@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# MKRG-One
 
-## Getting Started
+Steel recycling / sustainability website. Next.js 15 + Sanity + Vercel, animated with GSAP and Framer Motion.
 
-First, run the development server:
+## Stack
+
+- **Next.js 16** (App Router, TypeScript, Turbopack)
+- **Tailwind CSS v4** with sustainability palette (forest / cream / amber)
+- **GSAP** + `@gsap/react` — hero word-reveal, stat counters, scroll-triggered reveals
+- **Framer Motion** — micro-interactions, viewport-triggered grids
+- **Lenis** — smooth scroll (synced to GSAP ticker)
+- **Sanity v3** + **next-sanity v13** — embedded Studio at `/studio`, Live Content API
+- Project ID: `72k8551o`
+
+## Local dev
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run dev      # starts on :3000 (or next free port)
+npm run build    # production build
+npm run lint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open:
+- App: http://localhost:3000
+- Studio: http://localhost:3000/studio
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Required setup before the Studio works fully
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. **Confirm the dataset name** at https://sanity.io/manage/project/72k8551o — update `NEXT_PUBLIC_SANITY_DATASET` in `.env.local` if it isn't `production`.
+2. **Create a Viewer API token** at https://sanity.io/manage/project/72k8551o/api#tokens → paste into `SANITY_API_READ_TOKEN`.
+3. **Add CORS origin** at https://sanity.io/manage/project/72k8551o/api → add `http://localhost:3000` (and your Vercel URL later) with credentials allowed.
+4. **Set a webhook secret** (any string) in `SANITY_REVALIDATE_SECRET` and on the Sanity webhook (see below).
 
-## Learn More
+## Content model
 
-To learn more about Next.js, take a look at the following resources:
+- `siteSettings` — singleton (title, description, logo, nav)
+- `page` — generic page with hero + section page-builder (`impactSection`, `contentSection`)
+- `post` — blog post / case study
+- `impactSection` — heading + intro + stat counter array (used on home)
+- `contentSection` — heading + Portable Text body
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Create a `page` document with slug `home` to drive the hero + impact stats on `/`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Deploying to Vercel
 
-## Deploy on Vercel
+1. Push this repo to GitHub.
+2. Import the repo at https://vercel.com/new.
+3. Set the same env vars from `.env.local` in Vercel's project settings.
+4. After first deploy, add the production domain to **CORS Origins** in Sanity Manage.
+5. Add a **Sanity webhook** → `https://YOUR-DOMAIN/api/revalidate/tag` with secret = `SANITY_REVALIDATE_SECRET`; payload should include `{ tags: ["page:home"] }` etc.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Where the animation lives
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `src/components/Hero.tsx` — GSAP word-reveal timeline + Framer Motion CTAs
+- `src/components/ImpactStats.tsx` — GSAP ScrollTrigger counters
+- `src/components/ProcessSteps.tsx` — Framer Motion staggered viewport reveal
+- `src/components/SmoothScroll.tsx` — Lenis provider synced to GSAP ticker
+
+## TODO (when content / brand assets land)
+
+- Run TypeGen (`npx sanity typegen generate`) once schemas stabilise — replaces the manual `HomeData` type in `src/app/page.tsx`.
+- Swap default copy in components with real Sanity-driven values.
+- Replace placeholder colors in `globals.css` with real brand palette.
+- Add real logo to `/public` and surface from `siteSettings.logo`.

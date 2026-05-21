@@ -1,26 +1,63 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* MKRG brand palette */
+  --color-deep-green: #27500a;
+  --color-brand-green: #3b6d11;
+  --color-light-green: #eaf3de;
+  --color-teal: #0f6e56;
+  --color-light-teal: #e1f5ee;
+  --color-blue: #185fa5;
+  --color-beige: #f1efe8;
+
+  /* Text */
+  --color-ink: #0a0a0a;          /* headings */
+  --color-body: #3f3f46;         /* body — neutral-700ish dark grey */
+  --color-muted: #6b7280;        /* muted body */
+
+  --color-bg: var(--color-beige);
+  --color-fg: var(--color-body);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-background: var(--color-bg);
+  --color-foreground: var(--color-fg);
+
+  --color-deep-green: var(--color-deep-green);
+  --color-brand-green: var(--color-brand-green);
+  --color-light-green: var(--color-light-green);
+  --color-teal: var(--color-teal);
+  --color-light-teal: var(--color-light-teal);
+  --color-blue: var(--color-blue);
+  --color-beige: var(--color-beige);
+  --color-ink: var(--color-ink);
+  --color-body: var(--color-body);
+  --color-muted: var(--color-muted);
+
+  --font-sans: var(--font-inter);
+  --font-serif: var(--font-playfair);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html,
+body {
+  background: var(--color-bg);
+  color: var(--color-body);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4 {
+  color: var(--color-ink);
+  font-family: var(--font-playfair), ui-serif, Georgia, serif;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+::selection {
+  background: var(--color-brand-green);
+  color: white;
 }

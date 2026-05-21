@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Users/User/AppData/Local/Temp/claude/c--Users-User-Desktop-MKRG-MKRG-One/4c6ec6cd-edf3-4aa3-ad32-4697a8c29fcc/tasks/**)",
+      "PowerShell($home_res = Invoke-WebRequest -Uri \"http://localhost:3001/\" -UseBasicParsing -TimeoutSec 60; \"HOME: $\\($home_res.StatusCode\\) - length: $\\($home_res.Content.Length\\)\"; $studio_res = Invoke-WebRequest -Uri \"http://localhost:3001/studio\" -UseBasicParsing -TimeoutSec 60; \"STUDIO: $\\($studio_res.StatusCode\\) - length: $\\($studio_res.Content.Length\\)\")",
+      "PowerShell(try { $r = Invoke-WebRequest -Uri \"http://localhost:3001/\" -UseBasicParsing -TimeoutSec 30; \"HOME: $\\($r.StatusCode\\), body length: $\\($r.Content.Length\\)\" } catch { \"Dev server not responding: $\\($_.Exception.Message\\)\" })"
+    ]
+  }
+}

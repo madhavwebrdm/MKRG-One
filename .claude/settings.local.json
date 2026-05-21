@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell($items = Get-ChildItem -Force -Path \"c:\\\\Users\\\\User\\\\Desktop\\\\MKRG\\\\MKRG-One\"; if \\($items\\) { $items | ForEach-Object { Write-Output $_.Name } } else { Write-Output \"EMPTY_DIRECTORY\" })",
+      "Read(//c/Users/User/.claude/skills/sanity-best-practices/references/**)",
+      "PowerShell(node --version)",
+      "PowerShell(npm --version)",
+      "PowerShell(npx --yes create-next-app@latest . --ts --tailwind --eslint --app --src-dir --turbopack --use-npm --no-import-alias --skip-install --yes)",
+      "PowerShell($items = Get-ChildItem -Force -Path \"c:\\\\Users\\\\User\\\\Desktop\\\\MKRG\\\\MKRG-One\"; $items | ForEach-Object { Write-Output $_.Name })",
+      "PowerShell(npx --yes create-next-app@latest mkrg-one --ts --tailwind --eslint --app --src-dir --turbopack --use-npm --no-import-alias --skip-install --yes)",
+      "PowerShell(Get-ChildItem -Force -Path \"c:\\\\Users\\\\User\\\\Desktop\\\\MKRG\\\\MKRG-One\\\\mkrg-one\" | ForEach-Object { Write-Output $_.Name })",
+      "PowerShell(Get-ChildItem -Path \"c:\\\\Users\\\\User\\\\Desktop\\\\MKRG\\\\MKRG-One\\\\mkrg-one\" -Force | Move-Item -Destination \"c:\\\\Users\\\\User\\\\Desktop\\\\MKRG\\\\MKRG-One\" -Force; Remove-Item -Path \"c:\\\\Users\\\\User\\\\Desktop\\\\MKRG\\\\MKRG-One\\\\mkrg-one\" -Force -Recurse; Get-ChildItem -Force -Path \"c:\\\\Users\\\\User\\\\Desktop\\\\MKRG\\\\MKRG-One\" | ForEach-Object { Write-Output $_.Name })",
+      "PowerShell(Get-ChildItem -Force -Recurse -Path \"c:\\\\Users\\\\User\\\\Desktop\\\\MKRG\\\\MKRG-One\\\\src\" | Where-Object { -not $_.PSIsContainer } | ForEach-Object { Write-Output $_.FullName.Substring\\(\"c:\\\\Users\\\\User\\\\Desktop\\\\MKRG\\\\MKRG-One\\\\\".Length\\) })",
+      "PowerShell(npm run build 2>&1)"
+    ]
+  }
+}
