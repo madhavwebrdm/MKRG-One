@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import logoFallback from "@/images/MKRG Logo_Actual Color_PNG.png";
+import logoFallback from "@/Images/MKRG Logo_Actual Color_PNG.png";
 
 const NAV = [
   { label: "About", href: "/about" },
