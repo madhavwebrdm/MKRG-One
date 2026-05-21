@@ -1,9 +1,11 @@
 "use client";
 
+import Image, { type StaticImageData } from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import logoFallback from "@/images/MKRG Logo_Actual Color_PNG.png";
 
 const NAV = [
   { label: "About", href: "/about" },
@@ -17,7 +19,7 @@ const NAV = [
 
 type Props = {
   siteTitle?: string;
-  logoUrl?: string | null;
+  logoUrl?: string | StaticImageData | null;
   nav?: Array<{ label: string; href: string }>;
 };
 
@@ -46,14 +48,13 @@ export default function Header({
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 sm:px-10 lg:px-16">
         <Link href="/" className="flex items-center gap-2.5">
-          {logoUrl ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img src={logoUrl} alt={siteTitle} className="h-8 w-auto" />
-          ) : (
-            <span className="font-serif text-xl tracking-tight text-ink">
-              MKRG<span className="text-brand-green">.</span>
-            </span>
-          )}
+          <Image
+            src={logoUrl ?? logoFallback}
+            alt={siteTitle}
+            width={70}
+            height={70}
+            style={{ width: 70, height: "auto" }}
+          />
           <span className="sr-only">{siteTitle}</span>
         </Link>
 
