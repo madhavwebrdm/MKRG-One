@@ -9,7 +9,7 @@ import MagneticButton from "./MagneticButton";
 import { PLACEHOLDER_IMAGES } from "@/lib/placeholderImages";
 
 const PLACEHOLDER_VIDEO =
-  "https://videos.pexels.com/video-files/2098989/2098989-hd_1920_1080_30fps.mp4";
+  "https://videos.pexels.com/video-files/32585519/13895966_3840_2160_60fps.mp4";
 
 type HeroProps = {
   eyebrow?: string;
