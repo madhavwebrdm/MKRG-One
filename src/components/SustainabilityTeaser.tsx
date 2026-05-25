@@ -5,6 +5,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRight, Leaf, Wind, HeartHandshake } from "lucide-react";
 import { PLACEHOLDER_IMAGES } from "@/lib/placeholderImages";
+import AnimatedHeading from "./AnimatedHeading";
 
 type Highlight = { label: string; value: string };
 
@@ -48,9 +49,9 @@ export default function SustainabilityTeaser({
             <span className="text-xs uppercase tracking-[0.2em] text-white/80">
               {eyebrow}
             </span>
-            <h2 className="mt-3 text-balance font-serif text-3xl leading-tight text-white sm:text-4xl lg:text-5xl">
+            <AnimatedHeading className="mt-3 text-balance font-serif text-3xl leading-tight text-white sm:text-4xl lg:text-5xl">
               {heading}
-            </h2>
+            </AnimatedHeading>
           </div>
           <div className="lg:col-span-6">
             <p className="text-base leading-relaxed text-white/85 sm:text-lg">
@@ -98,7 +99,7 @@ export default function SustainabilityTeaser({
                   </div>
                 </div>
                 <div className="p-6 sm:p-7">
-                  <p className="text-xs font-medium uppercase tracking-wider text-light-green">
+                  <p className="text-xs font-medium uppercase tracking-wider text-white">
                     {h.label}
                   </p>
                   <p className="mt-2 font-serif text-2xl leading-snug text-white">

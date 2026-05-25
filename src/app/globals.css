@@ -1,10 +1,10 @@
 @import "tailwindcss";
 
 :root {
-  /* MKRG brand palette */
-  --color-deep-green: #27500a;
-  --color-brand-green: #3b6d11;
-  --color-light-green: #eaf3de;
+  /* MKRG brand palette — primary: #2ecc71 emerald */
+  --color-deep-green: #27ae60;
+  --color-brand-green: #2ecc71;
+  --color-light-green: #d1f2e0;
   --color-teal: #0f6e56;
   --color-light-teal: #e1f5ee;
   --color-blue: #185fa5;
@@ -50,11 +50,13 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-h1, h2, h3, h4 {
-  color: var(--color-ink);
-  font-family: var(--font-playfair), ui-serif, Georgia, serif;
-  font-weight: 500;
-  letter-spacing: -0.01em;
+@layer base {
+  h1, h2, h3, h4 {
+    color: var(--color-ink);
+    font-family: var(--font-playfair), ui-serif, Georgia, serif;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
 }
 
 ::selection {

@@ -6,6 +6,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { PLACEHOLDER_IMAGES } from "@/lib/placeholderImages";
+import AnimatedHeading from "./AnimatedHeading";
 
 type Metric = {
   value: number;
@@ -37,7 +38,7 @@ export default function MetricsBar({
     () => {
       gsap.registerPlugin(ScrollTrigger);
 
-      gsap.from(".metrics-head > *", {
+      gsap.from(".metrics-head > :not(h2)", {
         scrollTrigger: { trigger: root.current, start: "top 75%" },
         y: 30,
         opacity: 0,
@@ -105,9 +106,9 @@ export default function MetricsBar({
           <span className="text-xs uppercase tracking-[0.2em] text-white/80">
             Impact metrics
           </span>
-          <h2 className="mt-3 text-balance font-serif text-3xl leading-tight text-white sm:text-4xl lg:text-5xl">
+          <AnimatedHeading className="mt-3 text-balance font-serif text-3xl leading-tight text-white sm:text-4xl lg:text-5xl">
             {heading}
-          </h2>
+          </AnimatedHeading>
           {intro && (
             <p className="mt-4 max-w-2xl text-base leading-relaxed text-white/85">
               {intro}

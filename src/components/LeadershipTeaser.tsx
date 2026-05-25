@@ -5,6 +5,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRight, Quote } from "lucide-react";
 import { PLACEHOLDER_IMAGES } from "@/lib/placeholderImages";
+import AnimatedHeading from "./AnimatedHeading";
 
 type Props = {
   eyebrow?: string;
@@ -67,25 +68,25 @@ export default function LeadershipTeaser({
           </div>
 
           <div className="lg:col-span-7">
-            <span className="text-xs uppercase tracking-[0.2em] text-light-green">
+            <span className="text-xs uppercase tracking-[0.2em] text-white">
               {eyebrow}
             </span>
-            <h2 className="mt-3 text-balance font-serif text-3xl leading-tight text-white sm:text-4xl lg:text-5xl">
+            <AnimatedHeading className="mt-3 text-balance font-serif text-3xl leading-tight text-white sm:text-4xl lg:text-5xl">
               {heading}
-            </h2>
+            </AnimatedHeading>
 
             <motion.figure
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-              className="mt-10 max-w-2xl border-l-2 border-light-green/40 pl-6"
+              className="mt-10 max-w-2xl border-l-2 border-white/40 pl-6"
             >
-              <Quote className="h-6 w-6 text-light-green/70" aria-hidden />
-              <blockquote className="mt-4 font-serif text-2xl leading-snug text-light-green sm:text-3xl">
+              <Quote className="h-6 w-6 text-white/70" aria-hidden />
+              <blockquote className="mt-4 font-serif text-2xl leading-snug text-white sm:text-3xl">
                 “{quote}”
               </blockquote>
-              <figcaption className="mt-5 text-sm uppercase tracking-wider text-light-green/70">
+              <figcaption className="mt-5 text-sm uppercase tracking-wider text-white/70">
                 — {attribution}
               </figcaption>
             </motion.figure>
@@ -94,7 +95,7 @@ export default function LeadershipTeaser({
               <Link
                 href={ctaHref}
                 data-cursor="grow"
-                className="inline-flex items-center gap-2 text-sm font-medium text-light-green underline-offset-4 hover:underline"
+                className="inline-flex items-center gap-2 text-sm font-medium text-white underline-offset-4 hover:underline"
               >
                 {ctaLabel}
                 <ArrowRight className="h-4 w-4" />

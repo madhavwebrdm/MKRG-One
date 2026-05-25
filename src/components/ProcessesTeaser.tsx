@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, Truck, Recycle, Factory, Package, ShieldCheck, Boxes } from "lucide-react";
 import { PLACEHOLDER_IMAGES } from "@/lib/placeholderImages";
 import TiltCard from "./TiltCard";
+import AnimatedHeading from "./AnimatedHeading";
 
 type Step = { title: string; body: string };
 
@@ -59,9 +60,9 @@ export default function ProcessesTeaser({
             <span className="text-xs uppercase tracking-[0.2em] text-deep-green">
               {eyebrow}
             </span>
-            <h2 className="mt-3 text-balance font-serif text-3xl leading-tight text-ink sm:text-4xl lg:text-5xl">
+            <AnimatedHeading className="mt-3 text-balance font-serif text-3xl leading-tight text-ink sm:text-4xl lg:text-5xl">
               {heading}
-            </h2>
+            </AnimatedHeading>
           </div>
           <div className="lg:col-span-5">
             <p className="text-base leading-relaxed text-body sm:text-lg">

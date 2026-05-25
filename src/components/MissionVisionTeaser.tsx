@@ -5,6 +5,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRight, Compass, Target } from "lucide-react";
 import { PLACEHOLDER_IMAGES } from "@/lib/placeholderImages";
+import AnimatedHeading from "./AnimatedHeading";
 
 type Props = {
   eyebrow?: string;
@@ -59,9 +60,9 @@ export default function MissionVisionTeaser({
             <span className="text-xs uppercase tracking-[0.2em] text-deep-green">
               {eyebrow}
             </span>
-            <h2 className="mt-3 text-balance font-serif text-3xl leading-tight text-ink sm:text-4xl lg:text-5xl">
+            <AnimatedHeading className="mt-3 text-balance font-serif text-3xl leading-tight text-ink sm:text-4xl lg:text-5xl">
               {heading}
-            </h2>
+            </AnimatedHeading>
 
             <div className="mt-10 grid grid-cols-1 gap-px overflow-hidden rounded-2xl bg-deep-green/10 sm:grid-cols-2">
               <motion.article

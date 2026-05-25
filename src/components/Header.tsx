@@ -3,6 +3,7 @@
 import Image, { type StaticImageData } from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import logoFallback from "@/Images/MKRG Logo_Actual Color_PNG.png";
@@ -30,6 +31,8 @@ export default function Header({
 }: Props) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+  const darkTop = !scrolled && pathname === "/";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 16);
@@ -63,7 +66,7 @@ export default function Header({
             <Link
               key={item.href}
               href={item.href}
-              className="text-sm font-medium text-body transition-colors hover:text-deep-green"
+              className={`text-sm font-medium transition-colors ${darkTop ? "text-white/90 hover:text-white" : "text-body hover:text-deep-green"}`}
             >
               {item.label}
             </Link>
@@ -72,7 +75,7 @@ export default function Header({
 
         <Link
           href="/contact"
-          className="hidden rounded-full bg-deep-green px-5 py-2.5 text-sm font-medium text-white shadow-sm transition-colors hover:bg-brand-green lg:inline-flex"
+          className={`hidden rounded-full px-5 py-2.5 text-sm font-medium shadow-sm transition-colors lg:inline-flex ${darkTop ? "bg-white text-deep-green hover:bg-white/90" : "bg-deep-green text-white hover:bg-brand-green"}`}
         >
           Get in touch
         </Link>
@@ -80,7 +83,7 @@ export default function Header({
         <button
           type="button"
           onClick={() => setOpen((v) => !v)}
-          className="inline-flex h-10 w-10 items-center justify-center rounded-md text-ink lg:hidden"
+          className={`inline-flex h-10 w-10 items-center justify-center rounded-md lg:hidden ${darkTop ? "text-white" : "text-ink"}`}
           aria-label={open ? "Close menu" : "Open menu"}
         >
           {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}

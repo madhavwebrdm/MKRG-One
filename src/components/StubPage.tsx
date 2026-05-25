@@ -1,5 +1,8 @@
+"use client";
+
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
+import AnimatedHeading from "./AnimatedHeading";
 
 type Props = {
   eyebrow?: string;
@@ -16,9 +19,9 @@ export default function StubPage({ eyebrow, heading, body }: Props) {
             {eyebrow}
           </span>
         )}
-        <h1 className="mt-3 max-w-4xl font-serif text-4xl leading-tight text-ink sm:text-5xl lg:text-6xl">
+        <AnimatedHeading as="h1" className="mt-3 max-w-4xl font-serif text-4xl leading-tight text-ink sm:text-5xl lg:text-6xl">
           {heading}
-        </h1>
+        </AnimatedHeading>
         {body && (
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-body">
             {body}

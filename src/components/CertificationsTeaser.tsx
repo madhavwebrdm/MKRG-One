@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, ShieldCheck } from "lucide-react";
 import { PLACEHOLDER_IMAGES } from "@/lib/placeholderImages";
 import TiltCard from "./TiltCard";
+import AnimatedHeading from "./AnimatedHeading";
 
 type Badge = { label: string; issuer: string };
 
@@ -48,7 +49,7 @@ export default function CertificationsTeaser({
   ctaHref = "/certifications",
 }: Props) {
   return (
-    <section className="bg-light-green/60 py-24 sm:py-32">
+    <section className="bg-gradient-to-b from-[#F0FCF5] via-[#D5F7E4] to-[#A8F0C6] py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-5">
@@ -76,13 +77,13 @@ export default function CertificationsTeaser({
           </div>
 
           <div className="lg:col-span-7">
-            <span className="text-xs uppercase tracking-[0.2em] text-deep-green">
+            <span className="text-xs uppercase tracking-[0.2em] text-black">
               {eyebrow}
             </span>
-            <h2 className="mt-3 text-balance font-serif text-3xl leading-tight text-ink sm:text-4xl lg:text-5xl">
+            <AnimatedHeading className="mt-3 text-balance font-serif text-3xl leading-tight text-black sm:text-4xl lg:text-5xl">
               {heading}
-            </h2>
-            <p className="mt-5 max-w-2xl text-base leading-relaxed text-body sm:text-lg">
+            </AnimatedHeading>
+            <p className="mt-5 max-w-2xl text-base leading-relaxed text-black/80 sm:text-lg">
               {body}
             </p>
           </div>
@@ -114,7 +115,7 @@ export default function CertificationsTeaser({
           <Link
             href={ctaHref}
             data-cursor="grow"
-            className="inline-flex items-center gap-2 text-sm font-medium text-deep-green underline-offset-4 hover:underline"
+            className="inline-flex items-center gap-2 text-sm font-medium text-black underline-offset-4 hover:underline"
           >
             {ctaLabel}
             <ArrowRight className="h-4 w-4" />

@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, Newspaper, Play, Calendar } from "lucide-react";
 import { PLACEHOLDER_IMAGES } from "@/lib/placeholderImages";
 import TiltCard from "./TiltCard";
+import AnimatedHeading from "./AnimatedHeading";
 
 type Item = {
   kind?: string | null;
@@ -74,13 +75,13 @@ export default function MediaTeaser({
       <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-2xl">
-            <span className="text-xs uppercase tracking-[0.2em] text-light-green">
+            <span className="text-xs uppercase tracking-[0.2em] text-white">
               {eyebrow}
             </span>
-            <h2 className="mt-3 text-balance font-serif text-3xl leading-tight text-white sm:text-4xl lg:text-5xl">
+            <AnimatedHeading className="mt-3 text-balance font-serif text-3xl leading-tight text-white sm:text-4xl lg:text-5xl">
               {heading}
-            </h2>
-            <p className="mt-5 text-base leading-relaxed text-light-green/85 sm:text-lg">
+            </AnimatedHeading>
+            <p className="mt-5 text-base leading-relaxed text-white/85 sm:text-lg">
               {body}
             </p>
           </div>
@@ -88,7 +89,7 @@ export default function MediaTeaser({
             <Link
               href={ctaHref}
               data-cursor="grow"
-              className="inline-flex items-center gap-2 text-sm font-medium text-light-green underline-offset-4 hover:underline"
+              className="inline-flex items-center gap-2 text-sm font-medium text-white underline-offset-4 hover:underline"
             >
               {ctaLabel}
               <ArrowRight className="h-4 w-4" />
@@ -135,14 +136,14 @@ export default function MediaTeaser({
                       )}
                     </div>
                     <div className="flex flex-1 flex-col gap-3 p-6">
-                      <div className="flex items-center justify-between text-xs text-light-green/70">
+                      <div className="flex items-center justify-between text-xs text-white/70">
                         {it.date && <span>{formatDate(it.date)}</span>}
                       </div>
-                      <h3 className="font-serif text-xl leading-snug text-white group-hover:text-light-green">
+                      <h3 className="font-serif text-xl leading-snug text-white group-hover:text-white/80">
                         {it.title}
                       </h3>
                       {it.source && (
-                        <p className="mt-auto text-sm text-light-green/80">{it.source}</p>
+                        <p className="mt-auto text-sm text-white/80">{it.source}</p>
                       )}
                     </div>
                   </a>
