@@ -93,7 +93,6 @@ export default function SustainabilityTeaser({
                     sizes="(max-width: 768px) 100vw, 33vw"
                     className="object-cover transition-transform duration-700 group-hover:scale-110"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-deep-green via-deep-green/30 to-transparent" />
                   <div className="absolute left-5 top-5 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-white/15 text-white backdrop-blur">
                     <Icon className="h-5 w-5" aria-hidden />
                   </div>
