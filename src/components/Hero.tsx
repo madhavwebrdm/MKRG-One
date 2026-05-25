@@ -6,10 +6,12 @@ import { useGSAP } from "@gsap/react";
 import { ArrowRight, Recycle } from "lucide-react";
 
 import MagneticButton from "./MagneticButton";
-import { PLACEHOLDER_IMAGES } from "@/lib/placeholderImages";
 
 const PLACEHOLDER_VIDEO =
   "https://videos.pexels.com/video-files/32585519/13895966_3840_2160_60fps.mp4";
+
+const PLACEHOLDER_VIDEO_POSTER =
+  "https://images.pexels.com/videos/32585519/pexels-photo-32585519.jpeg?auto=compress&cs=tinysrgb&w=5000";
 
 type HeroProps = {
   eyebrow?: string;
@@ -73,7 +75,7 @@ export default function Hero({
     { scope: root },
   );
 
-  const words = heading.split(" ");
+  const headingRows = heading.split(",").map((row) => row.trim()).filter(Boolean);
 
   return (
     <section
@@ -87,11 +89,12 @@ export default function Hero({
         muted
         loop
         playsInline
-        poster={imageUrl ?? PLACEHOLDER_IMAGES.hero}
+        poster={imageUrl ?? PLACEHOLDER_VIDEO_POSTER}
       >
         <source src={videoUrl ?? PLACEHOLDER_VIDEO} type="video/mp4" />
       </video>
 
+      <div className="absolute inset-0 bg-black/30" />
       <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/5 to-black/65" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_100%,rgba(0,0,0,0.3),transparent)]" />
 
@@ -102,17 +105,22 @@ export default function Hero({
         </span>
 
         <h1 className="mt-7 max-w-5xl font-serif text-5xl leading-[1.05] tracking-tight text-white sm:text-6xl lg:text-[clamp(3.5rem,6.5vw,6rem)]">
-          {words.map((word, wi) => (
-            <Fragment key={`${word}-${wi}`}>
-              <span className="inline-block overflow-hidden pb-[0.15em] align-bottom">
-                {word.split("").map((char, ci) => (
-                  <span key={ci} className="hero-char inline-block">
-                    {char}
+          {headingRows.map((row, ri) => (
+            <span key={ri} className="block">
+              {row.split(" ").map((word, wi) => (
+                <Fragment key={`${word}-${ri}-${wi}`}>
+                  <span className="inline-block overflow-hidden pb-[0.15em] align-bottom">
+                    {word.split("").map((char, ci) => (
+                      <span key={ci} className="hero-char inline-block">
+                        {char}
+                      </span>
+                    ))}
                   </span>
-                ))}
-              </span>
-              {wi < words.length - 1 && " "}
-            </Fragment>
+                  {wi < row.split(" ").length - 1 && " "}
+                </Fragment>
+              ))}
+              {ri < headingRows.length - 1 ? "," : ""}
+            </span>
           ))}
         </h1>
 
