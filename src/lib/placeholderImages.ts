@@ -76,6 +76,31 @@ const PHOTO = {
 export const PLACEHOLDER_IMAGES = {
   // Home — Hero, metrics, mission, sustainability, processes, leadership, certs, media
   hero: u(PHOTO.moltenPour, 1600, 1200),
+  parallaxImpact: u(PHOTO.aerialForest, 2400, 1400),
+  productsBg: u(PHOTO.steelRodsGray, 1600, 1000),
+
+  // Process flow step images — one per step for the sticky-image scroll on home.
+  processSteel: [
+    u(PHOTO.scrapTrain, 900, 1100),
+    u(PHOTO.overheadCrane, 900, 1100),
+    u(PHOTO.moltenPour, 900, 1100),
+    u(PHOTO.workersOnMetal, 900, 1100),
+    u(PHOTO.metalRodsBundled, 900, 1100),
+  ],
+  processZinc: [
+    u(PHOTO.industrialRefuse, 900, 1100),
+    u(PHOTO.wasteBins, 900, 1100),
+    u(PHOTO.welderClose, 900, 1100),
+    u(PHOTO.grinderSparks, 900, 1100),
+    u(PHOTO.metalCylinders, 900, 1100),
+  ],
+  products: [
+    u(PHOTO.metalRodsBundled, 900, 1100),
+    u(PHOTO.steelRolls, 900, 1100),
+    u(PHOTO.metalCylinders, 900, 1100),
+    u(PHOTO.moltenPour, 900, 1100),
+    u(PHOTO.steelRodsGray, 900, 1100),
+  ],
   metricsBg: u(PHOTO.factoryInterior, 1800, 1000),
   missionVision: u(PHOTO.workersOnMetal, 900, 1100),
   sustainability1: u(PHOTO.aerialForest, 800, 900),

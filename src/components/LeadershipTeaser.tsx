@@ -39,16 +39,7 @@ export default function LeadershipTeaser({
 
   return (
     <section className="relative isolate overflow-hidden bg-deep-green py-24 text-white sm:py-32">
-      <div className="absolute inset-0 -z-10 opacity-30">
-        <Image
-          src={PLACEHOLDER_IMAGES.leadershipBg}
-          alt=""
-          fill
-          sizes="100vw"
-          className="object-cover"
-        />
-      </div>
-      <div className="absolute inset-0 -z-10 bg-gradient-to-r from-deep-green via-deep-green/85 to-deep-green/60" />
+      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_15%_0%,rgba(255,255,255,0.08),transparent_60%)]" />
 
       <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-16">

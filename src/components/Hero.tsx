@@ -8,10 +8,10 @@ import { ArrowRight, Recycle } from "lucide-react";
 import MagneticButton from "./MagneticButton";
 
 const PLACEHOLDER_VIDEO =
-  "https://videos.pexels.com/video-files/32585519/13895966_3840_2160_60fps.mp4";
+  "https://videos.pexels.com/video-files/36082894/15303048_2560_1440_25fps.mp4";
 
 const PLACEHOLDER_VIDEO_POSTER =
-  "https://images.pexels.com/videos/32585519/pexels-photo-32585519.jpeg?auto=compress&cs=tinysrgb&w=5000";
+  "https://images.pexels.com/videos/36082894/pexels-photo-36082894.jpeg?auto=compress&cs=tinysrgb&w=2560";
 
 type HeroProps = {
   eyebrow?: string;

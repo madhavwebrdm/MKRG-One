@@ -2,7 +2,7 @@
 
 import Image, { type StaticImageData } from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import logoFallback from "@/Images/MKRG Logo_Actual Color_PNG.png";
@@ -29,19 +29,38 @@ export default function Header({
   nav = NAV,
 }: Props) {
   const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
   const [open, setOpen] = useState(false);
+  const lastY = useRef(0);
   const darkTop = !scrolled;
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 16);
+    const onScroll = () => {
+      const y = window.scrollY;
+      const delta = y - lastY.current;
+
+      setScrolled(y > 16);
+
+      if (open || y < 80) {
+        setHidden(false);
+      } else if (delta > 4) {
+        setHidden(true);
+      } else if (delta < -4) {
+        setHidden(false);
+      }
+
+      lastY.current = y;
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [open]);
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
+      className={`fixed inset-x-0 top-0 z-50 transition-[transform,background-color,border-color] duration-300 ease-out ${
+        hidden ? "-translate-y-full" : "translate-y-0"
+      } ${
         scrolled
           ? "border-b border-deep-green/10 bg-beige/85 backdrop-blur"
           : "bg-transparent"
@@ -52,9 +71,9 @@ export default function Header({
           <Image
             src={logoUrl ?? logoFallback}
             alt={siteTitle}
-            width={70}
-            height={70}
-            style={{ width: 70, height: "auto" }}
+            width={100}
+            height={100}
+            style={{ width: 100, height: "auto" }}
           />
           <span className="sr-only">{siteTitle}</span>
         </Link>

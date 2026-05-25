@@ -10,6 +10,9 @@
   --color-blue: #185fa5;
   --color-beige: #f1efe8;
 
+  /* Accent — used sparingly for small focus elements (chips, underlines, markers) */
+  --color-accent: #b22e31;
+
   /* Text */
   --color-ink: #0a0a0a;          /* headings */
   --color-body: #3f3f46;         /* body — neutral-700ish dark grey */
@@ -30,6 +33,7 @@
   --color-light-teal: var(--color-light-teal);
   --color-blue: var(--color-blue);
   --color-beige: var(--color-beige);
+  --color-accent: var(--color-accent);
   --color-ink: var(--color-ink);
   --color-body: var(--color-body);
   --color-muted: var(--color-muted);
@@ -63,3 +67,4 @@ body {
   background: var(--color-brand-green);
   color: white;
 }
+

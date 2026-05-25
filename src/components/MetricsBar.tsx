@@ -1,11 +1,9 @@
 "use client";
 
 import { useRef } from "react";
-import Image from "next/image";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import { PLACEHOLDER_IMAGES } from "@/lib/placeholderImages";
 import AnimatedHeading from "./AnimatedHeading";
 
 type Metric = {
@@ -76,15 +74,6 @@ export default function MetricsBar({
         duration: 0.8,
         ease: "power3.out",
       });
-
-      // Slow Ken Burns on the bg image
-      gsap.to(".metrics-bg", {
-        scale: 1.12,
-        duration: 14,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-      });
     },
     { scope: root },
   );
@@ -95,16 +84,7 @@ export default function MetricsBar({
       ref={root}
       className="relative isolate overflow-hidden bg-deep-green py-24 text-white sm:py-32"
     >
-      <div className="metrics-bg absolute inset-0 -z-10">
-        <Image
-          src={PLACEHOLDER_IMAGES.metricsBg}
-          alt=""
-          fill
-          sizes="100vw"
-          className="object-cover opacity-25"
-        />
-      </div>
-      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-deep-green/70 via-deep-green/85 to-deep-green" />
+      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_15%_0%,rgba(255,255,255,0.08),transparent_60%)]" />
 
       <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
         <div className="metrics-head max-w-3xl">
