@@ -1,13 +1,11 @@
-import StubPage from "@/components/StubPage";
+import SustainabilityPageContent from "@/components/SustainabilityPageContent";
 
-export const metadata = { title: "Sustainability — Madhav KRG Group" };
+export const metadata = {
+  title: "Sustainability — Madhav KRG Group",
+  description:
+    "Environmental impact, recycling statistics and community programs at Madhav KRG Group — emissions avoided, resources conserved, communities supported.",
+};
 
 export default function SustainabilityPage() {
-  return (
-    <StubPage
-      eyebrow="Sustainability"
-      heading="Environmental impact, recycling stats and community programs."
-      body="Hard numbers, EHS programs and CSR initiatives in the regions where we operate."
-    />
-  );
+  return <SustainabilityPageContent />;
 }

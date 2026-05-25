@@ -1,13 +1,11 @@
-import StubPage from "@/components/StubPage";
+import ProcessesPageContent from "@/components/ProcessesPageContent";
 
-export const metadata = { title: "Processes — Madhav KRG Group" };
+export const metadata = {
+  title: "Processes — Madhav KRG Group",
+  description:
+    "The Recycle2X process — Scrap to Steel and Waste to Zinc. Two output streams, one closed loop, APCD air protection and zero landfill.",
+};
 
 export default function ProcessesPage() {
-  return (
-    <StubPage
-      eyebrow="Processes"
-      heading="Recycle2X process, materials and competitive advantages."
-      body="Scrap → Steel, Waste → Zinc, APCD — and the materials catalogue: TMT, PIPE, COIL, ZINC, LEAD."
-    />
-  );
+  return <ProcessesPageContent />;
 }

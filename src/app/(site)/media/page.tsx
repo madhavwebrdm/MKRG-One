@@ -1,13 +1,11 @@
-import StubPage from "@/components/StubPage";
+import MediaPageContent from "@/components/MediaPageContent";
 
-export const metadata = { title: "Media — Madhav KRG Group" };
+export const metadata = {
+  title: "Media — Madhav KRG Group",
+  description:
+    "Industry articles, company news, press releases, videos and events from Madhav KRG Group — recycling innovation, sustainability policy and the circular economy.",
+};
 
 export default function MediaPage() {
-  return (
-    <StubPage
-      eyebrow="Media"
-      heading="Press, videos and events."
-      body="Coverage from the industry press, plant tours on camera and where you can find us in person."
-    />
-  );
+  return <MediaPageContent />;
 }

@@ -1,13 +1,11 @@
-import StubPage from "@/components/StubPage";
+import CertificationsPageContent from "@/components/CertificationsPageContent";
 
-export const metadata = { title: "Certifications — Madhav KRG Group" };
+export const metadata = {
+  title: "Certifications — Madhav KRG Group",
+  description:
+    "ISO 9001 / 14001, GPCB, MOEFCC and EHS certifications — quality, environmental and safety standards Madhav KRG Group operates under.",
+};
 
 export default function CertificationsPage() {
-  return (
-    <StubPage
-      eyebrow="Certifications"
-      heading="ISO, MOEFCC, GPCB and EHS — fully documented."
-      body="Independent certifications, compliance approvals and downloadable PDFs for procurement teams."
-    />
-  );
+  return <CertificationsPageContent />;
 }

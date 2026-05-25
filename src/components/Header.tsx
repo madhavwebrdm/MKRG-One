@@ -3,7 +3,6 @@
 import Image, { type StaticImageData } from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import logoFallback from "@/Images/MKRG Logo_Actual Color_PNG.png";
@@ -31,8 +30,7 @@ export default function Header({
 }: Props) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  const pathname = usePathname();
-  const darkTop = !scrolled && pathname === "/";
+  const darkTop = !scrolled;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 16);

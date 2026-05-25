@@ -1,13 +1,11 @@
-import StubPage from "@/components/StubPage";
+import AboutPageContent from "@/components/AboutPageContent";
 
-export const metadata = { title: "About — Madhav KRG Group" };
+export const metadata = {
+  title: "About — Madhav KRG Group",
+  description:
+    "Mission, vision, values, brand identity, differentiators and the company history of Madhav KRG Group — India's state-of-the-art recycler.",
+};
 
 export default function AboutPage() {
-  return (
-    <StubPage
-      eyebrow="About us"
-      heading="Our mission, vision, history and team."
-      body="A deeper look at Madhav KRG Group — what drives us, how we got here, and who leads the work."
-    />
-  );
+  return <AboutPageContent />;
 }
