@@ -18,14 +18,23 @@ type Props = {
 };
 
 export default function MissionVisionTeaser({
-  eyebrow = "About us",
-  heading = "A purpose built around the planet.",
-  mission = "To provide efficient, responsible recycling solutions that empower communities and businesses to minimise their environmental footprint.",
-  vision = "Accelerating India's growth by enabling Green Infrastructure.",
-  ctaLabel = "Learn more about us",
-  ctaHref = "/about",
+  eyebrow: eyebrowProp,
+  heading: headingProp,
+  mission: missionProp,
+  vision: visionProp,
+  ctaLabel: ctaLabelProp,
+  ctaHref: ctaHrefProp,
   imageUrl,
 }: Props) {
+  const eyebrow = eyebrowProp ?? "About us";
+  const heading = headingProp ?? "A purpose built around the planet.";
+  const mission =
+    missionProp ??
+    "To provide efficient, responsible recycling solutions that empower communities and businesses to minimise their environmental footprint.";
+  const vision =
+    visionProp ?? "Accelerating India's growth by enabling Green Infrastructure.";
+  const ctaLabel = ctaLabelProp ?? "Learn more about us";
+  const ctaHref = ctaHrefProp ?? "/about";
   return (
     <section className="bg-beige py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">

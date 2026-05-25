@@ -35,17 +35,27 @@ const DEFAULT_TAGS = [
 ];
 
 export default function Hero({
-  eyebrow = "Waste is a Resource, Not a Problem",
-  heading = "Waste is a Resource, Not a Problem",
-  subheading = "Recycled with zero degradation or contamination, intact properties per Indian Standards — virtually identical to virgin material with lesser environmental impact.",
-  positioningTags = DEFAULT_TAGS,
+  eyebrow: eyebrowProp,
+  heading: headingProp,
+  subheading: subheadingProp,
+  positioningTags: positioningTagsProp,
   videoUrl,
   imageUrl,
-  primaryCtaLabel = "See our impact",
-  primaryCtaHref = "#metrics",
-  secondaryCtaLabel = "Our recycling process",
-  secondaryCtaHref = "/processes",
+  primaryCtaLabel: primaryCtaLabelProp,
+  primaryCtaHref: primaryCtaHrefProp,
+  secondaryCtaLabel: secondaryCtaLabelProp,
+  secondaryCtaHref: secondaryCtaHrefProp,
 }: HeroProps) {
+  const eyebrow = eyebrowProp ?? "Waste is a Resource, Not a Problem";
+  const heading = headingProp ?? "Waste is a Resource, Not a Problem";
+  const subheading =
+    subheadingProp ??
+    "Recycled with zero degradation or contamination, intact properties per Indian Standards — virtually identical to virgin material with lesser environmental impact.";
+  const positioningTags = positioningTagsProp ?? DEFAULT_TAGS;
+  const primaryCtaLabel = primaryCtaLabelProp ?? "See our impact";
+  const primaryCtaHref = primaryCtaHrefProp ?? "#metrics";
+  const secondaryCtaLabel = secondaryCtaLabelProp ?? "Our recycling process";
+  const secondaryCtaHref = secondaryCtaHrefProp ?? "/processes";
   const root = useRef<HTMLElement>(null);
 
   useGSAP(

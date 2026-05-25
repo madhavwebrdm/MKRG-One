@@ -45,13 +45,21 @@ const item = {
 };
 
 export default function ProcessesTeaser({
-  eyebrow = "Processes",
-  heading = "The Recycle2X Process.",
-  body = "Two output streams, one closed loop. We turn industrial scrap into structural steel and convert process waste into commercial zinc — all under strict emissions control.",
-  steps = DEFAULTS,
-  ctaLabel = "Explore the process",
-  ctaHref = "/processes",
+  eyebrow: eyebrowProp,
+  heading: headingProp,
+  body: bodyProp,
+  steps: stepsProp,
+  ctaLabel: ctaLabelProp,
+  ctaHref: ctaHrefProp,
 }: Props) {
+  const eyebrow = eyebrowProp ?? "Processes";
+  const heading = headingProp ?? "The Recycle2X Process.";
+  const body =
+    bodyProp ??
+    "Two output streams, one closed loop. We turn industrial scrap into structural steel and convert process waste into commercial zinc — all under strict emissions control.";
+  const steps = stepsProp ?? DEFAULTS;
+  const ctaLabel = ctaLabelProp ?? "Explore the process";
+  const ctaHref = ctaHrefProp ?? "/processes";
   return (
     <section id="processes" className="bg-beige py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">

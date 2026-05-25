@@ -63,13 +63,21 @@ function formatDate(input?: string | null) {
 }
 
 export default function MediaTeaser({
-  eyebrow = "Media",
-  heading = "Latest press, plant tours and events.",
-  body = "Where MKRG shows up — on the page, on camera, and on the ground at the conversations shaping circular industry.",
-  items = DEFAULTS,
-  ctaLabel = "Browse the gallery",
-  ctaHref = "/media",
+  eyebrow: eyebrowProp,
+  heading: headingProp,
+  body: bodyProp,
+  items: itemsProp,
+  ctaLabel: ctaLabelProp,
+  ctaHref: ctaHrefProp,
 }: Props) {
+  const eyebrow = eyebrowProp ?? "Media";
+  const heading = headingProp ?? "Latest press, plant tours and events.";
+  const body =
+    bodyProp ??
+    "Where MKRG shows up — on the page, on camera, and on the ground at the conversations shaping circular industry.";
+  const items = itemsProp ?? DEFAULTS;
+  const ctaLabel = ctaLabelProp ?? "Browse the gallery";
+  const ctaHref = ctaHrefProp ?? "/media";
   return (
     <section className="bg-deep-green py-24 text-white sm:py-32">
       <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">

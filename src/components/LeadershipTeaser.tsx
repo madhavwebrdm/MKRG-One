@@ -18,14 +18,23 @@ type Props = {
 };
 
 export default function LeadershipTeaser({
-  eyebrow = "Leadership",
-  heading = "Built by people who have spent decades closing the loop.",
-  quote = "Recycling isn't a side business — it is the only way we can build the infrastructure of tomorrow without exhausting the resources of today.",
-  attribution = "Founder, Madhav KRG Group",
+  eyebrow: eyebrowProp,
+  heading: headingProp,
+  quote: quoteProp,
+  attribution: attributionProp,
   portraitUrl,
-  ctaLabel = "Meet the team",
-  ctaHref = "/leadership",
+  ctaLabel: ctaLabelProp,
+  ctaHref: ctaHrefProp,
 }: Props) {
+  const eyebrow = eyebrowProp ?? "Leadership";
+  const heading =
+    headingProp ?? "Built by people who have spent decades closing the loop.";
+  const quote =
+    quoteProp ??
+    "Recycling isn't a side business — it is the only way we can build the infrastructure of tomorrow without exhausting the resources of today.";
+  const attribution = attributionProp ?? "Founder, Madhav KRG Group";
+  const ctaLabel = ctaLabelProp ?? "Meet the team";
+  const ctaHref = ctaHrefProp ?? "/leadership";
   const portrait = portraitUrl || PLACEHOLDER_IMAGES.leadershipPortrait;
 
   return (

@@ -28,10 +28,15 @@ const DEFAULTS: Metric[] = [
 ];
 
 export default function MetricsBar({
-  heading = "Our impact, measured.",
-  intro = "Every tonne we process meets Indian Standards and behaves virtually like virgin material — at a fraction of the environmental cost.",
-  metrics = DEFAULTS,
+  heading: headingProp,
+  intro: introProp,
+  metrics: metricsProp,
 }: Props) {
+  const heading = headingProp ?? "Our impact, measured.";
+  const intro =
+    introProp ??
+    "Every tonne we process meets Indian Standards and behaves virtually like virgin material — at a fraction of the environmental cost.";
+  const metrics = metricsProp ?? DEFAULTS;
   const root = useRef<HTMLElement>(null);
 
   useGSAP(

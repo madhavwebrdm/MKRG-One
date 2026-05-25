@@ -41,13 +41,21 @@ const item = {
 };
 
 export default function CertificationsTeaser({
-  eyebrow = "Certifications",
-  heading = "Compliant by design, certified by audit.",
-  body = "Independent certifications confirm what our process already enforces. Standards aren't a finish line — they are the baseline we operate above.",
-  badges = DEFAULTS,
-  ctaLabel = "View certifications",
-  ctaHref = "/certifications",
+  eyebrow: eyebrowProp,
+  heading: headingProp,
+  body: bodyProp,
+  badges: badgesProp,
+  ctaLabel: ctaLabelProp,
+  ctaHref: ctaHrefProp,
 }: Props) {
+  const eyebrow = eyebrowProp ?? "Certifications";
+  const heading = headingProp ?? "Compliant by design, certified by audit.";
+  const body =
+    bodyProp ??
+    "Independent certifications confirm what our process already enforces. Standards aren't a finish line — they are the baseline we operate above.";
+  const badges = badgesProp ?? DEFAULTS;
+  const ctaLabel = ctaLabelProp ?? "View certifications";
+  const ctaHref = ctaHrefProp ?? "/certifications";
   return (
     <section className="bg-gradient-to-b from-[#F0FCF5] via-[#D5F7E4] to-[#A8F0C6] py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">

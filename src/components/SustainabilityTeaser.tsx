@@ -32,13 +32,22 @@ const DEFAULTS: Highlight[] = [
 ];
 
 export default function SustainabilityTeaser({
-  eyebrow = "Sustainability",
-  heading = "Recycling that gives back — to industry and to the planet.",
-  body = "Our environmental, health and safety programs run alongside community initiatives in the regions where we operate. Recycling isn't a line item; it is how we build green infrastructure.",
-  highlights = DEFAULTS,
-  ctaLabel = "See our impact",
-  ctaHref = "/sustainability",
+  eyebrow: eyebrowProp,
+  heading: headingProp,
+  body: bodyProp,
+  highlights: highlightsProp,
+  ctaLabel: ctaLabelProp,
+  ctaHref: ctaHrefProp,
 }: Props) {
+  const eyebrow = eyebrowProp ?? "Sustainability";
+  const heading =
+    headingProp ?? "Recycling that gives back — to industry and to the planet.";
+  const body =
+    bodyProp ??
+    "Our environmental, health and safety programs run alongside community initiatives in the regions where we operate. Recycling isn't a line item; it is how we build green infrastructure.";
+  const highlights = highlightsProp ?? DEFAULTS;
+  const ctaLabel = ctaLabelProp ?? "See our impact";
+  const ctaHref = ctaHrefProp ?? "/sustainability";
   return (
     <section className="relative bg-brand-green py-24 text-white sm:py-32">
       <div className="absolute inset-0 -z-0 bg-[radial-gradient(circle_at_20%_0%,rgba(255,255,255,0.08),transparent_60%)]" />
