@@ -14,7 +14,6 @@ type Leader = {
   name: string;
   role: string;
   bio: string;
-  imageIndex: number;
   linkedin?: string;
   email?: string;
 };
@@ -39,42 +38,36 @@ const LEADERSHIP: Leader[] = [
     name: "Director — Operations",
     role: "Plant operations · Recycle2X",
     bio: "Three decades on the shop floor across steel and zinc recycling. Owns plant uptime, throughput and process discipline.",
-    imageIndex: 0,
     linkedin: "#",
   },
   {
     name: "Director — Sustainability",
     role: "EHS · CSR · ESG reporting",
     bio: "Leads environment, health and safety policy across every site, and shapes the group's ESG and community programs.",
-    imageIndex: 1,
     linkedin: "#",
   },
   {
     name: "Director — Sales & Marketing",
     role: "TMT · Pipe · Coil · Zinc · Lead",
     bio: "Builds the partner network for every output stream — from infrastructure majors to specialty manufacturers across India.",
-    imageIndex: 2,
     linkedin: "#",
   },
   {
     name: "Director — Finance",
     role: "Capital · Treasury · Compliance",
     bio: "Funds the capex roadmap and keeps every plant audit-ready under Indian accounting and corporate-governance standards.",
-    imageIndex: 3,
     linkedin: "#",
   },
   {
     name: "Head — Quality & Standards",
     role: "IS specifications · Certification",
     bio: "Owns the Indian Standards conformance program, from incoming scrap grading to finished-product traceability.",
-    imageIndex: 4,
     linkedin: "#",
   },
   {
     name: "Head — Human Resources",
     role: "People · Culture · Careers",
     bio: "Builds the team — from plant apprenticeships to engineering hires — and runs the group's training and safety culture.",
-    imageIndex: 5,
     email: "hr@mkrg.in",
   },
 ];
@@ -86,7 +79,7 @@ export default function LeadershipPageContent() {
         eyebrow="Leadership"
         heading="Built by people who've spent decades closing the loop."
         intro="Madhav KRG Group is led by operators, not bystanders. The people on this page have been on the shop floor, in the audit room and in the field — often all in the same week."
-        imageUrl={PLACEHOLDER_IMAGES.leadershipFounderFull}
+        imageUrl={PLACEHOLDER_IMAGES.leadershipHero}
         imageAlt="MKRG leadership"
       />
 
@@ -185,7 +178,7 @@ export default function LeadershipPageContent() {
                   <Image
                     src={
                       PLACEHOLDER_IMAGES.leadershipTeam[
-                        l.imageIndex % PLACEHOLDER_IMAGES.leadershipTeam.length
+                        i % PLACEHOLDER_IMAGES.leadershipTeam.length
                       ]
                     }
                     alt={l.name}
@@ -193,7 +186,6 @@ export default function LeadershipPageContent() {
                     sizes="(max-width: 768px) 100vw, 33vw"
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-ink/40 via-transparent to-transparent" />
                 </div>
                 <div className="flex flex-1 flex-col p-7">
                   <h3 className="font-serif text-2xl leading-snug text-ink">

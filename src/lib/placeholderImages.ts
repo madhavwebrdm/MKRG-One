@@ -139,14 +139,15 @@ export const PLACEHOLDER_IMAGES = {
   ],
 
   // Leadership page
-  leadershipFounderFull: u(PHOTO.portraitMan1, 1100, 1400),
+  leadershipHero:
+    "https://images.pexels.com/photos/776615/pexels-photo-776615.jpeg?auto=compress&cs=tinysrgb&w=1600&h=1000&fit=crop",
+  leadershipFounderFull:
+    "https://images.pexels.com/photos/25884446/pexels-photo-25884446.jpeg?auto=compress&cs=tinysrgb&w=1100&h=1400&fit=crop",
   leadershipTeam: [
-    u(PHOTO.portraitMan2, 800, 1000),
-    u(PHOTO.portraitMan3, 800, 1000),
-    u(PHOTO.portraitMan4, 800, 1000),
-    u(PHOTO.portraitMan5, 800, 1000),
-    u(PHOTO.portraitMan1, 800, 1000),
-    u(PHOTO.portraitPair, 800, 1000),
+    "https://images.pexels.com/photos/7580970/pexels-photo-7580970.jpeg?auto=compress&cs=tinysrgb&w=800&h=1000&fit=crop",
+    "https://images.pexels.com/photos/25884446/pexels-photo-25884446.jpeg?auto=compress&cs=tinysrgb&w=800&h=1000&fit=crop",
+    "https://images.pexels.com/photos/20752498/pexels-photo-20752498.jpeg?auto=compress&cs=tinysrgb&w=800&h=1000&fit=crop",
+    "https://images.pexels.com/photos/17049766/pexels-photo-17049766.jpeg?auto=compress&cs=tinysrgb&w=800&h=1000&fit=crop",
   ],
 
   // Certifications page
