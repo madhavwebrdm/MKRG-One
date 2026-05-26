@@ -28,14 +28,14 @@ const PRODUCTS: Product[] = [
     name: "Steel Pipes",
     spec: "IS 1239 / IS 3589",
     body: "Black and galvanised pipes for water, gas and structural applications across plant, civic and industrial sites.",
-    image: PLACEHOLDER_IMAGES.products[1],
+    image: PLACEHOLDER_IMAGES.products[2],
     href: "/processes/materials#pipe",
   },
   {
     name: "Steel Coils",
     spec: "IS 2062",
     body: "Hot-rolled coils for downstream fabrication — formability and weldability verified batch-by-batch.",
-    image: PLACEHOLDER_IMAGES.products[2],
+    image: PLACEHOLDER_IMAGES.products[1],
     href: "/processes/materials#coil",
   },
   {
@@ -60,7 +60,7 @@ export default function ProductsShowcase() {
       <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
         <div className="grid grid-cols-1 items-end gap-8 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-7">
-            <span className="text-xs uppercase tracking-[0.2em] text-deep-green">
+            <span className="text-xs uppercase tracking-[0.2em] text-accent">
               Recycled materials
             </span>
             <AnimatedHeading className="mt-3 text-balance font-serif text-3xl leading-tight text-ink sm:text-4xl lg:text-5xl">
@@ -122,7 +122,7 @@ export default function ProductsShowcase() {
                   <p className="mt-3 flex-1 text-sm leading-relaxed text-body">
                     {p.body}
                   </p>
-                  <span className="mt-5 inline-flex items-center gap-1.5 text-xs font-medium text-deep-green">
+                  <span className="mt-5 inline-flex items-center gap-1.5 text-xs font-medium text-accent">
                     Spec sheet
                     <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
                   </span>

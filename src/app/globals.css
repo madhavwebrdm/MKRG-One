@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
 :root {
-  /* MKRG brand palette — primary: #2ecc71 emerald */
-  --color-deep-green: #27ae60;
-  --color-brand-green: #2ecc71;
+  /* MKRG brand palette — primary: deep forest green */
+  --color-deep-green: #2A5417;
+  --color-brand-green: #2A5417;
   --color-light-green: #d1f2e0;
   --color-teal: #0f6e56;
   --color-light-teal: #e1f5ee;

@@ -1,10 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
+import Image, { type StaticImageData } from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRight, Leaf, Wind, HeartHandshake } from "lucide-react";
 import { PLACEHOLDER_IMAGES } from "@/lib/placeholderImages";
+import mkrg3 from "@/Images/mkrg (3).jpeg";
 import AnimatedHeading from "./AnimatedHeading";
 
 type Highlight = { label: string; value: string };
@@ -19,10 +20,10 @@ type Props = {
 };
 
 const ICONS = [Leaf, Wind, HeartHandshake];
-const HIGHLIGHT_IMAGES = [
+const HIGHLIGHT_IMAGES: Array<string | StaticImageData> = [
   PLACEHOLDER_IMAGES.sustainability1,
   PLACEHOLDER_IMAGES.sustainability2,
-  PLACEHOLDER_IMAGES.sustainability3,
+  mkrg3,
 ];
 
 const DEFAULTS: Highlight[] = [
@@ -49,10 +50,8 @@ export default function SustainabilityTeaser({
   const ctaLabel = ctaLabelProp ?? "See our impact";
   const ctaHref = ctaHrefProp ?? "/sustainability";
   return (
-    <section className="relative bg-brand-green py-24 text-white sm:py-32">
-      <div className="absolute inset-0 -z-0 bg-[radial-gradient(circle_at_20%_0%,rgba(255,255,255,0.08),transparent_60%)]" />
-
-      <div className="relative mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
+    <section className="bg-brand-green py-24 text-white sm:py-32">
+      <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-12">
           <div className="lg:col-span-6">
             <span className="text-xs uppercase tracking-[0.2em] text-white/80">

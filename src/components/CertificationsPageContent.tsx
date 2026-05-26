@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 
 import { PLACEHOLDER_IMAGES } from "@/lib/placeholderImages";
+import certificationsHero from "@/Images/Certifications.jpeg";
 import AnimatedHeading from "./AnimatedHeading";
 import PageHero from "./PageHero";
 
@@ -76,15 +77,15 @@ export default function CertificationsPageContent() {
         eyebrow="Certifications"
         heading="Compliant by design, certified by audit."
         intro="Independent certifications confirm what our process already enforces. Quality, environment and safety standards aren't a finish line for Madhav KRG Group — they are the baseline we operate above."
-        imageUrl={PLACEHOLDER_IMAGES.certificationsHero}
-        imageAlt="Audit-ready plant operations"
+        imageUrl={certificationsHero}
+        imageAlt="Madhav KRG Group certifications"
       />
 
       {/* Badge grid */}
       <section className="bg-white py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
           <div className="max-w-3xl">
-            <span className="text-xs uppercase tracking-[0.2em] text-deep-green">
+            <span className="text-xs uppercase tracking-[0.2em] text-accent">
               Standards we operate under
             </span>
             <AnimatedHeading className="mt-3 font-serif text-3xl leading-tight text-ink sm:text-4xl lg:text-5xl">
@@ -110,12 +111,12 @@ export default function CertificationsPageContent() {
                   className="group flex h-full flex-col rounded-2xl border border-deep-green/15 bg-beige p-7 transition-colors hover:border-deep-green/40"
                 >
                   <div className="flex items-center justify-between">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-deep-green/10 text-deep-green transition-transform group-hover:scale-110">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10 text-accent transition-transform group-hover:scale-110">
                       <Icon className="h-5 w-5" aria-hidden />
                     </div>
                     {c.status && (
-                      <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-green/15 px-3 py-1 text-[10px] font-medium uppercase tracking-wider text-deep-green">
-                        <span className="h-1.5 w-1.5 rounded-full bg-brand-green" />
+                      <span className="inline-flex items-center gap-1.5 rounded-full bg-accent/15 px-3 py-1 text-[10px] font-medium uppercase tracking-wider text-accent">
+                        <span className="h-1.5 w-1.5 rounded-full bg-accent" />
                         {c.status}
                       </span>
                     )}
@@ -147,7 +148,7 @@ export default function CertificationsPageContent() {
       <section className="bg-beige py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
           <div className="max-w-3xl">
-            <span className="text-xs uppercase tracking-[0.2em] text-deep-green">
+            <span className="text-xs uppercase tracking-[0.2em] text-accent">
               Documents
             </span>
             <AnimatedHeading className="mt-3 font-serif text-3xl leading-tight text-ink sm:text-4xl lg:text-5xl">
@@ -189,7 +190,7 @@ export default function CertificationsPageContent() {
                       <Link
                         href={c.downloadHref}
                         aria-label={`Download ${c.title}`}
-                        className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-deep-green/10 text-deep-green transition-colors hover:bg-deep-green hover:text-white"
+                        className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-accent/10 text-accent transition-colors hover:bg-accent hover:text-white"
                       >
                         <Download className="h-4 w-4" />
                       </Link>

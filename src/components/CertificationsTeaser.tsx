@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRight, ShieldCheck } from "lucide-react";
-import { PLACEHOLDER_IMAGES } from "@/lib/placeholderImages";
+import mkrg6 from "@/Images/mkrg (6).jpeg";
 import TiltCard from "./TiltCard";
 import AnimatedHeading from "./AnimatedHeading";
 
@@ -70,15 +70,15 @@ export default function CertificationsTeaser({
               data-cursor="grow"
             >
               <Image
-                src={PLACEHOLDER_IMAGES.certificationsAccent}
-                alt="Plant operations"
+                src={mkrg6}
+                alt="Madhav KRG Group certifications and audits"
                 fill
                 sizes="(max-width: 1024px) 100vw, 40vw"
                 className="object-cover transition-transform duration-1000 hover:scale-110"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-deep-green/50 via-transparent to-transparent" />
-              <div className="absolute left-5 top-5 inline-flex items-center gap-2 rounded-full bg-white/90 px-3.5 py-1.5 text-[10px] uppercase tracking-[0.2em] text-deep-green backdrop-blur">
-                <span className="h-1.5 w-1.5 rounded-full bg-brand-green" />
+              <div className="absolute left-5 top-5 inline-flex items-center gap-2 rounded-full bg-white/90 px-3.5 py-1.5 text-[10px] uppercase tracking-[0.2em] text-accent backdrop-blur">
+                <span className="h-1.5 w-1.5 rounded-full bg-accent" />
                 Audit-ready
               </div>
             </motion.div>
@@ -107,7 +107,7 @@ export default function CertificationsTeaser({
           {badges.map((b, i) => (
             <motion.li key={`${b.label}-${i}`} variants={item}>
               <TiltCard className="group h-full rounded-2xl border border-deep-green/15 bg-beige p-7 transition-colors hover:border-deep-green/40">
-                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-deep-green/10 text-deep-green transition-transform group-hover:scale-110">
+                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-accent/10 text-accent transition-transform group-hover:scale-110">
                   <ShieldCheck className="h-5 w-5" aria-hidden />
                 </div>
                 <p className="mt-5 font-serif text-lg text-ink">{b.label}</p>

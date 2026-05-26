@@ -106,7 +106,7 @@ function EnquiryForm() {
   if (status === "sent") {
     return (
       <div className="flex flex-col items-start gap-4 rounded-2xl border border-deep-green/15 bg-white p-8 sm:p-10">
-        <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-brand-green/15 text-deep-green">
+        <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-accent/15 text-accent">
           <CheckCircle2 className="h-6 w-6" />
         </span>
         <h3 className="font-serif text-2xl leading-snug text-ink">
@@ -203,7 +203,7 @@ function CareersForm() {
   if (status === "sent") {
     return (
       <div className="flex flex-col items-start gap-4 rounded-2xl border border-deep-green/15 bg-white p-8 sm:p-10">
-        <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-brand-green/15 text-deep-green">
+        <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-accent/15 text-accent">
           <CheckCircle2 className="h-6 w-6" />
         </span>
         <h3 className="font-serif text-2xl leading-snug text-ink">
@@ -249,7 +249,7 @@ function CareersForm() {
       <div className="mt-6">
         <Label>CV (PDF, up to 5 MB)</Label>
         <label className="mt-2 flex cursor-pointer items-center gap-3 rounded-xl border border-dashed border-deep-green/30 bg-beige/40 px-4 py-3 text-sm text-body transition-colors hover:border-deep-green">
-          <Upload className="h-4 w-4 text-deep-green" />
+          <Upload className="h-4 w-4 text-accent" />
           <span className="truncate">
             {fileName ? fileName : "Choose a PDF to upload"}
           </span>
@@ -286,7 +286,7 @@ function Label({
   return (
     <label
       htmlFor={htmlFor}
-      className="text-xs font-medium uppercase tracking-wider text-deep-green"
+      className="text-xs font-medium uppercase tracking-wider text-accent"
     >
       {children}
     </label>
@@ -310,7 +310,7 @@ function Field({
     <div>
       <Label htmlFor={id}>
         {label}
-        {required && <span className="ml-1 text-brand-green">*</span>}
+        {required && <span className="ml-1 text-accent">*</span>}
       </Label>
       <input
         id={id}
@@ -339,7 +339,7 @@ export default function ContactPageContent() {
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
             <div className="lg:col-span-7">
-              <span className="text-xs uppercase tracking-[0.2em] text-deep-green">
+              <span className="text-xs uppercase tracking-[0.2em] text-accent">
                 Enquiry
               </span>
               <AnimatedHeading className="mt-3 font-serif text-3xl leading-tight text-ink sm:text-4xl">
@@ -355,7 +355,7 @@ export default function ContactPageContent() {
             </div>
 
             <aside className="lg:col-span-5">
-              <span className="text-xs uppercase tracking-[0.2em] text-deep-green">
+              <span className="text-xs uppercase tracking-[0.2em] text-accent">
                 Reach us
               </span>
               <AnimatedHeading className="mt-3 font-serif text-3xl leading-tight text-ink sm:text-4xl">
@@ -370,11 +370,11 @@ export default function ContactPageContent() {
                       key={o.label}
                       className="flex gap-4 rounded-2xl border border-deep-green/15 bg-beige/40 p-5"
                     >
-                      <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-deep-green/10 text-deep-green">
+                      <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent/10 text-accent">
                         <Icon className="h-5 w-5" />
                       </span>
                       <div>
-                        <p className="text-xs font-medium uppercase tracking-wider text-deep-green">
+                        <p className="text-xs font-medium uppercase tracking-wider text-accent">
                           {o.label}
                         </p>
                         <address className="mt-1 not-italic text-sm leading-relaxed text-body">
@@ -395,11 +395,11 @@ export default function ContactPageContent() {
                   const Icon = c.icon;
                   return (
                     <li key={c.label} className="flex items-center gap-4 p-5">
-                      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-deep-green/10 text-deep-green">
+                      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-accent/10 text-accent">
                         <Icon className="h-4 w-4" />
                       </span>
                       <div className="min-w-0">
-                        <p className="text-xs font-medium uppercase tracking-wider text-deep-green">
+                        <p className="text-xs font-medium uppercase tracking-wider text-accent">
                           {c.label}
                         </p>
                         <Link
@@ -415,7 +415,7 @@ export default function ContactPageContent() {
               </ul>
 
               <div className="mt-6">
-                <p className="text-xs font-medium uppercase tracking-wider text-deep-green">
+                <p className="text-xs font-medium uppercase tracking-wider text-accent">
                   Follow MKRG
                 </p>
                 <ul className="mt-3 flex flex-wrap gap-2.5">
@@ -426,7 +426,7 @@ export default function ContactPageContent() {
                         <Link
                           href={s.href}
                           aria-label={s.label}
-                          className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-deep-green/15 text-deep-green transition-colors hover:bg-deep-green hover:text-white"
+                          className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-accent/20 text-accent transition-colors hover:bg-accent hover:text-white"
                         >
                           <Icon className="h-4 w-4" />
                         </Link>
@@ -444,7 +444,7 @@ export default function ContactPageContent() {
       <section className="bg-beige py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
           <div className="flex flex-col items-start gap-3">
-            <span className="text-xs uppercase tracking-[0.2em] text-deep-green">
+            <span className="text-xs uppercase tracking-[0.2em] text-accent">
               Find us
             </span>
             <AnimatedHeading className="font-serif text-3xl leading-tight text-ink sm:text-4xl">
@@ -472,11 +472,11 @@ export default function ContactPageContent() {
             </div>
             <div className="flex flex-col gap-4 lg:col-span-4">
               <div className="flex gap-4 rounded-2xl border border-deep-green/15 bg-white p-6">
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-deep-green/10 text-deep-green">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent/10 text-accent">
                   <MapPin className="h-5 w-5" />
                 </span>
                 <div>
-                  <p className="text-xs font-medium uppercase tracking-wider text-deep-green">
+                  <p className="text-xs font-medium uppercase tracking-wider text-accent">
                     Coordinates
                   </p>
                   <p className="mt-1 text-sm leading-relaxed text-body">

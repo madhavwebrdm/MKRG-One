@@ -4,8 +4,9 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRight, Quote } from "lucide-react";
-import { PLACEHOLDER_IMAGES } from "@/lib/placeholderImages";
 import AnimatedHeading from "./AnimatedHeading";
+
+const FOUNDER_PORTRAIT = "https://www.madhavkrggroup.com/images/sudhir-goyal.jpg";
 
 type Props = {
   eyebrow?: string;
@@ -31,16 +32,14 @@ export default function LeadershipTeaser({
     headingProp ?? "Built by people who have spent decades closing the loop.";
   const quote =
     quoteProp ??
-    "Recycling isn't a side business — it is the only way we can build the infrastructure of tomorrow without exhausting the resources of today.";
-  const attribution = attributionProp ?? "Founder, Madhav KRG Group";
+    "Efficient utilization of Energy and Nature's Resources is the mantra of Madhav KRG Group in achieving our set goals.";
+  const attribution = attributionProp ?? "Sudhir Goyal, Managing Director";
   const ctaLabel = ctaLabelProp ?? "Meet the team";
   const ctaHref = ctaHrefProp ?? "/leadership";
-  const portrait = portraitUrl || PLACEHOLDER_IMAGES.leadershipPortrait;
+  const portrait = portraitUrl || FOUNDER_PORTRAIT;
 
   return (
-    <section className="relative isolate overflow-hidden bg-deep-green py-24 text-white sm:py-32">
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_15%_0%,rgba(255,255,255,0.08),transparent_60%)]" />
-
+    <section className="bg-deep-green py-24 text-white sm:py-32">
       <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-5">
@@ -61,7 +60,7 @@ export default function LeadershipTeaser({
               />
               <div className="absolute inset-0 bg-gradient-to-t from-deep-green/60 via-transparent to-transparent" />
               <div className="absolute bottom-5 left-5 right-5 flex items-center gap-3 rounded-2xl bg-white/90 px-5 py-3.5 backdrop-blur">
-                <Quote className="h-5 w-5 text-brand-green" />
+                <Quote className="h-5 w-5 text-accent" />
                 <p className="text-sm font-medium text-ink">{attribution}</p>
               </div>
             </motion.div>

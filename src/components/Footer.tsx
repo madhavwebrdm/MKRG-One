@@ -76,12 +76,43 @@ export default function Footer({
   ].filter((s) => s.url);
 
   return (
-    <footer className="border-t border-deep-green/15 bg-beige">
-      <div className="mx-auto max-w-7xl px-6 py-16 sm:px-10 lg:px-16 lg:py-20">
+    <footer className="relative isolate overflow-hidden border-t border-deep-green/15 bg-beige">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 bottom-0 -z-20 flex h-[65%] w-full"
+        style={{
+          maskImage:
+            "linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.4) 30%, black 70%)",
+          WebkitMaskImage:
+            "linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.4) 30%, black 70%)",
+        }}
+      >
+        <video
+          className="h-full w-1/2 object-cover object-bottom"
+          autoPlay
+          muted
+          loop
+          playsInline
+          aria-hidden
+        >
+          <source src="/videos/grass-footer.mp4" type="video/mp4" />
+        </video>
+        <video
+          className="h-full w-1/2 -scale-x-100 object-cover object-bottom"
+          autoPlay
+          muted
+          loop
+          playsInline
+          aria-hidden
+        >
+          <source src="/videos/grass-footer.mp4" type="video/mp4" />
+        </video>
+      </div>
+      <div className="relative mx-auto max-w-7xl px-6 py-16 sm:px-10 lg:px-16 lg:py-20">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-5">
             <Link href="/" className="font-serif text-2xl tracking-tight text-ink">
-              MKRG<span className="text-brand-green">.</span>
+              MKRG<span className="text-accent">.</span>
             </Link>
             <p className="mt-4 max-w-sm font-serif text-xl leading-snug text-ink">
               {tagline}
@@ -100,7 +131,7 @@ export default function Footer({
                   <li>
                     <a
                       href={`tel:${contact.phone.replace(/\s+/g, "")}`}
-                      className="inline-flex items-center gap-2 hover:text-deep-green"
+                      className="inline-flex items-center gap-2 transition-colors hover:text-accent"
                     >
                       <Phone className="h-4 w-4" aria-hidden />
                       {contact.phone}
@@ -111,7 +142,7 @@ export default function Footer({
                   <li>
                     <a
                       href={`mailto:${contact.generalEmail}`}
-                      className="inline-flex items-center gap-2 hover:text-deep-green"
+                      className="inline-flex items-center gap-2 transition-colors hover:text-accent"
                     >
                       <Mail className="h-4 w-4" aria-hidden />
                       {contact.generalEmail}
@@ -122,7 +153,7 @@ export default function Footer({
                   <li>
                     <a
                       href={`mailto:${contact.salesEmail}`}
-                      className="inline-flex items-center gap-2 hover:text-deep-green"
+                      className="inline-flex items-center gap-2 transition-colors hover:text-accent"
                     >
                       <Mail className="h-4 w-4" aria-hidden />
                       {contact.salesEmail}
@@ -137,7 +168,7 @@ export default function Footer({
           <div className="grid grid-cols-1 gap-10 sm:grid-cols-3 lg:col-span-7">
             {NAV_GROUPS.map((group) => (
               <div key={group.title}>
-                <p className="text-xs font-medium uppercase tracking-wider text-deep-green">
+                <p className="text-xs font-medium uppercase tracking-wider text-accent">
                   {group.title}
                 </p>
                 <ul className="mt-4 space-y-2.5">
@@ -145,7 +176,7 @@ export default function Footer({
                     <li key={item.href}>
                       <Link
                         href={item.href}
-                        className="text-sm text-body transition-colors hover:text-deep-green"
+                        className="text-sm text-body transition-colors hover:text-accent"
                       >
                         {item.label}
                       </Link>
@@ -157,7 +188,7 @@ export default function Footer({
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col gap-6 border-t border-deep-green/10 pt-8 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-14 flex flex-col gap-4 rounded-2xl border border-deep-green/15 bg-beige/85 px-5 py-4 backdrop-blur-sm sm:flex-row sm:items-center sm:justify-between sm:gap-6 sm:px-6 sm:py-5">
           <div className="text-xs text-muted">
             © {new Date().getFullYear()} {legalName || siteTitle}.
             {cin && (
@@ -177,7 +208,7 @@ export default function Footer({
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={label}
-                    className="inline-flex h-9 w-9 items-center justify-center rounded-full text-body transition-colors hover:bg-light-green hover:text-deep-green"
+                    className="inline-flex h-9 w-9 items-center justify-center rounded-full text-body transition-colors hover:bg-accent/10 hover:text-accent"
                   >
                     <Icon className="h-4 w-4" aria-hidden />
                   </a>

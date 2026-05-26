@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 
 import { PLACEHOLDER_IMAGES } from "@/lib/placeholderImages";
+import mediaHero from "@/Images/media hero.jpeg";
 import AnimatedHeading from "./AnimatedHeading";
 import PageHero from "./PageHero";
 import TiltCard from "./TiltCard";
@@ -255,7 +256,7 @@ export default function MediaPageContent() {
         eyebrow="Media"
         heading="Press, plant tours and the conversations shaping circular industry."
         intro="Where Madhav KRG Group shows up — on the page, on camera and on the ground at the forums where recycling policy and practice are being rewritten."
-        imageUrl={PLACEHOLDER_IMAGES.mediaHero}
+        imageUrl={mediaHero}
         imageAlt="MKRG in the media"
       />
 
@@ -264,7 +265,7 @@ export default function MediaPageContent() {
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-2xl">
-              <span className="text-xs uppercase tracking-[0.2em] text-deep-green">
+              <span className="text-xs uppercase tracking-[0.2em] text-accent">
                 Industry articles
               </span>
               <AnimatedHeading className="mt-3 font-serif text-3xl leading-tight text-ink sm:text-4xl lg:text-5xl">
@@ -304,7 +305,7 @@ export default function MediaPageContent() {
                         className="object-cover transition-transform duration-700 group-hover:scale-110"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-ink/40 via-transparent to-transparent" />
-                      <div className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full bg-white/90 px-3 py-1 text-[10px] font-medium uppercase tracking-wider text-deep-green">
+                      <div className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full bg-white/90 px-3 py-1 text-[10px] font-medium uppercase tracking-wider text-accent">
                         <Newspaper className="h-3.5 w-3.5" />
                         {a.topic}
                       </div>
@@ -329,7 +330,7 @@ export default function MediaPageContent() {
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-2xl">
-              <span className="text-xs uppercase tracking-[0.2em] text-deep-green">
+              <span className="text-xs uppercase tracking-[0.2em] text-accent">
                 Company news
               </span>
               <AnimatedHeading className="mt-3 font-serif text-3xl leading-tight text-ink sm:text-4xl lg:text-5xl">
@@ -366,7 +367,7 @@ export default function MediaPageContent() {
                     </div>
                     <div className="flex flex-col gap-3 p-7 sm:col-span-7">
                       <div className="flex items-center gap-3 text-xs">
-                        <span className="inline-flex items-center gap-1.5 rounded-full bg-deep-green/10 px-3 py-1 font-medium uppercase tracking-wider text-deep-green">
+                        <span className="inline-flex items-center gap-1.5 rounded-full bg-accent/10 px-3 py-1 font-medium uppercase tracking-wider text-accent">
                           <Icon className="h-3.5 w-3.5" />
                           {n.kind}
                         </span>
@@ -390,7 +391,7 @@ export default function MediaPageContent() {
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-2xl">
-              <span className="text-xs uppercase tracking-[0.2em] text-deep-green">
+              <span className="text-xs uppercase tracking-[0.2em] text-accent">
                 Press releases
               </span>
               <AnimatedHeading className="mt-3 font-serif text-3xl leading-tight text-ink sm:text-4xl lg:text-5xl">
@@ -424,11 +425,11 @@ export default function MediaPageContent() {
                   className="group flex flex-col gap-2 p-6 transition-colors hover:bg-white sm:flex-row sm:items-start sm:justify-between sm:gap-8 sm:p-8"
                 >
                   <div className="flex flex-1 items-start gap-4">
-                    <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-deep-green/10 text-deep-green">
+                    <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-accent/10 text-accent">
                       <FileText className="h-4 w-4" />
                     </span>
                     <div>
-                      <p className="text-xs font-medium uppercase tracking-wider text-deep-green">
+                      <p className="text-xs font-medium uppercase tracking-wider text-accent">
                         {formatDate(p.date)}
                       </p>
                       <h3 className="mt-2 font-serif text-xl leading-snug text-ink group-hover:text-deep-green">
@@ -439,7 +440,7 @@ export default function MediaPageContent() {
                       </p>
                     </div>
                   </div>
-                  <ArrowRight className="hidden h-5 w-5 shrink-0 self-center text-deep-green transition-transform group-hover:translate-x-1 sm:block" />
+                  <ArrowRight className="hidden h-5 w-5 shrink-0 self-center text-accent transition-transform group-hover:translate-x-1 sm:block" />
                 </Link>
               </motion.li>
             ))}
@@ -448,8 +449,7 @@ export default function MediaPageContent() {
       </section>
 
       {/* Videos */}
-      <section className="relative isolate overflow-hidden bg-deep-green py-24 text-white sm:py-32">
-        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_20%_0%,rgba(255,255,255,0.08),transparent_55%)]" />
+      <section className="bg-deep-green py-24 text-white sm:py-32">
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-2xl">
@@ -509,7 +509,7 @@ export default function MediaPageContent() {
                         {v.duration}
                       </div>
                       <div className="absolute inset-0 flex items-center justify-center">
-                        <span className="flex h-16 w-16 items-center justify-center rounded-full bg-white/85 text-deep-green transition-transform group-hover:scale-110">
+                        <span className="flex h-16 w-16 items-center justify-center rounded-full bg-white/85 text-accent transition-transform group-hover:scale-110">
                           <Play className="h-6 w-6 fill-current" />
                         </span>
                       </div>
@@ -532,7 +532,7 @@ export default function MediaPageContent() {
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-2xl">
-              <span className="text-xs uppercase tracking-[0.2em] text-deep-green">
+              <span className="text-xs uppercase tracking-[0.2em] text-accent">
                 Events
               </span>
               <AnimatedHeading className="mt-3 font-serif text-3xl leading-tight text-ink sm:text-4xl lg:text-5xl">
@@ -576,20 +576,20 @@ export default function MediaPageContent() {
                         className="object-cover transition-transform duration-700 group-hover:scale-110"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-ink/40 via-transparent to-transparent" />
-                      <div className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full bg-white/90 px-3 py-1 text-[10px] font-medium uppercase tracking-wider text-deep-green backdrop-blur">
+                      <div className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full bg-white/90 px-3 py-1 text-[10px] font-medium uppercase tracking-wider text-accent backdrop-blur">
                         <KindIcon className="h-3.5 w-3.5" />
                         {e.kind}
                       </div>
                     </div>
                     <div className="flex flex-1 flex-col gap-3 p-6">
-                      <p className="text-xs font-medium uppercase tracking-wider text-deep-green">
+                      <p className="text-xs font-medium uppercase tracking-wider text-accent">
                         {formatDate(e.date)}
                       </p>
                       <h3 className="font-serif text-xl leading-snug text-ink">
                         {e.title}
                       </h3>
                       <p className="mt-auto inline-flex items-center gap-2 text-sm text-body">
-                        <MapPin className="h-4 w-4 text-deep-green" />
+                        <MapPin className="h-4 w-4 text-accent" />
                         {e.location}
                       </p>
                     </div>
@@ -642,7 +642,7 @@ export default function MediaPageContent() {
                         className="object-cover transition-transform duration-700 group-hover:scale-110"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-ink/40 via-transparent to-transparent" />
-                      <div className="absolute left-5 top-5 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-white/90 text-deep-green backdrop-blur">
+                      <div className="absolute left-5 top-5 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-white/90 text-accent backdrop-blur">
                         <Icon className="h-5 w-5" aria-hidden />
                       </div>
                     </div>

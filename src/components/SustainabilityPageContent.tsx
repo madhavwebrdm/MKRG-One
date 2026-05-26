@@ -22,9 +22,15 @@ import {
 } from "lucide-react";
 
 import { PLACEHOLDER_IMAGES } from "@/lib/placeholderImages";
+import mkrg3 from "@/Images/mkrg (3).jpeg";
+import mkrg4 from "@/Images/mkrg (4).jpeg";
+import mkrg5 from "@/Images/mkrg (5).jpeg";
+import mkrg8 from "@/Images/mkrg (8).jpeg";
 import AnimatedHeading from "./AnimatedHeading";
 import PageHero from "./PageHero";
 import TiltCard from "./TiltCard";
+
+type PillarImage = string | import("next/image").StaticImageData;
 
 const METRICS = [
   { value: 1.2, suffix: "M t", label: "CO₂ offset", note: "Avoided emissions per year" },
@@ -32,7 +38,12 @@ const METRICS = [
   { value: 42, suffix: "%", label: "Renewable energy", note: "Powering our plants today" },
 ];
 
-const PILLARS = [
+const PILLARS: Array<{
+  title: string;
+  body: string;
+  icon: typeof ShieldCheck;
+  image?: PillarImage;
+}> = [
   {
     title: "Environment Protection",
     body: "Hazardous waste reduction at source. Flue dust becomes commercial zinc instead of landfill.",
@@ -42,11 +53,13 @@ const PILLARS = [
     title: "Resource Conservation",
     body: "Every recycled tonne is a tonne of virgin iron ore that stays in the ground.",
     icon: Sprout,
+    image: mkrg4,
   },
   {
     title: "Less Energy Consumption",
     body: "Recycled steel needs a fraction of the energy of primary smelting.",
     icon: Zap,
+    image: mkrg5,
   },
   {
     title: "Less Carbon Emission",
@@ -161,21 +174,12 @@ export default function SustainabilityPageContent() {
         intro="Sustainability at Madhav KRG Group isn't a line item — it is the business model. Every tonne we process avoids emissions, conserves resources and supports the communities we operate in."
         imageUrl={PLACEHOLDER_IMAGES.sustHero}
         imageAlt="Green plant operations"
+        videoUrl="/videos/sustainability-hero.mp4"
+        videoPoster={typeof PLACEHOLDER_IMAGES.sustHero === "string" ? PLACEHOLDER_IMAGES.sustHero : undefined}
       />
 
       {/* Environmental impact metrics */}
-      <section className="relative isolate overflow-hidden bg-deep-green py-24 text-white sm:py-32">
-        <div className="absolute inset-0 -z-10 opacity-25">
-          <Image
-            src={PLACEHOLDER_IMAGES.metricsBg}
-            alt=""
-            fill
-            sizes="100vw"
-            className="object-cover"
-          />
-        </div>
-        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-deep-green/70 via-deep-green/85 to-deep-green" />
-
+      <section className="bg-deep-green py-24 text-white sm:py-32">
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
           <div className="max-w-3xl">
             <span className="text-xs uppercase tracking-[0.2em] text-white/80">
@@ -199,7 +203,7 @@ export default function SustainabilityPageContent() {
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
           <div className="grid grid-cols-1 items-end gap-10 lg:grid-cols-12 lg:gap-16">
             <div className="lg:col-span-7">
-              <span className="text-xs uppercase tracking-[0.2em] text-deep-green">
+              <span className="text-xs uppercase tracking-[0.2em] text-accent">
                 Pillars of impact
               </span>
               <AnimatedHeading className="mt-3 text-balance font-serif text-3xl leading-tight text-ink sm:text-4xl lg:text-5xl">
@@ -217,7 +221,8 @@ export default function SustainabilityPageContent() {
           <ul className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {PILLARS.map((p, i) => {
               const Icon = p.icon;
-              const img =
+              const img: PillarImage =
+                p.image ??
                 PLACEHOLDER_IMAGES.sustPillars[i % PLACEHOLDER_IMAGES.sustPillars.length];
               return (
                 <motion.li
@@ -237,7 +242,7 @@ export default function SustainabilityPageContent() {
                         className="object-cover transition-transform duration-700 group-hover:scale-110"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-deep-green/55 via-transparent to-transparent" />
-                      <div className="absolute left-5 top-5 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-white/90 text-deep-green backdrop-blur">
+                      <div className="absolute left-5 top-5 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-white/90 text-accent backdrop-blur">
                         <Icon className="h-5 w-5" aria-hidden />
                       </div>
                     </div>
@@ -258,7 +263,17 @@ export default function SustainabilityPageContent() {
       </section>
 
       {/* Recycling statistics */}
-      <section className="bg-brand-green py-24 text-white sm:py-32">
+      <section
+        className="relative isolate overflow-hidden bg-brand-green py-24 text-white sm:py-32"
+        style={{
+          backgroundImage: `url(${PLACEHOLDER_IMAGES.metricsBg})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundAttachment: "fixed",
+          backgroundRepeat: "no-repeat",
+        }}
+      >
+        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-brand-green/85 via-brand-green/80 to-brand-green/90" />
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
           <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-16">
             <motion.div
@@ -317,7 +332,7 @@ export default function SustainabilityPageContent() {
       <section className="bg-beige py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
           <div className="max-w-3xl">
-            <span className="text-xs uppercase tracking-[0.2em] text-deep-green">
+            <span className="text-xs uppercase tracking-[0.2em] text-accent">
               Community programs
             </span>
             <AnimatedHeading className="mt-3 font-serif text-3xl leading-tight text-ink sm:text-4xl lg:text-5xl">
@@ -340,19 +355,19 @@ export default function SustainabilityPageContent() {
             >
               <div className="relative aspect-[5/3] w-full overflow-hidden">
                 <Image
-                  src={PLACEHOLDER_IMAGES.sustCsr}
+                  src={mkrg3}
                   alt="CSR program"
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-ink/40 via-transparent to-transparent" />
-                <div className="absolute left-5 top-5 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-white/90 text-deep-green backdrop-blur">
+                <div className="absolute left-5 top-5 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-white/90 text-accent backdrop-blur">
                   <HeartHandshake className="h-5 w-5" aria-hidden />
                 </div>
               </div>
               <div className="p-8 sm:p-10">
-                <span className="text-xs font-medium uppercase tracking-wider text-brand-green">
+                <span className="text-xs font-medium uppercase tracking-wider text-accent">
                   CSR
                 </span>
                 <h3 className="mt-3 font-serif text-2xl leading-snug text-ink">
@@ -375,14 +390,14 @@ export default function SustainabilityPageContent() {
             >
               <div className="relative aspect-[5/3] w-full overflow-hidden">
                 <Image
-                  src={PLACEHOLDER_IMAGES.sustEhs}
+                  src={mkrg8}
                   alt="EHS program"
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-ink/40 via-transparent to-transparent" />
-                <div className="absolute left-5 top-5 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-white/90 text-deep-green backdrop-blur">
+                <div className="absolute left-5 top-5 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-white/90 text-accent backdrop-blur">
                   <Sun className="h-5 w-5" aria-hidden />
                 </div>
               </div>
@@ -443,7 +458,7 @@ export default function SustainabilityPageContent() {
                         className="object-cover transition-transform duration-700 group-hover:scale-110"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-ink/40 via-transparent to-transparent" />
-                      <div className="absolute left-5 top-5 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-white/90 text-deep-green backdrop-blur">
+                      <div className="absolute left-5 top-5 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-white/90 text-accent backdrop-blur">
                         <Icon className="h-5 w-5" aria-hidden />
                       </div>
                     </div>

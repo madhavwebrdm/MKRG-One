@@ -57,10 +57,11 @@ export default function Header({
   }, [open]);
 
   return (
-    <header
-      className={`fixed inset-x-0 top-0 z-50 transition-[transform,background-color,border-color] duration-300 ease-out ${
-        hidden ? "-translate-y-full" : "translate-y-0"
-      } ${
+    <motion.header
+      initial={false}
+      animate={{ y: hidden ? "-100%" : "0%" }}
+      transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+      className={`fixed inset-x-0 top-0 z-50 transition-[background-color,border-color] duration-300 ease-out ${
         scrolled
           ? "border-b border-deep-green/10 bg-beige/85 backdrop-blur"
           : "bg-transparent"
@@ -83,7 +84,7 @@ export default function Header({
             <Link
               key={item.href}
               href={item.href}
-              className={`text-sm font-medium transition-colors ${darkTop ? "text-white/90 hover:text-white" : "text-body hover:text-deep-green"}`}
+              className={`text-sm font-medium transition-colors ${darkTop ? "text-white/90 hover:text-white" : "text-body hover:text-accent"}`}
             >
               {item.label}
             </Link>
@@ -92,9 +93,9 @@ export default function Header({
 
         <Link
           href="/contact"
-          className={`hidden rounded-full px-5 py-2.5 text-sm font-medium shadow-sm transition-colors lg:inline-flex ${darkTop ? "bg-white text-deep-green hover:bg-white/90" : "bg-deep-green text-white hover:bg-brand-green"}`}
+          className={`hidden rounded-full px-5 py-2.5 text-sm font-medium shadow-sm transition-colors lg:inline-flex ${darkTop ? "bg-white text-deep-green hover:bg-accent hover:text-white" : "bg-deep-green text-white hover:bg-accent"}`}
         >
-          Get in touch
+          Make an Impact
         </Link>
 
         <button
@@ -122,7 +123,7 @@ export default function Header({
                   <Link
                     href={item.href}
                     onClick={() => setOpen(false)}
-                    className="block rounded-md px-2 py-2.5 text-base font-medium text-body hover:bg-light-green hover:text-deep-green"
+                    className="block rounded-md px-2 py-2.5 text-base font-medium text-body transition-colors hover:bg-accent/10 hover:text-accent"
                   >
                     {item.label}
                   </Link>
@@ -132,15 +133,15 @@ export default function Header({
                 <Link
                   href="/contact"
                   onClick={() => setOpen(false)}
-                  className="block rounded-full bg-deep-green px-4 py-2.5 text-center text-sm font-medium text-white"
+                  className="block rounded-full bg-deep-green px-4 py-2.5 text-center text-sm font-medium text-white transition-colors hover:bg-accent"
                 >
-                  Get in touch
+                  Make an Impact
                 </Link>
               </li>
             </ul>
           </motion.div>
         )}
       </AnimatePresence>
-    </header>
+    </motion.header>
   );
 }

@@ -43,15 +43,15 @@ export default function MarqueeStrip({ items = DEFAULTS, speed = 35 }: Props) {
   return (
     <div
       ref={root}
-      className="overflow-hidden border-y border-deep-green/10 bg-deep-green/5 py-5"
+      className="overflow-hidden border-y border-accent/15 bg-accent/5 py-5"
     >
-      <div className="marquee-track flex w-max items-center gap-12 whitespace-nowrap pl-12 font-serif text-xl text-deep-green sm:text-2xl">
+      <div className="marquee-track flex w-max items-center gap-12 whitespace-nowrap pl-12 font-serif text-xl text-accent sm:text-2xl">
         {loop.map((label, i) => (
           <span key={`${label}-${i}`} className="flex items-center gap-12">
             <span>{label}</span>
             <span
               aria-hidden
-              className="inline-block h-1.5 w-1.5 rounded-full bg-brand-green"
+              className="inline-block h-1.5 w-1.5 rounded-full bg-accent"
             />
           </span>
         ))}

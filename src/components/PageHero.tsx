@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import Image, { type StaticImageData } from "next/image";
 import { motion } from "framer-motion";
 
 import AnimatedHeading from "./AnimatedHeading";
@@ -9,8 +9,10 @@ type Props = {
   eyebrow: string;
   heading: string;
   intro?: string;
-  imageUrl: string;
+  imageUrl: string | StaticImageData;
   imageAlt?: string;
+  videoUrl?: string;
+  videoPoster?: string;
   align?: "left" | "center";
 };
 
@@ -20,20 +22,35 @@ export default function PageHero({
   intro,
   imageUrl,
   imageAlt = "",
+  videoUrl,
+  videoPoster,
   align = "left",
 }: Props) {
   const isCenter = align === "center";
 
   return (
     <section className="relative min-h-[70vh] overflow-hidden bg-deep-green sm:min-h-[78vh]">
-      <Image
-        src={imageUrl}
-        alt={imageAlt}
-        fill
-        priority
-        sizes="100vw"
-        className="object-cover"
-      />
+      {videoUrl ? (
+        <video
+          className="absolute inset-0 h-full w-full object-cover"
+          autoPlay
+          muted
+          loop
+          playsInline
+          poster={videoPoster}
+        >
+          <source src={videoUrl} type="video/mp4" />
+        </video>
+      ) : (
+        <Image
+          src={imageUrl}
+          alt={imageAlt}
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
+        />
+      )}
       <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-deep-green/35 to-black/75" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_100%,rgba(0,0,0,0.35),transparent)]" />
 

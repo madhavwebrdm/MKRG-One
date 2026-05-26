@@ -82,10 +82,8 @@ export default function MetricsBar({
     <section
       id="metrics"
       ref={root}
-      className="relative isolate overflow-hidden bg-deep-green py-24 text-white sm:py-32"
+      className="bg-deep-green py-24 text-white sm:py-32"
     >
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_15%_0%,rgba(255,255,255,0.08),transparent_60%)]" />
-
       <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
         <div className="metrics-head max-w-3xl">
           <span className="text-xs uppercase tracking-[0.2em] text-white/80">

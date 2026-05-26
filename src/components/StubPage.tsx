@@ -15,7 +15,7 @@ export default function StubPage({ eyebrow, heading, body }: Props) {
     <main className="bg-beige pt-28 sm:pt-36">
       <div className="mx-auto max-w-7xl px-6 pb-32 sm:px-10 lg:px-16">
         {eyebrow && (
-          <span className="text-xs uppercase tracking-[0.2em] text-deep-green">
+          <span className="text-xs uppercase tracking-[0.2em] text-accent">
             {eyebrow}
           </span>
         )}
@@ -27,7 +27,7 @@ export default function StubPage({ eyebrow, heading, body }: Props) {
             {body}
           </p>
         )}
-        <div className="mt-12 inline-flex items-center gap-2 rounded-full border border-deep-green/15 bg-white px-4 py-2 text-xs uppercase tracking-wider text-deep-green">
+        <div className="mt-12 inline-flex items-center gap-2 rounded-full border border-accent/20 bg-white px-4 py-2 text-xs uppercase tracking-wider text-accent">
           Coming soon
         </div>
         <div className="mt-10">

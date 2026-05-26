@@ -75,9 +75,9 @@ export default function HeroIllustration({ imageUrl, imageAlt }: Props) {
       {/* Floating accent badge */}
       <motion.div
         style={{ x: badgeX, y: badgeY }}
-        className="absolute right-5 top-5 flex items-center gap-2 rounded-full bg-white/90 px-3.5 py-1.5 text-[10px] font-medium uppercase tracking-[0.2em] text-deep-green backdrop-blur"
+        className="absolute right-5 top-5 flex items-center gap-2 rounded-full bg-white/90 px-3.5 py-1.5 text-[10px] font-medium uppercase tracking-[0.2em] text-accent backdrop-blur"
       >
-        <span className="h-1.5 w-1.5 rounded-full bg-brand-green" />
+        <span className="h-1.5 w-1.5 rounded-full bg-accent" />
         Recycle2X
       </motion.div>
 

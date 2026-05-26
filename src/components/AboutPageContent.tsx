@@ -20,6 +20,7 @@ import {
 } from "lucide-react";
 
 import { PLACEHOLDER_IMAGES } from "@/lib/placeholderImages";
+import aboutParallax from "@/Images/about paralax.jpeg";
 import AnimatedHeading from "./AnimatedHeading";
 import PageHero from "./PageHero";
 import TiltCard from "./TiltCard";
@@ -113,17 +114,19 @@ export default function AboutPageContent() {
     <main className="bg-beige">
       <PageHero
         eyebrow="About us"
-        heading="The recycler India can build its tomorrow on."
+        heading="The recycler India can build its future on."
         intro="Madhav KRG Group has spent decades closing the loop — turning end-of-life steel and process waste into materials that meet Indian Standards. We are building our identity as a state-of-the-art recycler so that industry, communities and the planet can grow together."
         imageUrl={PLACEHOLDER_IMAGES.aboutHero}
         imageAlt="MKRG plant operations"
+        videoUrl="/videos/about-hero.mp4"
+        videoPoster={PLACEHOLDER_IMAGES.aboutHero}
       />
 
       {/* Mission & Vision */}
       <section className="bg-white py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
-          <div className="max-w-3xl">
-            <span className="text-xs uppercase tracking-[0.2em] text-deep-green">
+          <div className="mx-auto max-w-3xl text-center">
+            <span className="text-xs uppercase tracking-[0.2em] text-accent">
               Purpose
             </span>
             <AnimatedHeading className="mt-3 font-serif text-3xl leading-tight text-ink sm:text-4xl lg:text-5xl">
@@ -139,7 +142,7 @@ export default function AboutPageContent() {
               transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
               className="bg-beige p-8 sm:p-10"
             >
-              <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-wider text-brand-green">
+              <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-wider text-accent">
                 <Target className="h-4 w-4" />
                 Mission
               </div>
@@ -169,8 +172,17 @@ export default function AboutPageContent() {
       </section>
 
       {/* Values */}
-      <section className="relative isolate overflow-hidden bg-deep-green py-24 text-white sm:py-32">
-        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_15%_0%,rgba(255,255,255,0.08),transparent_55%)]" />
+      <section
+        className="relative isolate overflow-hidden bg-deep-green py-24 text-white sm:py-32"
+        style={{
+          backgroundImage: `url("${aboutParallax.src}")`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundAttachment: "fixed",
+          backgroundRepeat: "no-repeat",
+        }}
+      >
+        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-deep-green/70 via-deep-green/55 to-deep-green/75" />
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
           <div className="max-w-3xl">
             <span className="text-xs uppercase tracking-[0.2em] text-white/80">
@@ -233,7 +245,7 @@ export default function AboutPageContent() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-deep-green/40 via-transparent to-transparent" />
               <div className="absolute bottom-5 left-5 right-5 flex items-center gap-3 rounded-2xl bg-white/90 px-5 py-3.5 backdrop-blur">
-                <Sparkles className="h-5 w-5 text-brand-green" />
+                <Sparkles className="h-5 w-5 text-accent" />
                 <p className="text-sm font-medium text-ink">
                   Madhav KRG Group — the mother brand for everything we recycle.
                 </p>
@@ -241,7 +253,7 @@ export default function AboutPageContent() {
             </motion.div>
 
             <div className="lg:col-span-6">
-              <span className="text-xs uppercase tracking-[0.2em] text-deep-green">
+              <span className="text-xs uppercase tracking-[0.2em] text-accent">
                 Brand identity
               </span>
               <AnimatedHeading className="mt-3 font-serif text-3xl leading-tight text-ink sm:text-4xl lg:text-5xl">
@@ -308,7 +320,7 @@ export default function AboutPageContent() {
                         className="object-cover transition-transform duration-700 group-hover:scale-110"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-ink/40 via-transparent to-transparent" />
-                      <div className="absolute left-5 top-5 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-white/90 text-deep-green backdrop-blur">
+                      <div className="absolute left-5 top-5 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-white/90 text-accent backdrop-blur">
                         <Icon className="h-5 w-5" aria-hidden />
                       </div>
                     </div>
@@ -331,8 +343,8 @@ export default function AboutPageContent() {
       {/* Timeline */}
       <section className="bg-beige py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
-          <div className="max-w-3xl">
-            <span className="text-xs uppercase tracking-[0.2em] text-deep-green">
+          <div className="mx-auto max-w-3xl text-center">
+            <span className="text-xs uppercase tracking-[0.2em] text-accent">
               Our story
             </span>
             <AnimatedHeading className="mt-3 font-serif text-3xl leading-tight text-ink sm:text-4xl lg:text-5xl">
@@ -344,28 +356,59 @@ export default function AboutPageContent() {
             </p>
           </div>
 
-          <ol className="relative mt-14 border-l-2 border-deep-green/20 pl-8 sm:pl-12">
-            {TIMELINE.map((t, i) => (
-              <motion.li
-                key={t.year}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: "-80px" }}
-                transition={{ duration: 0.6, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
-                className="relative pb-12 last:pb-0"
-              >
-                <span className="absolute -left-[42px] flex h-6 w-6 items-center justify-center rounded-full bg-deep-green text-white sm:-left-[54px]">
-                  <span className="h-2 w-2 rounded-full bg-white" />
-                </span>
-                <p className="font-serif text-3xl text-deep-green">{t.year}</p>
-                <h3 className="mt-2 font-serif text-2xl leading-snug text-ink">
-                  {t.title}
-                </h3>
-                <p className="mt-3 max-w-2xl text-base leading-relaxed text-body">
-                  {t.body}
-                </p>
-              </motion.li>
-            ))}
+          <ol className="relative mt-14">
+            {/* Central / left vertical line */}
+            <div
+              aria-hidden
+              className="pointer-events-none absolute bottom-0 left-4 top-0 w-0.5 bg-deep-green/20 sm:left-6 lg:left-1/2 lg:-translate-x-1/2"
+            />
+
+            {TIMELINE.map((t, i) => {
+              const isLeft = i % 2 === 0;
+              return (
+                <motion.li
+                  key={t.year}
+                  initial={{ opacity: 0, x: isLeft ? -30 : 30, y: 12 }}
+                  whileInView={{ opacity: 1, x: 0, y: 0 }}
+                  viewport={{ once: true, margin: "-80px" }}
+                  transition={{
+                    duration: 0.7,
+                    delay: i * 0.08,
+                    ease: [0.16, 1, 0.3, 1],
+                  }}
+                  className="relative pb-14 last:pb-0 lg:grid lg:grid-cols-2 lg:gap-x-16"
+                >
+                  {/* Dot on the line */}
+                  <span
+                    aria-hidden
+                    className="absolute left-4 top-2 inline-flex h-5 w-5 -translate-x-1/2 items-center justify-center rounded-full bg-deep-green ring-4 ring-beige sm:left-6 lg:left-1/2"
+                  >
+                    <span className="h-1.5 w-1.5 rounded-full bg-white" />
+                  </span>
+
+                  {/* Content — left-padded on mobile; alternates on lg+ */}
+                  <div
+                    className={`pl-12 sm:pl-16 lg:pl-0 ${
+                      isLeft
+                        ? "lg:col-start-1 lg:pr-12 lg:text-right"
+                        : "lg:col-start-2 lg:pl-12 lg:text-left"
+                    }`}
+                  >
+                    <p className="font-serif text-3xl text-accent">{t.year}</p>
+                    <h3 className="mt-2 font-serif text-2xl leading-snug text-ink">
+                      {t.title}
+                    </h3>
+                    <p
+                      className={`mt-3 text-base leading-relaxed text-body ${
+                        isLeft ? "lg:ml-auto" : ""
+                      } lg:max-w-md`}
+                    >
+                      {t.body}
+                    </p>
+                  </div>
+                </motion.li>
+              );
+            })}
           </ol>
 
           <motion.div whileHover={{ x: 4 }} className="mt-14 inline-flex">

@@ -1,7 +1,6 @@
 "use client";
 
 import { useRef } from "react";
-import Image from "next/image";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -15,18 +14,6 @@ export default function ParallaxImpact() {
   useGSAP(
     () => {
       gsap.registerPlugin(ScrollTrigger);
-
-      // Parallax: background drifts up slower than the section scrolls past.
-      gsap.to(".parallax-bg", {
-        yPercent: -22,
-        ease: "none",
-        scrollTrigger: {
-          trigger: root.current,
-          start: "top bottom",
-          end: "bottom top",
-          scrub: true,
-        },
-      });
 
       gsap.from(".parallax-eyebrow", {
         opacity: 0,
@@ -61,18 +48,14 @@ export default function ParallaxImpact() {
       ref={root}
       data-section="Parallax impact"
       className="relative isolate flex min-h-screen items-center overflow-hidden bg-ink text-white"
+      style={{
+        backgroundImage: `url(${PLACEHOLDER_IMAGES.parallaxImpact})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundAttachment: "fixed",
+        backgroundRepeat: "no-repeat",
+      }}
     >
-      {/* Parallax background — oversized so the translate doesn't reveal edges */}
-      <div className="parallax-bg absolute inset-0 -z-20 h-[125%] w-full">
-        <Image
-          src={PLACEHOLDER_IMAGES.parallaxImpact}
-          alt=""
-          fill
-          priority={false}
-          sizes="100vw"
-          className="object-cover"
-        />
-      </div>
       <div className="absolute inset-0 -z-10 bg-gradient-to-b from-ink/80 via-ink/55 to-ink/85" />
 
       <div className="relative mx-auto w-full max-w-6xl px-6 py-32 sm:px-10 lg:px-16">
