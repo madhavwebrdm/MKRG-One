@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Image, { type StaticImageData } from "next/image";
 import Link from "next/link";
@@ -24,7 +24,7 @@ const FLOWS: Flow[] = [
     id: "scrap-to-steel",
     title: "Scrap to Steel",
     caption:
-      "From raw scrap to finished TMT bars, pipes, and coils — every step optimized.",
+      "From raw scrap to finished TMT bars, pipes, and coils every step optimized.",
     image: processSteel,
     steps: [
       { title: "Scrap Collection", body: "Source ferrous scrap from industrial channels" },
@@ -72,7 +72,7 @@ export default function ProcessesTeaser({
     headingProp ?? "From scrap and waste to high-value resources.";
   const body =
     bodyProp ??
-    "Two parallel processes, one closed loop. Industrial scrap returns as structural steel; hazardous waste returns as commercial-grade zinc — every step verified and optimized.";
+    "Two parallel processes, one closed loop. Industrial scrap returns as structural steel; hazardous waste returns as commercial-grade zinc every step verified and optimized.";
   const ctaLabel = ctaLabelProp ?? "Explore our process";
   const ctaHref = ctaHrefProp ?? "/processes";
 
@@ -182,3 +182,4 @@ function FlowBlock({ flow, index }: { flow: Flow; index: number }) {
     </div>
   );
 }
+

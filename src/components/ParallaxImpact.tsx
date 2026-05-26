@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useRef } from "react";
 import { gsap } from "gsap";
@@ -74,14 +74,14 @@ export default function ParallaxImpact() {
         </div>
 
         <AnimatedHeading className="mt-7 max-w-5xl text-balance font-serif text-[2.6rem] leading-[1.05] tracking-tight text-white sm:text-6xl lg:text-[5.25rem]">
-          Every recycled tonne is a tonne the earth keeps.
+          Every recycled tonne is a step toward a greener Earth.
         </AnimatedHeading>
 
         <p className="parallax-rule mt-10 h-px w-24 bg-white/40" />
 
         <p className="mt-10 max-w-2xl text-lg leading-relaxed text-white/85 sm:text-xl">
           We don&apos;t source virgin iron ore. Every kilogram of steel that
-          leaves our plants began life on someone else&apos;s shop floor — and
+          leaves our plants began life on someone else&apos;s shop floor and
           will begin again on the next one.
         </p>
 
@@ -120,3 +120,4 @@ export default function ParallaxImpact() {
     </section>
   );
 }
+

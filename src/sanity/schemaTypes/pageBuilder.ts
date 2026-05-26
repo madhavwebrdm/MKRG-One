@@ -1,7 +1,7 @@
-import { defineArrayMember, defineType } from "sanity";
+﻿import { defineArrayMember, defineType } from "sanity";
 
 // The shared library of section blocks that can be composed onto a `page`
-// or `landingPage` document. Keep this list intentional — every block adds
+// or `landingPage` document. Keep this list intentional every block adds
 // editor choice paralysis.
 export const pageBuilder = defineType({
   name: "pageBuilder",
@@ -20,3 +20,4 @@ export const pageBuilder = defineType({
   ],
   options: { insertMenu: { showIcons: true } },
 });
+

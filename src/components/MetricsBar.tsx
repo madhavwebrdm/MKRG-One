@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useRef } from "react";
 import { gsap } from "gsap";
@@ -21,7 +21,7 @@ type Props = {
 
 const DEFAULTS: Metric[] = [
   { value: 1.2, suffix: "M t", label: "CO₂ offset", note: "Annual avoided emissions" },
-  { value: 850, suffix: "K t", label: "Tonnes recycled", note: "Steel, zinc, lead — last FY" },
+  { value: 850, suffix: "K t", label: "Tonnes recycled", note: "Steel, zinc, lead last FY" },
   { value: 42, suffix: "%", label: "Renewable energy", note: "Powering our plants" },
 ];
 
@@ -33,7 +33,7 @@ export default function MetricsBar({
   const heading = headingProp ?? "Our impact, measured.";
   const intro =
     introProp ??
-    "Every tonne we process meets Indian Standards and behaves virtually like virgin material — at a fraction of the environmental cost.";
+    "Every tonne we process meets Indian Standards and behaves virtually like virgin material at a fraction of the environmental cost.";
   const metrics = metricsProp ?? DEFAULTS;
   const root = useRef<HTMLElement>(null);
 
@@ -126,3 +126,4 @@ export default function MetricsBar({
     </section>
   );
 }
+

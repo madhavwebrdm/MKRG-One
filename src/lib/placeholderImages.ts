@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Curated Unsplash photos chosen to match MKRG's brand:
  * steel recycling, foundry operations, renewable energy, and Indian infrastructure.
  *
@@ -74,12 +74,12 @@ const PHOTO = {
 } as const;
 
 export const PLACEHOLDER_IMAGES = {
-  // Home — Hero, metrics, mission, sustainability, processes, leadership, certs, media
+  // Home Hero, metrics, mission, sustainability, processes, leadership, certs, media
   hero: u(PHOTO.moltenPour, 1600, 1200),
   parallaxImpact: u(PHOTO.aerialForest, 2400, 1400),
   productsBg: u(PHOTO.steelRodsGray, 1600, 1000),
 
-  // Process flow step images — one per step for the sticky-image scroll on home.
+  // Process flow step images one per step for the sticky-image scroll on home.
   processSteel: [
     u(PHOTO.scrapTrain, 900, 1100),
     u(PHOTO.overheadCrane, 900, 1100),
@@ -218,3 +218,4 @@ export const PLACEHOLDER_IMAGES = {
     u(PHOTO.conferenceAudience, 800, 600),
   ],
 };
+

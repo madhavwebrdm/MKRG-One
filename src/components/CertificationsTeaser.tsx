@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import Image from "next/image";
@@ -52,7 +52,7 @@ export default function CertificationsTeaser({
   const heading = headingProp ?? "Compliant by design, certified by audit.";
   const body =
     bodyProp ??
-    "Independent certifications confirm what our process already enforces. Standards aren't a finish line — they are the baseline we operate above.";
+    "Independent certifications confirm what our process already enforces. Standards aren't a finish line they are the baseline we operate above.";
   const badges = badgesProp ?? DEFAULTS;
   const ctaLabel = ctaLabelProp ?? "View certifications";
   const ctaHref = ctaHrefProp ?? "/certifications";
@@ -133,3 +133,4 @@ export default function CertificationsTeaser({
     </section>
   );
 }
+

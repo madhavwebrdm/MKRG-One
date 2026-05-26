@@ -1,4 +1,4 @@
-import { defineField, defineType } from "sanity";
+﻿import { defineField, defineType } from "sanity";
 import { RocketIcon } from "@sanity/icons";
 import { heroField } from "./shared/heroFields";
 import { seoFields } from "./shared/seoFields";
@@ -19,7 +19,7 @@ export const landingPage = defineType({
       name: "title",
       type: "string",
       validation: (r) => r.required(),
-      description: "Internal name — used in the Studio list.",
+      description: "Internal name used in the Studio list.",
     }),
     defineField({
       name: "slug",
@@ -93,3 +93,4 @@ export const landingPage = defineType({
     }),
   },
 });
+

@@ -1,7 +1,7 @@
-@import "tailwindcss";
+﻿@import "tailwindcss";
 
 :root {
-  /* MKRG brand palette — primary: deep forest green */
+  /* MKRG brand palette primary: deep forest green */
   --color-deep-green: #2A5417;
   --color-brand-green: #2A5417;
   --color-light-green: #d1f2e0;
@@ -10,12 +10,12 @@
   --color-blue: #185fa5;
   --color-beige: #f1efe8;
 
-  /* Accent — used sparingly for small focus elements (chips, underlines, markers) */
+  /* Accent used sparingly for small focus elements (chips, underlines, markers) */
   --color-accent: #b22e31;
 
   /* Text */
   --color-ink: #0a0a0a;          /* headings */
-  --color-body: #3f3f46;         /* body — neutral-700ish dark grey */
+  --color-body: #3f3f46;         /* body neutral-700ish dark grey */
   --color-muted: #6b7280;        /* muted body */
 
   --color-bg: var(--color-beige);
@@ -67,4 +67,5 @@ body {
   background: var(--color-brand-green);
   color: white;
 }
+
 

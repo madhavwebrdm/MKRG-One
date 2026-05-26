@@ -1,7 +1,7 @@
-import LeadershipPageContent from "@/components/LeadershipPageContent";
+﻿import LeadershipPageContent from "@/components/LeadershipPageContent";
 
 export const metadata = {
-  title: "Leadership — Madhav KRG Group",
+  title: "Leadership Madhav KRG Group",
   description:
     "Founder story, leadership team and the environmental mission behind Madhav KRG Group.",
 };
@@ -9,3 +9,4 @@ export const metadata = {
 export default function LeadershipPage() {
   return <LeadershipPageContent />;
 }
+

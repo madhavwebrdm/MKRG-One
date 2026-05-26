@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -32,7 +32,7 @@ const SUBPAGES: Array<{
   },
   {
     title: "Types of Materials Recycled",
-    body: "Steel, zinc, lead and the alloys in between — what comes in and what goes out.",
+    body: "Steel, zinc, lead and the alloys in between what comes in and what goes out.",
     href: "/processes/materials",
     icon: Boxes,
   },
@@ -58,11 +58,11 @@ export default function ProcessesPageContent() {
         videoPoster={PLACEHOLDER_IMAGES.processesHero}
       />
 
-      {/* Detailed sticky-scroll flow — moved from home */}
+      {/* Detailed sticky-scroll flow moved from home */}
       <ProcessesFlow
         eyebrow="Recycle2X"
         heading="The full Recycle2X flow, step by step."
-        body="Each step is verified, instrumented and tied to an Indian Standard. Scroll through both streams below — the image on the left tracks the step you're reading."
+        body="Each step is verified, instrumented and tied to an Indian Standard. Scroll through both streams below the image on the left tracks the step you're reading."
       />
 
       {/* Key message pull-quote */}
@@ -70,7 +70,7 @@ export default function ProcessesPageContent() {
         <div className="mx-auto max-w-5xl px-6 text-center sm:px-10 lg:px-16">
           <Sparkles className="mx-auto h-7 w-7 text-white/60" aria-hidden />
           <AnimatedHeading className="mt-6 font-serif text-3xl leading-tight text-white sm:text-4xl lg:text-5xl">
-            This entire process turns hazardous waste into high-quality zinc — reusable,
+            This entire process turns hazardous waste into high-quality zinc reusable,
             traceable and in high demand across industry.
           </AnimatedHeading>
         </div>
@@ -144,3 +144,4 @@ export default function ProcessesPageContent() {
     </main>
   );
 }
+

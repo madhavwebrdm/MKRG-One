@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import Image from "next/image";
@@ -86,7 +86,7 @@ export default function LeadershipTeaser({
                 “{quote}”
               </blockquote>
               <figcaption className="mt-5 text-sm uppercase tracking-wider text-white/70">
-                — {attribution}
+                {attribution}
               </figcaption>
             </motion.figure>
 
@@ -106,3 +106,4 @@ export default function LeadershipTeaser({
     </section>
   );
 }
+

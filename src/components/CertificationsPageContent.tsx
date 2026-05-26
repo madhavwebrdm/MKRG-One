@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -31,7 +31,7 @@ const CERTS: Cert[] = [
   {
     title: "ISO 9001",
     issuer: "Quality Management System",
-    body: "Internationally recognised quality management certification — every plant, every shift.",
+    body: "Internationally recognised quality management certification every plant, every shift.",
     icon: Award,
     status: "Active",
     downloadHref: "#",
@@ -63,7 +63,7 @@ const CERTS: Cert[] = [
   {
     title: "EHS Program",
     issuer: "Environment, Health & Safety",
-    body: "In-house EHS program covering occupational safety, emission monitoring and incident transparency — audited internally and externally.",
+    body: "In-house EHS program covering occupational safety, emission monitoring and incident transparency audited internally and externally.",
     icon: HardHat,
     status: "In force",
     downloadHref: "#",
@@ -76,7 +76,7 @@ export default function CertificationsPageContent() {
       <PageHero
         eyebrow="Certifications"
         heading="Compliant by design, certified by audit."
-        intro="Independent certifications confirm what our process already enforces. Quality, environment and safety standards aren't a finish line for Madhav KRG Group — they are the baseline we operate above."
+        intro="Independent certifications confirm what our process already enforces. Quality, environment and safety standards aren't a finish line for Madhav KRG Group they are the baseline we operate above."
         imageUrl={certificationsHero}
         imageAlt="Madhav KRG Group certifications"
       />
@@ -225,3 +225,4 @@ export default function CertificationsPageContent() {
     </main>
   );
 }
+

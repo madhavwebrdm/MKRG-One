@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useRef, useState } from "react";
 import Image, { type StaticImageData } from "next/image";
@@ -31,7 +31,7 @@ const FLOWS: Flow[] = [
     index: "01",
     title: "Scrap to Steel",
     caption:
-      "From raw scrap to finished TMT bars, pipes, and coils — every step optimized.",
+      "From raw scrap to finished TMT bars, pipes, and coils every step optimized.",
     steps: [
       {
         label: "Scrap Collection",
@@ -48,7 +48,7 @@ const FLOWS: Flow[] = [
       {
         label: "Electric Arc Furnace",
         note: "Melting at 1,800°C with precision",
-        body: "Electric arc furnaces return cold scrap to liquid steel using electricity — increasingly renewable. No coke, no blast furnace, a fraction of the CO₂ of the virgin route.",
+        body: "Electric arc furnaces return cold scrap to liquid steel using electricity increasingly renewable. No coke, no blast furnace, a fraction of the CO₂ of the virgin route.",
         image: PLACEHOLDER_IMAGES.processSteel[2],
       },
       {
@@ -75,7 +75,7 @@ const FLOWS: Flow[] = [
       {
         label: "Waste Collection",
         note: "Secure hazardous waste handling",
-        body: "Flue dust and hazardous by-products from galvanising and steel-making arrive under MOEFCC authorisation — chain of custody documented from origin to plant.",
+        body: "Flue dust and hazardous by-products from galvanising and steel-making arrive under MOEFCC authorisation chain of custody documented from origin to plant.",
         image: PLACEHOLDER_IMAGES.processZinc[0],
       },
       {
@@ -93,7 +93,7 @@ const FLOWS: Flow[] = [
       {
         label: "Purification",
         note: "Purify the solution",
-        body: "Successive precipitation, filtration and ion-exchange stages remove cadmium, copper and trace metals — delivering high-grade pregnant liquor to the electrolysis cells.",
+        body: "Successive precipitation, filtration and ion-exchange stages remove cadmium, copper and trace metals delivering high-grade pregnant liquor to the electrolysis cells.",
         image: PLACEHOLDER_IMAGES.processZinc[3],
       },
       {
@@ -121,7 +121,7 @@ export default function ProcessesFlow({
   const heading = headingProp ?? "From scrap and waste to high-value resources.";
   const body =
     bodyProp ??
-    "Two parallel processes, one closed loop. Industrial scrap returns as structural steel; hazardous waste returns as commercial-grade zinc — every step verified and optimized.";
+    "Two parallel processes, one closed loop. Industrial scrap returns as structural steel; hazardous waste returns as commercial-grade zinc every step verified and optimized.";
 
   return (
     <section id="processes" className="bg-beige py-24 sm:py-32">
@@ -293,3 +293,4 @@ function FlowSection({ flow }: { flow: Flow }) {
     </div>
   );
 }
+

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -28,7 +28,7 @@ import TiltCard from "./TiltCard";
 const VALUES = [
   {
     title: "Integrity",
-    body: "We act on principle, not expedience — every batch, every audit, every conversation.",
+    body: "We act on principle, not expedience every batch, every audit, every conversation.",
     icon: ShieldCheck,
   },
   {
@@ -43,7 +43,7 @@ const VALUES = [
   },
   {
     title: "Empowerment",
-    body: "Communities and partners grow with us — never around us.",
+    body: "Communities and partners grow with us never around us.",
     icon: Sparkles,
   },
   {
@@ -53,7 +53,7 @@ const VALUES = [
   },
   {
     title: "Unity",
-    body: "One team, one direction — across every plant and every shift.",
+    body: "One team, one direction across every plant and every shift.",
     icon: Users,
   },
 ];
@@ -61,7 +61,7 @@ const VALUES = [
 const DIFFERENTIATORS = [
   {
     title: "Recycle2X process",
-    body: "Two output streams — structural steel and commercial zinc — from a single closed loop. Nothing leaves as landfill.",
+    body: "Two output streams structural steel and commercial zinc from a single closed loop. Nothing leaves as landfill.",
     icon: Factory,
   },
   {
@@ -85,7 +85,7 @@ const TIMELINE = [
   {
     year: "1985",
     title: "A founding idea",
-    body: "Madhav KRG Group is founded on a single belief — that industrial waste is a resource the country can't afford to throw away.",
+    body: "Madhav KRG Group is founded on a single belief that industrial waste is a resource the country can't afford to throw away.",
   },
   {
     year: "1998",
@@ -100,7 +100,7 @@ const TIMELINE = [
   {
     year: "2018",
     title: "Recycle2X formalised",
-    body: "Two parallel output streams — steel and zinc — are unified under a single integrated process.",
+    body: "Two parallel output streams steel and zinc are unified under a single integrated process.",
   },
   {
     year: "2024",
@@ -115,7 +115,7 @@ export default function AboutPageContent() {
       <PageHero
         eyebrow="About us"
         heading="The recycler India can build its future on."
-        intro="Madhav KRG Group has spent decades closing the loop — turning end-of-life steel and process waste into materials that meet Indian Standards. We are building our identity as a state-of-the-art recycler so that industry, communities and the planet can grow together."
+        intro="Madhav KRG Group has spent decades closing the loop turning end-of-life steel and process waste into materials that meet Indian Standards. We are building our identity as a state-of-the-art recycler so that industry, communities and the planet can grow together."
         imageUrl={PLACEHOLDER_IMAGES.aboutHero}
         imageAlt="MKRG plant operations"
         videoUrl="/videos/about-hero.mp4"
@@ -192,7 +192,7 @@ export default function AboutPageContent() {
               Six values. One way of working.
             </AnimatedHeading>
             <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/85 sm:text-lg">
-              Integrity · Excellence · Patriotism · Empowerment · Humility · Unity —
+              Integrity · Excellence · Patriotism · Empowerment · Humility · Unity 
               the principles that pre-date every plant, every audit, and every hire.
             </p>
           </div>
@@ -247,7 +247,7 @@ export default function AboutPageContent() {
               <div className="absolute bottom-5 left-5 right-5 flex items-center gap-3 rounded-2xl bg-white/90 px-5 py-3.5 backdrop-blur">
                 <Sparkles className="h-5 w-5 text-accent" />
                 <p className="text-sm font-medium text-ink">
-                  Madhav KRG Group — the mother brand for everything we recycle.
+                  Madhav KRG Group the mother brand for everything we recycle.
                 </p>
               </div>
             </motion.div>
@@ -257,12 +257,12 @@ export default function AboutPageContent() {
                 Brand identity
               </span>
               <AnimatedHeading className="mt-3 font-serif text-3xl leading-tight text-ink sm:text-4xl lg:text-5xl">
-                One mother brand. Every plant. Every output.
+                One purpose. Every plant. A greener output.
               </AnimatedHeading>
               <p className="mt-6 text-base leading-relaxed text-body sm:text-lg">
                 Madhav KRG Group is the principal brand under which every recycling,
                 refining and manufacturing operation sits. This website is the place we
-                are building that identity — as a state-of-the-art recycler trusted by
+                are building that identity as a state-of-the-art recycler trusted by
                 industry, regulators and the communities we operate in.
               </p>
               <p className="mt-4 text-base leading-relaxed text-body sm:text-lg">
@@ -290,7 +290,7 @@ export default function AboutPageContent() {
             <div className="lg:col-span-5">
               <p className="text-base leading-relaxed text-black/80 sm:text-lg">
                 Four things show up in every audit, every spec sheet and every customer
-                conversation — they are the reason partners choose us over the next bid.
+                conversation they are the reason partners choose us over the next bid.
               </p>
             </div>
           </div>
@@ -386,7 +386,7 @@ export default function AboutPageContent() {
                     <span className="h-1.5 w-1.5 rounded-full bg-white" />
                   </span>
 
-                  {/* Content — left-padded on mobile; alternates on lg+ */}
+                  {/* Content left-padded on mobile; alternates on lg+ */}
                   <div
                     className={`pl-12 sm:pl-16 lg:pl-0 ${
                       isLeft
@@ -426,3 +426,4 @@ export default function AboutPageContent() {
     </main>
   );
 }
+

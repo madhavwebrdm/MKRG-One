@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 
@@ -16,9 +16,9 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Madhav KRG Group — Waste is a Resource, Not a Problem",
+  title: "Madhav KRG Group Waste is a Resource, Not a Problem",
   description:
-    "MKRG recycles steel and materials with zero degradation or contamination — intact properties as per Indian Standards, virtually similar to virgin material, with far lesser impact on the environment.",
+    "MKRG recycles steel and materials with zero degradation or contamination intact properties as per Indian Standards, virtually similar to virgin material, with far lesser impact on the environment.",
 };
 
 export default function RootLayout({
@@ -33,3 +33,4 @@ export default function RootLayout({
     </html>
   );
 }
+

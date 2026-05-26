@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -34,7 +34,7 @@ type PillarImage = string | import("next/image").StaticImageData;
 
 const METRICS = [
   { value: 1.2, suffix: "M t", label: "CO₂ offset", note: "Avoided emissions per year" },
-  { value: 850, suffix: "K t", label: "Tonnes recycled", note: "Steel, zinc and lead — last FY" },
+  { value: 850, suffix: "K t", label: "Tonnes recycled", note: "Steel, zinc and lead last FY" },
   { value: 42, suffix: "%", label: "Renewable energy", note: "Powering our plants today" },
 ];
 
@@ -63,7 +63,7 @@ const PILLARS: Array<{
   },
   {
     title: "Less Carbon Emission",
-    body: "Up to 86% lower CO₂ versus the virgin route — verified, not estimated.",
+    body: "Up to 86% lower CO₂ versus the virgin route verified, not estimated.",
     icon: Wind,
   },
   {
@@ -87,7 +87,7 @@ const RECYCLING_STATS = [
   {
     label: "APCD efficiency",
     value: "99.4%",
-    note: "Particulate capture across all stacks — well above the IS threshold.",
+    note: "Particulate capture across all stacks well above the IS threshold.",
   },
 ];
 
@@ -170,8 +170,8 @@ export default function SustainabilityPageContent() {
     <main className="bg-beige">
       <PageHero
         eyebrow="Sustainability"
-        heading="Hard numbers. Cleaner air. Real communities."
-        intro="Sustainability at Madhav KRG Group isn't a line item — it is the business model. Every tonne we process avoids emissions, conserves resources and supports the communities we operate in."
+        heading="Real numbers. Cleaner air. Real communities."
+        intro="Sustainability at Madhav KRG Group isn't a line item it is the business model. Every tonne we process avoids emissions, conserves resources and supports the communities we operate in."
         imageUrl={PLACEHOLDER_IMAGES.sustHero}
         imageAlt="Green plant operations"
         videoUrl="/videos/sustainability-hero.mp4"
@@ -213,7 +213,7 @@ export default function SustainabilityPageContent() {
             <div className="lg:col-span-5">
               <p className="text-base leading-relaxed text-body sm:text-lg">
                 Environment protection, resource conservation, less energy, less carbon,
-                a greener planet — each pillar is a metric, not a slogan.
+                a greener planet each pillar is a metric, not a slogan.
               </p>
             </div>
           </div>
@@ -328,7 +328,7 @@ export default function SustainabilityPageContent() {
         </div>
       </section>
 
-      {/* Community programs — CSR + EHS */}
+      {/* Community programs CSR + EHS */}
       <section className="bg-beige py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
           <div className="max-w-3xl">
@@ -336,7 +336,7 @@ export default function SustainabilityPageContent() {
               Community programs
             </span>
             <AnimatedHeading className="mt-3 font-serif text-3xl leading-tight text-ink sm:text-4xl lg:text-5xl">
-              Recycling that gives back — beyond the gate.
+              Recycling that gives back beyond the gate.
             </AnimatedHeading>
             <p className="mt-5 text-base leading-relaxed text-body sm:text-lg">
               Our work doesn&apos;t end at the plant boundary. CSR and EHS programs run
@@ -375,7 +375,7 @@ export default function SustainabilityPageContent() {
                 </h3>
                 <p className="mt-4 text-base leading-relaxed text-body">
                   Skills training, school infrastructure, healthcare access and water
-                  programs — our CSR spend is concentrated in the catchment of every
+                  programs our CSR spend is concentrated in the catchment of every
                   operating plant, where impact is local and visible.
                 </p>
               </div>
@@ -410,7 +410,7 @@ export default function SustainabilityPageContent() {
                 </h3>
                 <p className="mt-4 text-base leading-relaxed text-body">
                   Daily safety briefings, emission monitoring, occupational-health checks
-                  and incident transparency — EHS is governance, not paperwork. Every
+                  and incident transparency EHS is governance, not paperwork. Every
                   shift, every plant.
                 </p>
               </div>
@@ -484,3 +484,4 @@ export default function SustainabilityPageContent() {
     </main>
   );
 }
+

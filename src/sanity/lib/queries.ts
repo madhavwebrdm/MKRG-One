@@ -1,4 +1,4 @@
-import { defineQuery } from "next-sanity";
+﻿import { defineQuery } from "next-sanity";
 
 /* -------------------------------------------------------------------------- */
 /* Shared GROQ fragments                                                       */
@@ -27,7 +27,7 @@ const SEO_FRAGMENT = `
   }
 `;
 
-// Page builder section blocks — narrow projections per _type so unknown blocks
+// Page builder section blocks narrow projections per _type so unknown blocks
 // don't bloat the payload and TypeGen can discriminate cleanly.
 const SECTIONS_FRAGMENT = `
   sections[]{
@@ -88,7 +88,7 @@ export const SITE_SETTINGS_QUERY = defineQuery(`
 `);
 
 /* -------------------------------------------------------------------------- */
-/* Home (unchanged shape — already consumed by app/(site)/page.tsx)            */
+/* Home (unchanged shape already consumed by app/(site)/page.tsx)            */
 /* -------------------------------------------------------------------------- */
 
 export const HOME_PAGE_QUERY = defineQuery(`
@@ -353,3 +353,4 @@ export const POST_QUERY = defineQuery(`
     "coverImage": coverImage.asset->url
   }
 `);
+

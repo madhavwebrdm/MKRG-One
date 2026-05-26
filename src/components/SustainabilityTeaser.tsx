@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import Image, { type StaticImageData } from "next/image";
@@ -28,7 +28,6 @@ const HIGHLIGHT_IMAGES: Array<string | StaticImageData> = [
 
 const DEFAULTS: Highlight[] = [
   { label: "Lower emissions", value: "Up to 86% vs virgin steel" },
-  { label: "Renewable power", value: "42% of plant energy" },
   { label: "Community programs", value: "EHS & CSR across sites" },
 ];
 
@@ -42,7 +41,7 @@ export default function SustainabilityTeaser({
 }: Props) {
   const eyebrow = eyebrowProp ?? "Sustainability";
   const heading =
-    headingProp ?? "Recycling that gives back — to industry and to the planet.";
+    headingProp ?? "Recycling that gives back to industry and to the planet.";
   const body =
     bodyProp ??
     "Our environmental, health and safety programs run alongside community initiatives in the regions where we operate. Recycling isn't a line item; it is how we build green infrastructure.";
@@ -78,7 +77,7 @@ export default function SustainabilityTeaser({
           </div>
         </div>
 
-        <ul className="mt-14 grid grid-cols-1 gap-5 md:grid-cols-3">
+        <ul className="mt-14 grid grid-cols-1 gap-5 md:grid-cols-2">
           {highlights.map((h, i) => {
             const Icon = ICONS[i % ICONS.length];
             const img = HIGHLIGHT_IMAGES[i % HIGHLIGHT_IMAGES.length];
@@ -121,3 +120,4 @@ export default function SustainabilityTeaser({
     </section>
   );
 }
+

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import Image from "next/image";
@@ -36,7 +36,7 @@ const OFFICES = [
     lines: [
       "Madhav KRG Group",
       "Corporate Tower, S.G. Highway",
-      "Ahmedabad, Gujarat — 380015",
+      "Ahmedabad, Gujarat 380015",
       "India",
     ],
   },
@@ -46,7 +46,7 @@ const OFFICES = [
     lines: [
       "Madhav KRG Recycling Plant",
       "Recycle2X Industrial Estate",
-      "Mehsana, Gujarat — 384002",
+      "Mehsana, Gujarat 384002",
       "India",
     ],
   },
@@ -72,7 +72,7 @@ const CONTACT_LINES = [
     href: "mailto:info@mkrg.in",
   },
   {
-    label: "Careers — HR",
+    label: "Careers HR",
     icon: Mail,
     value: "careers@mkrg.in",
     href: "mailto:careers@mkrg.in",
@@ -110,7 +110,7 @@ function EnquiryForm() {
           <CheckCircle2 className="h-6 w-6" />
         </span>
         <h3 className="font-serif text-2xl leading-snug text-ink">
-          Thanks — we&apos;ve got your enquiry.
+          Thanks we&apos;ve got your enquiry.
         </h3>
         <p className="text-sm leading-relaxed text-body">
           A member of the Madhav KRG team will reply within one business day. For
@@ -207,7 +207,7 @@ function CareersForm() {
           <CheckCircle2 className="h-6 w-6" />
         </span>
         <h3 className="font-serif text-2xl leading-snug text-ink">
-          CV received — thank you.
+          CV received thank you.
         </h3>
         <p className="text-sm leading-relaxed text-body">
           Our HR team will review and reach out if there&apos;s a match. For role
@@ -329,7 +329,7 @@ export default function ContactPageContent() {
       <PageHero
         eyebrow="Contact"
         heading="Talk to the team behind the loop."
-        intro="Sales, technical queries, partnerships, audit requests or careers — every enquiry reaches a person. Most replies land within one business day."
+        intro="Sales, technical queries, partnerships, audit requests or careers every enquiry reaches a person. Most replies land within one business day."
         imageUrl={PLACEHOLDER_IMAGES.contactHero}
         imageAlt="MKRG office"
       />
@@ -451,7 +451,7 @@ export default function ContactPageContent() {
               Plant &amp; registered office.
             </AnimatedHeading>
             <p className="max-w-2xl text-base leading-relaxed text-body sm:text-lg">
-              Visits are by appointment — please write ahead so we can arrange a plant
+              Visits are by appointment please write ahead so we can arrange a plant
               walk-through or office meeting.
             </p>
           </div>
@@ -480,7 +480,7 @@ export default function ContactPageContent() {
                     Coordinates
                   </p>
                   <p className="mt-1 text-sm leading-relaxed text-body">
-                    Ahmedabad &amp; Mehsana, Gujarat — the registered office and the
+                    Ahmedabad &amp; Mehsana, Gujarat the registered office and the
                     primary Recycle2X plant.
                   </p>
                 </div>
@@ -513,7 +513,7 @@ export default function ContactPageContent() {
               </AnimatedHeading>
               <p className="mt-5 text-base leading-relaxed text-black/80 sm:text-lg">
                 MKRG is hiring across plant operations, engineering, sales, finance and
-                EHS. Send your CV and a short note — we read every application.
+                EHS. Send your CV and a short note we read every application.
               </p>
               <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
                 <Link
@@ -534,3 +534,4 @@ export default function ContactPageContent() {
     </main>
   );
 }
+

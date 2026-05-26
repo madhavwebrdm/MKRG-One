@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import Image from "next/image";
@@ -20,7 +20,7 @@ const PRODUCTS: Product[] = [
   {
     name: "TMT Bars",
     spec: "IS 1786",
-    body: "Structural rebar — Fe 500D and Fe 550D grades, cold-twisted and quenched for high-rise and infrastructure use.",
+    body: "Structural rebar Fe 500D and Fe 550D grades, cold-twisted and quenched for high-rise and infrastructure use.",
     image: PLACEHOLDER_IMAGES.products[0],
     href: "/processes/materials#tmt",
   },
@@ -34,21 +34,21 @@ const PRODUCTS: Product[] = [
   {
     name: "Steel Coils",
     spec: "IS 2062",
-    body: "Hot-rolled coils for downstream fabrication — formability and weldability verified batch-by-batch.",
+    body: "Hot-rolled coils for downstream fabrication formability and weldability verified batch-by-batch.",
     image: PLACEHOLDER_IMAGES.products[1],
     href: "/processes/materials#coil",
   },
   {
     name: "Zinc",
     spec: "Galvanizing, Batteries",
-    body: "99.9% pure zinc recovered from hazardous flue dust — the recycled alternative to mined ore.",
+    body: "99.9% pure zinc recovered from hazardous flue dust the recycled alternative to mined ore.",
     image: PLACEHOLDER_IMAGES.products[3],
     href: "/processes/materials#zinc",
   },
   {
     name: "Lead Ingots",
     spec: "Secondary refined",
-    body: "Refined secondary lead from closed-loop battery recycling — purity tested before despatch.",
+    body: "Refined secondary lead from closed-loop battery recycling purity tested before despatch.",
     image: PLACEHOLDER_IMAGES.products[4],
     href: "/processes/materials#lead",
   },
@@ -69,7 +69,7 @@ export default function ProductsShowcase() {
           </div>
           <div className="lg:col-span-5">
             <p className="text-base leading-relaxed text-body sm:text-lg">
-              Transforming hazardous waste into high-value resources — five
+              Transforming hazardous waste into high-value resources five
               output streams, every batch tested to Indian Standards and
               traceable end-to-end.
             </p>
@@ -135,3 +135,4 @@ export default function ProductsShowcase() {
     </section>
   );
 }
+

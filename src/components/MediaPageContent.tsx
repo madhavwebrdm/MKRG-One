@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -87,7 +87,7 @@ const COMPANY_NEWS: NewsItem[] = [
   {
     kind: "Milestone",
     title: "1 million tonnes of steel recycled this financial year",
-    body: "An eight-figure milestone for the group — and an eight-figure amount of virgin ore left in the ground.",
+    body: "An eight-figure milestone for the group and an eight-figure amount of virgin ore left in the ground.",
     date: "2026-01-05",
     href: "#",
   },
@@ -141,7 +141,7 @@ type VideoItem = {
 
 const VIDEOS: VideoItem[] = [
   {
-    title: "Inside the Mehsana Recycle2X plant — a 4-minute walkthrough",
+    title: "Inside the Mehsana Recycle2X plant a 4-minute walkthrough",
     duration: "4:12",
     kind: "Plant tour",
     href: "#",
@@ -202,7 +202,7 @@ const EVENTS: EventItem[] = [
 const SUBPAGES = [
   {
     title: "Press Releases",
-    body: "The full archive of formal announcements — for journalists, analysts and partners.",
+    body: "The full archive of formal announcements for journalists, analysts and partners.",
     href: "/media/press-releases",
     icon: FileText,
   },
@@ -255,7 +255,7 @@ export default function MediaPageContent() {
       <PageHero
         eyebrow="Media"
         heading="Press, plant tours and the conversations shaping circular industry."
-        intro="Where Madhav KRG Group shows up — on the page, on camera and on the ground at the forums where recycling policy and practice are being rewritten."
+        intro="Where Madhav KRG Group shows up on the page, on camera and on the ground at the forums where recycling policy and practice are being rewritten."
         imageUrl={mediaHero}
         imageAlt="MKRG in the media"
       />
@@ -398,7 +398,7 @@ export default function MediaPageContent() {
                 Formal announcements for the media.
               </AnimatedHeading>
               <p className="mt-5 text-base leading-relaxed text-body sm:text-lg">
-                Journalists, analysts and partners — every release is here, in
+                Journalists, analysts and partners every release is here, in
                 chronological order, with full PDFs available on request.
               </p>
             </div>
@@ -668,3 +668,4 @@ export default function MediaPageContent() {
     </main>
   );
 }
+

@@ -1,4 +1,4 @@
-# MKRG-One
+﻿# MKRG-One
 
 Steel recycling / sustainability website. Next.js 15 + Sanity + Vercel, animated with GSAP and Framer Motion.
 
@@ -6,10 +6,10 @@ Steel recycling / sustainability website. Next.js 15 + Sanity + Vercel, animated
 
 - **Next.js 16** (App Router, TypeScript, Turbopack)
 - **Tailwind CSS v4** with sustainability palette (forest / cream / amber)
-- **GSAP** + `@gsap/react` — hero word-reveal, stat counters, scroll-triggered reveals
-- **Framer Motion** — micro-interactions, viewport-triggered grids
-- **Lenis** — smooth scroll (synced to GSAP ticker)
-- **Sanity v3** + **next-sanity v13** — embedded Studio at `/studio`, Live Content API
+- **GSAP** + `@gsap/react` - hero word-reveal, stat counters, scroll-triggered reveals
+- **Framer Motion** - micro-interactions, viewport-triggered grids
+- **Lenis** - smooth scroll (synced to GSAP ticker)
+- **Sanity v3** + **next-sanity v13** - embedded Studio at `/studio`, Live Content API
 - Project ID: `72k8551o`
 
 ## Local dev
@@ -26,18 +26,18 @@ Open:
 
 ## Required setup before the Studio works fully
 
-1. **Confirm the dataset name** at https://sanity.io/manage/project/72k8551o — update `NEXT_PUBLIC_SANITY_DATASET` in `.env.local` if it isn't `production`.
+1. **Confirm the dataset name** at https://sanity.io/manage/project/72k8551o - update `NEXT_PUBLIC_SANITY_DATASET` in `.env.local` if it isn't `production`.
 2. **Create a Viewer API token** at https://sanity.io/manage/project/72k8551o/api#tokens → paste into `SANITY_API_READ_TOKEN`.
 3. **Add CORS origin** at https://sanity.io/manage/project/72k8551o/api → add `http://localhost:3000` (and your Vercel URL later) with credentials allowed.
 4. **Set a webhook secret** (any string) in `SANITY_REVALIDATE_SECRET` and on the Sanity webhook (see below).
 
 ## Content model
 
-- `siteSettings` — singleton (title, description, logo, nav)
-- `page` — generic page with hero + section page-builder (`impactSection`, `contentSection`)
-- `post` — blog post / case study
-- `impactSection` — heading + intro + stat counter array (used on home)
-- `contentSection` — heading + Portable Text body
+- `siteSettings` - singleton (title, description, logo, nav)
+- `page` - generic page with hero + section page-builder (`impactSection`, `contentSection`)
+- `post` - blog post / case study
+- `impactSection` - heading + intro + stat counter array (used on home)
+- `contentSection` - heading + Portable Text body
 
 Create a `page` document with slug `home` to drive the hero + impact stats on `/`.
 
@@ -51,14 +51,15 @@ Create a `page` document with slug `home` to drive the hero + impact stats on `/
 
 ## Where the animation lives
 
-- `src/components/Hero.tsx` — GSAP word-reveal timeline + Framer Motion CTAs
-- `src/components/ImpactStats.tsx` — GSAP ScrollTrigger counters
-- `src/components/ProcessSteps.tsx` — Framer Motion staggered viewport reveal
-- `src/components/SmoothScroll.tsx` — Lenis provider synced to GSAP ticker
+- `src/components/Hero.tsx` - GSAP word-reveal timeline + Framer Motion CTAs
+- `src/components/ImpactStats.tsx` - GSAP ScrollTrigger counters
+- `src/components/ProcessSteps.tsx` - Framer Motion staggered viewport reveal
+- `src/components/SmoothScroll.tsx` - Lenis provider synced to GSAP ticker
 
 ## TODO (when content / brand assets land)
 
-- Run TypeGen (`npx sanity typegen generate`) once schemas stabilise — replaces the manual `HomeData` type in `src/app/page.tsx`.
+- Run TypeGen (`npx sanity typegen generate`) once schemas stabilise - replaces the manual `HomeData` type in `src/app/page.tsx`.
 - Swap default copy in components with real Sanity-driven values.
 - Replace placeholder colors in `globals.css` with real brand palette.
 - Add real logo to `/public` and surface from `siteSettings.logo`.
+

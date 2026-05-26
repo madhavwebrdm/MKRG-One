@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -33,7 +33,7 @@ const MD: Principal = {
     "Efficient utilization of Energy and Nature's Resources is the mantra of Madhav KRG Group in achieving our set goals.",
   body: [
     "Positive outcomes are the result of following accurate techniques, procedures and systems. At Madhav KRG Group we maintain dedicated systems to ensure compliance with the standards we set for ourselves and the ones our partners hold us to.",
-    "The word that guides everything we do is GIVING — giving quality to our customers, fair remuneration to our people, dependable services to our partners, robust systems to our operations, and meaningful contribution to society.",
+    "The word that guides everything we do is GIVING giving quality to our customers, fair remuneration to our people, dependable services to our partners, robust systems to our operations, and meaningful contribution to society.",
     "This wholehearted commitment has helped us build strong, long-standing relationships with the customers and stakeholders who choose to grow with us.",
   ],
 };
@@ -43,22 +43,22 @@ const DIRECTOR: Principal = {
   title: "Director",
   portrait: `${MKRG}/sanjeev-goyal.jpg`,
   pullQuote:
-    "Quality assurance, for us, is not a step in the manufacturing line — it is part of the culture of our organisation.",
+    "Quality assurance, for us, is not a step in the manufacturing line it is part of the culture of our organisation.",
   body: [
     "Madhav KRG Group believes in long-term relationships and in creating an environment in which those relationships can grow. We welcome existing and new vendors with the same impartiality, because equitable economic development is what makes a supply chain durable.",
-    "We treat the regulatory policies of the government as business guidelines, not constraints — and the work we do is meant to contribute to the socio-economic development of the country.",
+    "We treat the regulatory policies of the government as business guidelines, not constraints and the work we do is meant to contribute to the socio-economic development of the country.",
     "Quality assurance, for us, is not a step in the manufacturing line. It is part of the culture of our organisation.",
   ],
 };
 
 const TEAM: Member[] = [
-  { name: "Randhir Singh Rathaur", role: "President — Sales & Marketing", photo: `${MKRG}/team/team8.jpg` },
-  { name: "Razeev Tondon", role: "General Manager — Pipe & Tube", photo: `${MKRG}/team/team1.jpg` },
-  { name: "Rishu Garg", role: "General Manager — Supply Chain Management", photo: `${MKRG}/team/team3.jpg` },
-  { name: "Gulshan Kumar", role: "General Manager — QMS", photo: `${MKRG}/team/team4.jpg` },
-  { name: "Smrutiranjan Dwibedi", role: "Plant Head — TMT", photo: `${MKRG}/team/team5.jpg` },
+  { name: "Randhir Singh Rathaur", role: "President Sales & Marketing", photo: `${MKRG}/team/team8.jpg` },
+  { name: "Razeev Tondon", role: "General Manager Pipe & Tube", photo: `${MKRG}/team/team1.jpg` },
+  { name: "Rishu Garg", role: "General Manager Supply Chain Management", photo: `${MKRG}/team/team3.jpg` },
+  { name: "Gulshan Kumar", role: "General Manager QMS", photo: `${MKRG}/team/team4.jpg` },
+  { name: "Smrutiranjan Dwibedi", role: "Plant Head TMT", photo: `${MKRG}/team/team5.jpg` },
   { name: "Sanjeev Kumar", role: "Group HR Head", photo: `${MKRG}/team/team9.jpg` },
-  { name: "Shaikh Sabiruddin", role: "Head — HRC Plant", photo: `${MKRG}/team/team7.jpg` },
+  { name: "Shaikh Sabiruddin", role: "Head HRC Plant", photo: `${MKRG}/team/team7.jpg` },
 ];
 
 export default function LeadershipPageContent() {
@@ -67,7 +67,7 @@ export default function LeadershipPageContent() {
       <PageHero
         eyebrow="Leadership"
         heading="The people behind every tonne we recycle."
-        intro="Madhav KRG Group is led by operators, not bystanders. The people on this page have been on the shop floor, in the audit room and in the field — often all in the same week."
+        intro="Madhav KRG Group is led by operators, not bystanders. The people on this page have been on the shop floor, in the audit room and in the field often all in the same week."
         imageUrl={`${MKRG}/team.jpg`}
         imageAlt="Madhav KRG Group leadership team"
       />
@@ -75,7 +75,7 @@ export default function LeadershipPageContent() {
       {/* MD MESSAGE */}
       <PrincipalSection principal={MD} side="left" />
 
-      {/* PULL QUOTE — mission */}
+      {/* PULL QUOTE mission */}
       <section
         className="relative isolate overflow-hidden bg-deep-green py-24 text-white sm:py-32"
         style={{
@@ -93,7 +93,7 @@ export default function LeadershipPageContent() {
             {MD.pullQuote}
           </AnimatedHeading>
           <p className="mt-8 text-sm uppercase tracking-[0.2em] text-white/80">
-            — {MD.name}, {MD.title}
+            {MD.name}, {MD.title}
           </p>
         </div>
       </section>
@@ -101,7 +101,7 @@ export default function LeadershipPageContent() {
       {/* DIRECTOR MESSAGE */}
       <PrincipalSection principal={DIRECTOR} side="right" background="white" />
 
-      {/* OUR MANAGEMENT — team grid */}
+      {/* OUR MANAGEMENT team grid */}
       <section className="bg-beige py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
           <div className="max-w-3xl">
@@ -112,7 +112,7 @@ export default function LeadershipPageContent() {
               The team running Madhav KRG, plant to partner.
             </AnimatedHeading>
             <p className="mt-5 text-base leading-relaxed text-body sm:text-lg">
-              From sales and supply chain to plant operations and human resources — the
+              From sales and supply chain to plant operations and human resources the
               people who keep every shift, every audit and every dispatch on the same
               standard.
             </p>
@@ -135,7 +135,7 @@ export default function LeadershipPageContent() {
                 <div className="relative aspect-[4/5] w-full overflow-hidden bg-beige">
                   <Image
                     src={m.photo}
-                    alt={`${m.name} — ${m.role}`}
+                    alt={`${m.name} ${m.role}`}
                     fill
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
@@ -267,3 +267,4 @@ function PrincipalSection({
     </section>
   );
 }
+
