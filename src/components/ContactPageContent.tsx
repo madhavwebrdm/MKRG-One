@@ -6,9 +6,11 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
+  Briefcase,
   Building2,
   CheckCircle2,
   Factory,
+  LifeBuoy,
   Mail,
   MapPin,
   Phone,
@@ -35,18 +37,29 @@ const OFFICES = [
     icon: Building2,
     lines: [
       "Madhav KRG Group",
-      "Corporate Tower, S.G. Highway",
-      "Ahmedabad, Gujarat 380015",
+      "1002-3 Agarwal Millennium Tower",
+      "Netaji Subhash Place",
+      "New Delhi 110034",
       "India",
     ],
   },
   {
-    label: "Plant",
+    label: "Corporate office",
+    icon: Briefcase,
+    lines: [
+      "Level 1, Celebration Bazaar",
+      "GT Road, Khanna",
+      "Punjab 141401",
+      "India",
+    ],
+  },
+  {
+    label: "Work office",
     icon: Factory,
     lines: [
-      "Madhav KRG Recycling Plant",
-      "Recycle2X Industrial Estate",
-      "Mehsana, Gujarat 384002",
+      "Vill. Akalgarh, Amloh-Bhadson Road",
+      "Near Toll Plaza, Dist Patiala",
+      "Punjab 147203",
       "India",
     ],
   },
@@ -54,41 +67,61 @@ const OFFICES = [
 
 const CONTACT_LINES = [
   {
-    label: "Sales",
+    label: "Corporate & registered office",
     icon: Phone,
-    value: "+91 99000 00000",
-    href: "tel:+919900000000",
+    value: "+91-1765-500075",
+    href: "tel:+911765500075",
   },
   {
-    label: "General enquiries",
+    label: "Work office",
     icon: Phone,
-    value: "+91 99000 11111",
-    href: "tel:+919900011111",
+    value: "+91-1765-282334",
+    href: "tel:+911765282334",
+  },
+  {
+    label: "Helpline",
+    icon: LifeBuoy,
+    value: "+91 97799-15000",
+    href: "tel:+919779915000",
   },
   {
     label: "General email",
     icon: Mail,
-    value: "info@mkrg.in",
-    href: "mailto:info@mkrg.in",
-  },
-  {
-    label: "Careers HR",
-    icon: Mail,
-    value: "careers@mkrg.in",
-    href: "mailto:careers@mkrg.in",
+    value: "info@madhavkrggroup.com",
+    href: "mailto:info@madhavkrggroup.com",
   },
 ];
 
 const SOCIALS = [
-  { label: "LinkedIn", icon: LinkedinIcon, href: "#" },
-  { label: "Twitter", icon: TwitterIcon, href: "#" },
-  { label: "YouTube", icon: YoutubeIcon, href: "#" },
-  { label: "Instagram", icon: InstagramIcon, href: "#" },
-  { label: "Facebook", icon: FacebookIcon, href: "#" },
+  {
+    label: "LinkedIn",
+    icon: LinkedinIcon,
+    href: "https://www.linkedin.com/company/madhavkrggroup/",
+  },
+  {
+    label: "Twitter",
+    icon: TwitterIcon,
+    href: "https://twitter.com/JYOTI_offcial",
+  },
+  {
+    label: "YouTube",
+    icon: YoutubeIcon,
+    href: "https://www.youtube.com/channel/UCbI08WxJFsWYc9hQ2oSrpfQ",
+  },
+  {
+    label: "Instagram",
+    icon: InstagramIcon,
+    href: "https://www.instagram.com/jyotiofficialindia/",
+  },
+  {
+    label: "Facebook",
+    icon: FacebookIcon,
+    href: "https://www.facebook.com/JyotiOfficialIndia",
+  },
 ];
 
 const MAP_EMBED =
-  "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d234123.45!2d72.4!3d23.0225!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e848aba5bd449%3A0x4fcedd11614f6516!2sAhmedabad%2C%20Gujarat!5e0!3m2!1sen!2sin!4v1700000000000";
+  "https://www.google.com/maps?q=Akalgarh+Amloh-Bhadson+Road+Patiala+147203&output=embed";
 
 function EnquiryForm() {
   const [product, setProduct] = useState<ProductOption | "">("");
@@ -213,10 +246,10 @@ function CareersForm() {
           Our HR team will review and reach out if there&apos;s a match. For role
           enquiries you can also write to{" "}
           <Link
-            href="mailto:careers@mkrg.in"
+            href="mailto:info@madhavkrggroup.com"
             className="text-deep-green underline-offset-4 hover:underline"
           >
-            careers@mkrg.in
+            info@madhavkrggroup.com
           </Link>
           .
         </p>
@@ -448,7 +481,7 @@ export default function ContactPageContent() {
               Find us
             </span>
             <AnimatedHeading className="font-serif text-3xl leading-tight text-ink sm:text-4xl">
-              Plant &amp; registered office.
+              Offices &amp; plant locations.
             </AnimatedHeading>
             <p className="max-w-2xl text-base leading-relaxed text-body sm:text-lg">
               Visits are by appointment please write ahead so we can arrange a plant
@@ -480,8 +513,8 @@ export default function ContactPageContent() {
                     Coordinates
                   </p>
                   <p className="mt-1 text-sm leading-relaxed text-body">
-                    Ahmedabad &amp; Mehsana, Gujarat the registered office and the
-                    primary Recycle2X plant.
+                    New Delhi, Khanna and Patiala, the registered office,
+                    corporate HQ and the Akalgarh plant.
                   </p>
                 </div>
               </div>
@@ -517,11 +550,11 @@ export default function ContactPageContent() {
               </p>
               <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
                 <Link
-                  href="mailto:careers@mkrg.in"
+                  href="mailto:info@madhavkrggroup.com"
                   className="inline-flex items-center gap-2 text-sm font-medium text-black underline-offset-4 hover:underline"
                 >
                   <Mail className="h-4 w-4" />
-                  careers@mkrg.in
+                  info@madhavkrggroup.com
                 </Link>
               </div>
             </div>

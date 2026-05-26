@@ -27,6 +27,7 @@ export default function PageHero({
   align = "left",
 }: Props) {
   const isCenter = align === "center";
+  const headingMaxWidth = heading.includes("\n") ? "max-w-6xl" : "max-w-4xl";
 
   return (
     <section className="relative min-h-[70vh] overflow-hidden bg-deep-green sm:min-h-[78vh]">
@@ -70,9 +71,7 @@ export default function PageHero({
 
         <AnimatedHeading
           as="h1"
-          className={`mt-5 font-serif text-[2.25rem] leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-6xl xl:text-[clamp(3rem,5vw,4.75rem)] ${
-            isCenter ? "max-w-4xl text-balance" : "max-w-4xl text-balance"
-          }`}
+          className={`mt-5 font-serif text-[2.25rem] leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-6xl xl:text-[clamp(3rem,5vw,4.75rem)] ${headingMaxWidth} text-balance`}
         >
           {heading}
         </AnimatedHeading>

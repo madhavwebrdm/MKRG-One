@@ -170,7 +170,7 @@ export default function SustainabilityPageContent() {
     <main className="bg-beige">
       <PageHero
         eyebrow="Sustainability"
-        heading="Real numbers. Cleaner air. Real communities."
+        heading={"Real numbers.\nCleaner air. Real communities."}
         intro="Sustainability at Madhav KRG Group isn't a line item it is the business model. Every tonne we process avoids emissions, conserves resources and supports the communities we operate in."
         imageUrl={PLACEHOLDER_IMAGES.sustHero}
         imageAlt="Green plant operations"

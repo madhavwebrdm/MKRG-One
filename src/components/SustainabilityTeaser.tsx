@@ -22,8 +22,8 @@ type Props = {
 const ICONS = [Leaf, Wind, HeartHandshake];
 const HIGHLIGHT_IMAGES: Array<string | StaticImageData> = [
   PLACEHOLDER_IMAGES.sustainability1,
-  PLACEHOLDER_IMAGES.sustainability2,
   mkrg3,
+  PLACEHOLDER_IMAGES.sustainability2,
 ];
 
 const DEFAULTS: Highlight[] = [

@@ -41,22 +41,33 @@ export default function AnimatedHeading({
     { scope: ref },
   );
 
-  const words = children.split(" ");
+  const lines = children.split("\n");
+  const isMultiLine = lines.length > 1;
 
   return (
     <Tag ref={ref} className={className} {...rest}>
-      {words.map((word, wi) => (
-        <Fragment key={`${word}-${wi}`}>
-          <span className="inline-block overflow-hidden pb-[0.15em] align-bottom">
-            {word.split("").map((char, ci) => (
-              <span key={ci} className="ah-char inline-block">
-                {char}
-              </span>
+      {lines.map((line, li) => {
+        const words = line.split(" ");
+        return (
+          <span
+            key={li}
+            className={isMultiLine ? "block whitespace-nowrap" : "block"}
+          >
+            {words.map((word, wi) => (
+              <Fragment key={`${word}-${li}-${wi}`}>
+                <span className="inline-block overflow-hidden pb-[0.15em] align-bottom">
+                  {word.split("").map((char, ci) => (
+                    <span key={ci} className="ah-char inline-block">
+                      {char}
+                    </span>
+                  ))}
+                </span>
+                {wi < words.length - 1 && " "}
+              </Fragment>
             ))}
           </span>
-          {wi < words.length - 1 && " "}
-        </Fragment>
-      ))}
+        );
+      })}
     </Tag>
   );
 }
