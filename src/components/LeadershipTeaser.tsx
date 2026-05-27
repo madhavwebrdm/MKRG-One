@@ -60,7 +60,6 @@ export default function LeadershipTeaser({
               />
               <div className="absolute inset-0 bg-gradient-to-t from-deep-green/60 via-transparent to-transparent" />
               <div className="absolute bottom-5 left-5 right-5 flex items-center gap-3 rounded-2xl bg-white/90 px-5 py-3.5 backdrop-blur">
-                <Quote className="h-5 w-5 text-accent" />
                 <p className="text-sm font-medium text-ink">{attribution}</p>
               </div>
             </motion.div>

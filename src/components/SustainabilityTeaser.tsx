@@ -3,9 +3,10 @@
 import Link from "next/link";
 import Image, { type StaticImageData } from "next/image";
 import { motion } from "framer-motion";
-import { ArrowRight, Leaf, Wind, HeartHandshake } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { PLACEHOLDER_IMAGES } from "@/lib/placeholderImages";
 import mkrg3 from "@/Images/mkrg (3).jpeg";
+import earthGlobe from "@/Images/earth-globe.webp";
 import AnimatedHeading from "./AnimatedHeading";
 
 type Highlight = { label: string; value: string };
@@ -19,9 +20,8 @@ type Props = {
   ctaHref?: string;
 };
 
-const ICONS = [Leaf, Wind, HeartHandshake];
 const HIGHLIGHT_IMAGES: Array<string | StaticImageData> = [
-  PLACEHOLDER_IMAGES.sustainability1,
+  earthGlobe,
   mkrg3,
   PLACEHOLDER_IMAGES.sustainability2,
 ];
@@ -79,7 +79,6 @@ export default function SustainabilityTeaser({
 
         <ul className="mt-14 grid grid-cols-1 gap-5 md:grid-cols-2">
           {highlights.map((h, i) => {
-            const Icon = ICONS[i % ICONS.length];
             const img = HIGHLIGHT_IMAGES[i % HIGHLIGHT_IMAGES.length];
             return (
               <motion.li
@@ -89,7 +88,7 @@ export default function SustainabilityTeaser({
                 viewport={{ once: true, margin: "-80px" }}
                 transition={{ duration: 0.6, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
                 whileHover={{ y: -6 }}
-                className="group relative overflow-hidden rounded-2xl bg-deep-green"
+                className="group relative overflow-hidden rounded-2xl border border-white/20 bg-deep-green"
                 data-cursor="grow"
               >
                 <div className="relative aspect-[5/4] w-full overflow-hidden">
@@ -100,9 +99,6 @@ export default function SustainabilityTeaser({
                     sizes="(max-width: 768px) 100vw, 33vw"
                     className="object-cover transition-transform duration-700 group-hover:scale-110"
                   />
-                  <div className="absolute left-5 top-5 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-white/15 text-white backdrop-blur">
-                    <Icon className="h-5 w-5" aria-hidden />
-                  </div>
                 </div>
                 <div className="p-6 sm:p-7">
                   <p className="text-xs font-medium uppercase tracking-wider text-white">

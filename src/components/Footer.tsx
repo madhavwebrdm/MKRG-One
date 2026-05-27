@@ -36,7 +36,7 @@ const NAV_GROUPS = [
       { label: "About", href: "/about" },
       { label: "Leadership", href: "/leadership" },
       { label: "Certifications", href: "/certifications" },
-      { label: "Careers", href: "/contact#careers" },
+      { label: "Careers", href: "/careers" },
     ],
   },
   {
@@ -77,37 +77,6 @@ export default function Footer({
 
   return (
     <footer className="relative isolate overflow-hidden border-t border-deep-green/15 bg-beige">
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 bottom-0 -z-20 flex h-[65%] w-full"
-        style={{
-          maskImage:
-            "linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.4) 30%, black 70%)",
-          WebkitMaskImage:
-            "linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.4) 30%, black 70%)",
-        }}
-      >
-        <video
-          className="h-full w-1/2 object-cover object-bottom"
-          autoPlay
-          muted
-          loop
-          playsInline
-          aria-hidden
-        >
-          <source src="/videos/grass-footer.mp4" type="video/mp4" />
-        </video>
-        <video
-          className="h-full w-1/2 -scale-x-100 object-cover object-bottom"
-          autoPlay
-          muted
-          loop
-          playsInline
-          aria-hidden
-        >
-          <source src="/videos/grass-footer.mp4" type="video/mp4" />
-        </video>
-      </div>
       <div className="relative mx-auto max-w-7xl px-6 py-16 sm:px-10 lg:px-16 lg:py-20">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-5">

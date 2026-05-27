@@ -1,21 +1,14 @@
 ﻿"use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { useRef } from "react";
 import { motion } from "framer-motion";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import {
-  ArrowRight,
-  HandHeart,
-  HeartHandshake,
-  Leaf,
-  Recycle,
   ShieldCheck,
   Sprout,
-  Sun,
   TreePine,
   Wind,
   Zap,
@@ -26,6 +19,7 @@ import mkrg3 from "@/Images/mkrg (3).jpeg";
 import mkrg4 from "@/Images/mkrg (4).jpeg";
 import mkrg5 from "@/Images/mkrg (5).jpeg";
 import mkrg8 from "@/Images/mkrg (8).jpeg";
+import greenPlanet from "@/Images/Green Planet.jpeg";
 import AnimatedHeading from "./AnimatedHeading";
 import PageHero from "./PageHero";
 import TiltCard from "./TiltCard";
@@ -70,6 +64,7 @@ const PILLARS: Array<{
     title: "Greener Planet",
     body: "Every closed loop is one less open one. The math is simple; the work is not.",
     icon: TreePine,
+    image: greenPlanet,
   },
 ];
 
@@ -88,27 +83,6 @@ const RECYCLING_STATS = [
     label: "APCD efficiency",
     value: "99.4%",
     note: "Particulate capture across all stacks well above the IS threshold.",
-  },
-];
-
-const SUBPAGES = [
-  {
-    title: "Environmental Impact",
-    body: "The full numbers behind avoided emissions, conserved resources and energy savings.",
-    href: "/sustainability/environmental-impact",
-    icon: Leaf,
-  },
-  {
-    title: "Recycling Statistics",
-    body: "Plant-by-plant throughput, output streams and APCD performance.",
-    href: "/sustainability/recycling-statistics",
-    icon: Recycle,
-  },
-  {
-    title: "Community Programs",
-    body: "CSR initiatives and EHS programs in the regions where we operate.",
-    href: "/sustainability/community-programs",
-    icon: HandHeart,
   },
 ];
 
@@ -175,7 +149,7 @@ export default function SustainabilityPageContent() {
         imageUrl={PLACEHOLDER_IMAGES.sustHero}
         imageAlt="Green plant operations"
         videoUrl="/videos/sustainability-hero.mp4"
-        videoPoster={typeof PLACEHOLDER_IMAGES.sustHero === "string" ? PLACEHOLDER_IMAGES.sustHero : undefined}
+        videoPoster="/images/sustainability-hero-poster.jpg"
       />
 
       {/* Environmental impact metrics */}
@@ -220,7 +194,6 @@ export default function SustainabilityPageContent() {
 
           <ul className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {PILLARS.map((p, i) => {
-              const Icon = p.icon;
               const img: PillarImage =
                 p.image ??
                 PLACEHOLDER_IMAGES.sustPillars[i % PLACEHOLDER_IMAGES.sustPillars.length];
@@ -242,9 +215,6 @@ export default function SustainabilityPageContent() {
                         className="object-cover transition-transform duration-700 group-hover:scale-110"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-deep-green/55 via-transparent to-transparent" />
-                      <div className="absolute left-5 top-5 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-white/90 text-accent backdrop-blur">
-                        <Icon className="h-5 w-5" aria-hidden />
-                      </div>
                     </div>
                     <div className="p-7">
                       <h3 className="font-serif text-2xl leading-snug text-ink">
@@ -304,7 +274,7 @@ export default function SustainabilityPageContent() {
               <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/90 sm:text-lg">
                 Scrap is converted to structural steel; hazardous flue dust is processed
                 into commercial-grade zinc. Air Pollution Control Devices keep what is
-                left of the airborne stream well within Indian Standards.
+                left of the airborne stream well within International Standards.
               </p>
 
               <dl className="mt-10 grid grid-cols-1 gap-px overflow-hidden rounded-2xl bg-white/15 md:grid-cols-3">
@@ -362,9 +332,6 @@ export default function SustainabilityPageContent() {
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-ink/40 via-transparent to-transparent" />
-                <div className="absolute left-5 top-5 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-white/90 text-accent backdrop-blur">
-                  <HeartHandshake className="h-5 w-5" aria-hidden />
-                </div>
               </div>
               <div className="p-8 sm:p-10">
                 <span className="text-xs font-medium uppercase tracking-wider text-accent">
@@ -397,9 +364,6 @@ export default function SustainabilityPageContent() {
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-ink/40 via-transparent to-transparent" />
-                <div className="absolute left-5 top-5 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-white/90 text-accent backdrop-blur">
-                  <Sun className="h-5 w-5" aria-hidden />
-                </div>
               </div>
               <div className="p-8 sm:p-10">
                 <span className="text-xs font-medium uppercase tracking-wider text-teal">
@@ -419,68 +383,6 @@ export default function SustainabilityPageContent() {
         </div>
       </section>
 
-      {/* Sub-pages nav */}
-      <section className="bg-gradient-to-b from-[#F0FCF5] via-[#D5F7E4] to-[#A8F0C6] py-24 sm:py-32">
-        <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
-          <div className="max-w-3xl">
-            <span className="text-xs uppercase tracking-[0.2em] text-black">
-              Go deeper
-            </span>
-            <AnimatedHeading className="mt-3 font-serif text-3xl leading-tight text-black sm:text-4xl lg:text-5xl">
-              Sustainability, in three parts.
-            </AnimatedHeading>
-          </div>
-
-          <ul className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
-            {SUBPAGES.map((s, i) => {
-              const Icon = s.icon;
-              const img =
-                PLACEHOLDER_IMAGES.sustSubpages[i % PLACEHOLDER_IMAGES.sustSubpages.length];
-              return (
-                <motion.li
-                  key={s.title}
-                  initial={{ opacity: 0, y: 28 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-80px" }}
-                  transition={{ duration: 0.6, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
-                >
-                  <Link
-                    href={s.href}
-                    data-cursor="grow"
-                    className="group flex h-full flex-col overflow-hidden rounded-2xl bg-white transition-shadow hover:shadow-xl"
-                  >
-                    <div className="relative aspect-[5/3] w-full overflow-hidden">
-                      <Image
-                        src={img}
-                        alt=""
-                        fill
-                        sizes="(max-width: 768px) 100vw, 33vw"
-                        className="object-cover transition-transform duration-700 group-hover:scale-110"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-ink/40 via-transparent to-transparent" />
-                      <div className="absolute left-5 top-5 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-white/90 text-accent backdrop-blur">
-                        <Icon className="h-5 w-5" aria-hidden />
-                      </div>
-                    </div>
-                    <div className="flex flex-1 flex-col p-7">
-                      <h3 className="font-serif text-xl leading-snug text-ink">
-                        {s.title}
-                      </h3>
-                      <p className="mt-3 text-sm leading-relaxed text-body">
-                        {s.body}
-                      </p>
-                      <span className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-deep-green underline-offset-4 group-hover:underline">
-                        Read more
-                        <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-                      </span>
-                    </div>
-                  </Link>
-                </motion.li>
-              );
-            })}
-          </ul>
-        </div>
-      </section>
     </main>
   );
 }

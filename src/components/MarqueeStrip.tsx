@@ -15,7 +15,7 @@ const DEFAULTS = [
   "MOEFCC Approved",
   "GPCB Compliant",
   "Zero degradation",
-  "Indian Standards",
+  "International Standards",
   "Renewable energy",
   "Closed loop",
 ];

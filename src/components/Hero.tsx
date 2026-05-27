@@ -9,8 +9,7 @@ import MagneticButton from "./MagneticButton";
 
 const PLACEHOLDER_VIDEO = "/videos/home-hero.mp4";
 
-const PLACEHOLDER_VIDEO_POSTER =
-  "https://images.pexels.com/videos/36082894/pexels-photo-36082894.jpeg?auto=compress&cs=tinysrgb&w=2560";
+const PLACEHOLDER_VIDEO_POSTER = "/images/hero-poster.webp";
 
 type HeroProps = {
   eyebrow?: string;
@@ -44,7 +43,7 @@ export default function Hero({
   const heading = headingProp ?? "Waste is a Resource, Not a Problem";
   const subheading =
     subheadingProp ??
-    "Recycled with zero degradation or contamination, intact properties per Indian Standards virtually identical to virgin material with lesser environmental impact.";
+    "Recycled with zero degradation or contamination, intact properties per International Standards virtually identical to virgin material with lesser environmental impact.";
   const positioningTags = positioningTagsProp ?? DEFAULT_TAGS;
   const primaryCtaLabel = primaryCtaLabelProp ?? "See our impact";
   const primaryCtaHref = primaryCtaHrefProp ?? "#metrics";

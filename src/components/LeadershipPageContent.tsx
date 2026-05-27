@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, Mail, Quote, Briefcase } from "lucide-react";
+import { ArrowRight, Mail } from "lucide-react";
 
 import { PLACEHOLDER_IMAGES } from "@/lib/placeholderImages";
 import AnimatedHeading from "./AnimatedHeading";
@@ -88,8 +88,7 @@ export default function LeadershipPageContent() {
       >
         <div className="absolute inset-0 -z-10 bg-gradient-to-b from-deep-green/85 via-deep-green/80 to-deep-green/90" />
         <div className="relative mx-auto max-w-5xl px-6 sm:px-10 lg:px-16">
-          <Quote className="h-8 w-8 text-accent" aria-hidden />
-          <AnimatedHeading className="mt-6 font-serif text-3xl leading-snug text-white sm:text-4xl lg:text-[2.75rem]">
+          <AnimatedHeading className="font-serif text-3xl leading-snug text-white sm:text-4xl lg:text-[2.75rem]">
             {MD.pullQuote}
           </AnimatedHeading>
           <p className="mt-8 text-sm uppercase tracking-[0.2em] text-white/80">
@@ -142,7 +141,6 @@ export default function LeadershipPageContent() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-ink/55 via-transparent to-transparent" />
                   <span className="absolute left-4 top-4 inline-flex items-center gap-1.5 rounded-full bg-white/90 px-3 py-1 text-[10px] font-medium uppercase tracking-wider text-accent backdrop-blur">
-                    <Briefcase className="h-3 w-3" />
                     Madhav KRG Group
                   </span>
                 </div>
@@ -203,7 +201,6 @@ function PrincipalSection({
       />
       <div className="absolute inset-0 bg-gradient-to-t from-deep-green/55 via-transparent to-transparent" />
       <div className="absolute bottom-5 left-5 right-5 flex items-center gap-3 rounded-2xl bg-white/90 px-5 py-3.5 backdrop-blur">
-        <Quote className="h-5 w-5 text-accent" />
         <div>
           <p className="text-sm font-medium text-ink">{principal.name}</p>
           <p className="text-xs text-muted">{principal.title}</p>

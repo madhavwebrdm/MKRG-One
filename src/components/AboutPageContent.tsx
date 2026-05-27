@@ -33,7 +33,7 @@ const VALUES = [
   },
   {
     title: "Excellence",
-    body: "Indian Standards are our floor, not our ceiling. We engineer above the bar.",
+    body: "International Standards are our floor, not our ceiling. We engineer above the bar.",
     icon: Award,
   },
   {
@@ -66,7 +66,7 @@ const DIFFERENTIATORS = [
   },
   {
     title: "APCD air protection",
-    body: "Air Pollution Control Devices capture particulates, keeping emissions well within Indian Standards.",
+    body: "Air Pollution Control Devices capture particulates, keeping emissions well within International Standards.",
     icon: Wind,
   },
   {
@@ -75,8 +75,8 @@ const DIFFERENTIATORS = [
     icon: Leaf,
   },
   {
-    title: "Indian Standards compliance",
-    body: "Every tonne is tested, certified and fully traceable to applicable IS specifications.",
+    title: "International Standards compliance",
+    body: "Every tonne is tested, certified and fully traceable to applicable international specifications.",
     icon: Gauge,
   },
 ];
@@ -115,7 +115,7 @@ export default function AboutPageContent() {
       <PageHero
         eyebrow="About us"
         heading="The recycler India can build its future on."
-        intro="Madhav KRG Group has spent decades closing the loop turning end-of-life steel and process waste into materials that meet Indian Standards. We are building our identity as a state-of-the-art recycler so that industry, communities and the planet can grow together."
+        intro="Madhav KRG Group has spent decades closing the loop turning end-of-life steel and process waste into materials that meet International Standards. We are building our identity as a state-of-the-art recycler so that industry, communities and the planet can grow together."
         imageUrl={PLACEHOLDER_IMAGES.aboutHero}
         imageAlt="MKRG plant operations"
         videoUrl="/videos/about-hero.mp4"
@@ -245,7 +245,6 @@ export default function AboutPageContent() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-deep-green/40 via-transparent to-transparent" />
               <div className="absolute bottom-5 left-5 right-5 flex items-center gap-3 rounded-2xl bg-white/90 px-5 py-3.5 backdrop-blur">
-                <Sparkles className="h-5 w-5 text-accent" />
                 <p className="text-sm font-medium text-ink">
                   Madhav KRG Group the mother brand for everything we recycle.
                 </p>
@@ -297,7 +296,6 @@ export default function AboutPageContent() {
 
           <ul className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-2">
             {DIFFERENTIATORS.map((d, i) => {
-              const Icon = d.icon;
               const img =
                 PLACEHOLDER_IMAGES.aboutDifferentiators[
                   i % PLACEHOLDER_IMAGES.aboutDifferentiators.length
@@ -320,9 +318,6 @@ export default function AboutPageContent() {
                         className="object-cover transition-transform duration-700 group-hover:scale-110"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-ink/40 via-transparent to-transparent" />
-                      <div className="absolute left-5 top-5 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-white/90 text-accent backdrop-blur">
-                        <Icon className="h-5 w-5" aria-hidden />
-                      </div>
                     </div>
                     <div className="p-7">
                       <h3 className="font-serif text-2xl leading-snug text-ink">

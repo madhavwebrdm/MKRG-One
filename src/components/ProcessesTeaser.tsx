@@ -32,7 +32,7 @@ const FLOWS: Flow[] = [
       { title: "Electric Arc Furnace", body: "Melting at 1,800°C with precision" },
       { title: "Continuous Casting", body: "Forming billets consistently" },
       { title: "Rolling & Forming", body: "Thermo-mechanical treatment" },
-      { title: "Finished Steel", body: "TMT bars, pipes, and coils" },
+      { title: "Finished Green Steel", body: "TMT bars, pipes, and coils" },
     ],
   },
   {

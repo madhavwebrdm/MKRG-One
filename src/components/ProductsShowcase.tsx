@@ -70,7 +70,7 @@ export default function ProductsShowcase() {
           <div className="lg:col-span-5">
             <p className="text-base leading-relaxed text-body sm:text-lg">
               Transforming hazardous waste into high-value resources five
-              output streams, every batch tested to Indian Standards and
+              output streams, every batch tested to International Standards and
               traceable end-to-end.
             </p>
           </div>

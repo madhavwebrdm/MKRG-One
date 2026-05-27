@@ -1,6 +1,6 @@
 ﻿"use client";
 
-import { useRef, useState } from "react";
+import { Fragment, useRef, useState } from "react";
 import Image, { type StaticImageData } from "next/image";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -8,6 +8,12 @@ import { useGSAP } from "@gsap/react";
 
 import { PLACEHOLDER_IMAGES } from "@/lib/placeholderImages";
 import mkrg2 from "@/Images/mkrg (2).jpeg";
+import steelImg from "@/Images/steel.jpg";
+import finishedGreenSteel from "@/Images/Finished Green Steel.jpg";
+import washingAndPrep from "@/Images/washing and prep.jpg";
+import acidLeaching from "@/Images/Acid Leaching.jpg";
+import purification from "@/Images/Purification.jpg";
+import zincRecovery from "@/Images/Zinc Recovery.png";
 import AnimatedHeading from "./AnimatedHeading";
 
 type Step = {
@@ -23,6 +29,7 @@ type Flow = {
   title: string;
   caption: string;
   steps: Step[];
+  callout?: string;
 };
 
 const FLOWS: Flow[] = [
@@ -32,6 +39,8 @@ const FLOWS: Flow[] = [
     title: "Scrap to Steel",
     caption:
       "From raw scrap to finished TMT bars, pipes, and coils every step optimized.",
+    callout:
+      "This process transforms industrial scrap into certified steel products ready for construction, infrastructure and manufacturing.",
     steps: [
       {
         label: "Scrap Collection",
@@ -49,7 +58,7 @@ const FLOWS: Flow[] = [
         label: "Electric Arc Furnace",
         note: "Melting at 1,800°C with precision",
         body: "Electric arc furnaces return cold scrap to liquid steel using electricity increasingly renewable. No coke, no blast furnace, a fraction of the CO₂ of the virgin route.",
-        image: PLACEHOLDER_IMAGES.processSteel[2],
+        image: steelImg,
       },
       {
         label: "Continuous Casting",
@@ -58,10 +67,10 @@ const FLOWS: Flow[] = [
         image: mkrg2,
       },
       {
-        label: "Finished Steel",
+        label: "Finished Green Steel",
         note: "TMT bars, pipes, and coils",
         body: "TMT rebar, structural pipes and hot-rolled coils ship under IS 1786, IS 1239 and IS 2062. Every batch is mill-tested and traceable to the heat number.",
-        image: PLACEHOLDER_IMAGES.processSteel[4],
+        image: finishedGreenSteel,
       },
     ],
   },
@@ -71,6 +80,8 @@ const FLOWS: Flow[] = [
     title: "Waste to Zinc",
     caption:
       "Our hydrometallurgical process recovers 99.9% pure zinc from hazardous waste.",
+    callout:
+      "This entire process turns hazardous waste into high-quality zinc reusable, traceable and in high demand across industry.",
     steps: [
       {
         label: "Waste Collection",
@@ -82,25 +93,25 @@ const FLOWS: Flow[] = [
         label: "Washing & Prep",
         note: "Conditioned for hydrometallurgical recovery",
         body: "Wet washing strips impurities, conditions particle size and prepares the feed for leaching. Process water is recycled in a closed loop with zero liquid discharge.",
-        image: PLACEHOLDER_IMAGES.processZinc[1],
+        image: washingAndPrep,
       },
       {
         label: "Acid Leaching",
         note: "Dissolve zinc content",
         body: "A precision sulphuric leach pulls zinc into solution while leaving iron, lead and other impurities behind. Recovery rates are tracked batch by batch.",
-        image: PLACEHOLDER_IMAGES.processZinc[2],
+        image: acidLeaching,
       },
       {
         label: "Purification",
         note: "Purify the solution",
         body: "Successive precipitation, filtration and ion-exchange stages remove cadmium, copper and trace metals delivering high-grade pregnant liquor to the electrolysis cells.",
-        image: PLACEHOLDER_IMAGES.processZinc[3],
+        image: purification,
       },
       {
         label: "Zinc Recovery",
         note: "99.9% pure zinc, cast to sheets",
         body: "Electrolysis deposits zinc on cathode sheets; the metal is stripped, melted and cast into commercial-grade ingots and sheets. Output purity above 99.9%.",
-        image: PLACEHOLDER_IMAGES.processZinc[4],
+        image: zincRecovery,
       },
     ],
   },
@@ -124,27 +135,52 @@ export default function ProcessesFlow({
     "Two parallel processes, one closed loop. Industrial scrap returns as structural steel; hazardous waste returns as commercial-grade zinc every step verified and optimized.";
 
   return (
-    <section id="processes" className="bg-beige py-24 sm:py-32">
-      <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
-        <div className="grid grid-cols-1 items-end gap-10 lg:grid-cols-12 lg:gap-16">
-          <div className="lg:col-span-7">
-            <span className="text-xs uppercase tracking-[0.2em] text-accent">
-              {eyebrow}
-            </span>
-            <AnimatedHeading className="mt-3 text-balance font-serif text-3xl leading-tight text-ink sm:text-4xl lg:text-5xl">
-              {heading}
-            </AnimatedHeading>
+    <>
+      <section id="processes" className="bg-beige py-24 sm:py-32">
+        <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
+          <div className="grid grid-cols-1 items-end gap-10 lg:grid-cols-12 lg:gap-16">
+            <div className="lg:col-span-7">
+              <span className="text-xs uppercase tracking-[0.2em] text-accent">
+                {eyebrow}
+              </span>
+              <AnimatedHeading className="mt-3 text-balance font-serif text-3xl leading-tight text-ink sm:text-4xl lg:text-5xl">
+                {heading}
+              </AnimatedHeading>
+            </div>
+            <div className="lg:col-span-5">
+              <p className="text-base leading-relaxed text-body sm:text-lg">
+                {body}
+              </p>
+            </div>
           </div>
-          <div className="lg:col-span-5">
-            <p className="text-base leading-relaxed text-body sm:text-lg">
-              {body}
-            </p>
-          </div>
-        </div>
 
-        {FLOWS.map((flow) => (
-          <FlowSection key={flow.id} flow={flow} />
-        ))}
+          <FlowSection flow={FLOWS[0]} />
+        </div>
+      </section>
+
+      {FLOWS[0].callout && <FlowCallout text={FLOWS[0].callout} />}
+
+      {FLOWS.slice(1).map((flow) => (
+        <Fragment key={flow.id}>
+          <section className="bg-beige py-24 sm:py-32">
+            <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
+              <FlowSection flow={flow} />
+            </div>
+          </section>
+          {flow.callout && <FlowCallout text={flow.callout} />}
+        </Fragment>
+      ))}
+    </>
+  );
+}
+
+function FlowCallout({ text }: { text: string }) {
+  return (
+    <section className="bg-deep-green py-24 text-white sm:py-32">
+      <div className="mx-auto max-w-5xl px-6 text-center sm:px-10 lg:px-16">
+        <AnimatedHeading className="font-serif text-3xl leading-tight text-white sm:text-4xl lg:text-5xl">
+          {text}
+        </AnimatedHeading>
       </div>
     </section>
   );

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { ArrowRight, Newspaper, Play, Calendar } from "lucide-react";
+import { ArrowRight, Play } from "lucide-react";
 import { PLACEHOLDER_IMAGES } from "@/lib/placeholderImages";
 import TiltCard from "./TiltCard";
 import AnimatedHeading from "./AnimatedHeading";
@@ -30,12 +30,6 @@ const DEFAULTS: Item[] = [
   { kind: "Video", title: "Inside the Recycle2X plant a 4-minute walkthrough", source: "Plant tour", date: "2025-07-22", href: "#" },
   { kind: "Event", title: "MKRG at India Sustainability Summit 2025", source: "Mumbai · Sept 2025", date: "2025-09-04", href: "#" },
 ];
-
-const ICONS: Record<string, typeof Newspaper> = {
-  Press: Newspaper,
-  Video: Play,
-  Event: Calendar,
-};
 
 const container = {
   hidden: {},
@@ -113,7 +107,6 @@ export default function MediaTeaser({
           className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-3"
         >
           {items.map((it, i) => {
-            const Icon = ICONS[it.kind || "Press"] || Newspaper;
             const img = PLACEHOLDER_IMAGES.mediaItems[i % PLACEHOLDER_IMAGES.mediaItems.length];
             return (
               <motion.li key={`${it.title}-${i}`} variants={item}>
@@ -131,7 +124,6 @@ export default function MediaTeaser({
                         className="object-cover transition-transform duration-700 group-hover:scale-110"
                       />
                       <div className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full bg-white/15 px-3 py-1 text-[10px] font-medium uppercase tracking-wider text-white backdrop-blur">
-                        <Icon className="h-3.5 w-3.5" aria-hidden />
                         {it.kind}
                       </div>
                       {it.kind === "Video" && (

@@ -6,14 +6,10 @@ import { motion } from "framer-motion";
 import {
   ArrowRight,
   ArrowUpRight,
-  Calendar,
-  CalendarDays,
   FileText,
-  MapPin,
   Mic,
   Newspaper,
   Play,
-  Video,
 } from "lucide-react";
 
 import { PLACEHOLDER_IMAGES } from "@/lib/placeholderImages";
@@ -163,63 +159,6 @@ const VIDEOS: VideoItem[] = [
   },
 ];
 
-type EventItem = {
-  title: string;
-  location: string;
-  date: string;
-  kind: "Exhibition" | "Conference" | "Community";
-  href: string;
-  imageIndex: number;
-};
-
-const EVENTS: EventItem[] = [
-  {
-    title: "India Sustainability Summit 2026",
-    location: "Mumbai · Bombay Exhibition Centre",
-    date: "2026-09-14",
-    kind: "Conference",
-    href: "#",
-    imageIndex: 0,
-  },
-  {
-    title: "International Recycling Expo",
-    location: "Bengaluru · BIEC",
-    date: "2026-07-22",
-    kind: "Exhibition",
-    href: "#",
-    imageIndex: 1,
-  },
-  {
-    title: "Mehsana Community Green Day",
-    location: "Mehsana · MKRG plant grounds",
-    date: "2026-06-05",
-    kind: "Community",
-    href: "#",
-    imageIndex: 2,
-  },
-];
-
-const SUBPAGES = [
-  {
-    title: "Press Releases",
-    body: "The full archive of formal announcements for journalists, analysts and partners.",
-    href: "/media/press-releases",
-    icon: FileText,
-  },
-  {
-    title: "Videos",
-    body: "Plant walkthroughs, process explainers and leadership interviews on demand.",
-    href: "/media/videos",
-    icon: Video,
-  },
-  {
-    title: "Events",
-    body: "Industry conferences, exhibitions and community programs where MKRG shows up.",
-    href: "/media/events",
-    icon: CalendarDays,
-  },
-];
-
 function formatDate(input: string) {
   const d = new Date(input);
   if (Number.isNaN(d.getTime())) return input;
@@ -235,18 +174,6 @@ const NEWS_ICON: Record<NewsItem["kind"], typeof Newspaper> = {
   Expansion: ArrowUpRight,
   CSR: Mic,
   Milestone: ArrowUpRight,
-};
-
-const EVENT_ICON: Record<EventItem["kind"], typeof Calendar> = {
-  Exhibition: CalendarDays,
-  Conference: Mic,
-  Community: Calendar,
-};
-
-const VIDEO_ICON: Record<VideoItem["kind"], typeof Play> = {
-  "Plant tour": Video,
-  Process: Play,
-  Interview: Mic,
 };
 
 export default function MediaPageContent() {
@@ -306,7 +233,6 @@ export default function MediaPageContent() {
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-ink/40 via-transparent to-transparent" />
                       <div className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full bg-white/90 px-3 py-1 text-[10px] font-medium uppercase tracking-wider text-accent">
-                        <Newspaper className="h-3.5 w-3.5" />
                         {a.topic}
                       </div>
                     </div>
@@ -475,7 +401,6 @@ export default function MediaPageContent() {
 
           <ul className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-3">
             {VIDEOS.map((v, i) => {
-              const KindIcon = VIDEO_ICON[v.kind];
               return (
                 <motion.li
                   key={v.title}
@@ -502,7 +427,6 @@ export default function MediaPageContent() {
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-deep-green/80 via-deep-green/15 to-transparent" />
                       <div className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full bg-white/15 px-3 py-1 text-[10px] font-medium uppercase tracking-wider text-white backdrop-blur">
-                        <KindIcon className="h-3.5 w-3.5" />
                         {v.kind}
                       </div>
                       <div className="absolute right-4 top-4 inline-flex items-center gap-1 rounded-full bg-black/40 px-2.5 py-1 text-[10px] font-medium text-white backdrop-blur">
@@ -527,144 +451,6 @@ export default function MediaPageContent() {
         </div>
       </section>
 
-      {/* Events */}
-      <section className="bg-beige py-24 sm:py-32">
-        <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
-          <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-            <div className="max-w-2xl">
-              <span className="text-xs uppercase tracking-[0.2em] text-accent">
-                Events
-              </span>
-              <AnimatedHeading className="mt-3 font-serif text-3xl leading-tight text-ink sm:text-4xl lg:text-5xl">
-                Exhibitions, conferences and community days.
-              </AnimatedHeading>
-            </div>
-            <Link
-              href="/media/events"
-              className="inline-flex items-center gap-2 text-sm font-medium text-deep-green underline-offset-4 hover:underline"
-            >
-              Full calendar
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
-
-          <ul className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-3">
-            {EVENTS.map((e, i) => {
-              const KindIcon = EVENT_ICON[e.kind];
-              return (
-                <motion.li
-                  key={e.title}
-                  initial={{ opacity: 0, y: 28 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-80px" }}
-                  transition={{ duration: 0.6, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
-                >
-                  <Link
-                    href={e.href}
-                    className="group flex h-full flex-col overflow-hidden rounded-2xl bg-white ring-1 ring-deep-green/10 transition-shadow hover:shadow-xl"
-                  >
-                    <div className="relative aspect-[5/3] w-full overflow-hidden">
-                      <Image
-                        src={
-                          PLACEHOLDER_IMAGES.mediaEvents[
-                            e.imageIndex % PLACEHOLDER_IMAGES.mediaEvents.length
-                          ]
-                        }
-                        alt=""
-                        fill
-                        sizes="(max-width: 768px) 100vw, 33vw"
-                        className="object-cover transition-transform duration-700 group-hover:scale-110"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-ink/40 via-transparent to-transparent" />
-                      <div className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full bg-white/90 px-3 py-1 text-[10px] font-medium uppercase tracking-wider text-accent backdrop-blur">
-                        <KindIcon className="h-3.5 w-3.5" />
-                        {e.kind}
-                      </div>
-                    </div>
-                    <div className="flex flex-1 flex-col gap-3 p-6">
-                      <p className="text-xs font-medium uppercase tracking-wider text-accent">
-                        {formatDate(e.date)}
-                      </p>
-                      <h3 className="font-serif text-xl leading-snug text-ink">
-                        {e.title}
-                      </h3>
-                      <p className="mt-auto inline-flex items-center gap-2 text-sm text-body">
-                        <MapPin className="h-4 w-4 text-accent" />
-                        {e.location}
-                      </p>
-                    </div>
-                  </Link>
-                </motion.li>
-              );
-            })}
-          </ul>
-        </div>
-      </section>
-
-      {/* Sub-pages nav */}
-      <section className="bg-gradient-to-b from-[#F0FCF5] via-[#D5F7E4] to-[#A8F0C6] py-24 sm:py-32">
-        <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
-          <div className="max-w-3xl">
-            <span className="text-xs uppercase tracking-[0.2em] text-black">
-              Go deeper
-            </span>
-            <AnimatedHeading className="mt-3 font-serif text-3xl leading-tight text-black sm:text-4xl lg:text-5xl">
-              Media, in three archives.
-            </AnimatedHeading>
-          </div>
-
-          <ul className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
-            {SUBPAGES.map((s, i) => {
-              const Icon = s.icon;
-              const img =
-                PLACEHOLDER_IMAGES.mediaSubpages[
-                  i % PLACEHOLDER_IMAGES.mediaSubpages.length
-                ];
-              return (
-                <motion.li
-                  key={s.title}
-                  initial={{ opacity: 0, y: 28 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-80px" }}
-                  transition={{ duration: 0.6, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
-                >
-                  <Link
-                    href={s.href}
-                    data-cursor="grow"
-                    className="group flex h-full flex-col overflow-hidden rounded-2xl bg-white transition-shadow hover:shadow-xl"
-                  >
-                    <div className="relative aspect-[5/3] w-full overflow-hidden">
-                      <Image
-                        src={img}
-                        alt=""
-                        fill
-                        sizes="(max-width: 768px) 100vw, 33vw"
-                        className="object-cover transition-transform duration-700 group-hover:scale-110"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-ink/40 via-transparent to-transparent" />
-                      <div className="absolute left-5 top-5 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-white/90 text-accent backdrop-blur">
-                        <Icon className="h-5 w-5" aria-hidden />
-                      </div>
-                    </div>
-                    <div className="flex flex-1 flex-col p-7">
-                      <h3 className="font-serif text-xl leading-snug text-ink">
-                        {s.title}
-                      </h3>
-                      <p className="mt-3 text-sm leading-relaxed text-body">
-                        {s.body}
-                      </p>
-                      <span className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-deep-green underline-offset-4 group-hover:underline">
-                        Open archive
-                        <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-                      </span>
-                    </div>
-                  </Link>
-                </motion.li>
-              );
-            })}
-          </ul>
-        </div>
-      </section>
     </main>
   );
 }

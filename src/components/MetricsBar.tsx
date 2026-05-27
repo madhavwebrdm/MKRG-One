@@ -33,7 +33,7 @@ export default function MetricsBar({
   const heading = headingProp ?? "Our impact, measured.";
   const intro =
     introProp ??
-    "Every tonne we process meets Indian Standards and behaves virtually like virgin material at a fraction of the environmental cost.";
+    "Every tonne we process meets International Standards and behaves virtually like virgin material at a fraction of the environmental cost.";
   const metrics = metricsProp ?? DEFAULTS;
   const root = useRef<HTMLElement>(null);
 

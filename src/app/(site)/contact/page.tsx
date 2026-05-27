@@ -3,7 +3,7 @@
 export const metadata = {
   title: "Contact Madhav KRG Group",
   description:
-    "Sales, technical, partnership and careers enquiries for Madhav KRG Group offices in Ahmedabad and the Recycle2X plant in Mehsana, Gujarat.",
+    "Sales, technical, partnership and audit enquiries for Madhav KRG Group offices in Ahmedabad and the Recycle2X plant in Mehsana, Gujarat.",
 };
 
 export default function ContactPage() {
