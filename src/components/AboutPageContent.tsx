@@ -1,7 +1,6 @@
 ﻿"use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { motion } from "framer-motion";
 import {
   Award,
@@ -16,7 +15,6 @@ import {
   Target,
   Users,
   Wind,
-  ArrowRight,
 } from "lucide-react";
 
 import { PLACEHOLDER_IMAGES } from "@/lib/placeholderImages";
@@ -119,7 +117,6 @@ export default function AboutPageContent() {
         imageUrl={PLACEHOLDER_IMAGES.aboutHero}
         imageAlt="MKRG plant operations"
         videoUrl="/videos/about-hero.mp4"
-        videoPoster={PLACEHOLDER_IMAGES.aboutHero}
       />
 
       {/* Mission & Vision */}
@@ -405,17 +402,6 @@ export default function AboutPageContent() {
               );
             })}
           </ol>
-
-          <motion.div whileHover={{ x: 4 }} className="mt-14 inline-flex">
-            <Link
-              href="/leadership"
-              data-cursor="grow"
-              className="inline-flex items-center gap-2 text-sm font-medium text-deep-green underline-offset-4 hover:underline"
-            >
-              Meet the people behind the work
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-          </motion.div>
         </div>
       </section>
     </main>

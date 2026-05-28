@@ -196,7 +196,7 @@ export default function MediaPageContent() {
                 Industry articles
               </span>
               <AnimatedHeading className="mt-3 font-serif text-3xl leading-tight text-ink sm:text-4xl lg:text-5xl">
-                Recycling, sustainability policy and the circular economy.
+                Recycling, sustainability policy and long-term resource use.
               </AnimatedHeading>
             </div>
             <p className="max-w-md text-base leading-relaxed text-body sm:text-lg">
@@ -313,31 +313,31 @@ export default function MediaPageContent() {
       </section>
 
       {/* Press releases */}
-      <section className="bg-white py-24 sm:py-32">
+      <section className="bg-deep-green py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-2xl">
-              <span className="text-xs uppercase tracking-[0.2em] text-accent">
+              <span className="text-xs uppercase tracking-[0.2em] text-white/60">
                 Press releases
               </span>
-              <AnimatedHeading className="mt-3 font-serif text-3xl leading-tight text-ink sm:text-4xl lg:text-5xl">
+              <AnimatedHeading className="mt-3 font-serif text-3xl leading-tight text-white sm:text-4xl lg:text-5xl">
                 Formal announcements for the media.
               </AnimatedHeading>
-              <p className="mt-5 text-base leading-relaxed text-body sm:text-lg">
+              <p className="mt-5 text-base leading-relaxed text-white/80 sm:text-lg">
                 Journalists, analysts and partners every release is here, in
                 chronological order, with full PDFs available on request.
               </p>
             </div>
             <Link
               href="/media/press-releases"
-              className="inline-flex items-center gap-2 text-sm font-medium text-deep-green underline-offset-4 hover:underline"
+              className="inline-flex items-center gap-2 text-sm font-medium text-white underline-offset-4 hover:underline"
             >
               View full archive
               <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
 
-          <ul className="mt-12 divide-y divide-deep-green/10 rounded-2xl border border-deep-green/15 bg-beige/40">
+          <ul className="mt-12 divide-y divide-white/10 rounded-2xl border border-white/15 bg-white/5">
             {PRESS_RELEASES.map((p, i) => (
               <motion.li
                 key={p.title}
@@ -348,25 +348,25 @@ export default function MediaPageContent() {
               >
                 <Link
                   href={p.href}
-                  className="group flex flex-col gap-2 p-6 transition-colors hover:bg-white sm:flex-row sm:items-start sm:justify-between sm:gap-8 sm:p-8"
+                  className="group flex flex-col gap-2 p-6 transition-colors hover:bg-white/10 sm:flex-row sm:items-start sm:justify-between sm:gap-8 sm:p-8"
                 >
                   <div className="flex flex-1 items-start gap-4">
-                    <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-accent/10 text-accent">
+                    <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white/15 text-white">
                       <FileText className="h-4 w-4" />
                     </span>
                     <div>
-                      <p className="text-xs font-medium uppercase tracking-wider text-accent">
+                      <p className="text-xs font-medium uppercase tracking-wider text-white/55">
                         {formatDate(p.date)}
                       </p>
-                      <h3 className="mt-2 font-serif text-xl leading-snug text-ink group-hover:text-deep-green">
+                      <h3 className="mt-2 font-serif text-xl leading-snug text-white group-hover:text-white/80">
                         {p.title}
                       </h3>
-                      <p className="mt-2 text-sm leading-relaxed text-body">
+                      <p className="mt-2 text-sm leading-relaxed text-white/70">
                         {p.summary}
                       </p>
                     </div>
                   </div>
-                  <ArrowRight className="hidden h-5 w-5 shrink-0 self-center text-accent transition-transform group-hover:translate-x-1 sm:block" />
+                  <ArrowRight className="hidden h-5 w-5 shrink-0 self-center text-white/50 transition-transform group-hover:translate-x-1 sm:block" />
                 </Link>
               </motion.li>
             ))}
@@ -375,24 +375,24 @@ export default function MediaPageContent() {
       </section>
 
       {/* Videos */}
-      <section className="bg-deep-green py-24 text-white sm:py-32">
+      <section className="bg-white py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-2xl">
-              <span className="text-xs uppercase tracking-[0.2em] text-white/80">
+              <span className="text-xs uppercase tracking-[0.2em] text-deep-green">
                 Videos
               </span>
-              <AnimatedHeading className="mt-3 font-serif text-3xl leading-tight text-white sm:text-4xl lg:text-5xl">
+              <AnimatedHeading className="mt-3 font-serif text-3xl leading-tight text-ink sm:text-4xl lg:text-5xl">
                 Plant tours, process walkthroughs and interviews.
               </AnimatedHeading>
-              <p className="mt-5 max-w-xl text-base leading-relaxed text-white/85 sm:text-lg">
+              <p className="mt-5 max-w-xl text-base leading-relaxed text-body sm:text-lg">
                 Recycle2X explained in minutes, not pitches. Watch a plant tour, follow a
                 process line or sit in on a leadership interview.
               </p>
             </div>
             <Link
               href="/media/videos"
-              className="inline-flex items-center gap-2 text-sm font-medium text-white underline-offset-4 hover:underline"
+              className="inline-flex items-center gap-2 text-sm font-medium text-deep-green underline-offset-4 hover:underline"
             >
               All videos
               <ArrowRight className="h-4 w-4" />
@@ -411,7 +411,7 @@ export default function MediaPageContent() {
                 >
                   <Link
                     href={v.href}
-                    className="group flex h-full flex-col overflow-hidden rounded-2xl bg-deep-green/40 ring-1 ring-white/10 transition-colors hover:ring-white/30"
+                    className="group flex h-full flex-col overflow-hidden rounded-2xl bg-deep-green ring-1 ring-deep-green/20 transition-colors hover:ring-deep-green/40"
                   >
                     <div className="relative aspect-[16/10] w-full overflow-hidden">
                       <Image

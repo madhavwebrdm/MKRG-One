@@ -25,7 +25,7 @@ export default function ParallaxImpact() {
 
       <div className="relative mx-auto w-full max-w-5xl px-6 py-32 text-center sm:px-10 lg:px-16">
         <AnimatedHeading className="font-serif text-[2.2rem] leading-[1.1] tracking-tight text-white sm:text-5xl lg:text-[5.25rem]">
-          {"Every Recycled Tonne\nIs A Step Toward\nA Greener Earth."}
+          {"Every Recycled Tonne\nIs a Step Towards\na Greener Earth."}
         </AnimatedHeading>
       </div>
     </section>

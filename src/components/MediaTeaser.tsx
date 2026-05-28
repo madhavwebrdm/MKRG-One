@@ -73,17 +73,17 @@ export default function MediaTeaser({
   const ctaLabel = ctaLabelProp ?? "Browse the gallery";
   const ctaHref = ctaHrefProp ?? "/media";
   return (
-    <section className="bg-deep-green py-24 text-white sm:py-32">
+    <section className="bg-white py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-2xl">
-            <span className="text-xs uppercase tracking-[0.2em] text-white">
+            <span className="text-xs uppercase tracking-[0.2em] text-deep-green">
               {eyebrow}
             </span>
-            <AnimatedHeading className="mt-3 text-balance font-serif text-3xl leading-tight text-white sm:text-4xl lg:text-5xl">
+            <AnimatedHeading className="mt-3 text-balance font-serif text-3xl leading-tight text-ink sm:text-4xl lg:text-5xl">
               {heading}
             </AnimatedHeading>
-            <p className="mt-5 text-base leading-relaxed text-white/85 sm:text-lg">
+            <p className="mt-5 text-base leading-relaxed text-body sm:text-lg">
               {body}
             </p>
           </div>
@@ -91,7 +91,7 @@ export default function MediaTeaser({
             <Link
               href={ctaHref}
               data-cursor="grow"
-              className="inline-flex items-center gap-2 text-sm font-medium text-white underline-offset-4 hover:underline"
+              className="inline-flex items-center gap-2 text-sm font-medium text-deep-green underline-offset-4 hover:underline"
             >
               {ctaLabel}
               <ArrowRight className="h-4 w-4" />
@@ -113,7 +113,7 @@ export default function MediaTeaser({
                 <TiltCard className="h-full">
                   <a
                     href={it.href || "#"}
-                    className="group flex h-full flex-col overflow-hidden rounded-2xl bg-deep-green/40 ring-1 ring-white/10 transition-colors hover:ring-white/30"
+                    className="group flex h-full flex-col overflow-hidden rounded-2xl bg-deep-green ring-1 ring-deep-green/20 transition-colors hover:ring-deep-green/40"
                   >
                     <div className="relative aspect-[16/10] w-full overflow-hidden">
                       <Image

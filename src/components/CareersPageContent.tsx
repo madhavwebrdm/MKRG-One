@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { ArrowRight, CheckCircle2, Upload } from "lucide-react";
 
-import savePlants from "@/Images/save plants.jpeg";
+import careerHero from "@/Images/Career.jpg";
 import AnimatedHeading from "./AnimatedHeading";
 import PageHero from "./PageHero";
 
@@ -151,7 +151,7 @@ export default function CareersPageContent() {
         eyebrow="Careers"
         heading="Work where the loop closes."
         intro="MKRG is hiring across plant operations, engineering, sales, finance and EHS. Send your CV and a short note we read every application."
-        imageUrl={savePlants}
+        imageUrl={careerHero}
         imageAlt="Save plants greener planet"
       />
 

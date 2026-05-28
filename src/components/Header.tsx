@@ -75,7 +75,7 @@ export default function Header({
             alt={siteTitle}
             width={100}
             height={100}
-            style={{ width: 100, height: "auto" }}
+            className="h-auto w-[50px] sm:w-[100px]"
           />
           <span className="sr-only">{siteTitle}</span>
         </Link>

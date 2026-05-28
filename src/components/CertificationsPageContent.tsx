@@ -203,25 +203,6 @@ export default function CertificationsPageContent() {
         </div>
       </section>
 
-      {/* CTA strip */}
-      <section className="bg-gradient-to-b from-[#F0FCF5] via-[#D5F7E4] to-[#A8F0C6] py-20 sm:py-24">
-        <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-6 px-6 sm:px-10 md:flex-row md:items-center lg:px-16">
-          <div className="max-w-2xl">
-            <AnimatedHeading className="font-serif text-2xl leading-snug text-black sm:text-3xl">
-              Need a specific certificate or audit document?
-            </AnimatedHeading>
-            <p className="mt-3 text-sm leading-relaxed text-black/80 sm:text-base">
-              Compliance, sales and audit teams can request the full PDF set directly.
-            </p>
-          </div>
-          <Link
-            href="/contact"
-            className="inline-flex items-center gap-2 rounded-full bg-deep-green px-6 py-3 text-sm font-medium text-white shadow-md transition-shadow hover:shadow-lg"
-          >
-            Request documents
-          </Link>
-        </div>
-      </section>
     </main>
   );
 }
