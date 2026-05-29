@@ -1,12 +1,9 @@
 ﻿"use client";
 
-import Image, { type StaticImageData } from "next/image";
+import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight, Sprout } from "lucide-react";
-
-import processSteel from "@/Images/process-steel.webp";
-import processZinc from "@/Images/process-zinc.webp";
 import AnimatedHeading from "./AnimatedHeading";
 
 type Step = { title: string; body: string };
@@ -15,7 +12,7 @@ type Flow = {
   id: string;
   title: string;
   caption: string;
-  image: StaticImageData;
+  image: string;
   steps: Step[];
 };
 
@@ -25,7 +22,7 @@ const FLOWS: Flow[] = [
     title: "Scrap to Steel",
     caption:
       "From raw scrap to finished TMT bars, pipes, and coils every step optimized.",
-    image: processSteel,
+    image: "/images/process-steel.webp",
     steps: [
       { title: "Scrap Collection", body: "Source ferrous scrap from industrial channels" },
       { title: "Sorting & Grading", body: "Magnetic separation and classification" },
@@ -40,7 +37,7 @@ const FLOWS: Flow[] = [
     title: "Waste to Zinc",
     caption:
       "Our hydrometallurgical process recovers 99.9% pure zinc from hazardous waste.",
-    image: processZinc,
+    image: "/images/waste to zinc.jpeg",
     steps: [
       { title: "Waste Receipt", body: "Secure hazardous waste handling" },
       { title: "Washing & Prep", body: "Remove contaminants" },
@@ -148,6 +145,8 @@ function FlowBlock({ flow, index }: { flow: Flow; index: number }) {
         <Image
           src={flow.image}
           alt={`${flow.title} process illustration`}
+          width={1344}
+          height={768}
           sizes="(max-width: 1024px) 100vw, 1200px"
           className="h-auto w-full object-cover"
           priority={index === 0}

@@ -4,7 +4,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRight, ShieldCheck } from "lucide-react";
-import mkrg6 from "@/Images/mkrg (6).jpeg";
 import TiltCard from "./TiltCard";
 import AnimatedHeading from "./AnimatedHeading";
 
@@ -70,7 +69,7 @@ export default function CertificationsTeaser({
               data-cursor="grow"
             >
               <Image
-                src={mkrg6}
+                src="/images/mkrg-6.jpeg"
                 alt="Madhav KRG Group certifications and audits"
                 fill
                 sizes="(max-width: 1024px) 100vw, 40vw"

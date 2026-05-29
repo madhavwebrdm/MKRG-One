@@ -17,7 +17,6 @@ import {
 } from "lucide-react";
 
 import { PLACEHOLDER_IMAGES } from "@/lib/placeholderImages";
-import savePlants from "@/Images/save plants.jpeg";
 import AnimatedHeading from "./AnimatedHeading";
 import PageHero from "./PageHero";
 import {
@@ -274,7 +273,7 @@ export default function ContactPageContent() {
         eyebrow="Contact"
         heading="Talk to the team behind the loop."
         intro="Sales, technical queries, partnerships and audit requests every enquiry reaches a person. Most replies land within one business day."
-        imageUrl={savePlants}
+        imageUrl="/images/Contact.jpg"
         imageAlt="Save plants greener planet"
       />
 

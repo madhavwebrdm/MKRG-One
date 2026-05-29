@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Mail, Phone, ArrowRight } from "lucide-react";
-import logo from "@/Images/MKRG Logo_Actual Color_PNG.png";
 import {
   LinkedinIcon as Linkedin,
   TwitterIcon as Twitter,
@@ -100,18 +99,20 @@ export default function Footer({
 
           {/* Brand + contact */}
           <div className="lg:col-span-3">
-            <Link href="/" className="inline-block">
-              <Image
-                src={logo}
-                alt={siteTitle}
-                width={150}
-                height={150}
-                className="h-auto w-[100px] sm:w-[150px]"
-              />
-            </Link>
-            <p className="mt-3 max-w-[18rem] text-sm leading-relaxed text-white/65">
-              {tagline}
-            </p>
+            <div className="flex flex-col items-center text-center">
+              <Link href="/" className="inline-block">
+                <Image
+                  src="/images/mkrg-logo.png"
+                  alt={siteTitle}
+                  width={150}
+                  height={150}
+                  className="h-auto w-[100px] sm:w-[150px]"
+                />
+              </Link>
+              <p className="mt-3 max-w-[18rem] text-sm leading-relaxed text-white/65">
+                {tagline}
+              </p>
+            </div>
 
             {addressLines && addressLines.length > 0 && (
               <address className="mt-5 not-italic text-xs leading-relaxed text-white/45">

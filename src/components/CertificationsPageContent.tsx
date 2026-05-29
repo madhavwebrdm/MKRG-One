@@ -14,7 +14,6 @@ import {
 } from "lucide-react";
 
 import { PLACEHOLDER_IMAGES } from "@/lib/placeholderImages";
-import certificationsHero from "@/Images/Certifications.jpeg";
 import AnimatedHeading from "./AnimatedHeading";
 import PageHero from "./PageHero";
 
@@ -77,7 +76,7 @@ export default function CertificationsPageContent() {
         eyebrow="Certifications"
         heading="Compliant by design, certified by audit."
         intro="Independent certifications confirm what our process already enforces. Quality, environment and safety standards aren't a finish line for Madhav KRG Group they are the baseline we operate above."
-        imageUrl={certificationsHero}
+        imageUrl="/images/certifications.jpeg"
         imageAlt="Madhav KRG Group certifications"
       />
 

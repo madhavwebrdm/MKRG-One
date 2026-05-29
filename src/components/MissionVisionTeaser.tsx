@@ -4,7 +4,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRight, Compass, Target } from "lucide-react";
-import mkrg1 from "@/Images/mkrg (1).jpeg";
 import AnimatedHeading from "./AnimatedHeading";
 
 type Props = {
@@ -60,7 +59,7 @@ export default function MissionVisionTeaser({
             data-cursor="grow"
           >
             <Image
-              src={imageUrl || mkrg1}
+              src={imageUrl || "/images/mkrg-1.jpeg"}
               alt="Madhav KRG Group operations"
               fill
               sizes="(max-width: 1024px) 100vw, 40vw"

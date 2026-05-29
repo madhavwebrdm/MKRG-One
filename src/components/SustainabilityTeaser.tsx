@@ -1,12 +1,10 @@
 ﻿"use client";
 
 import Link from "next/link";
-import Image, { type StaticImageData } from "next/image";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { PLACEHOLDER_IMAGES } from "@/lib/placeholderImages";
-import mkrg3 from "@/Images/mkrg (3).jpeg";
-import earthGlobe from "@/Images/earth-globe.webp";
 import AnimatedHeading from "./AnimatedHeading";
 
 type Highlight = { label: string; value: string };
@@ -20,9 +18,9 @@ type Props = {
   ctaHref?: string;
 };
 
-const HIGHLIGHT_IMAGES: Array<string | StaticImageData> = [
-  earthGlobe,
-  mkrg3,
+const HIGHLIGHT_IMAGES: string[] = [
+  "/images/earth-globe.webp",
+  "/images/mkrg-3.jpeg",
   PLACEHOLDER_IMAGES.sustainability2,
 ];
 

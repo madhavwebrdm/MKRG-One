@@ -1,9 +1,14 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import Image, { type StaticImageData } from "next/image";
 import { motion } from "framer-motion";
 
 import AnimatedHeading from "./AnimatedHeading";
+
+const FADE_MS = 1500;
+
+type VideoClip = { src: string; duration: number };
 
 type Props = {
   eyebrow: string;
@@ -12,9 +17,54 @@ type Props = {
   imageUrl: string | StaticImageData;
   imageAlt?: string;
   videoUrl?: string;
+  videos?: VideoClip[];
   videoPoster?: string;
   align?: "left" | "center";
 };
+
+function VideoPlaylist({ clips, poster }: { clips: VideoClip[]; poster?: string }) {
+  const [activeIdx, setActiveIdx] = useState(0);
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
+
+  useEffect(() => {
+    const video = videoRefs.current[activeIdx];
+    if (video) {
+      video.currentTime = 0;
+      video.play().catch(() => {});
+    }
+  }, [activeIdx]);
+
+  useEffect(() => {
+    const { duration } = clips[activeIdx];
+    const timer = setTimeout(() => {
+      setActiveIdx((i) => (i + 1) % clips.length);
+    }, duration);
+    return () => clearTimeout(timer);
+  }, [activeIdx, clips]);
+
+  return (
+    <>
+      {clips.map((clip, i) => (
+        <video
+          key={clip.src}
+          ref={(el) => { videoRefs.current[i] = el; }}
+          className="absolute inset-0 h-full w-full object-cover"
+          muted
+          playsInline
+          preload="auto"
+          poster={i === 0 ? poster : undefined}
+          {...(i === 0 ? { autoPlay: true } : {})}
+          style={{
+            opacity: i === activeIdx ? 1 : 0,
+            transition: `opacity ${FADE_MS}ms ease-in-out`,
+          }}
+        >
+          <source src={clip.src} type="video/mp4" />
+        </video>
+      ))}
+    </>
+  );
+}
 
 export default function PageHero({
   eyebrow,
@@ -23,25 +73,32 @@ export default function PageHero({
   imageUrl,
   imageAlt = "",
   videoUrl,
+  videos,
   videoPoster,
   align = "left",
 }: Props) {
   const isCenter = align === "center";
   const headingMaxWidth = heading.includes("\n") ? "max-w-6xl" : "max-w-4xl";
 
+  const playlist = videos ?? (videoUrl ? [{ src: videoUrl, duration: Infinity }] : null);
+
   return (
     <section className="relative min-h-[70vh] overflow-hidden bg-deep-green sm:min-h-[78vh]">
-      {videoUrl ? (
-        <video
-          className="absolute inset-0 h-full w-full object-cover"
-          autoPlay
-          muted
-          loop
-          playsInline
-          poster={videoPoster}
-        >
-          <source src={videoUrl} type="video/mp4" />
-        </video>
+      {playlist ? (
+        playlist.length === 1 ? (
+          <video
+            className="absolute inset-0 h-full w-full object-cover"
+            autoPlay
+            muted
+            loop
+            playsInline
+            poster={videoPoster}
+          >
+            <source src={playlist[0].src} type="video/mp4" />
+          </video>
+        ) : (
+          <VideoPlaylist clips={playlist} poster={videoPoster} />
+        )
       ) : (
         <Image
           src={imageUrl}
@@ -52,6 +109,7 @@ export default function PageHero({
           className="object-cover"
         />
       )}
+
       <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-deep-green/35 to-black/75" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_100%,rgba(0,0,0,0.35),transparent)]" />
 

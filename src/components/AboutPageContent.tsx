@@ -18,7 +18,6 @@ import {
 } from "lucide-react";
 
 import { PLACEHOLDER_IMAGES } from "@/lib/placeholderImages";
-import aboutParallax from "@/Images/about paralax.jpeg";
 import AnimatedHeading from "./AnimatedHeading";
 import PageHero from "./PageHero";
 import TiltCard from "./TiltCard";
@@ -116,7 +115,10 @@ export default function AboutPageContent() {
         intro="Madhav KRG Group has spent decades closing the loop turning end-of-life steel and process waste into materials that meet International Standards. We are building our identity as a state-of-the-art recycler so that industry, communities and the planet can grow together."
         imageUrl={PLACEHOLDER_IMAGES.aboutHero}
         imageAlt="MKRG plant operations"
-        videoUrl="/videos/about-hero.mp4"
+        videos={[
+          { src: "/videos/about-hero-2.mp4", duration: 5000 },
+          { src: "/videos/about-hero.mp4", duration: 5000 },
+        ]}
       />
 
       {/* Mission & Vision */}
@@ -172,7 +174,7 @@ export default function AboutPageContent() {
       <section
         className="relative isolate overflow-hidden bg-deep-green py-24 text-white sm:py-32"
         style={{
-          backgroundImage: `url("${aboutParallax.src}")`,
+          backgroundImage: `url("/images/about-parallax.jpeg")`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundAttachment: "fixed",
@@ -230,7 +232,7 @@ export default function AboutPageContent() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="relative aspect-[5/4] w-full overflow-hidden rounded-2xl lg:col-span-6"
+              className="relative aspect-[5/4] w-full overflow-hidden rounded-2xl lg:col-span-5"
               data-cursor="grow"
             >
               <Image
@@ -248,12 +250,12 @@ export default function AboutPageContent() {
               </div>
             </motion.div>
 
-            <div className="lg:col-span-6">
+            <div className="lg:col-span-7">
               <span className="text-xs uppercase tracking-[0.2em] text-accent">
                 Brand identity
               </span>
               <AnimatedHeading className="mt-3 font-serif text-3xl leading-tight text-ink sm:text-4xl lg:text-5xl">
-                One purpose. Every plant. A greener output.
+                {"One purpose.\nEvery plant. A greener output."}
               </AnimatedHeading>
               <p className="mt-6 text-base leading-relaxed text-body sm:text-lg">
                 Madhav KRG Group is the principal brand under which every recycling,

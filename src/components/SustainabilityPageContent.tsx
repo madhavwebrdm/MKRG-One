@@ -15,11 +15,6 @@ import {
 } from "lucide-react";
 
 import { PLACEHOLDER_IMAGES } from "@/lib/placeholderImages";
-import mkrg3 from "@/Images/mkrg (3).jpeg";
-import mkrg4 from "@/Images/mkrg (4).jpeg";
-import mkrg5 from "@/Images/mkrg (5).jpeg";
-import mkrg8 from "@/Images/mkrg (8).jpeg";
-import greenPlanet from "@/Images/Green Planet.jpeg";
 import AnimatedHeading from "./AnimatedHeading";
 import PageHero from "./PageHero";
 import TiltCard from "./TiltCard";
@@ -47,24 +42,25 @@ const PILLARS: Array<{
     title: "Resource Conservation",
     body: "Every recycled tonne is a tonne of virgin iron ore that stays in the ground.",
     icon: Sprout,
-    image: mkrg4,
+    image: "/images/mkrg-4.jpeg",
   },
   {
     title: "Less Energy Consumption",
     body: "Recycled steel needs a fraction of the energy of primary smelting.",
     icon: Zap,
-    image: mkrg5,
+    image: "/images/mkrg-5.jpeg",
   },
   {
     title: "Less Carbon Emission",
     body: "Up to 86% lower CO₂ versus the virgin route verified, not estimated.",
     icon: Wind,
+    image: "/images/solar.jpg",
   },
   {
     title: "Greener Planet",
     body: "Every closed loop is one less open one. The math is simple; the work is not.",
     icon: TreePine,
-    image: greenPlanet,
+    image: "/images/green-planet.jpeg",
   },
 ];
 
@@ -325,7 +321,7 @@ export default function SustainabilityPageContent() {
             >
               <div className="relative aspect-[5/3] w-full overflow-hidden">
                 <Image
-                  src={mkrg3}
+                  src="/images/mkrg-3.jpeg"
                   alt="CSR program"
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
@@ -357,7 +353,7 @@ export default function SustainabilityPageContent() {
             >
               <div className="relative aspect-[5/3] w-full overflow-hidden">
                 <Image
-                  src={mkrg8}
+                  src="/images/mkrg-8.jpeg"
                   alt="EHS program"
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"

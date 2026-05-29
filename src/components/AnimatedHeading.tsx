@@ -51,7 +51,7 @@ export default function AnimatedHeading({
         return (
           <span
             key={li}
-            className={isMultiLine ? "block whitespace-nowrap" : "block"}
+            className={isMultiLine ? "block text-balance" : "block"}
           >
             {words.map((word, wi) => (
               <Fragment key={`${word}-${li}-${wi}`}>

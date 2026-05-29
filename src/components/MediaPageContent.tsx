@@ -13,7 +13,6 @@ import {
 } from "lucide-react";
 
 import { PLACEHOLDER_IMAGES } from "@/lib/placeholderImages";
-import mediaHero from "@/Images/media hero.jpeg";
 import AnimatedHeading from "./AnimatedHeading";
 import PageHero from "./PageHero";
 import TiltCard from "./TiltCard";
@@ -183,7 +182,7 @@ export default function MediaPageContent() {
         eyebrow="Media"
         heading="Press, plant tours and the conversations shaping circular industry."
         intro="Where Madhav KRG Group shows up on the page, on camera and on the ground at the forums where recycling policy and practice are being rewritten."
-        imageUrl={mediaHero}
+        imageUrl="/images/media-hero.jpeg"
         imageAlt="MKRG in the media"
       />
 

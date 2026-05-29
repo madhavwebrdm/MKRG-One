@@ -7,13 +7,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 
 import { PLACEHOLDER_IMAGES } from "@/lib/placeholderImages";
-import mkrg2 from "@/Images/mkrg (2).jpeg";
-import steelImg from "@/Images/steel.jpg";
-import finishedGreenSteel from "@/Images/Finished Green Steel.jpg";
-import washingAndPrep from "@/Images/washing and prep.jpg";
-import acidLeaching from "@/Images/Acid Leaching.jpg";
-import purification from "@/Images/Purification.jpg";
-import zincRecovery from "@/Images/Zinc Recovery.png";
 import AnimatedHeading from "./AnimatedHeading";
 
 type Step = {
@@ -58,19 +51,19 @@ const FLOWS: Flow[] = [
         label: "Electric Arc Furnace",
         note: "Melting at 1,800°C with precision",
         body: "Electric arc furnaces return cold scrap to liquid steel using electricity increasingly renewable. No coke, no blast furnace, a fraction of the CO₂ of the virgin route.",
-        image: steelImg,
+        image: "/images/steel.jpg",
       },
       {
         label: "Continuous Casting",
         note: "Forming billets consistently",
         body: "Liquid steel casts straight into structural billets and slabs. Continuous casting means fewer defects, tighter tolerances and steady supply to downstream rolling.",
-        image: mkrg2,
+        image: "/images/mkrg-2.jpeg",
       },
       {
         label: "Finished Green Steel",
         note: "TMT bars, pipes, and coils",
         body: "TMT rebar, structural pipes and hot-rolled coils ship under IS 1786, IS 1239 and IS 2062. Every batch is mill-tested and traceable to the heat number.",
-        image: finishedGreenSteel,
+        image: "/images/finished-green-steel.jpg",
       },
     ],
   },
@@ -87,31 +80,31 @@ const FLOWS: Flow[] = [
         label: "Waste Collection",
         note: "Secure hazardous waste handling",
         body: "Flue dust and hazardous by-products from galvanising and steel-making arrive under MOEFCC authorisation chain of custody documented from origin to plant.",
-        image: PLACEHOLDER_IMAGES.processZinc[0],
+        image: "/images/Waste Collection.jpg",
       },
       {
         label: "Washing & Prep",
         note: "Conditioned for hydrometallurgical recovery",
         body: "Wet washing strips impurities, conditions particle size and prepares the feed for leaching. Process water is recycled in a closed loop with zero liquid discharge.",
-        image: washingAndPrep,
+        image: "/images/washing-and-prep.jpg",
       },
       {
         label: "Acid Leaching",
         note: "Dissolve zinc content",
         body: "A precision sulphuric leach pulls zinc into solution while leaving iron, lead and other impurities behind. Recovery rates are tracked batch by batch.",
-        image: acidLeaching,
+        image: "/images/acid-leaching.jpg",
       },
       {
         label: "Purification",
         note: "Purify the solution",
         body: "Successive precipitation, filtration and ion-exchange stages remove cadmium, copper and trace metals delivering high-grade pregnant liquor to the electrolysis cells.",
-        image: purification,
+        image: "/images/purification.jpg",
       },
       {
         label: "Zinc Recovery",
         note: "99.9% pure zinc, cast to sheets",
         body: "Electrolysis deposits zinc on cathode sheets; the metal is stripped, melted and cast into commercial-grade ingots and sheets. Output purity above 99.9%.",
-        image: zincRecovery,
+        image: "/images/zinc-recovery.png",
       },
     ],
   },

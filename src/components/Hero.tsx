@@ -1,15 +1,23 @@
-﻿"use client";
+"use client";
 
-import { Fragment, useRef } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ArrowRight, Recycle } from "lucide-react";
 
 import MagneticButton from "./MagneticButton";
 
-const PLACEHOLDER_VIDEO = "/videos/home-hero.mp4";
-
 const PLACEHOLDER_VIDEO_POSTER = "/images/hero-poster.webp";
+
+const PLAYLIST = [
+  { src: "/videos/home-hero.mp4", duration: 5000, startTime: 0  },
+  { src: "/videos/hero-3.mp4",   duration: 5000, startTime: 5  }, // industrial work, start at 5s
+  { src: "/videos/hero-tree.mp4", duration: 5000, startTime: 0  }, // tree/sunlight
+  { src: "/videos/hero-2.mp4",   duration: 5000, startTime: 0  }, // forging metal
+  { src: "/videos/hero-4.mp4",   duration: 5000, startTime: 0  }, // plasma cutter
+];
+
+const FADE_MS = 1500;
 
 type HeroProps = {
   eyebrow?: string;
@@ -32,7 +40,6 @@ export default function Hero({
   heading: headingProp,
   subheading: subheadingProp,
   positioningTags: positioningTagsProp,
-  videoUrl,
   imageUrl,
   primaryCtaLabel: primaryCtaLabelProp,
   primaryCtaHref: primaryCtaHrefProp,
@@ -49,7 +56,29 @@ export default function Hero({
   const primaryCtaHref = primaryCtaHrefProp ?? "#metrics";
   const secondaryCtaLabel = secondaryCtaLabelProp ?? "Our recycling process";
   const secondaryCtaHref = secondaryCtaHrefProp ?? "/processes";
+
+  const [activeIdx, setActiveIdx] = useState(0);
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const root = useRef<HTMLElement>(null);
+
+  // Seek to startTime and play the newly active video
+  useEffect(() => {
+    const video = videoRefs.current[activeIdx];
+    const { startTime = 0 } = PLAYLIST[activeIdx];
+    if (video) {
+      video.currentTime = startTime;
+      video.play().catch(() => {});
+    }
+  }, [activeIdx]);
+
+  // Advance to next video after each clip's duration
+  useEffect(() => {
+    const { duration } = PLAYLIST[activeIdx];
+    const timer = setTimeout(() => {
+      setActiveIdx((i) => (i + 1) % PLAYLIST.length);
+    }, duration);
+    return () => clearTimeout(timer);
+  }, [activeIdx]);
 
   useGSAP(
     () => {
@@ -86,22 +115,37 @@ export default function Hero({
       ref={root}
       className="relative flex min-h-screen flex-col justify-end overflow-hidden bg-deep-green"
     >
-      <video
-        className="absolute inset-0 h-full w-full object-cover"
-        autoPlay
-        muted
-        loop
-        playsInline
-        poster={imageUrl ?? PLACEHOLDER_VIDEO_POSTER}
-      >
-        <source src={videoUrl ?? PLACEHOLDER_VIDEO} type="video/mp4" />
-      </video>
+      {/* Video layers — stacked by DOM order; opacity crossfade via CSS transition */}
+      {PLAYLIST.map((item, i) => (
+        <video
+          key={item.src}
+          ref={(el) => { videoRefs.current[i] = el; }}
+          className="absolute inset-0 h-full w-full object-cover"
+          muted
+          playsInline
+          preload="auto"
+          poster={i === 0 ? (imageUrl ?? PLACEHOLDER_VIDEO_POSTER) : undefined}
+          {...(i === 0 ? { autoPlay: true } : {})}
+          style={{
+            opacity: i === activeIdx ? 1 : 0,
+            transition: `opacity ${FADE_MS}ms ease-in-out`,
+          }}
+        >
+          <source src={item.src} type="video/mp4" />
+        </video>
+      ))}
 
       <div className="absolute inset-0 bg-black/30" />
       <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/5 to-black/65" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_100%,rgba(0,0,0,0.3),transparent)]" />
 
       <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pb-24 pt-36 sm:px-10 sm:pb-32 lg:px-16 lg:pb-36">
+        <div style={{ width: '450px' }}>
+          <h2 className="uppercase text-white" style={{ fontSize: '25px', letterSpacing: '0', paddingTop: '30px', paddingBottom: '30px' }}>
+            MKRG Environmental Solutions Pvt. Ltd.
+          </h2>
+        </div>
+
         <span className="hero-eyebrow inline-flex w-fit items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs uppercase tracking-[0.18em] text-white/90 backdrop-blur">
           <Recycle className="h-3.5 w-3.5" aria-hidden />
           {eyebrow}
@@ -171,4 +215,3 @@ export default function Hero({
     </section>
   );
 }
-
