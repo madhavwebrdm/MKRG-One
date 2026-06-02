@@ -140,8 +140,8 @@ export default function Hero({
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_100%,rgba(0,0,0,0.3),transparent)]" />
 
       <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pb-24 pt-36 sm:px-10 sm:pb-32 lg:px-16 lg:pb-36">
-        <div style={{ width: '450px' }}>
-          <h2 className="uppercase text-white" style={{ fontSize: '25px', letterSpacing: '0', paddingTop: '30px', paddingBottom: '30px' }}>
+        <div className="w-full max-w-3xl">
+          <h2 className="text-base uppercase leading-snug text-white sm:text-lg md:text-xl lg:text-2xl" style={{ letterSpacing: '0', paddingTop: '30px', paddingBottom: '30px' }}>
             MKRG Environmental Solutions Pvt. Ltd.
           </h2>
         </div>

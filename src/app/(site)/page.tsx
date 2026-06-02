@@ -5,8 +5,6 @@ import MissionVisionTeaser from "@/components/MissionVisionTeaser";
 import SustainabilityTeaser from "@/components/SustainabilityTeaser";
 import ParallaxImpact from "@/components/ParallaxImpact";
 import ProcessesTeaser from "@/components/ProcessesTeaser";
-import ProductsShowcase from "@/components/ProductsShowcase";
-import LeadershipTeaser from "@/components/LeadershipTeaser";
 import CertificationsTeaser from "@/components/CertificationsTeaser";
 import MediaTeaser from "@/components/MediaTeaser";
 import { sanityFetch } from "@/sanity/lib/live";
@@ -106,8 +104,6 @@ export default async function Home() {
       <SustainabilityTeaser {...(page?.sustainabilityTeaser ?? {})} />
       <ParallaxImpact />
       <ProcessesTeaser {...(page?.processesTeaser ?? {})} />
-      <ProductsShowcase />
-      <LeadershipTeaser {...(page?.leadershipTeaser ?? {})} />
       <CertificationsTeaser {...(page?.certificationsTeaser ?? {})} />
       <MediaTeaser {...(page?.mediaTeaser ?? {})} />
     </>

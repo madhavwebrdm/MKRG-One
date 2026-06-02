@@ -13,14 +13,14 @@ type NavItem = {
 };
 
 const NAV: NavItem[] = [
-  { label: "About", href: "/about" },
-  { label: "Sustainability", href: "/sustainability" },
-  { label: "Processes", href: "/processes" },
   {
-    label: "Leadership",
-    href: "/leadership",
-    children: [{ label: "Certifications", href: "/certifications" }],
+    label: "About us",
+    href: "/about",
+    children: [{ label: "Process", href: "/processes" }],
   },
+  { label: "Leadership", href: "/leadership", children: [{ label: "Certifications", href: "/certifications" }] },
+  { label: "Product", href: "/product" },
+  { label: "Sustainability", href: "/sustainability" },
   { label: "Media", href: "/media" },
   { label: "Contact", href: "/contact" },
 ];
