@@ -104,7 +104,7 @@ export default function Footer({
             <div className="flex flex-col items-center text-center">
               <Link href="/" className="inline-block">
                 <Image
-                  src="/images/MKRG%20LOGO.png"
+                  src="/images/mkrg-logo.png"
                   alt={siteTitle}
                   width={150}
                   height={150}

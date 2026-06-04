@@ -70,9 +70,10 @@ export default function Header({
           <Image
             src={logoUrl ?? "/images/MKRG%20LOGO.png"}
             alt={siteTitle}
-            width={100}
-            height={100}
-            className="h-auto w-[50px] sm:w-[100px]"
+            width={1009}
+            height={335}
+            priority
+            className="h-auto w-[120px] sm:w-[160px]"
           />
           <span className="sr-only">{siteTitle}</span>
         </Link>
