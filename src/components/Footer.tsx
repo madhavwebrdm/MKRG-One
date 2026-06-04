@@ -44,6 +44,8 @@ const NAV_GROUPS = [
     title: "What We Do",
     items: [
       { label: "Sustainability", href: "/sustainability" },
+      { label: "CSR", href: "/csr" },
+      { label: "EHS", href: "/ehs" },
       { label: "Processes", href: "/processes" },
       { label: "Materials", href: "/processes#materials" },
     ],
@@ -102,7 +104,7 @@ export default function Footer({
             <div className="flex flex-col items-center text-center">
               <Link href="/" className="inline-block">
                 <Image
-                  src="/images/mkrg-logo.png"
+                  src="/images/MKRG%20LOGO.png"
                   alt={siteTitle}
                   width={150}
                   height={150}

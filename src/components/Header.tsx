@@ -20,7 +20,14 @@ const NAV: NavItem[] = [
   },
   { label: "Leadership", href: "/leadership", children: [{ label: "Certifications", href: "/certifications" }] },
   { label: "Product", href: "/product" },
-  { label: "Sustainability", href: "/sustainability" },
+  {
+    label: "Sustainability",
+    href: "/sustainability",
+    children: [
+      { label: "CSR", href: "/csr" },
+      { label: "EHS", href: "/ehs" },
+    ],
+  },
   { label: "Media", href: "/media" },
   { label: "Contact", href: "/contact" },
 ];
@@ -61,7 +68,7 @@ export default function Header({
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 sm:px-10 lg:px-16">
         <Link href="/" className="flex items-center gap-2.5">
           <Image
-            src={logoUrl ?? "/images/mkrg-logo.png"}
+            src={logoUrl ?? "/images/MKRG%20LOGO.png"}
             alt={siteTitle}
             width={100}
             height={100}

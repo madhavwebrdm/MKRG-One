@@ -7,7 +7,7 @@ import { ArrowRight } from "lucide-react";
 import { PLACEHOLDER_IMAGES } from "@/lib/placeholderImages";
 import AnimatedHeading from "./AnimatedHeading";
 
-type Highlight = { label: string; value: string };
+type Highlight = { label: string; value: string; href?: string };
 
 type Props = {
   eyebrow?: string;
@@ -19,14 +19,14 @@ type Props = {
 };
 
 const HIGHLIGHT_IMAGES: string[] = [
-  "/images/earth-globe.webp",
   "/images/mkrg-3.jpeg",
+  "/images/mkrg-8.jpeg",
   PLACEHOLDER_IMAGES.sustainability2,
 ];
 
 const DEFAULTS: Highlight[] = [
-  { label: "Lower emissions", value: "Up to 86% vs virgin steel" },
-  { label: "Community programs", value: "EHS & CSR across sites" },
+  { label: "CSR", value: "Community programs across our sites", href: "/csr" },
+  { label: "EHS", value: "Environment, health & safety, every shift", href: "/ehs" },
 ];
 
 export default function SustainabilityTeaser({
@@ -78,17 +78,8 @@ export default function SustainabilityTeaser({
         <ul className="mt-14 grid grid-cols-1 gap-5 md:grid-cols-2">
           {highlights.map((h, i) => {
             const img = HIGHLIGHT_IMAGES[i % HIGHLIGHT_IMAGES.length];
-            return (
-              <motion.li
-                key={`${h.label}-${i}`}
-                initial={{ opacity: 0, y: 28 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-80px" }}
-                transition={{ duration: 0.6, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                whileHover={{ y: -6 }}
-                className="group relative overflow-hidden rounded-2xl border border-white/20 bg-deep-green"
-                data-cursor="grow"
-              >
+            const inner = (
+              <>
                 <div className="relative aspect-[5/4] w-full overflow-hidden">
                   <Image
                     src={img}
@@ -105,7 +96,33 @@ export default function SustainabilityTeaser({
                   <p className="mt-2 font-serif text-2xl leading-snug text-white">
                     {h.value}
                   </p>
+                  {h.href && (
+                    <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-white/90 transition-colors group-hover:text-light-green">
+                      Explore
+                      <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    </span>
+                  )}
                 </div>
+              </>
+            );
+            return (
+              <motion.li
+                key={`${h.label}-${i}`}
+                initial={{ opacity: 0, y: 28 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.6, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                whileHover={{ y: -6 }}
+                className="group relative overflow-hidden rounded-2xl border border-white/20 bg-deep-green"
+                data-cursor="grow"
+              >
+                {h.href ? (
+                  <Link href={h.href} className="block h-full">
+                    {inner}
+                  </Link>
+                ) : (
+                  inner
+                )}
               </motion.li>
             );
           })}

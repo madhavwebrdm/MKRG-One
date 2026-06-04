@@ -11,7 +11,9 @@
       "PowerShell(Get-ChildItem -Force -Path \"c:\\\\Users\\\\User\\\\Desktop\\\\MKRG\\\\MKRG-One\\\\mkrg-one\" | ForEach-Object { Write-Output $_.Name })",
       "PowerShell(Get-ChildItem -Path \"c:\\\\Users\\\\User\\\\Desktop\\\\MKRG\\\\MKRG-One\\\\mkrg-one\" -Force | Move-Item -Destination \"c:\\\\Users\\\\User\\\\Desktop\\\\MKRG\\\\MKRG-One\" -Force; Remove-Item -Path \"c:\\\\Users\\\\User\\\\Desktop\\\\MKRG\\\\MKRG-One\\\\mkrg-one\" -Force -Recurse; Get-ChildItem -Force -Path \"c:\\\\Users\\\\User\\\\Desktop\\\\MKRG\\\\MKRG-One\" | ForEach-Object { Write-Output $_.Name })",
       "PowerShell(Get-ChildItem -Force -Recurse -Path \"c:\\\\Users\\\\User\\\\Desktop\\\\MKRG\\\\MKRG-One\\\\src\" | Where-Object { -not $_.PSIsContainer } | ForEach-Object { Write-Output $_.FullName.Substring\\(\"c:\\\\Users\\\\User\\\\Desktop\\\\MKRG\\\\MKRG-One\\\\\".Length\\) })",
-      "PowerShell(npm run build 2>&1)"
+      "PowerShell(npm run build 2>&1)",
+      "Bash(curl -s -o /dev/null -w '%{http_code}' 'https://images.unsplash.com/photo-__TRACKED_VAR__?w=400&h=300&fit=crop&auto=format&q=80')",
+      "Bash(npm run *)"
     ]
   }
 }

@@ -79,6 +79,24 @@ export const PLACEHOLDER_IMAGES = {
   parallaxImpact: u(PHOTO.aerialForest, 2400, 1400),
   productsBg: u(PHOTO.steelRodsGray, 1600, 1000),
 
+  // Product page (overview cards + steel/zinc product ranges)
+  product: {
+    hero: u(PHOTO.steelRolls, 1600, 1000),
+    greenSteel: "/images/finished-green-steel.jpg",
+    zinc: "/images/zinc-recovery.png",
+    steelRange: [
+      u(PHOTO.metalRodsBundled, 800, 800), // TMT Bars
+      "/images/Structural%20Steel.jpg", // Structural Steel
+      "/images/Steel%20Pipes.jpg", // Steel Pipes
+      u(PHOTO.steelRolls, 800, 800), // Hot Rolled Coils
+    ],
+    zincRange: [
+      "/images/zinc-recovery.png", // Zinc Ingots
+      "/images/Zinc%20Sheets.jpg", // Zinc Sheets
+      "/images/Zinc%20Feedstock.png", // Zinc Feedstock
+    ],
+  },
+
   // Process flow step images one per step for the sticky-image scroll on home.
   processSteel: [
     u(PHOTO.scrapTrain, 900, 1100),
@@ -217,5 +235,55 @@ export const PLACEHOLDER_IMAGES = {
     u(PHOTO.grinderSparks, 800, 600),
     u(PHOTO.conferenceAudience, 800, 600),
   ],
+
+  // CSR page (landing + focus-area detail pages).
+  // Real CSR field photography from /public/images/CSR.
+  csr: {
+    hero: "/images/CSR/Plantation.jpeg",
+    education: {
+      hero: "/images/CSR/Scholorship.jpeg",
+      initiatives: [
+        "/images/CSR/Equipment%20donation.jpg", // education centres
+        "/images/CSR/Scholorship.jpeg", // scholarships
+        "/images/CSR/Equipment%20donation.jpg", // government schools
+      ],
+    },
+    health: {
+      hero: "/images/CSR/Women%20health%20camp.jpg",
+      initiatives: [
+        "/images/CSR/Blood%20donation.jpeg", // blood donation camps
+        "/images/CSR/Women%20health%20camp.jpg", // medical camps
+      ],
+    },
+    environment: {
+      hero: "/images/CSR/Plantation%202.jpeg",
+      initiatives: [
+        "/images/CSR/Plantation.jpeg", // tree plantation
+        "/images/CSR/Plastic%20ban.jpeg", // plastic-free awareness
+      ],
+    },
+    infrastructure: {
+      hero: "/images/CSR/Street%20light.jpeg",
+      initiatives: [
+        "/images/CSR/Street%20light.jpeg", // village street lighting
+        "/images/CSR/Sanitation%20program.jpg", // school sanitation
+        "/images/CSR/Bus%20stand.jpeg", // bus stand construction
+      ],
+    },
+    women: {
+      hero: "/images/CSR/Women%20empowerment%202.jpeg",
+      initiatives: [
+        "/images/CSR/women%20empowerment.jpeg", // sewing skills
+      ],
+    },
+    skill: {
+      hero: "/images/CSR/Skill%20center.jpeg",
+      initiatives: [
+        "/images/CSR/Skill%20center.jpeg", // skill development centre
+        "/images/CSR/Women%20health%20camp.jpg", // healthcare skill centre
+        "/images/CSR/Equipment%20donation.jpg", // free computer education
+      ],
+    },
+  },
 };
 
