@@ -40,7 +40,6 @@ type Props = {
 
 export default function Header({
   siteTitle = "Madhav KRG Group",
-  logoUrl,
   nav = NAV,
 }: Props) {
   const [scrolled, setScrolled] = useState(false);
@@ -68,7 +67,7 @@ export default function Header({
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 sm:px-10 lg:px-16">
         <Link href="/" className="flex items-center gap-2.5">
           <Image
-            src={logoUrl ?? "/images/MKRG%20LOGO.png"}
+            src="/images/MKRG%20LOGO.png"
             alt={siteTitle}
             width={1009}
             height={335}
