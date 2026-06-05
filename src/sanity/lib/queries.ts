@@ -212,6 +212,73 @@ export const PROCESSES_PAGE_QUERY = defineQuery(`
   }
 `);
 
+export const PRODUCT_PAGE_QUERY = defineQuery(`
+  *[_type == "productPage"][0]{
+    ${HERO_FRAGMENT},
+    overview{
+      eyebrow, heading, intro,
+      families[]{
+        title, tagline, icon,
+        "imageUrl": image.asset->url, "imageAlt": image.alt,
+        productsIncluded, applications,
+        ctaLabel, ctaHref
+      }
+    },
+    greenSteel{
+      eyebrow, heading, intro,
+      products[]{
+        name, description,
+        "imageUrl": image.asset->url, "imageAlt": image.alt
+      },
+      calloutTitle, calloutBody
+    },
+    zinc{
+      eyebrow, heading, intro,
+      products[]{
+        name, description,
+        "imageUrl": image.asset->url, "imageAlt": image.alt
+      },
+      calloutTitle, calloutBody
+    },
+    closingCta{ heading, body, primaryLabel, primaryHref },
+    ${SEO_FRAGMENT}
+  }
+`);
+
+export const CSR_PAGE_QUERY = defineQuery(`
+  *[_type == "csrPage"][0]{
+    ${HERO_FRAGMENT},
+    impact{
+      eyebrow, heading,
+      stats[]{ value, label }
+    },
+    focus{ eyebrow, heading, intro },
+    focusAreas[]{
+      "slug": slug.current,
+      title, tagline, summary, icon,
+      "heroImageUrl": heroImage.asset->url, "heroImageAlt": heroImage.alt,
+      cardStat{ value, label },
+      stats[]{ value, label },
+      initiatives[]{
+        title,
+        "imageUrl": image.asset->url, "imageAlt": image.alt,
+        body, bullets
+      }
+    },
+    closingCta{ heading, body, primaryLabel, primaryHref },
+    ${SEO_FRAGMENT}
+  }
+`);
+
+export const EHS_PAGE_QUERY = defineQuery(`
+  *[_type == "ehsPage"][0]{
+    ${HERO_FRAGMENT},
+    comingSoon{ eyebrow, heading, body },
+    closingCta{ heading, body, primaryLabel, primaryHref },
+    ${SEO_FRAGMENT}
+  }
+`);
+
 export const LEADERSHIP_PAGE_QUERY = defineQuery(`
   *[_type == "leadershipPage"][0]{
     ${HERO_FRAGMENT},

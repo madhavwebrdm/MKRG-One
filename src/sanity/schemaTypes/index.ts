@@ -6,6 +6,9 @@ import { homePage } from "./homePage";
 import { aboutPage } from "./aboutPage";
 import { sustainabilityPage } from "./sustainabilityPage";
 import { processesPage } from "./processesPage";
+import { productPage } from "./productPage";
+import { csrPage } from "./csrPage";
+import { ehsPage } from "./ehsPage";
 import { leadershipPage } from "./leadershipPage";
 import { certificationsPage } from "./certificationsPage";
 import { mediaPage } from "./mediaPage";
@@ -32,6 +35,9 @@ export const SINGLETON_TYPES = [
   "aboutPage",
   "sustainabilityPage",
   "processesPage",
+  "productPage",
+  "csrPage",
+  "ehsPage",
   "leadershipPage",
   "certificationsPage",
   "mediaPage",
@@ -45,6 +51,9 @@ export const schemaTypes: SchemaTypeDefinition[] = [
   aboutPage,
   sustainabilityPage,
   processesPage,
+  productPage,
+  csrPage,
+  ehsPage,
   leadershipPage,
   certificationsPage,
   mediaPage,
