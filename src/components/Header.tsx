@@ -61,7 +61,7 @@ export default function Header({
       className={`fixed inset-x-0 top-0 z-50 transition-[background-color,border-color] duration-300 ease-out ${
         scrolled
           ? "border-b border-deep-green/10 bg-beige/85 backdrop-blur"
-          : "bg-transparent"
+          : "bg-black/50"
       }`}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 sm:px-10 lg:px-16">
