@@ -11,6 +11,9 @@ import PageHero from "./PageHero";
 
 const MKRG = "https://www.madhavkrggroup.com/images";
 
+const str = (v: string | null | undefined, fallback: string): string =>
+  v && v.trim() ? v : fallback;
+
 type Principal = {
   name: string;
   title: string;
@@ -24,6 +27,26 @@ type Member = {
   role: string;
   photo: string;
 };
+
+export type LeadershipPageData = {
+  hero?:
+    | { eyebrow?: string | null; heading?: string | null; intro?: string | null; imageUrl?: string | null; imageAlt?: string | null }
+    | null;
+  founder?:
+    | { name?: string | null; role?: string | null; story?: string | null; imageUrl?: string | null; imageAlt?: string | null }
+    | null;
+  pullQuote?: { text?: string | null; attribution?: string | null } | null;
+  team?:
+    | {
+        eyebrow?: string | null;
+        heading?: string | null;
+        intro?: string | null;
+        members?: Array<{ name?: string | null; role?: string | null; photoUrl?: string | null; photoAlt?: string | null }> | null;
+        closingCtaLabel?: string | null;
+        closingCtaHref?: string | null;
+      }
+    | null;
+} | null;
 
 const MD: Principal = {
   name: "Sudhir Goyal",
@@ -61,19 +84,53 @@ const TEAM: Member[] = [
   { name: "Shaikh Sabiruddin", role: "Head HRC Plant", photo: `${MKRG}/team/team7.jpg` },
 ];
 
-export default function LeadershipPageContent() {
+export default function LeadershipPageContent({
+  data,
+}: {
+  data?: LeadershipPageData;
+}) {
+  const hero = data?.hero;
+  const team = data?.team;
+
+  const md: Principal = {
+    name: str(data?.founder?.name, MD.name),
+    title: str(data?.founder?.role, MD.title),
+    portrait: data?.founder?.imageUrl || MD.portrait,
+    pullQuote: MD.pullQuote,
+    body: data?.founder?.story?.trim()
+      ? data.founder.story.split(/\n+/).map((p) => p.trim()).filter(Boolean)
+      : MD.body,
+  };
+
+  const quoteText = str(data?.pullQuote?.text, MD.pullQuote);
+  const quoteAttribution = str(
+    data?.pullQuote?.attribution,
+    `${md.name}, ${md.title}`,
+  );
+
+  const teamMembers: Member[] = team?.members?.length
+    ? team.members.map((m, i) => ({
+        name: m.name ?? "",
+        role: m.role ?? "",
+        photo: m.photoUrl || PLACEHOLDER_IMAGES.leadershipTeam[i % PLACEHOLDER_IMAGES.leadershipTeam.length],
+      }))
+    : TEAM;
+
   return (
     <main className="bg-beige">
       <PageHero
-        eyebrow="Leadership"
-        heading="The people behind every tonne we recycle."
-        intro="Madhav KRG Group is led by operators, not bystanders. The people on this page have been on the shop floor, in the audit room and in the field often all in the same week."
-        imageUrl={`${MKRG}/team.jpg`}
-        imageAlt="Madhav KRG Group leadership team"
+        eyebrow={str(hero?.eyebrow, "Leadership")}
+        heading={str(hero?.heading, "The people behind every tonne we recycle.")}
+        intro={str(
+          hero?.intro,
+          "Madhav KRG Group is led by operators, not bystanders. The people on this page have been on the shop floor, in the audit room and in the field often all in the same week.",
+        )}
+        imageUrl={hero?.imageUrl || `${MKRG}/team.jpg`}
+        imageAlt={str(hero?.imageAlt, "Madhav KRG Group leadership team")}
       />
 
       {/* MD MESSAGE */}
-      <PrincipalSection principal={MD} side="left" />
+      <PrincipalSection principal={md} side="left" />
 
       {/* PULL QUOTE mission */}
       <section
@@ -89,10 +146,10 @@ export default function LeadershipPageContent() {
         <div className="absolute inset-0 -z-10 bg-gradient-to-b from-deep-green/85 via-deep-green/80 to-deep-green/90" />
         <div className="relative mx-auto max-w-5xl px-6 sm:px-10 lg:px-16">
           <AnimatedHeading className="font-serif text-3xl leading-snug text-white sm:text-4xl lg:text-[2.75rem]">
-            {MD.pullQuote}
+            {quoteText}
           </AnimatedHeading>
           <p className="mt-8 text-sm uppercase tracking-[0.2em] text-white/80">
-            {MD.name}, {MD.title}
+            {quoteAttribution}
           </p>
         </div>
       </section>
@@ -105,20 +162,21 @@ export default function LeadershipPageContent() {
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
           <div className="max-w-3xl">
             <span className="text-xs uppercase tracking-[0.2em] text-accent">
-              Our Management
+              {str(team?.eyebrow, "Our Management")}
             </span>
             <AnimatedHeading className="mt-3 font-serif text-3xl leading-tight text-ink sm:text-4xl lg:text-5xl">
-              The team running Madhav KRG, plant to partner.
+              {str(team?.heading, "The team running Madhav KRG, plant to partner.")}
             </AnimatedHeading>
             <p className="mt-5 text-base leading-relaxed text-body sm:text-lg">
-              From sales and supply chain to plant operations and human resources the
-              people who keep every shift, every audit and every dispatch on the same
-              standard.
+              {str(
+                team?.intro,
+                "From sales and supply chain to plant operations and human resources the people who keep every shift, every audit and every dispatch on the same standard.",
+              )}
             </p>
           </div>
 
           <ul className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {TEAM.map((m, i) => (
+            {teamMembers.map((m, i) => (
               <motion.li
                 key={m.name}
                 initial={{ opacity: 0, y: 28 }}
@@ -158,11 +216,11 @@ export default function LeadershipPageContent() {
 
           <motion.div whileHover={{ x: 4 }} className="mt-14 inline-flex">
             <Link
-              href="/contact"
+              href={str(team?.closingCtaHref, "/contact")}
               data-cursor="grow"
               className="inline-flex items-center gap-2 text-sm font-medium text-accent underline-offset-4 hover:underline"
             >
-              Get in touch with the team
+              {str(team?.closingCtaLabel, "Get in touch with the team")}
               <ArrowRight className="h-4 w-4" />
             </Link>
           </motion.div>

@@ -16,6 +16,9 @@ import {
   Phone,
 } from "lucide-react";
 
+import type { LucideIcon } from "lucide-react";
+
+import { iconFromKey } from "@/lib/icons";
 import { PLACEHOLDER_IMAGES } from "@/lib/placeholderImages";
 import AnimatedHeading from "./AnimatedHeading";
 import PageHero from "./PageHero";
@@ -27,8 +30,25 @@ import {
   YoutubeIcon,
 } from "./SocialIcons";
 
-const PRODUCT_OPTIONS = ["TMT", "PIPE", "COIL", "ZINC", "LEAD"] as const;
-type ProductOption = (typeof PRODUCT_OPTIONS)[number];
+const str = (v: string | null | undefined, fallback: string): string =>
+  v && v.trim() ? v : fallback;
+
+const DEFAULT_PRODUCT_OPTIONS = ["TMT", "PIPE", "COIL", "ZINC", "LEAD"];
+
+export type ContactPageData = {
+  hero?:
+    | { eyebrow?: string | null; heading?: string | null; intro?: string | null; imageUrl?: string | null; imageAlt?: string | null }
+    | null;
+  offices?: Array<{ label?: string | null; icon?: string | null; lines?: string[] | null }> | null;
+  contactLines?: Array<{ label?: string | null; icon?: string | null; value?: string | null; href?: string | null }> | null;
+  mapEmbedUrl?: string | null;
+  enquiryForm?:
+    | { heading?: string | null; intro?: string | null; productOptions?: string[] | null; submitLabel?: string | null; successMessage?: string | null }
+    | null;
+} | null;
+
+type OfficeView = { label: string; Icon: LucideIcon; lines: string[] };
+type ContactLineView = { label: string; Icon: LucideIcon; value: string; href: string };
 
 const OFFICES = [
   {
@@ -122,8 +142,16 @@ const SOCIALS = [
 const MAP_EMBED =
   "https://www.google.com/maps?q=Akalgarh+Amloh-Bhadson+Road+Patiala+147203&output=embed";
 
-function EnquiryForm() {
-  const [product, setProduct] = useState<ProductOption | "">("");
+function EnquiryForm({
+  productOptions,
+  submitLabel,
+  successMessage,
+}: {
+  productOptions: string[];
+  submitLabel: string;
+  successMessage: string;
+}) {
+  const [product, setProduct] = useState<string>("");
   const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -145,8 +173,7 @@ function EnquiryForm() {
           Thanks we&apos;ve got your enquiry.
         </h3>
         <p className="text-sm leading-relaxed text-body">
-          A member of the Madhav KRG team will reply within one business day. For
-          urgent calls, the sales line is open between 9 AM and 7 PM IST.
+          {successMessage}
         </p>
         <button
           type="button"
@@ -186,7 +213,7 @@ function EnquiryForm() {
       <div className="mt-6">
         <Label>Product interest</Label>
         <div className="mt-3 flex flex-wrap gap-2.5">
-          {PRODUCT_OPTIONS.map((opt) => {
+          {productOptions.map((opt) => {
             const active = product === opt;
             return (
               <button
@@ -212,7 +239,7 @@ function EnquiryForm() {
         disabled={status === "sending"}
         className="mt-8 inline-flex items-center gap-2 rounded-full bg-deep-green px-6 py-3 text-sm font-medium text-white shadow-md transition-shadow hover:shadow-lg disabled:opacity-60"
       >
-        {status === "sending" ? "Sending…" : "Send enquiry"}
+        {status === "sending" ? "Sending…" : submitLabel}
         <ArrowRight className="h-4 w-4" />
       </button>
     </form>
@@ -266,15 +293,46 @@ function Field({
   );
 }
 
-export default function ContactPageContent() {
+export default function ContactPageContent({ data }: { data?: ContactPageData }) {
+  const hero = data?.hero;
+  const ef = data?.enquiryForm;
+
+  const offices: OfficeView[] = data?.offices?.length
+    ? data.offices.map((o) => ({
+        label: o.label ?? "",
+        Icon: iconFromKey(o.icon, Building2),
+        lines: o.lines ?? [],
+      }))
+    : OFFICES.map((o) => ({ label: o.label, Icon: o.icon, lines: o.lines }));
+
+  const contactLines: ContactLineView[] = data?.contactLines?.length
+    ? data.contactLines.map((c) => ({
+        label: c.label ?? "",
+        Icon: iconFromKey(c.icon, Phone),
+        value: c.value ?? "",
+        href: c.href ?? "#",
+      }))
+    : CONTACT_LINES.map((c) => ({
+        label: c.label,
+        Icon: c.icon,
+        value: c.value,
+        href: c.href,
+      }));
+
+  const mapEmbed = str(data?.mapEmbedUrl, MAP_EMBED);
+  const productOptions = ef?.productOptions?.length ? ef.productOptions : DEFAULT_PRODUCT_OPTIONS;
+
   return (
     <main className="bg-beige">
       <PageHero
-        eyebrow="Contact"
-        heading="Talk to the team behind the loop."
-        intro="Sales, technical queries, partnerships and audit requests every enquiry reaches a person. Most replies land within one business day."
-        imageUrl="/images/Contact.jpg"
-        imageAlt="Save plants greener planet"
+        eyebrow={str(hero?.eyebrow, "Contact")}
+        heading={str(hero?.heading, "Talk to the team behind the loop.")}
+        intro={str(
+          hero?.intro,
+          "Sales, technical queries, partnerships and audit requests every enquiry reaches a person. Most replies land within one business day.",
+        )}
+        imageUrl={hero?.imageUrl || "/images/Contact.jpg"}
+        imageAlt={str(hero?.imageAlt, "Save plants greener planet")}
       />
 
       {/* Enquiry form + contact details */}
@@ -286,14 +344,23 @@ export default function ContactPageContent() {
                 Enquiry
               </span>
               <AnimatedHeading className="mt-3 font-serif text-3xl leading-tight text-ink sm:text-4xl">
-                Send us a message.
+                {str(ef?.heading, "Send us a message.")}
               </AnimatedHeading>
               <p className="mt-4 max-w-xl text-base leading-relaxed text-body">
-                Pick a product interest, drop a line and we&apos;ll route your enquiry
-                to the right person.
+                {str(
+                  ef?.intro,
+                  "Pick a product interest, drop a line and we'll route your enquiry to the right person.",
+                )}
               </p>
               <div className="mt-8">
-                <EnquiryForm />
+                <EnquiryForm
+                  productOptions={productOptions}
+                  submitLabel={str(ef?.submitLabel, "Send enquiry")}
+                  successMessage={str(
+                    ef?.successMessage,
+                    "A member of the Madhav KRG team will reply within one business day. For urgent calls, the sales line is open between 9 AM and 7 PM IST.",
+                  )}
+                />
               </div>
             </div>
 
@@ -306,8 +373,8 @@ export default function ContactPageContent() {
               </AnimatedHeading>
 
               <ul className="mt-8 space-y-5">
-                {OFFICES.map((o) => {
-                  const Icon = o.icon;
+                {offices.map((o) => {
+                  const Icon = o.Icon;
                   return (
                     <li
                       key={o.label}
@@ -334,8 +401,8 @@ export default function ContactPageContent() {
               </ul>
 
               <ul className="mt-6 divide-y divide-deep-green/10 rounded-2xl border border-deep-green/15 bg-beige/40">
-                {CONTACT_LINES.map((c) => {
-                  const Icon = c.icon;
+                {contactLines.map((c) => {
+                  const Icon = c.Icon;
                   return (
                     <li key={c.label} className="flex items-center gap-4 p-5">
                       <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-accent/10 text-accent">
@@ -402,7 +469,7 @@ export default function ContactPageContent() {
           <div className="mt-12 grid grid-cols-1 gap-6 lg:grid-cols-12">
             <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl ring-1 ring-deep-green/10 lg:col-span-8 lg:aspect-auto">
               <iframe
-                src={MAP_EMBED}
+                src={mapEmbed}
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}

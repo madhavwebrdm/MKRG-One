@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 
 import { PLACEHOLDER_IMAGES } from "./placeholderImages";
+import { iconFromKey } from "./icons";
 
 const IMG = PLACEHOLDER_IMAGES.csr;
 
@@ -265,4 +266,81 @@ export const CSR_SLUGS = CSR_FOCUS_AREAS.map((area) => area.slug);
 
 export function getCsrFocusArea(slug: string): CsrFocusArea | undefined {
   return CSR_FOCUS_AREAS.find((area) => area.slug === slug);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Sanity → focus-area merge (built-in data is the fallback)                   */
+/* -------------------------------------------------------------------------- */
+
+/** Raw focus-area shape returned by CSR_PAGE_QUERY. */
+export type SanityFocusArea = {
+  slug?: string | null;
+  title?: string | null;
+  tagline?: string | null;
+  summary?: string | null;
+  icon?: string | null;
+  heroImageUrl?: string | null;
+  cardStat?: { value?: string | null; label?: string | null } | null;
+  stats?: Array<{ value?: string | null; label?: string | null }> | null;
+  initiatives?: Array<{
+    title?: string | null;
+    imageUrl?: string | null;
+    body?: string[] | null;
+    bullets?: string[] | null;
+  }> | null;
+};
+
+const txt = (v: string | null | undefined, fallback: string): string =>
+  v && v.trim() ? v : fallback;
+
+/**
+ * Resolve the focus areas shown on the site. When Sanity provides focus areas
+ * they win (field-by-field, falling back to the matching built-in area by slug
+ * or position); otherwise the built-in CSR_FOCUS_AREAS are used unchanged.
+ * Icons are resolved here (client side) so no React component crosses the
+ * server→client boundary.
+ */
+export function resolveCsrAreas(
+  input?: SanityFocusArea[] | null,
+): CsrFocusArea[] {
+  if (!input?.length) return CSR_FOCUS_AREAS;
+  return input.map((a, i) => {
+    const fb = (a.slug ? getCsrFocusArea(a.slug) : undefined) ?? CSR_FOCUS_AREAS[i];
+    return {
+      slug: txt(a.slug, fb?.slug ?? `area-${i}`),
+      title: txt(a.title, fb?.title ?? "Focus area"),
+      tagline: txt(a.tagline, fb?.tagline ?? ""),
+      summary: txt(a.summary, fb?.summary ?? ""),
+      icon: iconFromKey(a.icon, fb?.icon ?? HeartPulse),
+      heroImage: a.heroImageUrl || fb?.heroImage || IMG.hero,
+      cardStat: {
+        value: txt(a.cardStat?.value, fb?.cardStat.value ?? ""),
+        label: txt(a.cardStat?.label, fb?.cardStat.label ?? ""),
+      },
+      stats: a.stats?.length
+        ? a.stats.map((s, si) => ({
+            value: txt(s.value, fb?.stats[si]?.value ?? ""),
+            label: txt(s.label, fb?.stats[si]?.label ?? ""),
+          }))
+        : fb?.stats ?? [],
+      initiatives: a.initiatives?.length
+        ? a.initiatives.map((it, ii) => ({
+            title: txt(it.title, fb?.initiatives[ii]?.title ?? ""),
+            image: it.imageUrl || fb?.initiatives[ii]?.image || IMG.hero,
+            body: it.body?.length ? it.body : fb?.initiatives[ii]?.body ?? [],
+            bullets: it.bullets?.length
+              ? it.bullets
+              : fb?.initiatives[ii]?.bullets,
+          }))
+        : fb?.initiatives ?? [],
+    };
+  });
+}
+
+/** Find one resolved focus area by slug (Sanity-aware). */
+export function resolveCsrArea(
+  slug: string,
+  input?: SanityFocusArea[] | null,
+): CsrFocusArea | undefined {
+  return resolveCsrAreas(input).find((a) => a.slug === slug);
 }

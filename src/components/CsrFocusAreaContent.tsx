@@ -5,15 +5,22 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight, ArrowUpRight, Check } from "lucide-react";
 
-import { CSR_FOCUS_AREAS, getCsrFocusArea } from "@/lib/csr";
+import { resolveCsrAreas, type SanityFocusArea } from "@/lib/csr";
 import AnimatedHeading from "./AnimatedHeading";
 import PageHero from "./PageHero";
 
-export default function CsrFocusAreaContent({ slug }: { slug: string }) {
-  const area = getCsrFocusArea(slug);
+export default function CsrFocusAreaContent({
+  slug,
+  focusAreas,
+}: {
+  slug: string;
+  focusAreas?: SanityFocusArea[] | null;
+}) {
+  const areas = resolveCsrAreas(focusAreas);
+  const area = areas.find((a) => a.slug === slug);
   if (!area) return null;
 
-  const others = CSR_FOCUS_AREAS.filter((a) => a.slug !== area.slug);
+  const others = areas.filter((a) => a.slug !== area.slug);
 
   return (
     <main className="bg-beige">

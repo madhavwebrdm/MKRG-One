@@ -19,7 +19,31 @@ import AnimatedHeading from "./AnimatedHeading";
 import PageHero from "./PageHero";
 import TiltCard from "./TiltCard";
 
+const str = (v: string | null | undefined, fallback: string): string =>
+  v && v.trim() ? v : fallback;
+
 type PillarImage = string | import("next/image").StaticImageData;
+
+type Metric = { value: number; suffix?: string; label: string; note?: string };
+type PillarView = { title: string; body: string; image?: PillarImage };
+type StatRow = { label: string; value: string; note: string };
+
+export type SustainabilityPageData = {
+  hero?:
+    | { eyebrow?: string | null; heading?: string | null; intro?: string | null; imageUrl?: string | null; imageAlt?: string | null }
+    | null;
+  metricsBlock?:
+    | { eyebrow?: string | null; heading?: string | null; intro?: string | null; items?: Array<{ value?: number | null; suffix?: string | null; label?: string | null; note?: string | null }> | null }
+    | null;
+  pillars?:
+    | { eyebrow?: string | null; heading?: string | null; intro?: string | null; items?: Array<{ title?: string | null; body?: string | null; icon?: string | null }> | null }
+    | null;
+  recyclingStats?:
+    | { heading?: string | null; intro?: string | null; items?: Array<{ label?: string | null; value?: string | null; note?: string | null }> | null }
+    | null;
+  csrSection?: { eyebrow?: string | null; heading?: string | null; imageUrl?: string | null; imageAlt?: string | null } | null;
+  ehsSection?: { eyebrow?: string | null; heading?: string | null; imageUrl?: string | null; imageAlt?: string | null } | null;
+} | null;
 
 const METRICS = [
   { value: 1.2, suffix: "M t", label: "CO₂ offset", note: "Avoided emissions per year" },
@@ -82,7 +106,7 @@ const RECYCLING_STATS = [
   },
 ];
 
-function ImpactMetrics() {
+function ImpactMetrics({ metrics }: { metrics: Metric[] }) {
   const root = useRef<HTMLDivElement>(null);
 
   useGSAP(
@@ -112,7 +136,7 @@ function ImpactMetrics() {
       ref={root}
       className="mt-12 grid grid-cols-1 gap-px overflow-hidden rounded-2xl bg-white/10 sm:grid-cols-3"
     >
-      {METRICS.map((m, i) => (
+      {metrics.map((m, i) => (
         <div
           key={i}
           className="flex flex-col gap-2 bg-deep-green/60 p-7 backdrop-blur sm:p-8"
@@ -135,15 +159,54 @@ function ImpactMetrics() {
   );
 }
 
-export default function SustainabilityPageContent() {
+export default function SustainabilityPageContent({
+  data,
+}: {
+  data?: SustainabilityPageData;
+}) {
+  const hero = data?.hero;
+  const mb = data?.metricsBlock;
+  const pl = data?.pillars;
+  const rs = data?.recyclingStats;
+  const csr = data?.csrSection;
+  const ehs = data?.ehsSection;
+
+  const metrics: Metric[] = mb?.items?.length
+    ? mb.items.map((m) => ({
+        value: m.value ?? 0,
+        suffix: m.suffix ?? undefined,
+        label: m.label ?? "",
+        note: m.note ?? "",
+      }))
+    : METRICS;
+
+  const pillarsItems: PillarView[] = pl?.items?.length
+    ? pl.items.map((p, i) => ({
+        title: p.title ?? "",
+        body: p.body ?? "",
+        image: PLACEHOLDER_IMAGES.sustPillars[i % PLACEHOLDER_IMAGES.sustPillars.length],
+      }))
+    : PILLARS.map((p) => ({ title: p.title, body: p.body, image: p.image }));
+
+  const recyclingItems: StatRow[] = rs?.items?.length
+    ? rs.items.map((s) => ({
+        label: s.label ?? "",
+        value: s.value ?? "",
+        note: s.note ?? "",
+      }))
+    : RECYCLING_STATS;
+
   return (
     <main className="bg-beige">
       <PageHero
-        eyebrow="Sustainability"
-        heading={"Real numbers.\nCleaner air. Real communities."}
-        intro="Sustainability at Madhav KRG Group isn't a line item it is the business model. Every tonne we process avoids emissions, conserves resources and supports the communities we operate in."
-        imageUrl={PLACEHOLDER_IMAGES.sustHero}
-        imageAlt="Green plant operations"
+        eyebrow={str(hero?.eyebrow, "Sustainability")}
+        heading={hero?.heading?.trim() ? hero.heading : "Real numbers.\nCleaner air. Real communities."}
+        intro={str(
+          hero?.intro,
+          "Sustainability at Madhav KRG Group isn't a line item it is the business model. Every tonne we process avoids emissions, conserves resources and supports the communities we operate in.",
+        )}
+        imageUrl={hero?.imageUrl || PLACEHOLDER_IMAGES.sustHero}
+        imageAlt={str(hero?.imageAlt, "Green plant operations")}
         videoUrl="/videos/sustainability-hero.mp4"
         videoPoster="/images/sustainability-hero-poster.jpg"
       />
@@ -153,18 +216,20 @@ export default function SustainabilityPageContent() {
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
           <div className="max-w-3xl">
             <span className="text-xs uppercase tracking-[0.2em] text-white/80">
-              Environmental impact
+              {str(mb?.eyebrow, "Environmental impact")}
             </span>
             <AnimatedHeading className="mt-3 font-serif text-3xl leading-tight text-white sm:text-4xl lg:text-5xl">
-              Our impact, measured.
+              {str(mb?.heading, "Our impact, measured.")}
             </AnimatedHeading>
             <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/85 sm:text-lg">
-              Verified figures from the most recent financial year. Every metric is
-              auditable and traceable back to the plant floor.
+              {str(
+                mb?.intro,
+                "Verified figures from the most recent financial year. Every metric is auditable and traceable back to the plant floor.",
+              )}
             </p>
           </div>
 
-          <ImpactMetrics />
+          <ImpactMetrics metrics={metrics} />
         </div>
       </section>
 
@@ -174,22 +239,24 @@ export default function SustainabilityPageContent() {
           <div className="grid grid-cols-1 items-end gap-10 lg:grid-cols-12 lg:gap-16">
             <div className="lg:col-span-7">
               <span className="text-xs uppercase tracking-[0.2em] text-accent">
-                Pillars of impact
+                {str(pl?.eyebrow, "Pillars of impact")}
               </span>
               <AnimatedHeading className="mt-3 text-balance font-serif text-3xl leading-tight text-ink sm:text-4xl lg:text-5xl">
-                Five outcomes the process is designed for.
+                {str(pl?.heading, "Five outcomes the process is designed for.")}
               </AnimatedHeading>
             </div>
             <div className="lg:col-span-5">
               <p className="text-base leading-relaxed text-body sm:text-lg">
-                Environment protection, resource conservation, less energy, less carbon,
-                a greener planet each pillar is a metric, not a slogan.
+                {str(
+                  pl?.intro,
+                  "Environment protection, resource conservation, less energy, less carbon, a greener planet each pillar is a metric, not a slogan.",
+                )}
               </p>
             </div>
           </div>
 
           <ul className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {PILLARS.map((p, i) => {
+            {pillarsItems.map((p, i) => {
               const img: PillarImage =
                 p.image ??
                 PLACEHOLDER_IMAGES.sustPillars[i % PLACEHOLDER_IMAGES.sustPillars.length];
@@ -265,16 +332,17 @@ export default function SustainabilityPageContent() {
                 Recycling statistics
               </span>
               <AnimatedHeading className="mt-3 font-serif text-3xl leading-tight text-white sm:text-4xl lg:text-5xl">
-                Two output streams. One closed loop.
+                {str(rs?.heading, "Two output streams. One closed loop.")}
               </AnimatedHeading>
               <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/90 sm:text-lg">
-                Scrap is converted to structural steel; hazardous flue dust is processed
-                into commercial-grade zinc. Air Pollution Control Devices keep what is
-                left of the airborne stream well within International Standards.
+                {str(
+                  rs?.intro,
+                  "Scrap is converted to structural steel; hazardous flue dust is processed into commercial-grade zinc. Air Pollution Control Devices keep what is left of the airborne stream well within International Standards.",
+                )}
               </p>
 
               <dl className="mt-10 grid grid-cols-1 gap-px overflow-hidden rounded-2xl bg-white/15 md:grid-cols-3">
-                {RECYCLING_STATS.map((s) => (
+                {recyclingItems.map((s) => (
                   <div
                     key={s.label}
                     className="flex flex-col gap-2 bg-brand-green p-6 sm:p-7"
@@ -321,7 +389,7 @@ export default function SustainabilityPageContent() {
             >
               <div className="relative aspect-[5/3] w-full overflow-hidden">
                 <Image
-                  src="/images/mkrg-3.jpeg"
+                  src={csr?.imageUrl || "/images/mkrg-3.jpeg"}
                   alt="CSR program"
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
@@ -331,10 +399,10 @@ export default function SustainabilityPageContent() {
               </div>
               <div className="p-8 sm:p-10">
                 <span className="text-xs font-medium uppercase tracking-wider text-accent">
-                  CSR
+                  {str(csr?.eyebrow, "CSR")}
                 </span>
                 <h3 className="mt-3 font-serif text-2xl leading-snug text-ink">
-                  Corporate social responsibility
+                  {str(csr?.heading, "Corporate social responsibility")}
                 </h3>
                 <p className="mt-4 text-base leading-relaxed text-body">
                   Skills training, school infrastructure, healthcare access and water
@@ -353,7 +421,7 @@ export default function SustainabilityPageContent() {
             >
               <div className="relative aspect-[5/3] w-full overflow-hidden">
                 <Image
-                  src="/images/mkrg-8.jpeg"
+                  src={ehs?.imageUrl || "/images/mkrg-8.jpeg"}
                   alt="EHS program"
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
@@ -363,10 +431,10 @@ export default function SustainabilityPageContent() {
               </div>
               <div className="p-8 sm:p-10">
                 <span className="text-xs font-medium uppercase tracking-wider text-teal">
-                  EHS
+                  {str(ehs?.eyebrow, "EHS")}
                 </span>
                 <h3 className="mt-3 font-serif text-2xl leading-snug text-ink">
-                  Environment, health &amp; safety
+                  {str(ehs?.heading, "Environment, health & safety")}
                 </h3>
                 <p className="mt-4 text-base leading-relaxed text-body">
                   Daily safety briefings, emission monitoring, occupational-health checks

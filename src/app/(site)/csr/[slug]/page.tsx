@@ -2,10 +2,20 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import CsrFocusAreaContent from "@/components/CsrFocusAreaContent";
-import { CSR_FOCUS_AREAS, getCsrFocusArea } from "@/lib/csr";
+import { CSR_SLUGS, resolveCsrArea, type SanityFocusArea } from "@/lib/csr";
+import { sanityFetch } from "@/sanity/lib/live";
+import { CSR_PAGE_QUERY } from "@/sanity/lib/queries";
 
+type CsrPageResult = { focusAreas?: SanityFocusArea[] | null } | null;
+
+async function fetchFocusAreas(): Promise<SanityFocusArea[] | null | undefined> {
+  const { data } = await sanityFetch({ query: CSR_PAGE_QUERY, tags: ["csrPage"] });
+  return (data as CsrPageResult)?.focusAreas;
+}
+
+// Pre-render the built-in slugs; any Sanity-only slugs render on demand.
 export function generateStaticParams() {
-  return CSR_FOCUS_AREAS.map((area) => ({ slug: area.slug }));
+  return CSR_SLUGS.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({
@@ -14,7 +24,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const area = getCsrFocusArea(slug);
+  const area = resolveCsrArea(slug, await fetchFocusAreas());
   if (!area) return {};
   return {
     title: `${area.title} CSR Madhav KRG Group`,
@@ -28,7 +38,7 @@ export default async function CsrFocusAreaPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const area = getCsrFocusArea(slug);
-  if (!area) notFound();
-  return <CsrFocusAreaContent slug={slug} />;
+  const focusAreas = await fetchFocusAreas();
+  if (!resolveCsrArea(slug, focusAreas)) notFound();
+  return <CsrFocusAreaContent slug={slug} focusAreas={focusAreas} />;
 }

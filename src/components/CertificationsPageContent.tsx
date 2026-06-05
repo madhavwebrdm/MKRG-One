@@ -13,9 +13,15 @@ import {
   ShieldCheck,
 } from "lucide-react";
 
+import type { LucideIcon } from "lucide-react";
+
+import { iconFromKey } from "@/lib/icons";
 import { PLACEHOLDER_IMAGES } from "@/lib/placeholderImages";
 import AnimatedHeading from "./AnimatedHeading";
 import PageHero from "./PageHero";
+
+const str = (v: string | null | undefined, fallback: string): string =>
+  v && v.trim() ? v : fallback;
 
 type Cert = {
   title: string;
@@ -25,6 +31,30 @@ type Cert = {
   status?: string;
   downloadHref?: string;
 };
+
+type CertView = {
+  title: string;
+  issuer: string;
+  body: string;
+  Icon: LucideIcon;
+  status?: string;
+  downloadHref?: string;
+};
+
+export type CertificationsPageData = {
+  hero?:
+    | { eyebrow?: string | null; heading?: string | null; intro?: string | null; imageUrl?: string | null; imageAlt?: string | null }
+    | null;
+  intro?: { eyebrow?: string | null; heading?: string | null; body?: string | null } | null;
+  certificates?: Array<{
+    title?: string | null;
+    issuer?: string | null;
+    body?: string | null;
+    status?: string | null;
+    icon?: string | null;
+    downloadUrl?: string | null;
+  }> | null;
+} | null;
 
 const CERTS: Cert[] = [
   {
@@ -69,15 +99,43 @@ const CERTS: Cert[] = [
   },
 ];
 
-export default function CertificationsPageContent() {
+export default function CertificationsPageContent({
+  data,
+}: {
+  data?: CertificationsPageData;
+}) {
+  const hero = data?.hero;
+  const intro = data?.intro;
+
+  const certs: CertView[] = data?.certificates?.length
+    ? data.certificates.map((c) => ({
+        title: c.title ?? "",
+        issuer: c.issuer ?? "",
+        body: c.body ?? "",
+        Icon: iconFromKey(c.icon, ShieldCheck),
+        status: c.status ?? undefined,
+        downloadHref: c.downloadUrl ?? undefined,
+      }))
+    : CERTS.map((c) => ({
+        title: c.title,
+        issuer: c.issuer,
+        body: c.body,
+        Icon: c.icon,
+        status: c.status,
+        downloadHref: c.downloadHref,
+      }));
+
   return (
     <main className="bg-beige">
       <PageHero
-        eyebrow="Certifications"
-        heading="Compliant by design, certified by audit."
-        intro="Independent certifications confirm what our process already enforces. Quality, environment and safety standards aren't a finish line for Madhav KRG Group they are the baseline we operate above."
-        imageUrl="/images/certifications.jpeg"
-        imageAlt="Madhav KRG Group certifications"
+        eyebrow={str(hero?.eyebrow, "Certifications")}
+        heading={str(hero?.heading, "Compliant by design, certified by audit.")}
+        intro={str(
+          hero?.intro,
+          "Independent certifications confirm what our process already enforces. Quality, environment and safety standards aren't a finish line for Madhav KRG Group they are the baseline we operate above.",
+        )}
+        imageUrl={hero?.imageUrl || "/images/certifications.jpeg"}
+        imageAlt={str(hero?.imageAlt, "Madhav KRG Group certifications")}
       />
 
       {/* Badge grid */}
@@ -85,21 +143,22 @@ export default function CertificationsPageContent() {
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
           <div className="max-w-3xl">
             <span className="text-xs uppercase tracking-[0.2em] text-accent">
-              Standards we operate under
+              {str(intro?.eyebrow, "Standards we operate under")}
             </span>
             <AnimatedHeading className="mt-3 font-serif text-3xl leading-tight text-ink sm:text-4xl lg:text-5xl">
-              Five certifications. Same expectation.
+              {str(intro?.heading, "Five certifications. Same expectation.")}
             </AnimatedHeading>
             <p className="mt-5 text-base leading-relaxed text-body sm:text-lg">
-              Quality, environment and safety standards from Indian regulators and
-              international bodies. Every certificate is current and renewed on
-              schedule.
+              {str(
+                intro?.body,
+                "Quality, environment and safety standards from Indian regulators and international bodies. Every certificate is current and renewed on schedule.",
+              )}
             </p>
           </div>
 
           <ul className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {CERTS.map((c, i) => {
-              const Icon = c.icon;
+            {certs.map((c, i) => {
+              const Icon = c.Icon;
               return (
                 <motion.li
                   key={c.title}
@@ -160,7 +219,7 @@ export default function CertificationsPageContent() {
           </div>
 
           <ul className="mt-14 grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-5">
-            {CERTS.map((c, i) => {
+            {certs.map((c, i) => {
               const img =
                 PLACEHOLDER_IMAGES.certificationsDocs[
                   i % PLACEHOLDER_IMAGES.certificationsDocs.length
