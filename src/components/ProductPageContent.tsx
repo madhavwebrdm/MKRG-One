@@ -12,6 +12,57 @@ import PageHero from "./PageHero";
 
 const IMG = PLACEHOLDER_IMAGES.product;
 
+/* -------------------------------------------------------------------------- */
+/* Sanity data shape (all optional; we fall back to the built-in design)       */
+/* -------------------------------------------------------------------------- */
+
+type SanityImg = { imageUrl?: string | null; imageAlt?: string | null };
+
+type FamilyData = SanityImg & {
+  title?: string | null;
+  tagline?: string | null;
+  icon?: string | null;
+  productsIncluded?: string[] | null;
+  applications?: string[] | null;
+  ctaLabel?: string | null;
+  ctaHref?: string | null;
+};
+
+type SectionData = {
+  eyebrow?: string | null;
+  heading?: string | null;
+  intro?: string | null;
+  products?: Array<SanityImg & { name?: string | null; description?: string | null }> | null;
+  calloutTitle?: string | null;
+  calloutBody?: string | null;
+};
+
+export type ProductPageData = {
+  hero?:
+    | (SanityImg & { eyebrow?: string | null; heading?: string | null; intro?: string | null })
+    | null;
+  overview?:
+    | { eyebrow?: string | null; heading?: string | null; intro?: string | null; families?: FamilyData[] | null }
+    | null;
+  greenSteel?: SectionData | null;
+  zinc?: SectionData | null;
+  closingCta?:
+    | { heading?: string | null; body?: string | null; primaryLabel?: string | null; primaryHref?: string | null }
+    | null;
+} | null;
+
+/* -------------------------------------------------------------------------- */
+/* Built-in fallback content                                                   */
+/* -------------------------------------------------------------------------- */
+
+const ICON_MAP: Record<string, LucideIcon> = { factory: Factory, recycle: Recycle };
+const iconFor = (key: string | null | undefined, fallback: LucideIcon): LucideIcon =>
+  (key && ICON_MAP[key]) || fallback;
+
+/** Return the value if it is a non-empty string, otherwise the fallback. */
+const str = (v: string | null | undefined, fallback: string): string =>
+  v && v.trim() ? v : fallback;
+
 type Overview = {
   id: string;
   icon: LucideIcon;
@@ -103,15 +154,62 @@ const ZINC_RANGE: RangeItem[] = [
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
-export default function ProductPageContent() {
+/** Merge Sanity range products over a built-in fallback range. */
+function mergeRange(
+  products: SectionData["products"],
+  fallback: RangeItem[],
+): RangeItem[] {
+  if (!products?.length) return fallback;
+  return products.map((p, i) => ({
+    name: str(p.name, fallback[i]?.name ?? `Product ${i + 1}`),
+    desc: str(p.description, fallback[i]?.desc ?? ""),
+    image: p.imageUrl || fallback[i % fallback.length].image,
+  }));
+}
+
+/* -------------------------------------------------------------------------- */
+
+export default function ProductPageContent({ data }: { data?: ProductPageData }) {
+  const hero = data?.hero;
+  const ov = data?.overview;
+  const gs = data?.greenSteel;
+  const zn = data?.zinc;
+  const cc = data?.closingCta;
+
+  const families: Overview[] = ov?.families?.length
+    ? ov.families.map((f, i) => ({
+        id: `${f.title ?? "family"}-${i}`,
+        icon: iconFor(f.icon, OVERVIEW[i]?.icon ?? Factory),
+        title: str(f.title, OVERVIEW[i]?.title ?? `Product family ${i + 1}`),
+        tagline: str(f.tagline, OVERVIEW[i]?.tagline ?? ""),
+        image: f.imageUrl || OVERVIEW[i]?.image || IMG.hero,
+        products: f.productsIncluded?.length
+          ? f.productsIncluded
+          : OVERVIEW[i]?.products ?? [],
+        applications: f.applications?.length
+          ? f.applications
+          : OVERVIEW[i]?.applications ?? [],
+        cta: {
+          label: str(f.ctaLabel, OVERVIEW[i]?.cta.label ?? "Learn more"),
+          href: str(f.ctaHref, OVERVIEW[i]?.cta.href ?? "/processes"),
+        },
+      }))
+    : OVERVIEW;
+
   return (
     <main className="bg-beige">
       <PageHero
-        eyebrow="Our Products"
-        heading="Certified steel and high-purity zinc, recovered from waste."
-        intro="From industrial scrap and hazardous waste, we create certified steel and high-purity zinc products that power infrastructure, manufacturing and sustainable growth."
-        imageUrl={IMG.hero}
-        imageAlt="Madhav KRG Group steel and zinc products"
+        eyebrow={str(hero?.eyebrow, "Our Products")}
+        heading={str(
+          hero?.heading,
+          "Certified steel and high-purity zinc, recovered from waste.",
+        )}
+        intro={str(
+          hero?.intro,
+          "From industrial scrap and hazardous waste, we create certified steel and high-purity zinc products that power infrastructure, manufacturing and sustainable growth.",
+        )}
+        imageUrl={hero?.imageUrl || IMG.hero}
+        imageAlt={str(hero?.imageAlt, "Madhav KRG Group steel and zinc products")}
       />
 
       {/* Two product families overview */}
@@ -119,21 +217,21 @@ export default function ProductPageContent() {
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
           <div className="max-w-3xl">
             <span className="text-xs uppercase tracking-[0.2em] text-accent">
-              Two output streams
+              {str(ov?.eyebrow, "Two output streams")}
             </span>
             <AnimatedHeading className="mt-3 font-serif text-3xl leading-tight text-ink sm:text-4xl lg:text-5xl">
-              One closed loop, two families of products.
+              {str(ov?.heading, "One closed loop, two families of products.")}
             </AnimatedHeading>
             <p className="mt-5 text-base leading-relaxed text-body sm:text-lg">
-              Industrial scrap returns as structural steel, while the hazardous
-              waste that steel-making would otherwise send to landfill is
-              recovered as commercial zinc.
+              {str(
+                ov?.intro,
+                "Industrial scrap returns as structural steel, while the hazardous waste that steel-making would otherwise send to landfill is recovered as commercial zinc.",
+              )}
             </p>
           </div>
 
           <div className="mt-14 grid grid-cols-1 gap-8 lg:grid-cols-2">
-            {OVERVIEW.map((item, i) => {
-              const Icon = item.icon;
+            {families.map((item, i) => {
               return (
                 <motion.article
                   key={item.id}
@@ -152,9 +250,6 @@ export default function ProductPageContent() {
                       className="object-cover"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-deep-green/80 via-deep-green/15 to-transparent" />
-                    <div className="absolute left-5 top-5 flex h-11 w-11 items-center justify-center rounded-xl bg-white/95 text-deep-green shadow-sm">
-                      <Icon className="h-5 w-5" aria-hidden />
-                    </div>
                     <h2 className="absolute bottom-4 left-5 font-serif text-2xl text-white sm:text-3xl">
                       {item.title}
                     </h2>
@@ -222,14 +317,20 @@ export default function ProductPageContent() {
       <ProductRange
         id="green-steel-detail"
         background="beige"
-        eyebrow="Green Steel"
-        heading="Certified Green Steel for Tomorrow's Infrastructure"
-        intro="Produced through responsible recycling and engineered to meet the demands of modern construction and manufacturing."
-        items={STEEL_RANGE}
+        eyebrow={str(gs?.eyebrow, "Green Steel")}
+        heading={str(gs?.heading, "Certified Green Steel for Tomorrow's Infrastructure")}
+        intro={str(
+          gs?.intro,
+          "Produced through responsible recycling and engineered to meet the demands of modern construction and manufacturing.",
+        )}
+        items={mergeRange(gs?.products, STEEL_RANGE)}
         columns={4}
         callout={{
-          title: "Transforming Waste into Value",
-          body: "Instead of extracting virgin resources, our steel products are created by returning valuable scrap to productive use, reducing waste, conserving resources and lowering emissions across the value chain.",
+          title: str(gs?.calloutTitle, "Transforming Waste into Value"),
+          body: str(
+            gs?.calloutBody,
+            "Instead of extracting virgin resources, our steel products are created by returning valuable scrap to productive use, reducing waste, conserving resources and lowering emissions across the value chain.",
+          ),
         }}
       />
 
@@ -237,14 +338,20 @@ export default function ProductPageContent() {
       <ProductRange
         id="commercial-zinc-detail"
         background="white"
-        eyebrow="Commercial Zinc"
-        heading="High-Purity Zinc Recovered Through Circular Innovation"
-        intro="Commercial-grade zinc products are recovered from industrial waste streams and refined to 99.9% purity."
-        items={ZINC_RANGE}
+        eyebrow={str(zn?.eyebrow, "Commercial Zinc")}
+        heading={str(zn?.heading, "High-Purity Zinc Recovered Through Circular Innovation")}
+        intro={str(
+          zn?.intro,
+          "Commercial-grade zinc products are recovered from industrial waste streams and refined to 99.9% purity.",
+        )}
+        items={mergeRange(zn?.products, ZINC_RANGE)}
         columns={3}
         callout={{
-          title: "Turning Waste into Resource",
-          body: "Every tonne of zinc recovered represents hazardous waste diverted from landfill and valuable material returned to industrial use.",
+          title: str(zn?.calloutTitle, "Turning Waste into Resource"),
+          body: str(
+            zn?.calloutBody,
+            "Every tonne of zinc recovered represents hazardous waste diverted from landfill and valuable material returned to industrial use.",
+          ),
         }}
       />
 
@@ -254,19 +361,21 @@ export default function ProductPageContent() {
           <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-12">
             <div className="lg:col-span-8">
               <AnimatedHeading className="font-serif text-3xl leading-tight text-white sm:text-4xl">
-                Looking for a reliable supply of green steel or zinc?
+                {str(cc?.heading, "Looking for a reliable supply of green steel or zinc?")}
               </AnimatedHeading>
               <p className="mt-4 max-w-2xl text-base leading-relaxed text-white/80">
-                Talk to our team about grades, volumes and certifications for your
-                project or production line.
+                {str(
+                  cc?.body,
+                  "Talk to our team about grades, volumes and certifications for your project or production line.",
+                )}
               </p>
             </div>
             <div className="lg:col-span-4 lg:justify-self-end">
               <Link
-                href="/contact"
+                href={str(cc?.primaryHref, "/contact")}
                 className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-medium text-deep-green transition-colors hover:bg-light-green"
               >
-                Get in touch
+                {str(cc?.primaryLabel, "Get in touch")}
                 <ArrowUpRight className="h-4 w-4" aria-hidden />
               </Link>
             </div>
@@ -320,7 +429,7 @@ function ProductRange({
         <ul className={`mt-14 grid grid-cols-1 gap-6 ${gridCols} lg:gap-8`}>
           {items.map((item, i) => (
             <motion.li
-              key={item.name}
+              key={`${item.name}-${i}`}
               initial={{ opacity: 0, y: 28 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
