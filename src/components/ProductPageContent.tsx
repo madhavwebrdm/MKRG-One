@@ -9,6 +9,7 @@ import type { LucideIcon } from "lucide-react";
 import { PLACEHOLDER_IMAGES } from "@/lib/placeholderImages";
 import AnimatedHeading from "./AnimatedHeading";
 import PageHero from "./PageHero";
+import ParallaxImpact from "./ParallaxImpact";
 
 const IMG = PLACEHOLDER_IMAGES.product;
 
@@ -333,6 +334,8 @@ export default function ProductPageContent({ data }: { data?: ProductPageData })
           ),
         }}
       />
+
+      <ParallaxImpact heading={"Recycled. Certified.\nReady for Industry."} />
 
       {/* Zinc detail */}
       <ProductRange
