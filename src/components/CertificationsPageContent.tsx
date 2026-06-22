@@ -1,11 +1,10 @@
 ﻿"use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { motion } from "framer-motion";
 import {
   Award,
-  Download,
+  Eye,
   FileBadge,
   Globe2,
   HardHat,
@@ -63,7 +62,7 @@ const CERTS: Cert[] = [
     body: "Internationally recognised quality management certification every plant, every shift.",
     icon: Award,
     status: "Active",
-    downloadHref: "#",
+    downloadHref: "/documents/ISO9001.pdf",
   },
   {
     title: "ISO 14001",
@@ -187,13 +186,15 @@ export default function CertificationsPageContent({
                   </p>
                   <p className="mt-4 text-sm leading-relaxed text-body">{c.body}</p>
                   {c.downloadHref && (
-                    <Link
+                    <a
                       href={c.downloadHref}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-deep-green underline-offset-4 hover:underline"
                     >
-                      <Download className="h-4 w-4" />
-                      Download certificate
-                    </Link>
+                      <Eye className="h-4 w-4" />
+                      View certificate
+                    </a>
                   )}
                 </motion.li>
               );
@@ -245,13 +246,15 @@ export default function CertificationsPageContent({
                   <div className="flex items-center justify-between gap-2 p-4">
                     <p className="text-sm font-medium text-ink">{c.title}</p>
                     {c.downloadHref && (
-                      <Link
+                      <a
                         href={c.downloadHref}
-                        aria-label={`Download ${c.title}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`View ${c.title} certificate`}
                         className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-accent/10 text-accent transition-colors hover:bg-accent hover:text-white"
                       >
-                        <Download className="h-4 w-4" />
-                      </Link>
+                        <Eye className="h-4 w-4" />
+                      </a>
                     )}
                   </div>
                 </motion.li>
