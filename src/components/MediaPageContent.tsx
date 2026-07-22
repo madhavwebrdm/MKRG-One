@@ -384,7 +384,7 @@ export default function MediaPageContent() {
             </Link>
           </div>
 
-          <ul className="mt-14 grid max-w-xl grid-cols-1 gap-6">
+          <ul className="mt-14 grid grid-cols-1 gap-6">
             {VIDEOS.map((v, i) => {
               return (
                 <motion.li
@@ -400,12 +400,12 @@ export default function MediaPageContent() {
                     rel="noopener noreferrer"
                     className="group flex h-full flex-col overflow-hidden rounded-2xl bg-deep-green ring-1 ring-deep-green/20 transition-colors hover:ring-deep-green/40"
                   >
-                    <div className="relative aspect-[16/10] w-full overflow-hidden">
+                    <div className="relative aspect-[21/9] w-full overflow-hidden">
                       <Image
                         src={v.thumbnail}
                         alt=""
                         fill
-                        sizes="(max-width: 768px) 100vw, 33vw"
+                        sizes="(max-width: 1280px) 100vw, 1280px"
                         className="object-cover transition-transform duration-700 group-hover:scale-110"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-deep-green/80 via-deep-green/15 to-transparent" />
