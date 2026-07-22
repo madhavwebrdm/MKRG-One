@@ -288,13 +288,13 @@ export const LEADERSHIP_PAGE_QUERY = defineQuery(`
       "imageUrl": image.asset->url, "imageAlt": image.alt
     },
     pullQuote{ text, attribution },
-    team{
-      eyebrow, heading, intro,
-      members[]{
-        name, role, bio, linkedin, email,
-        "photoUrl": photo.asset->url, "photoAlt": photo.alt
-      },
-      closingCtaLabel, closingCtaHref
+    director{
+      eyebrow, heading, name, role, story,
+      "imageUrl": image.asset->url, "imageAlt": image.alt
+    },
+    additionalLeaders[]{
+      eyebrow, heading, name, role, story,
+      "imageUrl": image.asset->url, "imageAlt": image.alt
     },
     ${SEO_FRAGMENT}
   }

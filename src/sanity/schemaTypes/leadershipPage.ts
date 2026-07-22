@@ -3,6 +3,31 @@ import { UsersIcon } from "@sanity/icons";
 import { heroField } from "./shared/heroFields";
 import { seoFields } from "./shared/seoFields";
 
+const principalFields = (defaultEyebrow: string) => [
+  defineField({ name: "eyebrow", type: "string", initialValue: defaultEyebrow }),
+  defineField({ name: "heading", type: "string" }),
+  defineField({
+    name: "name",
+    type: "string",
+    validation: (r) => r.required(),
+  }),
+  defineField({ name: "role", type: "string" }),
+  defineField({
+    name: "story",
+    title: "Message",
+    type: "text",
+    rows: 6,
+    description: "One paragraph per line.",
+  }),
+  defineField({
+    name: "image",
+    title: "Portrait",
+    type: "image",
+    options: { hotspot: true },
+    fields: [defineField({ name: "alt", type: "string", title: "Alt text" })],
+  }),
+];
+
 export const leadershipPage = defineType({
   name: "leadershipPage",
   title: "Leadership page",
@@ -18,31 +43,10 @@ export const leadershipPage = defineType({
 
     defineField({
       name: "founder",
-      title: "Founder",
+      title: "Founder message",
       type: "object",
       group: "content",
-      fields: [
-        defineField({ name: "eyebrow", type: "string", initialValue: "Founder" }),
-        defineField({ name: "heading", type: "string" }),
-        defineField({
-          name: "name",
-          type: "string",
-          validation: (r) => r.required(),
-        }),
-        defineField({ name: "role", type: "string" }),
-        defineField({
-          name: "story",
-          type: "array",
-          title: "Founder story",
-          of: [{ type: "block", styles: [{ title: "Normal", value: "normal" }] }],
-        }),
-        defineField({
-          name: "image",
-          type: "image",
-          options: { hotspot: true },
-          fields: [defineField({ name: "alt", type: "string", title: "Alt text" })],
-        }),
-      ],
+      fields: principalFields("Founder"),
     }),
 
     defineField({
@@ -66,47 +70,26 @@ export const leadershipPage = defineType({
     }),
 
     defineField({
-      name: "team",
-      title: "Leadership team",
+      name: "director",
+      title: "Director message",
       type: "object",
       group: "content",
-      fields: [
-        defineField({ name: "eyebrow", type: "string", initialValue: "The team" }),
-        defineField({ name: "heading", type: "string" }),
-        defineField({ name: "intro", type: "text", rows: 3 }),
-        defineField({
-          name: "members",
-          type: "array",
-          of: [
-            defineArrayMember({
-              type: "object",
-              fields: [
-                defineField({
-                  name: "name",
-                  type: "string",
-                  validation: (r) => r.required(),
-                }),
-                defineField({ name: "role", type: "string" }),
-                defineField({ name: "bio", type: "text", rows: 3 }),
-                defineField({
-                  name: "photo",
-                  type: "image",
-                  options: { hotspot: true },
-                  fields: [defineField({ name: "alt", type: "string", title: "Alt text" })],
-                }),
-                defineField({ name: "linkedin", type: "url" }),
-                defineField({
-                  name: "email",
-                  type: "string",
-                  validation: (r) => r.email(),
-                }),
-              ],
-              preview: { select: { title: "name", subtitle: "role", media: "photo" } },
-            }),
-          ],
+      fields: principalFields("Director"),
+    }),
+
+    defineField({
+      name: "additionalLeaders",
+      title: "Additional leadership messages",
+      description:
+        "More leadership sections shown below the Director message, in order.",
+      type: "array",
+      group: "content",
+      of: [
+        defineArrayMember({
+          type: "object",
+          fields: principalFields("Leadership"),
+          preview: { select: { title: "name", subtitle: "role", media: "image" } },
         }),
-        defineField({ name: "closingCtaLabel", type: "string" }),
-        defineField({ name: "closingCtaHref", type: "string" }),
       ],
     }),
 

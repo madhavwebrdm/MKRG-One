@@ -3,13 +3,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, Mail } from "lucide-react";
+import { Mail } from "lucide-react";
 
 import { PLACEHOLDER_IMAGES } from "@/lib/placeholderImages";
 import AnimatedHeading from "./AnimatedHeading";
 import PageHero from "./PageHero";
-
-const MKRG = "https://www.madhavkrggroup.com/images";
 
 const str = (v: string | null | undefined, fallback: string): string =>
   v && v.trim() ? v : fallback;
@@ -22,36 +20,27 @@ type Principal = {
   body: string[];
 };
 
-type Member = {
-  name: string;
-  role: string;
-  photo: string;
-};
+type PrincipalInput = {
+  name?: string | null;
+  role?: string | null;
+  story?: string | null;
+  imageUrl?: string | null;
+} | null;
 
 export type LeadershipPageData = {
   hero?:
     | { eyebrow?: string | null; heading?: string | null; intro?: string | null; imageUrl?: string | null; imageAlt?: string | null }
     | null;
-  founder?:
-    | { name?: string | null; role?: string | null; story?: string | null; imageUrl?: string | null; imageAlt?: string | null }
-    | null;
+  founder?: PrincipalInput;
   pullQuote?: { text?: string | null; attribution?: string | null } | null;
-  team?:
-    | {
-        eyebrow?: string | null;
-        heading?: string | null;
-        intro?: string | null;
-        members?: Array<{ name?: string | null; role?: string | null; photoUrl?: string | null; photoAlt?: string | null }> | null;
-        closingCtaLabel?: string | null;
-        closingCtaHref?: string | null;
-      }
-    | null;
+  director?: PrincipalInput;
+  additionalLeaders?: PrincipalInput[] | null;
 } | null;
 
 const MD: Principal = {
   name: "Sudhir Goyal",
   title: "Managing Director",
-  portrait: `${MKRG}/sudhir-goyal.jpg`,
+  portrait: "/images/leadership/sudhir-goyal.jpg",
   pullQuote:
     "Efficient utilization of Energy and Nature's Resources is the mantra of Madhav KRG Group in achieving our set goals.",
   body: [
@@ -64,7 +53,7 @@ const MD: Principal = {
 const DIRECTOR: Principal = {
   name: "Sanjeev Goyal",
   title: "Director",
-  portrait: `${MKRG}/sanjeev-goyal.jpg`,
+  portrait: "/images/leadership/sanjeev-goyal.jpg",
   pullQuote:
     "Quality assurance, for us, is not a step in the manufacturing line it is part of the culture of our organisation.",
   body: [
@@ -74,15 +63,40 @@ const DIRECTOR: Principal = {
   ],
 };
 
-const TEAM: Member[] = [
-  { name: "Randhir Singh Rathaur", role: "President Sales & Marketing", photo: `${MKRG}/team/team8.jpg` },
-  { name: "Razeev Tondon", role: "General Manager Pipe & Tube", photo: `${MKRG}/team/team1.jpg` },
-  { name: "Rishu Garg", role: "General Manager Supply Chain Management", photo: `${MKRG}/team/team3.jpg` },
-  { name: "Gulshan Kumar", role: "General Manager QMS", photo: `${MKRG}/team/team4.jpg` },
-  { name: "Smrutiranjan Dwibedi", role: "Plant Head TMT", photo: `${MKRG}/team/team5.jpg` },
-  { name: "Sanjeev Kumar", role: "Group HR Head", photo: `${MKRG}/team/team9.jpg` },
-  { name: "Shaikh Sabiruddin", role: "Head HRC Plant", photo: `${MKRG}/team/team7.jpg` },
-];
+const RAHUL: Principal = {
+  name: "Rahul Goel",
+  title: "Director",
+  portrait: PLACEHOLDER_IMAGES.leadershipTeam[0],
+  pullQuote:
+    "As the next-generation founder and director, I bring a fresh perspective, strategic insight and unwavering commitment to making a lasting impact.",
+  body: [
+    "A visionary leader committed to driving innovation and excellence. With a passion for transformative growth and a forward-thinking approach, he is dedicated to shaping the future of Madhav KRG Environmental Solutions Ltd.",
+    "As the next-generation founder and director, he brings a fresh perspective, strategic insight, and unwavering commitment to making a lasting impact.",
+  ],
+};
+
+const RANDHIR: Principal = {
+  name: "Randhir Singh Rathaur",
+  title: "President Sales & Marketing",
+  portrait: "/images/leadership/team8.jpg",
+  pullQuote:
+    "Every tonne we move is a relationship we've earned, with customers, transporters and partners who trust Madhav KRG Group to deliver, every time.",
+  body: [
+    "Sales in this industry isn't won with a single order, it's won by being the mill a customer calls first when the market gets tight. That reputation is built shipment by shipment, not campaign by campaign.",
+    "We work directly with contractors, dealers and infrastructure players across the region, carrying what the market needs back to the plant floor so our production stays aligned with real demand.",
+    "Growth, for us, means widening the base of customers who choose Madhav KRG Group not because we are the cheapest, but because we are the most dependable.",
+  ],
+};
+
+const resolvePrincipal = (input: PrincipalInput | undefined, fallback: Principal): Principal => ({
+  name: str(input?.name, fallback.name),
+  title: str(input?.role, fallback.title),
+  portrait: input?.imageUrl || fallback.portrait,
+  pullQuote: fallback.pullQuote,
+  body: input?.story?.trim()
+    ? input.story.split(/\n+/).map((p) => p.trim()).filter(Boolean)
+    : fallback.body,
+});
 
 export default function LeadershipPageContent({
   data,
@@ -90,31 +104,30 @@ export default function LeadershipPageContent({
   data?: LeadershipPageData;
 }) {
   const hero = data?.hero;
-  const team = data?.team;
 
-  const md: Principal = {
-    name: str(data?.founder?.name, MD.name),
-    title: str(data?.founder?.role, MD.title),
-    portrait: data?.founder?.imageUrl || MD.portrait,
-    pullQuote: MD.pullQuote,
-    body: data?.founder?.story?.trim()
-      ? data.founder.story.split(/\n+/).map((p) => p.trim()).filter(Boolean)
-      : MD.body,
-  };
+  const md = resolvePrincipal(data?.founder, MD);
+  const director = resolvePrincipal(data?.director, DIRECTOR);
+
+  const additionalFallbacks = [RAHUL, RANDHIR];
+  const additionalLeaders: Principal[] = data?.additionalLeaders?.length
+    ? data.additionalLeaders.map((leader, i) =>
+        resolvePrincipal(leader, {
+          ...(additionalFallbacks[i] ?? {
+            name: "",
+            title: "",
+            portrait: PLACEHOLDER_IMAGES.leadershipTeam[i % PLACEHOLDER_IMAGES.leadershipTeam.length],
+            pullQuote: "",
+            body: [],
+          }),
+        }),
+      )
+    : additionalFallbacks;
 
   const quoteText = str(data?.pullQuote?.text, MD.pullQuote);
   const quoteAttribution = str(
     data?.pullQuote?.attribution,
     `${md.name}, ${md.title}`,
   );
-
-  const teamMembers: Member[] = team?.members?.length
-    ? team.members.map((m, i) => ({
-        name: m.name ?? "",
-        role: m.role ?? "",
-        photo: m.photoUrl || PLACEHOLDER_IMAGES.leadershipTeam[i % PLACEHOLDER_IMAGES.leadershipTeam.length],
-      }))
-    : TEAM;
 
   return (
     <main className="bg-beige">
@@ -125,7 +138,7 @@ export default function LeadershipPageContent({
           hero?.intro,
           "Madhav KRG Group is led by operators, not bystanders. The people on this page have been on the shop floor, in the audit room and in the field often all in the same week.",
         )}
-        imageUrl={hero?.imageUrl || `${MKRG}/team.jpg`}
+        imageUrl={hero?.imageUrl || "/images/leadership/team-hero.jpg"}
         imageAlt={str(hero?.imageAlt, "Madhav KRG Group leadership team")}
       />
 
@@ -155,77 +168,16 @@ export default function LeadershipPageContent({
       </section>
 
       {/* DIRECTOR MESSAGE */}
-      <PrincipalSection principal={DIRECTOR} side="right" background="white" />
+      <PrincipalSection principal={director} side="right" />
 
-      {/* OUR MANAGEMENT team grid */}
-      <section className="bg-beige py-24 sm:py-32">
-        <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
-          <div className="max-w-3xl">
-            <span className="text-xs uppercase tracking-[0.2em] text-accent">
-              {str(team?.eyebrow, "Our Management")}
-            </span>
-            <AnimatedHeading className="mt-3 font-serif text-3xl leading-tight text-ink sm:text-4xl lg:text-5xl">
-              {str(team?.heading, "The team running Madhav KRG, plant to partner.")}
-            </AnimatedHeading>
-            <p className="mt-5 text-base leading-relaxed text-body sm:text-lg">
-              {str(
-                team?.intro,
-                "From sales and supply chain to plant operations and human resources the people who keep every shift, every audit and every dispatch on the same standard.",
-              )}
-            </p>
-          </div>
-
-          <ul className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {teamMembers.map((m, i) => (
-              <motion.li
-                key={m.name}
-                initial={{ opacity: 0, y: 28 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-80px" }}
-                transition={{
-                  duration: 0.55,
-                  delay: i * 0.06,
-                  ease: [0.16, 1, 0.3, 1],
-                }}
-                className="group flex h-full flex-col overflow-hidden rounded-2xl border border-deep-green/15 bg-white transition-colors hover:border-accent/40"
-              >
-                <div className="relative aspect-[4/5] w-full overflow-hidden bg-beige">
-                  <Image
-                    src={m.photo}
-                    alt={`${m.name} ${m.role}`}
-                    fill
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-ink/55 via-transparent to-transparent" />
-                  <span className="absolute left-4 top-4 inline-flex items-center gap-1.5 rounded-full bg-white/90 px-3 py-1 text-[10px] font-medium uppercase tracking-wider text-accent backdrop-blur">
-                    Madhav KRG Group
-                  </span>
-                </div>
-                <div className="flex flex-1 flex-col p-7">
-                  <h3 className="font-serif text-xl leading-snug text-ink">
-                    {m.name}
-                  </h3>
-                  <p className="mt-2 text-xs font-medium uppercase tracking-wider text-accent">
-                    {m.role}
-                  </p>
-                </div>
-              </motion.li>
-            ))}
-          </ul>
-
-          <motion.div whileHover={{ x: 4 }} className="mt-14 inline-flex">
-            <Link
-              href={str(team?.closingCtaHref, "/contact")}
-              data-cursor="grow"
-              className="inline-flex items-center gap-2 text-sm font-medium text-accent underline-offset-4 hover:underline"
-            >
-              {str(team?.closingCtaLabel, "Get in touch with the team")}
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-          </motion.div>
-        </div>
-      </section>
+      {/* ADDITIONAL LEADERSHIP MESSAGES */}
+      {additionalLeaders.map((leader, i) => (
+        <PrincipalSection
+          key={`${leader.name}-${i}`}
+          principal={leader}
+          side={i % 2 === 0 ? "left" : "right"}
+        />
+      ))}
     </main>
   );
 }
