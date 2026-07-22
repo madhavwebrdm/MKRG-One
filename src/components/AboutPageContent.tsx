@@ -385,23 +385,13 @@ export default function AboutPageContent({ data }: { data?: AboutPageData }) {
       {/* Differentiators */}
       <section className="bg-gradient-to-b from-[#F0FCF5] via-[#D5F7E4] to-[#A8F0C6] py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
-          <div className="grid grid-cols-1 items-end gap-10 lg:grid-cols-12 lg:gap-16">
-            <div className="lg:col-span-7">
-              <span className="text-xs uppercase tracking-[0.2em] text-black">
-                {str(differentiators?.eyebrow, "Differentiators")}
-              </span>
-              <AnimatedHeading className="mt-3 text-balance font-serif text-3xl leading-tight text-black sm:text-4xl lg:text-5xl">
-                {str(differentiators?.heading, "What sets MKRG apart on the shop floor.")}
-              </AnimatedHeading>
-            </div>
-            <div className="lg:col-span-5">
-              <p className="text-base leading-relaxed text-black/80 sm:text-lg">
-                {str(
-                  differentiators?.intro,
-                  "Four things show up in every audit, every spec sheet and every customer conversation they are the reason partners choose us over the next bid.",
-                )}
-              </p>
-            </div>
+          <div className="max-w-3xl">
+            <span className="text-xs uppercase tracking-[0.2em] text-black">
+              {str(differentiators?.eyebrow, "Differentiators")}
+            </span>
+            <AnimatedHeading className="mt-3 text-balance font-serif text-3xl leading-tight text-black sm:text-4xl lg:text-5xl">
+              {str(differentiators?.heading, "What sets MKRG apart on the shop floor.")}
+            </AnimatedHeading>
           </div>
 
           <ul className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-2">
@@ -449,12 +439,6 @@ export default function AboutPageContent({ data }: { data?: AboutPageData }) {
             <AnimatedHeading className="mt-3 font-serif text-3xl leading-tight text-ink sm:text-4xl lg:text-5xl">
               {str(timeline?.heading, "Four decades of closing the loop.")}
             </AnimatedHeading>
-            <p className="mt-5 text-base leading-relaxed text-body sm:text-lg">
-              {str(
-                timeline?.intro,
-                "A short timeline of how Madhav KRG Group grew from a single founding idea into one of India's most integrated recyclers.",
-              )}
-            </p>
           </div>
 
           <ol className="relative mt-14">
