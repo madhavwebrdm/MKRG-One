@@ -249,15 +249,19 @@ export default function MediaPageContent({ data }: { data?: MediaPageData }) {
     : PRESS_RELEASES;
 
   const videos: VideoItem[] = videosSection?.items?.length
-    ? videosSection.items.map((v, i) => ({
-        title: v.title ?? "",
-        duration: v.duration ?? "",
-        kind: v.kind || "Process",
-        href: v.href || "#",
-        thumbnail:
-          v.thumbnailUrl ||
-          PLACEHOLDER_IMAGES.mediaVideos[i % PLACEHOLDER_IMAGES.mediaVideos.length],
-      }))
+    ? videosSection.items.map((v, i) => {
+        const fallback = VIDEOS[i];
+        return {
+          title: v.title || fallback?.title || "",
+          duration: v.duration || fallback?.duration || "",
+          kind: v.kind || fallback?.kind || "Process",
+          href: v.href || fallback?.href || "#",
+          thumbnail:
+            v.thumbnailUrl ||
+            fallback?.thumbnail ||
+            PLACEHOLDER_IMAGES.mediaVideos[i % PLACEHOLDER_IMAGES.mediaVideos.length],
+        };
+      })
     : VIDEOS;
 
   return (
