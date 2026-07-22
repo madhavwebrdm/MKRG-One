@@ -139,6 +139,7 @@ export const ABOUT_PAGE_QUERY = defineQuery(`
   *[_type == "aboutPage"][0]{
     ${HERO_FRAGMENT},
     purpose{ eyebrow, heading, mission, vision },
+    sustainabilityStatement{ heading, body },
     values{
       eyebrow, heading, intro,
       items[]{ title, body, icon }

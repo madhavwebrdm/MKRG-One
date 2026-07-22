@@ -31,6 +31,17 @@ export const aboutPage = defineType({
     }),
 
     defineField({
+      name: "sustainabilityStatement",
+      title: "Sustainability statement",
+      type: "object",
+      group: "content",
+      fields: [
+        defineField({ name: "heading", type: "string", initialValue: "Driving Sustainable Change" }),
+        defineField({ name: "body", type: "text", rows: 6 }),
+      ],
+    }),
+
+    defineField({
       name: "values",
       title: "Values",
       type: "object",

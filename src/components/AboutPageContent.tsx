@@ -22,6 +22,13 @@ import AnimatedHeading from "./AnimatedHeading";
 import PageHero from "./PageHero";
 import TiltCard from "./TiltCard";
 
+const str = (v: string | null | undefined, fallback: string): string =>
+  v && v.trim() ? v : fallback;
+
+export type AboutPageData = {
+  sustainabilityStatement?: { heading?: string | null; body?: string | null } | null;
+} | null;
+
 const VALUES = [
   {
     title: "Integrity",
@@ -106,7 +113,9 @@ const TIMELINE = [
   },
 ];
 
-export default function AboutPageContent() {
+export default function AboutPageContent({ data }: { data?: AboutPageData }) {
+  const sustainabilityStatement = data?.sustainabilityStatement;
+
   return (
     <main className="bg-beige">
       <PageHero
@@ -167,6 +176,21 @@ export default function AboutPageContent() {
               </p>
             </motion.article>
           </div>
+        </div>
+      </section>
+
+      {/* Sustainability statement */}
+      <section className="bg-beige py-24 sm:py-32">
+        <div className="mx-auto max-w-4xl px-6 text-center sm:px-10 lg:px-16">
+          <AnimatedHeading className="font-serif text-3xl leading-tight text-ink sm:text-4xl lg:text-5xl">
+            {str(sustainabilityStatement?.heading, "Driving Sustainable Change")}
+          </AnimatedHeading>
+          <p className="mt-6 text-base leading-relaxed text-body sm:text-lg">
+            {str(
+              sustainabilityStatement?.body,
+              "MKESPL contributes to environmental sustainability through its core operations, focused on recycling APCD dust and metal waste. By actively engaging in the recycling process, MKESPL helps reduce waste and minimise the extraction of raw new materials. The company manufactures and trades zinc cathodes and zinc ingots, essential components across various industries, while adhering to strict environmental regulations in its manufacturing processes.",
+            )}
+          </p>
         </div>
       </section>
 
