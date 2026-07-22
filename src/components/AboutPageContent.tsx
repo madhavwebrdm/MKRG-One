@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import Image from "next/image";
 import { motion } from "framer-motion";
@@ -17,6 +17,7 @@ import {
   Wind,
 } from "lucide-react";
 
+import { iconFromKey } from "@/lib/icons";
 import { PLACEHOLDER_IMAGES } from "@/lib/placeholderImages";
 import AnimatedHeading from "./AnimatedHeading";
 import PageHero from "./PageHero";
@@ -25,8 +26,60 @@ import TiltCard from "./TiltCard";
 const str = (v: string | null | undefined, fallback: string): string =>
   v && v.trim() ? v : fallback;
 
+type Block = { children?: Array<{ text?: string | null }> | null };
+const blockText = (block: Block): string =>
+  (block.children ?? []).map((c) => c.text ?? "").join("");
+
 export type AboutPageData = {
+  hero?:
+    | { eyebrow?: string | null; heading?: string | null; intro?: string | null; imageUrl?: string | null; imageAlt?: string | null }
+    | null;
+  purpose?:
+    | { eyebrow?: string | null; heading?: string | null; mission?: string | null; vision?: string | null }
+    | null;
   sustainabilityStatement?: { heading?: string | null; body?: string | null } | null;
+  values?:
+    | {
+        eyebrow?: string | null;
+        heading?: string | null;
+        intro?: string | null;
+        items?: Array<{ title?: string | null; body?: string | null; icon?: string | null }> | null;
+      }
+    | null;
+  brandIdentity?:
+    | {
+        eyebrow?: string | null;
+        heading?: string | null;
+        body?: Block[] | null;
+        imageUrl?: string | null;
+        imageAlt?: string | null;
+        caption?: string | null;
+      }
+    | null;
+  differentiators?:
+    | {
+        eyebrow?: string | null;
+        heading?: string | null;
+        intro?: string | null;
+        items?:
+          | Array<{
+              title?: string | null;
+              body?: string | null;
+              icon?: string | null;
+              imageUrl?: string | null;
+              imageAlt?: string | null;
+            }>
+          | null;
+      }
+    | null;
+  timeline?:
+    | {
+        eyebrow?: string | null;
+        heading?: string | null;
+        intro?: string | null;
+        entries?: Array<{ year?: string | null; title?: string | null; body?: string | null }> | null;
+      }
+    | null;
 } | null;
 
 const VALUES = [
@@ -60,6 +113,11 @@ const VALUES = [
     body: "One team, one direction across every plant and every shift.",
     icon: Users,
   },
+];
+
+const DEFAULT_BRAND_PARAGRAPHS = [
+  "Madhav KRG Group is the principal brand under which every recycling, refining and manufacturing operation sits. This website is the place we are building that identity as a state-of-the-art recycler trusted by industry, regulators and the communities we operate in.",
+  "When a partner buys recycled steel or zinc from any plant in our group, the same standards, the same audit trail and the same promise sit behind the badge.",
 ];
 
 const DIFFERENTIATORS = [
@@ -114,16 +172,57 @@ const TIMELINE = [
 ];
 
 export default function AboutPageContent({ data }: { data?: AboutPageData }) {
+  const hero = data?.hero;
+  const purpose = data?.purpose;
   const sustainabilityStatement = data?.sustainabilityStatement;
+  const values = data?.values;
+  const brandIdentity = data?.brandIdentity;
+  const differentiators = data?.differentiators;
+  const timeline = data?.timeline;
+
+  const valuesItems = values?.items?.length
+    ? values.items.map((v) => ({
+        title: v.title ?? "",
+        body: v.body ?? "",
+        Icon: iconFromKey(v.icon, ShieldCheck),
+      }))
+    : VALUES.map((v) => ({ title: v.title, body: v.body, Icon: v.icon }));
+
+  const brandParagraphs = brandIdentity?.body?.length
+    ? brandIdentity.body.map(blockText).filter(Boolean)
+    : DEFAULT_BRAND_PARAGRAPHS;
+
+  const differentiatorItems = differentiators?.items?.length
+    ? differentiators.items.map((d, i) => ({
+        title: d.title ?? "",
+        body: d.body ?? "",
+        Icon: iconFromKey(d.icon, Factory),
+        image:
+          d.imageUrl ||
+          PLACEHOLDER_IMAGES.aboutDifferentiators[i % PLACEHOLDER_IMAGES.aboutDifferentiators.length],
+      }))
+    : DIFFERENTIATORS.map((d, i) => ({
+        title: d.title,
+        body: d.body,
+        Icon: d.icon,
+        image: PLACEHOLDER_IMAGES.aboutDifferentiators[i % PLACEHOLDER_IMAGES.aboutDifferentiators.length],
+      }));
+
+  const timelineEntries = timeline?.entries?.length
+    ? timeline.entries.map((t) => ({ year: t.year ?? "", title: t.title ?? "", body: t.body ?? "" }))
+    : TIMELINE;
 
   return (
     <main className="bg-beige">
       <PageHero
-        eyebrow="About us"
-        heading="The recycler India can build its future on."
-        intro="Madhav KRG Group has spent decades closing the loop turning end-of-life steel and process waste into materials that meet International Standards. We are building our identity as a state-of-the-art recycler so that industry, communities and the planet can grow together."
-        imageUrl={PLACEHOLDER_IMAGES.aboutHero}
-        imageAlt="MKRG plant operations"
+        eyebrow={str(hero?.eyebrow, "About us")}
+        heading={str(hero?.heading, "The recycler India can build its future on.")}
+        intro={str(
+          hero?.intro,
+          "Madhav KRG Group has spent decades closing the loop turning end-of-life steel and process waste into materials that meet International Standards. We are building our identity as a state-of-the-art recycler so that industry, communities and the planet can grow together.",
+        )}
+        imageUrl={hero?.imageUrl || PLACEHOLDER_IMAGES.aboutHero}
+        imageAlt={str(hero?.imageAlt, "MKRG plant operations")}
         videos={[
           { src: "/videos/about-hero-2.mp4", duration: 5000 },
           { src: "/videos/about-hero.mp4", duration: 5000 },
@@ -135,10 +234,10 @@ export default function AboutPageContent({ data }: { data?: AboutPageData }) {
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
           <div className="mx-auto max-w-3xl text-center">
             <span className="text-xs uppercase tracking-[0.2em] text-accent">
-              Purpose
+              {str(purpose?.eyebrow, "Purpose")}
             </span>
             <AnimatedHeading className="mt-3 font-serif text-3xl leading-tight text-ink sm:text-4xl lg:text-5xl">
-              A purpose built around the planet.
+              {str(purpose?.heading, "A purpose built around the planet.")}
             </AnimatedHeading>
           </div>
 
@@ -155,8 +254,10 @@ export default function AboutPageContent({ data }: { data?: AboutPageData }) {
                 Mission
               </div>
               <p className="mt-5 font-serif text-2xl leading-snug text-ink">
-                To provide efficient, responsible recycling solutions that empower
-                communities and businesses to minimise their environmental footprint.
+                {str(
+                  purpose?.mission,
+                  "To provide efficient, responsible recycling solutions that empower communities and businesses to minimise their environmental footprint.",
+                )}
               </p>
             </motion.article>
 
@@ -172,25 +273,10 @@ export default function AboutPageContent({ data }: { data?: AboutPageData }) {
                 Vision
               </div>
               <p className="mt-5 font-serif text-2xl leading-snug text-ink">
-                Accelerating India&apos;s growth by enabling Green Infrastructure.
+                {str(purpose?.vision, "Accelerating India's growth by enabling Green Infrastructure.")}
               </p>
             </motion.article>
           </div>
-        </div>
-      </section>
-
-      {/* Sustainability statement */}
-      <section className="bg-beige py-24 sm:py-32">
-        <div className="mx-auto max-w-4xl px-6 text-center sm:px-10 lg:px-16">
-          <AnimatedHeading className="font-serif text-3xl leading-tight text-ink sm:text-4xl lg:text-5xl">
-            {str(sustainabilityStatement?.heading, "Driving Sustainable Change")}
-          </AnimatedHeading>
-          <p className="mt-6 text-base leading-relaxed text-body sm:text-lg">
-            {str(
-              sustainabilityStatement?.body,
-              "MKESPL contributes to environmental sustainability through its core operations, focused on recycling APCD dust and metal waste. By actively engaging in the recycling process, MKESPL helps reduce waste and minimise the extraction of raw new materials. The company manufactures and trades zinc cathodes and zinc ingots, essential components across various industries, while adhering to strict environmental regulations in its manufacturing processes.",
-            )}
-          </p>
         </div>
       </section>
 
@@ -209,20 +295,22 @@ export default function AboutPageContent({ data }: { data?: AboutPageData }) {
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
           <div className="max-w-3xl">
             <span className="text-xs uppercase tracking-[0.2em] text-white/80">
-              Values
+              {str(values?.eyebrow, "Values")}
             </span>
             <AnimatedHeading className="mt-3 font-serif text-3xl leading-tight text-white sm:text-4xl lg:text-5xl">
-              Six values. One way of working.
+              {str(values?.heading, "Six values. One way of working.")}
             </AnimatedHeading>
             <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/85 sm:text-lg">
-              Integrity · Excellence · Patriotism · Empowerment · Humility · Unity 
-              the principles that pre-date every plant, every audit, and every hire.
+              {str(
+                values?.intro,
+                "Integrity · Excellence · Patriotism · Empowerment · Humility · Unity, the principles that pre-date every plant, every audit, and every hire.",
+              )}
             </p>
           </div>
 
           <ul className="mt-14 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {VALUES.map((v, i) => {
-              const Icon = v.icon;
+            {valuesItems.map((v, i) => {
+              const Icon = v.Icon;
               return (
                 <motion.li
                   key={v.title}
@@ -260,8 +348,8 @@ export default function AboutPageContent({ data }: { data?: AboutPageData }) {
               data-cursor="grow"
             >
               <Image
-                src={PLACEHOLDER_IMAGES.aboutBrand}
-                alt="Madhav KRG Group identity"
+                src={brandIdentity?.imageUrl || PLACEHOLDER_IMAGES.aboutBrand}
+                alt={str(brandIdentity?.imageAlt, "Madhav KRG Group identity")}
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover transition-transform duration-1000 hover:scale-110"
@@ -269,29 +357,26 @@ export default function AboutPageContent({ data }: { data?: AboutPageData }) {
               <div className="absolute inset-0 bg-gradient-to-t from-deep-green/40 via-transparent to-transparent" />
               <div className="absolute bottom-5 left-5 right-5 flex items-center gap-3 rounded-2xl bg-white/90 px-5 py-3.5 backdrop-blur">
                 <p className="text-sm font-medium text-ink">
-                  Madhav KRG Group the mother brand for everything we recycle.
+                  {str(brandIdentity?.caption, "Madhav KRG Group, the mother brand for everything we recycle.")}
                 </p>
               </div>
             </motion.div>
 
             <div className="lg:col-span-7">
               <span className="text-xs uppercase tracking-[0.2em] text-accent">
-                Brand identity
+                {str(brandIdentity?.eyebrow, "Brand identity")}
               </span>
               <AnimatedHeading className="mt-3 font-serif text-3xl leading-tight text-ink sm:text-4xl lg:text-5xl">
-                {"One purpose.\nEvery plant. A greener output."}
+                {str(brandIdentity?.heading, "One purpose.\nEvery plant. A greener output.")}
               </AnimatedHeading>
-              <p className="mt-6 text-base leading-relaxed text-body sm:text-lg">
-                Madhav KRG Group is the principal brand under which every recycling,
-                refining and manufacturing operation sits. This website is the place we
-                are building that identity as a state-of-the-art recycler trusted by
-                industry, regulators and the communities we operate in.
-              </p>
-              <p className="mt-4 text-base leading-relaxed text-body sm:text-lg">
-                When a partner buys recycled steel or zinc from any plant in our group,
-                the same standards, the same audit trail and the same promise sit behind
-                the badge.
-              </p>
+              {brandParagraphs.map((p, i) => (
+                <p
+                  key={i}
+                  className={`text-base leading-relaxed text-body sm:text-lg ${i === 0 ? "mt-6" : "mt-4"}`}
+                >
+                  {p}
+                </p>
+              ))}
             </div>
           </div>
         </div>
@@ -303,57 +388,53 @@ export default function AboutPageContent({ data }: { data?: AboutPageData }) {
           <div className="grid grid-cols-1 items-end gap-10 lg:grid-cols-12 lg:gap-16">
             <div className="lg:col-span-7">
               <span className="text-xs uppercase tracking-[0.2em] text-black">
-                Differentiators
+                {str(differentiators?.eyebrow, "Differentiators")}
               </span>
               <AnimatedHeading className="mt-3 text-balance font-serif text-3xl leading-tight text-black sm:text-4xl lg:text-5xl">
-                What sets MKRG apart on the shop floor.
+                {str(differentiators?.heading, "What sets MKRG apart on the shop floor.")}
               </AnimatedHeading>
             </div>
             <div className="lg:col-span-5">
               <p className="text-base leading-relaxed text-black/80 sm:text-lg">
-                Four things show up in every audit, every spec sheet and every customer
-                conversation they are the reason partners choose us over the next bid.
+                {str(
+                  differentiators?.intro,
+                  "Four things show up in every audit, every spec sheet and every customer conversation they are the reason partners choose us over the next bid.",
+                )}
               </p>
             </div>
           </div>
 
           <ul className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-2">
-            {DIFFERENTIATORS.map((d, i) => {
-              const img =
-                PLACEHOLDER_IMAGES.aboutDifferentiators[
-                  i % PLACEHOLDER_IMAGES.aboutDifferentiators.length
-                ];
-              return (
-                <motion.li
-                  key={d.title}
-                  initial={{ opacity: 0, y: 28 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-80px" }}
-                  transition={{ duration: 0.6, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
-                >
-                  <TiltCard className="group h-full overflow-hidden rounded-2xl bg-white">
-                    <div className="relative aspect-[5/3] w-full overflow-hidden">
-                      <Image
-                        src={img}
-                        alt=""
-                        fill
-                        sizes="(max-width: 768px) 100vw, 50vw"
-                        className="object-cover transition-transform duration-700 group-hover:scale-110"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-ink/40 via-transparent to-transparent" />
-                    </div>
-                    <div className="p-7">
-                      <h3 className="font-serif text-2xl leading-snug text-ink">
-                        {d.title}
-                      </h3>
-                      <p className="mt-3 text-sm leading-relaxed text-body">
-                        {d.body}
-                      </p>
-                    </div>
-                  </TiltCard>
-                </motion.li>
-              );
-            })}
+            {differentiatorItems.map((d, i) => (
+              <motion.li
+                key={d.title}
+                initial={{ opacity: 0, y: 28 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.6, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
+              >
+                <TiltCard className="group h-full overflow-hidden rounded-2xl bg-white">
+                  <div className="relative aspect-[5/3] w-full overflow-hidden">
+                    <Image
+                      src={d.image}
+                      alt=""
+                      fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      className="object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-ink/40 via-transparent to-transparent" />
+                  </div>
+                  <div className="p-7">
+                    <h3 className="font-serif text-2xl leading-snug text-ink">
+                      {d.title}
+                    </h3>
+                    <p className="mt-3 text-sm leading-relaxed text-body">
+                      {d.body}
+                    </p>
+                  </div>
+                </TiltCard>
+              </motion.li>
+            ))}
           </ul>
         </div>
       </section>
@@ -363,14 +444,16 @@ export default function AboutPageContent({ data }: { data?: AboutPageData }) {
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
           <div className="mx-auto max-w-3xl text-center">
             <span className="text-xs uppercase tracking-[0.2em] text-accent">
-              Our story
+              {str(timeline?.eyebrow, "Our story")}
             </span>
             <AnimatedHeading className="mt-3 font-serif text-3xl leading-tight text-ink sm:text-4xl lg:text-5xl">
-              Four decades of closing the loop.
+              {str(timeline?.heading, "Four decades of closing the loop.")}
             </AnimatedHeading>
             <p className="mt-5 text-base leading-relaxed text-body sm:text-lg">
-              A short timeline of how Madhav KRG Group grew from a single founding idea
-              into one of India&apos;s most integrated recyclers.
+              {str(
+                timeline?.intro,
+                "A short timeline of how Madhav KRG Group grew from a single founding idea into one of India's most integrated recyclers.",
+              )}
             </p>
           </div>
 
@@ -381,11 +464,11 @@ export default function AboutPageContent({ data }: { data?: AboutPageData }) {
               className="pointer-events-none absolute bottom-0 left-4 top-0 w-0.5 bg-deep-green/20 sm:left-6 lg:left-1/2 lg:-translate-x-1/2"
             />
 
-            {TIMELINE.map((t, i) => {
+            {timelineEntries.map((t, i) => {
               const isLeft = i % 2 === 0;
               return (
                 <motion.li
-                  key={t.year}
+                  key={`${t.year}-${i}`}
                   initial={{ opacity: 0, x: isLeft ? -30 : 30, y: 12 }}
                   whileInView={{ opacity: 1, x: 0, y: 0 }}
                   viewport={{ once: true, margin: "-80px" }}
@@ -430,7 +513,21 @@ export default function AboutPageContent({ data }: { data?: AboutPageData }) {
           </ol>
         </div>
       </section>
+
+      {/* Sustainability statement */}
+      <section className="bg-white py-24 sm:py-32">
+        <div className="mx-auto max-w-4xl px-6 text-center sm:px-10 lg:px-16">
+          <AnimatedHeading className="font-serif text-3xl leading-tight text-ink sm:text-4xl lg:text-5xl">
+            {str(sustainabilityStatement?.heading, "Driving Sustainable Change")}
+          </AnimatedHeading>
+          <p className="mt-6 text-base leading-relaxed text-body sm:text-lg">
+            {str(
+              sustainabilityStatement?.body,
+              "MKESPL contributes to environmental sustainability through its core operations, focused on recycling APCD dust and metal waste. By actively engaging in the recycling process, MKESPL helps reduce waste and minimise the extraction of raw new materials. The company manufactures and trades zinc cathodes and zinc ingots, essential components across various industries, while adhering to strict environmental regulations in its manufacturing processes.",
+            )}
+          </p>
+        </div>
+      </section>
     </main>
   );
 }
-
