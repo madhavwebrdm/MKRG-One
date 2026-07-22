@@ -21,11 +21,15 @@ type Principal = {
 };
 
 type PrincipalInput = {
+  eyebrow?: string | null;
+  heading?: string | null;
   name?: string | null;
   role?: string | null;
   story?: string | null;
   imageUrl?: string | null;
 } | null;
+
+type ResolvedPrincipal = Principal & { eyebrow: string; heading: string };
 
 export type LeadershipPageData = {
   hero?:
@@ -88,15 +92,21 @@ const RANDHIR: Principal = {
   ],
 };
 
-const resolvePrincipal = (input: PrincipalInput | undefined, fallback: Principal): Principal => ({
-  name: str(input?.name, fallback.name),
-  title: str(input?.role, fallback.title),
-  portrait: input?.imageUrl || fallback.portrait,
-  pullQuote: fallback.pullQuote,
-  body: input?.story?.trim()
-    ? input.story.split(/\n+/).map((p) => p.trim()).filter(Boolean)
-    : fallback.body,
-});
+const resolvePrincipal = (input: PrincipalInput | undefined, fallback: Principal): ResolvedPrincipal => {
+  const name = str(input?.name, fallback.name);
+  const title = str(input?.role, fallback.title);
+  return {
+    name,
+    title,
+    portrait: input?.imageUrl || fallback.portrait,
+    pullQuote: fallback.pullQuote,
+    body: input?.story?.trim()
+      ? input.story.split(/\n+/).map((p) => p.trim()).filter(Boolean)
+      : fallback.body,
+    eyebrow: str(input?.eyebrow, `${title}'s message`),
+    heading: str(input?.heading, `A note from ${name}.`),
+  };
+};
 
 export default function LeadershipPageContent({
   data,
@@ -109,7 +119,7 @@ export default function LeadershipPageContent({
   const director = resolvePrincipal(data?.director, DIRECTOR);
 
   const additionalFallbacks = [RAHUL, RANDHIR];
-  const additionalLeaders: Principal[] = data?.additionalLeaders?.length
+  const additionalLeaders: ResolvedPrincipal[] = data?.additionalLeaders?.length
     ? data.additionalLeaders.map((leader, i) =>
         resolvePrincipal(leader, {
           ...(additionalFallbacks[i] ?? {
@@ -121,7 +131,7 @@ export default function LeadershipPageContent({
           }),
         }),
       )
-    : additionalFallbacks;
+    : additionalFallbacks.map((fallback) => resolvePrincipal(undefined, fallback));
 
   const quoteText = str(data?.pullQuote?.text, MD.pullQuote);
   const quoteAttribution = str(
@@ -187,7 +197,7 @@ function PrincipalSection({
   side,
   background = "white",
 }: {
-  principal: Principal;
+  principal: ResolvedPrincipal;
   side: "left" | "right";
   background?: "white" | "beige";
 }) {
@@ -222,10 +232,10 @@ function PrincipalSection({
   const TextCol = (
     <div className="lg:col-span-7">
       <span className="text-xs uppercase tracking-[0.2em] text-accent">
-        {principal.title}&apos;s message
+        {principal.eyebrow}
       </span>
       <AnimatedHeading className="mt-3 font-serif text-3xl leading-tight text-ink sm:text-4xl lg:text-5xl">
-        {`A note from ${principal.name}.`}
+        {principal.heading}
       </AnimatedHeading>
       <div className="mt-6 space-y-5">
         {principal.body.map((paragraph, i) => (
