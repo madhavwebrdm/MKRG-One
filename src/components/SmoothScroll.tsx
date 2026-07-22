@@ -29,6 +29,7 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
     <ReactLenis
       root
       ref={lenisRef}
+      autoRaf={false}
       options={{ lerp: 0.1, smoothWheel: true, syncTouch: false }}
     >
       {children}

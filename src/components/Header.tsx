@@ -16,9 +16,12 @@ const NAV: NavItem[] = [
   {
     label: "About us",
     href: "/about",
-    children: [{ label: "Process", href: "/processes" }],
+    children: [
+      { label: "Process", href: "/processes" },
+      { label: "Certifications", href: "/certifications" },
+    ],
   },
-  { label: "Leadership", href: "/leadership", children: [{ label: "Certifications", href: "/certifications" }] },
+  { label: "Leadership", href: "/leadership" },
   { label: "Product", href: "/product" },
   {
     label: "Sustainability",
