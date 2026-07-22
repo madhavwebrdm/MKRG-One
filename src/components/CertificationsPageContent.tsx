@@ -32,6 +32,7 @@ type Cert = {
   status?: string;
   downloadHref?: string;
   thumbnail?: string;
+  category: "certification" | "award";
 };
 
 type CertView = {
@@ -42,6 +43,7 @@ type CertView = {
   status?: string;
   downloadHref?: string;
   thumbnail?: string;
+  category: "certification" | "award";
 };
 
 export type CertificationsPageData = {
@@ -67,6 +69,7 @@ const CERTS: Cert[] = [
     icon: Award,
     status: "Active",
     downloadHref: "/documents/ISO9001.pdf",
+    category: "certification",
   },
   {
     title: "ISO 14001",
@@ -75,6 +78,7 @@ const CERTS: Cert[] = [
     icon: Globe2,
     status: "Active",
     downloadHref: "#",
+    category: "certification",
   },
   {
     title: "GPCB",
@@ -83,6 +87,7 @@ const CERTS: Cert[] = [
     icon: Landmark,
     status: "Compliant",
     downloadHref: "#",
+    category: "certification",
   },
   {
     title: "MOEFCC",
@@ -91,6 +96,7 @@ const CERTS: Cert[] = [
     icon: FileBadge,
     status: "Approved",
     downloadHref: "#",
+    category: "certification",
   },
   {
     title: "EHS Program",
@@ -99,6 +105,7 @@ const CERTS: Cert[] = [
     icon: HardHat,
     status: "In force",
     downloadHref: "#",
+    category: "certification",
   },
   {
     title: "Environment Excellence Award",
@@ -107,6 +114,7 @@ const CERTS: Cert[] = [
     icon: Award,
     status: "Awarded",
     downloadHref: "/documents/environment-excellence-award-2018.pdf",
+    category: "award",
   },
   {
     title: "Environment Excellence Award Nomination",
@@ -116,6 +124,7 @@ const CERTS: Cert[] = [
     status: "On file",
     downloadHref: "/documents/environment-excellence-award-nomination-2018.jpg",
     thumbnail: "/documents/environment-excellence-award-nomination-2018.jpg",
+    category: "award",
   },
   {
     title: "Zinc Extraction Patent",
@@ -124,6 +133,7 @@ const CERTS: Cert[] = [
     icon: Lightbulb,
     status: "Granted",
     downloadHref: "/documents/zinc-extraction-patent-427561.pdf",
+    category: "certification",
   },
 ];
 
@@ -143,6 +153,7 @@ export default function CertificationsPageContent({
         Icon: iconFromKey(c.icon, ShieldCheck),
         status: c.status ?? undefined,
         downloadHref: c.downloadUrl ?? undefined,
+        category: "certification" as const,
       }))
     : CERTS.map((c) => ({
         title: c.title,
@@ -152,7 +163,10 @@ export default function CertificationsPageContent({
         status: c.status,
         downloadHref: c.downloadHref,
         thumbnail: c.thumbnail,
+        category: c.category,
       }));
+
+  const awardDocs = certs.filter((c) => c.category === "award");
 
   return (
     <main className="bg-beige">
@@ -233,24 +247,24 @@ export default function CertificationsPageContent({
         </div>
       </section>
 
-      {/* Certificate document gallery */}
+      {/* Award document gallery */}
       <section className="bg-beige py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
           <div className="max-w-3xl">
             <span className="text-xs uppercase tracking-[0.2em] text-accent">
-              Documents
+              Awards
             </span>
             <AnimatedHeading className="mt-3 font-serif text-3xl leading-tight text-ink sm:text-4xl lg:text-5xl">
-              Compliance documents on file.
+              Recognition, on record.
             </AnimatedHeading>
             <p className="mt-5 text-base leading-relaxed text-body sm:text-lg">
-              Scanned copies of every active certificate. Full PDFs are available on
-              request for partners, regulators and auditors.
+              Scanned copies of the awards we&apos;ve received. Full documents are available
+              on request for partners, regulators and auditors.
             </p>
           </div>
 
           <ul className="mt-14 grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-5">
-            {certs.map((c, i) => {
+            {awardDocs.map((c, i) => {
               const img =
                 c.thumbnail ||
                 PLACEHOLDER_IMAGES.certificationsDocs[
