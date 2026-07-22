@@ -9,6 +9,7 @@ import {
   Globe2,
   HardHat,
   Landmark,
+  Lightbulb,
   ShieldCheck,
 } from "lucide-react";
 
@@ -29,6 +30,7 @@ type Cert = {
   icon: typeof ShieldCheck;
   status?: string;
   downloadHref?: string;
+  thumbnail?: string;
 };
 
 type CertView = {
@@ -38,6 +40,7 @@ type CertView = {
   Icon: LucideIcon;
   status?: string;
   downloadHref?: string;
+  thumbnail?: string;
 };
 
 export type CertificationsPageData = {
@@ -96,6 +99,23 @@ const CERTS: Cert[] = [
     status: "In force",
     downloadHref: "#",
   },
+  {
+    title: "Environment Excellence Award",
+    issuer: "Punjab Pollution Control Board",
+    body: "Awarded on World Environment Day 2018 for pioneering the recycling of hazardous APCD dust into a resource, at our Fatehgarh Sahib facility.",
+    icon: Award,
+    status: "Awarded",
+    downloadHref: "/documents/environment-excellence-award-2018.pdf",
+    thumbnail: "/documents/environment-excellence-award-nomination-2018.jpg",
+  },
+  {
+    title: "Zinc Extraction Patent",
+    issuer: "The Patent Office, Government of India",
+    body: "Patent No. 427561 for an improved process to extract zinc from Air Pollution Control Device (APCD) dust, granted for 20 years from July 2017.",
+    icon: Lightbulb,
+    status: "Granted",
+    downloadHref: "/documents/zinc-extraction-patent-427561.pdf",
+  },
 ];
 
 export default function CertificationsPageContent({
@@ -122,6 +142,7 @@ export default function CertificationsPageContent({
         Icon: c.icon,
         status: c.status,
         downloadHref: c.downloadHref,
+        thumbnail: c.thumbnail,
       }));
 
   return (
@@ -145,7 +166,7 @@ export default function CertificationsPageContent({
               {str(intro?.eyebrow, "Standards we operate under")}
             </span>
             <AnimatedHeading className="mt-3 font-serif text-3xl leading-tight text-ink sm:text-4xl lg:text-5xl">
-              {str(intro?.heading, "Five certifications. Same expectation.")}
+              {str(intro?.heading, "Certified, awarded, patented. Same expectation.")}
             </AnimatedHeading>
             <p className="mt-5 text-base leading-relaxed text-body sm:text-lg">
               {str(
@@ -222,6 +243,7 @@ export default function CertificationsPageContent({
           <ul className="mt-14 grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-5">
             {certs.map((c, i) => {
               const img =
+                c.thumbnail ||
                 PLACEHOLDER_IMAGES.certificationsDocs[
                   i % PLACEHOLDER_IMAGES.certificationsDocs.length
                 ];
