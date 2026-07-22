@@ -131,30 +131,16 @@ type VideoItem = {
   duration: string;
   kind: "Plant tour" | "Process" | "Interview";
   href: string;
-  imageIndex: number;
+  thumbnail: string;
 };
 
 const VIDEOS: VideoItem[] = [
   {
-    title: "Inside the Mehsana Recycle2X plant a 4-minute walkthrough",
-    duration: "4:12",
-    kind: "Plant tour",
-    href: "#",
-    imageIndex: 0,
-  },
-  {
-    title: "Scrap to Steel: every step of the EAC line, on camera",
-    duration: "7:45",
+    title: "Inside MKESPL: the full recycling process, start to finish",
+    duration: "3:59",
     kind: "Process",
-    href: "#",
-    imageIndex: 1,
-  },
-  {
-    title: "Founder Q&A: building India's green infrastructure",
-    duration: "11:08",
-    kind: "Interview",
-    href: "#",
-    imageIndex: 2,
+    href: "/videos/mkespl-process-video.mp4",
+    thumbnail: "/images/media/mkespl-process-thumb.jpg",
   },
 ];
 
@@ -398,7 +384,7 @@ export default function MediaPageContent() {
             </Link>
           </div>
 
-          <ul className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-3">
+          <ul className="mt-14 grid max-w-xl grid-cols-1 gap-6">
             {VIDEOS.map((v, i) => {
               return (
                 <motion.li
@@ -410,15 +396,13 @@ export default function MediaPageContent() {
                 >
                   <Link
                     href={v.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="group flex h-full flex-col overflow-hidden rounded-2xl bg-deep-green ring-1 ring-deep-green/20 transition-colors hover:ring-deep-green/40"
                   >
                     <div className="relative aspect-[16/10] w-full overflow-hidden">
                       <Image
-                        src={
-                          PLACEHOLDER_IMAGES.mediaVideos[
-                            v.imageIndex % PLACEHOLDER_IMAGES.mediaVideos.length
-                          ]
-                        }
+                        src={v.thumbnail}
                         alt=""
                         fill
                         sizes="(max-width: 768px) 100vw, 33vw"
