@@ -220,6 +220,11 @@ export const PLACEHOLDER_IMAGES = {
     u(PHOTO.wasteWorker, 800, 600),
     u(PHOTO.steelRolls, 800, 600),
   ],
+  mediaVideos: [
+    u(PHOTO.workersOnMetal, 1200, 700),
+    u(PHOTO.grinderSparks, 1200, 700),
+    u(PHOTO.speakerOnStage, 1200, 700),
+  ],
   mediaEvents: [
     u(PHOTO.conventionCentre, 800, 600),
     u(PHOTO.eventMingling, 800, 600),

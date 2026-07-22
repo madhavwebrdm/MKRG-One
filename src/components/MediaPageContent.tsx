@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -17,12 +17,16 @@ import AnimatedHeading from "./AnimatedHeading";
 import PageHero from "./PageHero";
 import TiltCard from "./TiltCard";
 
+const str = (v: string | null | undefined, fallback: string): string =>
+  v && v.trim() ? v : fallback;
+
 type Article = {
   topic: string;
   title: string;
   source: string;
   date: string;
   href: string;
+  imageUrl?: string;
 };
 
 const ARTICLES: Article[] = [
@@ -49,12 +53,15 @@ const ARTICLES: Article[] = [
   },
 ];
 
+type NewsKind = "Certification" | "Expansion" | "CSR" | "Milestone";
+
 type NewsItem = {
-  kind: "Certification" | "Expansion" | "CSR" | "Milestone";
+  kind: NewsKind;
   title: string;
   body: string;
   date: string;
   href: string;
+  imageUrl?: string;
 };
 
 const COMPANY_NEWS: NewsItem[] = [
@@ -129,7 +136,7 @@ const PRESS_RELEASES: PressRelease[] = [
 type VideoItem = {
   title: string;
   duration: string;
-  kind: "Plant tour" | "Process" | "Interview";
+  kind: string;
   href: string;
   thumbnail: string;
 };
@@ -144,6 +151,48 @@ const VIDEOS: VideoItem[] = [
   },
 ];
 
+type ItemsSection<T> = {
+  eyebrow?: string | null;
+  heading?: string | null;
+  items?: T[] | null;
+} | null;
+
+export type MediaPageData = {
+  hero?:
+    | { eyebrow?: string | null; heading?: string | null; intro?: string | null; imageUrl?: string | null; imageAlt?: string | null }
+    | null;
+  articlesSection?: ItemsSection<{
+    topic?: string | null;
+    title?: string | null;
+    source?: string | null;
+    date?: string | null;
+    href?: string | null;
+    imageUrl?: string | null;
+  }>;
+  companyNewsSection?: ItemsSection<{
+    kind?: string | null;
+    title?: string | null;
+    body?: string | null;
+    date?: string | null;
+    href?: string | null;
+    imageUrl?: string | null;
+  }>;
+  pressReleasesSection?: ItemsSection<{
+    title?: string | null;
+    summary?: string | null;
+    date?: string | null;
+    href?: string | null;
+    downloadUrl?: string | null;
+  }>;
+  videosSection?: ItemsSection<{
+    title?: string | null;
+    duration?: string | null;
+    kind?: string | null;
+    href?: string | null;
+    thumbnailUrl?: string | null;
+  }>;
+} | null;
+
 function formatDate(input: string) {
   const d = new Date(input);
   if (Number.isNaN(d.getTime())) return input;
@@ -154,22 +203,77 @@ function formatDate(input: string) {
   });
 }
 
-const NEWS_ICON: Record<NewsItem["kind"], typeof Newspaper> = {
+const NEWS_ICON: Record<NewsKind, typeof Newspaper> = {
   Certification: FileText,
   Expansion: ArrowUpRight,
   CSR: Mic,
   Milestone: ArrowUpRight,
 };
 
-export default function MediaPageContent() {
+export default function MediaPageContent({ data }: { data?: MediaPageData }) {
+  const hero = data?.hero;
+  const articlesSection = data?.articlesSection;
+  const companyNewsSection = data?.companyNewsSection;
+  const pressReleasesSection = data?.pressReleasesSection;
+  const videosSection = data?.videosSection;
+
+  const articles: Article[] = articlesSection?.items?.length
+    ? articlesSection.items.map((a) => ({
+        topic: a.topic ?? "",
+        title: a.title ?? "",
+        source: a.source ?? "",
+        date: a.date ?? "",
+        href: a.href || "#",
+        imageUrl: a.imageUrl ?? undefined,
+      }))
+    : ARTICLES;
+
+  const companyNews: NewsItem[] = companyNewsSection?.items?.length
+    ? companyNewsSection.items.map((n) => ({
+        kind: (n.kind as NewsKind) || "Milestone",
+        title: n.title ?? "",
+        body: n.body ?? "",
+        date: n.date ?? "",
+        href: n.href || "#",
+        imageUrl: n.imageUrl ?? undefined,
+      }))
+    : COMPANY_NEWS;
+
+  const pressReleases: PressRelease[] = pressReleasesSection?.items?.length
+    ? pressReleasesSection.items.map((p) => ({
+        title: p.title ?? "",
+        summary: p.summary ?? "",
+        date: p.date ?? "",
+        href: p.href || p.downloadUrl || "#",
+      }))
+    : PRESS_RELEASES;
+
+  const videos: VideoItem[] = videosSection?.items?.length
+    ? videosSection.items.map((v, i) => ({
+        title: v.title ?? "",
+        duration: v.duration ?? "",
+        kind: v.kind || "Process",
+        href: v.href || "#",
+        thumbnail:
+          v.thumbnailUrl ||
+          PLACEHOLDER_IMAGES.mediaVideos[i % PLACEHOLDER_IMAGES.mediaVideos.length],
+      }))
+    : VIDEOS;
+
   return (
     <main className="bg-beige">
       <PageHero
-        eyebrow="Media"
-        heading="Press, plant tours and the conversations shaping circular industry."
-        intro="Where Madhav KRG Group shows up on the page, on camera and on the ground at the forums where recycling policy and practice are being rewritten."
-        imageUrl="/images/media-hero.jpeg"
-        imageAlt="MKRG in the media"
+        eyebrow={str(hero?.eyebrow, "Media")}
+        heading={str(
+          hero?.heading,
+          "Press, plant tours and the conversations shaping circular industry.",
+        )}
+        intro={str(
+          hero?.intro,
+          "Where Madhav KRG Group shows up on the page, on camera and on the ground at the forums where recycling policy and practice are being rewritten.",
+        )}
+        imageUrl={hero?.imageUrl || "/images/media-hero.jpeg"}
+        imageAlt={str(hero?.imageAlt, "MKRG in the media")}
       />
 
       {/* Industry articles */}
@@ -178,10 +282,10 @@ export default function MediaPageContent() {
           <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-2xl">
               <span className="text-xs uppercase tracking-[0.2em] text-accent">
-                Industry articles
+                {str(articlesSection?.eyebrow, "Industry articles")}
               </span>
               <AnimatedHeading className="mt-3 font-serif text-3xl leading-tight text-ink sm:text-4xl lg:text-5xl">
-                Recycling, sustainability policy and long-term resource use.
+                {str(articlesSection?.heading, "Recycling, sustainability policy and long-term resource use.")}
               </AnimatedHeading>
             </div>
             <p className="max-w-md text-base leading-relaxed text-body sm:text-lg">
@@ -191,7 +295,7 @@ export default function MediaPageContent() {
           </div>
 
           <ul className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-3">
-            {ARTICLES.map((a, i) => (
+            {articles.map((a, i) => (
               <motion.li
                 key={a.title}
                 initial={{ opacity: 0, y: 28 }}
@@ -202,11 +306,14 @@ export default function MediaPageContent() {
                 <TiltCard className="h-full">
                   <Link
                     href={a.href}
+                    target={a.href.startsWith("http") ? "_blank" : undefined}
+                    rel={a.href.startsWith("http") ? "noopener noreferrer" : undefined}
                     className="group flex h-full flex-col overflow-hidden rounded-2xl bg-beige ring-1 ring-deep-green/10 transition-colors hover:ring-deep-green/30"
                   >
                     <div className="relative aspect-[5/3] w-full overflow-hidden">
                       <Image
                         src={
+                          a.imageUrl ||
                           PLACEHOLDER_IMAGES.mediaArticles[
                             i % PLACEHOLDER_IMAGES.mediaArticles.length
                           ]
@@ -242,17 +349,17 @@ export default function MediaPageContent() {
           <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-2xl">
               <span className="text-xs uppercase tracking-[0.2em] text-accent">
-                Company news
+                {str(companyNewsSection?.eyebrow, "Company news")}
               </span>
               <AnimatedHeading className="mt-3 font-serif text-3xl leading-tight text-ink sm:text-4xl lg:text-5xl">
-                Certifications, expansions, CSR and milestones.
+                {str(companyNewsSection?.heading, "Certifications, expansions, CSR and milestones.")}
               </AnimatedHeading>
             </div>
           </div>
 
           <ul className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2">
-            {COMPANY_NEWS.map((n, i) => {
-              const Icon = NEWS_ICON[n.kind];
+            {companyNews.map((n, i) => {
+              const Icon = NEWS_ICON[n.kind] ?? Newspaper;
               return (
                 <motion.li
                   key={n.title}
@@ -262,10 +369,16 @@ export default function MediaPageContent() {
                   transition={{ duration: 0.6, delay: i * 0.06, ease: [0.16, 1, 0.3, 1] }}
                   className="group overflow-hidden rounded-2xl bg-white ring-1 ring-deep-green/10"
                 >
-                  <Link href={n.href} className="grid grid-cols-1 sm:grid-cols-12">
+                  <Link
+                    href={n.href}
+                    target={n.href.startsWith("http") ? "_blank" : undefined}
+                    rel={n.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                    className="grid grid-cols-1 sm:grid-cols-12"
+                  >
                     <div className="relative aspect-[5/3] w-full overflow-hidden sm:col-span-5 sm:aspect-auto">
                       <Image
                         src={
+                          n.imageUrl ||
                           PLACEHOLDER_IMAGES.mediaCompanyNews[
                             i % PLACEHOLDER_IMAGES.mediaCompanyNews.length
                           ]
@@ -303,10 +416,10 @@ export default function MediaPageContent() {
           <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-2xl">
               <span className="text-xs uppercase tracking-[0.2em] text-white/60">
-                Press releases
+                {str(pressReleasesSection?.eyebrow, "Press releases")}
               </span>
               <AnimatedHeading className="mt-3 font-serif text-3xl leading-tight text-white sm:text-4xl lg:text-5xl">
-                Formal announcements for the media.
+                {str(pressReleasesSection?.heading, "Formal announcements for the media.")}
               </AnimatedHeading>
               <p className="mt-5 text-base leading-relaxed text-white/80 sm:text-lg">
                 Journalists, analysts and partners every release is here, in
@@ -323,7 +436,7 @@ export default function MediaPageContent() {
           </div>
 
           <ul className="mt-12 divide-y divide-white/10 rounded-2xl border border-white/15 bg-white/5">
-            {PRESS_RELEASES.map((p, i) => (
+            {pressReleases.map((p, i) => (
               <motion.li
                 key={p.title}
                 initial={{ opacity: 0, x: -16 }}
@@ -333,6 +446,8 @@ export default function MediaPageContent() {
               >
                 <Link
                   href={p.href}
+                  target={p.href.startsWith("http") ? "_blank" : undefined}
+                  rel={p.href.startsWith("http") ? "noopener noreferrer" : undefined}
                   className="group flex flex-col gap-2 p-6 transition-colors hover:bg-white/10 sm:flex-row sm:items-start sm:justify-between sm:gap-8 sm:p-8"
                 >
                   <div className="flex flex-1 items-start gap-4">
@@ -365,10 +480,10 @@ export default function MediaPageContent() {
           <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-2xl">
               <span className="text-xs uppercase tracking-[0.2em] text-deep-green">
-                Videos
+                {str(videosSection?.eyebrow, "Videos")}
               </span>
               <AnimatedHeading className="mt-3 font-serif text-3xl leading-tight text-ink sm:text-4xl lg:text-5xl">
-                Plant tours, process walkthroughs and interviews.
+                {str(videosSection?.heading, "Plant tours, process walkthroughs and interviews.")}
               </AnimatedHeading>
               <p className="mt-5 max-w-xl text-base leading-relaxed text-body sm:text-lg">
                 Recycle2X explained in minutes, not pitches. Watch a plant tour, follow a
@@ -385,7 +500,8 @@ export default function MediaPageContent() {
           </div>
 
           <ul className="mt-14 grid grid-cols-1 gap-6">
-            {VIDEOS.map((v, i) => {
+            {videos.map((v, i) => {
+              const isExternal = v.href.startsWith("http");
               return (
                 <motion.li
                   key={v.title}
@@ -396,8 +512,8 @@ export default function MediaPageContent() {
                 >
                   <Link
                     href={v.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    target={isExternal || v.href.endsWith(".mp4") ? "_blank" : undefined}
+                    rel={isExternal || v.href.endsWith(".mp4") ? "noopener noreferrer" : undefined}
                     className="group flex h-full flex-col overflow-hidden rounded-2xl bg-deep-green ring-1 ring-deep-green/20 transition-colors hover:ring-deep-green/40"
                   >
                     <div className="relative aspect-[21/9] w-full overflow-hidden">
@@ -412,9 +528,11 @@ export default function MediaPageContent() {
                       <div className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full bg-white/15 px-3 py-1 text-[10px] font-medium uppercase tracking-wider text-white backdrop-blur">
                         {v.kind}
                       </div>
-                      <div className="absolute right-4 top-4 inline-flex items-center gap-1 rounded-full bg-black/40 px-2.5 py-1 text-[10px] font-medium text-white backdrop-blur">
-                        {v.duration}
-                      </div>
+                      {v.duration && (
+                        <div className="absolute right-4 top-4 inline-flex items-center gap-1 rounded-full bg-black/40 px-2.5 py-1 text-[10px] font-medium text-white backdrop-blur">
+                          {v.duration}
+                        </div>
+                      )}
                       <div className="absolute inset-0 flex items-center justify-center">
                         <span className="flex h-16 w-16 items-center justify-center rounded-full bg-white/85 text-accent transition-transform group-hover:scale-110">
                           <Play className="h-6 w-6 fill-current" />
@@ -437,4 +555,3 @@ export default function MediaPageContent() {
     </main>
   );
 }
-
