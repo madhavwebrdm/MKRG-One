@@ -10,6 +10,7 @@ import {
   HardHat,
   Landmark,
   Lightbulb,
+  Mail,
   ShieldCheck,
 } from "lucide-react";
 
@@ -106,6 +107,14 @@ const CERTS: Cert[] = [
     icon: Award,
     status: "Awarded",
     downloadHref: "/documents/environment-excellence-award-2018.pdf",
+  },
+  {
+    title: "Environment Excellence Award Nomination",
+    issuer: "Punjab Pollution Control Board",
+    body: "Official nomination letter inviting Madhav Alloy to receive the 2018 Environment Excellence Award for its hazardous-waste recycling initiative.",
+    icon: Mail,
+    status: "On file",
+    downloadHref: "/documents/environment-excellence-award-nomination-2018.jpg",
     thumbnail: "/documents/environment-excellence-award-nomination-2018.jpg",
   },
   {
