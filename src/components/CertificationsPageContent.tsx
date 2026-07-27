@@ -114,6 +114,7 @@ const CERTS: Cert[] = [
     icon: Award,
     status: "Awarded",
     downloadHref: "/documents/environment-excellence-award-2018.pdf",
+    thumbnail: "/documents/environment-excellence-award-2018-thumb.png",
     category: "award",
   },
   {
@@ -167,6 +168,9 @@ export default function CertificationsPageContent({
       }));
 
   const awardDocs = certs.filter((c) => c.category === "award");
+  const badgeCerts = certs.filter(
+    (c) => c.title === "ISO 9001" || c.title === "Zinc Extraction Patent",
+  );
 
   return (
     <main className="bg-beige">
@@ -199,8 +203,8 @@ export default function CertificationsPageContent({
             </p>
           </div>
 
-          <ul className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {certs.map((c, i) => {
+          <ul className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2">
+            {badgeCerts.map((c, i) => {
               const Icon = c.Icon;
               return (
                 <motion.li
@@ -209,37 +213,39 @@ export default function CertificationsPageContent({
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-80px" }}
                   transition={{ duration: 0.6, delay: i * 0.07, ease: [0.16, 1, 0.3, 1] }}
-                  className="group flex h-full flex-col rounded-2xl border border-deep-green/15 bg-beige p-7 transition-colors hover:border-deep-green/40"
+                  className="h-full"
                 >
-                  <div className="flex items-center justify-between">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10 text-accent transition-transform group-hover:scale-110">
-                      <Icon className="h-5 w-5" aria-hidden />
+                  <a
+                    href={c.downloadHref}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex h-full flex-col rounded-2xl border border-deep-green/15 bg-beige p-7 transition-colors hover:border-deep-green/40"
+                  >
+                    <div className="flex items-center justify-between">
+                      <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10 text-accent transition-transform group-hover:scale-110">
+                        <Icon className="h-5 w-5" aria-hidden />
+                      </div>
+                      {c.status && (
+                        <span className="inline-flex items-center gap-1.5 rounded-full bg-accent/15 px-3 py-1 text-[10px] font-medium uppercase tracking-wider text-accent">
+                          <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+                          {c.status}
+                        </span>
+                      )}
                     </div>
-                    {c.status && (
-                      <span className="inline-flex items-center gap-1.5 rounded-full bg-accent/15 px-3 py-1 text-[10px] font-medium uppercase tracking-wider text-accent">
-                        <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-                        {c.status}
+                    <h3 className="mt-6 font-serif text-2xl leading-snug text-ink">
+                      {c.title}
+                    </h3>
+                    <p className="mt-1 text-xs uppercase tracking-wider text-muted">
+                      {c.issuer}
+                    </p>
+                    <p className="mt-4 text-sm leading-relaxed text-body">{c.body}</p>
+                    {c.downloadHref && (
+                      <span className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-deep-green underline-offset-4 group-hover:underline">
+                        <Eye className="h-4 w-4" />
+                        View certificate
                       </span>
                     )}
-                  </div>
-                  <h3 className="mt-6 font-serif text-2xl leading-snug text-ink">
-                    {c.title}
-                  </h3>
-                  <p className="mt-1 text-xs uppercase tracking-wider text-muted">
-                    {c.issuer}
-                  </p>
-                  <p className="mt-4 text-sm leading-relaxed text-body">{c.body}</p>
-                  {c.downloadHref && (
-                    <a
-                      href={c.downloadHref}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-deep-green underline-offset-4 hover:underline"
-                    >
-                      <Eye className="h-4 w-4" />
-                      View certificate
-                    </a>
-                  )}
+                  </a>
                 </motion.li>
               );
             })}
@@ -263,7 +269,7 @@ export default function CertificationsPageContent({
             </p>
           </div>
 
-          <ul className="mt-14 grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-5">
+          <ul className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2">
             {awardDocs.map((c, i) => {
               const img =
                 c.thumbnail ||
@@ -277,31 +283,30 @@ export default function CertificationsPageContent({
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-80px" }}
                   transition={{ duration: 0.55, delay: i * 0.06, ease: [0.16, 1, 0.3, 1] }}
-                  className="group overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-deep-green/10"
                 >
-                  <div className="relative aspect-[3/4] w-full overflow-hidden">
-                    <Image
-                      src={img}
-                      alt={`${c.title} certificate`}
-                      fill
-                      sizes="(max-width: 768px) 50vw, 20vw"
-                      className="object-cover transition-transform duration-700 group-hover:scale-105"
-                    />
-                  </div>
-                  <div className="flex items-center justify-between gap-2 p-4">
-                    <p className="text-sm font-medium text-ink">{c.title}</p>
-                    {c.downloadHref && (
-                      <a
-                        href={c.downloadHref}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={`View ${c.title} certificate`}
-                        className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-accent/10 text-accent transition-colors hover:bg-accent hover:text-white"
-                      >
+                  <a
+                    href={c.downloadHref}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`View ${c.title} certificate`}
+                    className="group block overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-deep-green/10"
+                  >
+                    <div className="relative aspect-[3/4] w-full overflow-hidden">
+                      <Image
+                        src={img}
+                        alt={`${c.title} certificate`}
+                        fill
+                        sizes="(max-width: 640px) 100vw, 50vw"
+                        className="object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
+                    </div>
+                    <div className="flex items-center justify-between gap-2 p-4">
+                      <p className="text-sm font-medium text-ink">{c.title}</p>
+                      <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-accent/10 text-accent transition-colors group-hover:bg-accent group-hover:text-white">
                         <Eye className="h-4 w-4" />
-                      </a>
-                    )}
-                  </div>
+                      </span>
+                    </div>
+                  </a>
                 </motion.li>
               );
             })}
