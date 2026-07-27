@@ -166,7 +166,11 @@ export default function Hero({
                   {wi < row.split(" ").length - 1 && " "}
                 </Fragment>
               ))}
-              {ri < headingRows.length - 1 ? "," : ""}
+              {ri < headingRows.length - 1 && (
+                <span className="inline-block overflow-hidden pb-[0.15em] align-bottom">
+                  <span className="hero-char inline-block">,</span>
+                </span>
+              )}
             </span>
           ))}
         </h1>
