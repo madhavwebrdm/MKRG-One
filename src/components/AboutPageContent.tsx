@@ -78,6 +78,8 @@ export type AboutPageData = {
         heading?: string | null;
         intro?: string | null;
         entries?: Array<{ year?: string | null; title?: string | null; body?: string | null }> | null;
+        closingHeading?: string | null;
+        closingBody?: string | null;
       }
     | null;
 } | null;
@@ -495,6 +497,18 @@ export default function AboutPageContent({ data }: { data?: AboutPageData }) {
               );
             })}
           </ol>
+
+          <div className="mx-auto mt-20 max-w-3xl text-center">
+            <AnimatedHeading className="font-serif text-3xl leading-tight text-ink sm:text-4xl lg:text-5xl">
+              {str(timeline?.closingHeading, "The next chapter, already underway.")}
+            </AnimatedHeading>
+            <p className="mt-5 text-base leading-relaxed text-body sm:text-lg">
+              {str(
+                timeline?.closingBody,
+                "Four decades of recycling zinc waste have built more than infrastructure, they've built a way of operating. The same discipline now points toward more capacity, more recovery and more markets, without compromising the standards that got us here.",
+              )}
+            </p>
+          </div>
         </div>
       </section>
 

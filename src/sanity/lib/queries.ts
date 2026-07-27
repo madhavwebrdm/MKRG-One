@@ -158,6 +158,7 @@ export const ABOUT_PAGE_QUERY = defineQuery(`
     timeline{
       eyebrow, heading, intro,
       entries[]{ year, title, body },
+      closingHeading, closingBody,
       closingCtaLabel, closingCtaHref
     },
     ${SEO_FRAGMENT}

@@ -31,17 +31,6 @@ export const aboutPage = defineType({
     }),
 
     defineField({
-      name: "sustainabilityStatement",
-      title: "Sustainability statement",
-      type: "object",
-      group: "content",
-      fields: [
-        defineField({ name: "heading", type: "string", initialValue: "Driving Sustainable Change" }),
-        defineField({ name: "body", type: "text", rows: 6 }),
-      ],
-    }),
-
-    defineField({
       name: "values",
       title: "Values",
       type: "object",
@@ -170,8 +159,32 @@ export const aboutPage = defineType({
             }),
           ],
         }),
+        defineField({
+          name: "closingHeading",
+          title: "Closing heading",
+          description: "Title shown after the timeline ends.",
+          type: "string",
+        }),
+        defineField({
+          name: "closingBody",
+          title: "Closing text",
+          description: "Paragraph shown after the timeline ends.",
+          type: "text",
+          rows: 4,
+        }),
         defineField({ name: "closingCtaLabel", type: "string" }),
         defineField({ name: "closingCtaHref", type: "string" }),
+      ],
+    }),
+
+    defineField({
+      name: "sustainabilityStatement",
+      title: "Sustainability statement",
+      type: "object",
+      group: "content",
+      fields: [
+        defineField({ name: "heading", type: "string", initialValue: "Driving Sustainable Change" }),
+        defineField({ name: "body", type: "text", rows: 6 }),
       ],
     }),
 
