@@ -19,10 +19,8 @@ type Props = {
 };
 
 const DEFAULTS: Badge[] = [
-  { label: "ISO 9001 / 14001", issuer: "Quality & Environmental Management" },
-  { label: "MOEFCC", issuer: "Ministry of Environment, Forest & Climate Change" },
-  { label: "GPCB", issuer: "Gujarat Pollution Control Board" },
-  { label: "EHS Program", issuer: "Environment, Health & Safety" },
+  { label: "ISO 9001", issuer: "Quality Management System" },
+  { label: "Zinc Extraction Patent", issuer: "The Patent Office, Government of India" },
 ];
 
 const container = {
@@ -101,7 +99,7 @@ export default function CertificationsTeaser({
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: "-80px" }}
-          className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4"
+          className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2"
         >
           {badges.map((b, i) => (
             <motion.li key={`${b.label}-${i}`} variants={item}>
