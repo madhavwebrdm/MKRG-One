@@ -6,6 +6,7 @@ import { homePage } from "./homePage";
 import { aboutPage } from "./aboutPage";
 import { sustainabilityPage } from "./sustainabilityPage";
 import { processesPage } from "./processesPage";
+import { projectsPage } from "./projectsPage";
 import { productPage } from "./productPage";
 import { csrPage } from "./csrPage";
 import { ehsPage } from "./ehsPage";
@@ -35,6 +36,7 @@ export const SINGLETON_TYPES = [
   "aboutPage",
   "sustainabilityPage",
   "processesPage",
+  "projectsPage",
   "productPage",
   "csrPage",
   "ehsPage",
@@ -51,6 +53,7 @@ export const schemaTypes: SchemaTypeDefinition[] = [
   aboutPage,
   sustainabilityPage,
   processesPage,
+  projectsPage,
   productPage,
   csrPage,
   ehsPage,

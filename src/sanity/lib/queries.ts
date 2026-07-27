@@ -214,6 +214,49 @@ export const PROCESSES_PAGE_QUERY = defineQuery(`
   }
 `);
 
+export const PROJECTS_PAGE_QUERY = defineQuery(`
+  *[_type == "projectsPage"][0]{
+    ${HERO_FRAGMENT},
+    highlights{
+      eyebrow, heading,
+      items[]{ title, icon }
+    },
+    overview{
+      eyebrow, heading, body,
+      "imageUrl": image.asset->url, "imageAlt": image.alt
+    },
+    challenge{
+      eyebrow, heading, body,
+      "backgroundImageUrl": backgroundImage.asset->url, "backgroundImageAlt": backgroundImage.alt
+    },
+    timeline{
+      eyebrow, heading, intro,
+      entries[]{ year, title, body }
+    },
+    process{
+      eyebrow, heading, intro,
+      steps[]{ title, body, icon },
+      capacityStats[]{ value, label }
+    },
+    impact{
+      eyebrow, heading, intro,
+      achievements,
+      "imageUrl": image.asset->url, "imageAlt": image.alt
+    },
+    circularEconomy{
+      eyebrow, heading, intro,
+      items[]{ title, icon }
+    },
+    stats{
+      eyebrow, heading, intro,
+      items[]{ value, suffix, label, note }
+    },
+    partnership{ eyebrow, heading, body },
+    futureVision{ eyebrow, heading, body },
+    ${SEO_FRAGMENT}
+  }
+`);
+
 export const PRODUCT_PAGE_QUERY = defineQuery(`
   *[_type == "productPage"][0]{
     ${HERO_FRAGMENT},
@@ -240,7 +283,8 @@ export const PRODUCT_PAGE_QUERY = defineQuery(`
         name, description,
         "imageUrl": image.asset->url, "imageAlt": image.alt
       },
-      calloutTitle, calloutBody
+      calloutTitle, calloutBody,
+      noteHeading, noteBody
     },
     closingCta{ heading, body, primaryLabel, primaryHref },
     ${SEO_FRAGMENT}

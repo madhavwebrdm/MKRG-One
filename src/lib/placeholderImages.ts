@@ -181,6 +181,15 @@ export const PLACEHOLDER_IMAGES = {
     u(PHOTO.overheadCrane, 800, 600),
   ],
 
+  // Projects page (Waste Recycling Division, Mandi Gobindgarh)
+  // Real plant/product photography where available, matching the CSR page precedent.
+  projects: {
+    hero: "/images/Zinc%20Feedstock.png",
+    overview: "/images/washing-and-prep.jpg",
+    challengeBg: "/images/purification.jpg",
+    impact: "/images/zinc-recovery.png",
+  },
+
   // Leadership page
   leadershipHero:
     "https://images.pexels.com/photos/776615/pexels-photo-776615.jpeg?auto=compress&cs=tinysrgb&w=1600&h=1000&fit=crop",
