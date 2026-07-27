@@ -36,6 +36,8 @@ type SectionData = {
   products?: Array<SanityImg & { name?: string | null; description?: string | null }> | null;
   calloutTitle?: string | null;
   calloutBody?: string | null;
+  noteHeading?: string | null;
+  noteBody?: string | null;
 };
 
 export type ProductPageData = {
@@ -356,6 +358,13 @@ export default function ProductPageContent({ data }: { data?: ProductPageData })
             "Every tonne of zinc recovered represents hazardous waste diverted from landfill and valuable material returned to industrial use.",
           ),
         }}
+        note={{
+          heading: str(zn?.noteHeading, "Built for consistent, certified supply."),
+          body: str(
+            zn?.noteBody,
+            "Every batch is tested for purity and traceable back to the waste stream it was recovered from, so partners can plan around a supply that meets specification every time.",
+          ),
+        }}
       />
 
       {/* CTA */}
@@ -398,6 +407,7 @@ type ProductRangeProps = {
   items: RangeItem[];
   columns: 3 | 4;
   callout: { title: string; body: string };
+  note?: { heading: string; body: string };
 };
 
 function ProductRange({
@@ -409,6 +419,7 @@ function ProductRange({
   items,
   columns,
   callout,
+  note,
 }: ProductRangeProps) {
   const sectionBg = background === "beige" ? "bg-beige" : "bg-white";
   const gridCols =
@@ -459,6 +470,23 @@ function ProductRange({
             </motion.li>
           ))}
         </ul>
+
+        {note && (
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.6, ease: EASE }}
+            className="mt-14 max-w-3xl"
+          >
+            <h3 className="font-serif text-2xl leading-snug text-ink sm:text-3xl">
+              {note.heading}
+            </h3>
+            <p className="mt-4 text-base leading-relaxed text-body sm:text-lg">
+              {note.body}
+            </p>
+          </motion.div>
+        )}
 
         <motion.div
           initial={{ opacity: 0, y: 24 }}

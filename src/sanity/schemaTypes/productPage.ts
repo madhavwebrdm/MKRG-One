@@ -124,6 +124,19 @@ export const productPage = defineType({
         productRange(),
         defineField({ name: "calloutTitle", type: "string" }),
         defineField({ name: "calloutBody", type: "text", rows: 3 }),
+        defineField({
+          name: "noteHeading",
+          title: "Note heading",
+          description: "Plain heading shown after the callout box.",
+          type: "string",
+        }),
+        defineField({
+          name: "noteBody",
+          title: "Note text",
+          description: "Plain paragraph shown after the callout box.",
+          type: "text",
+          rows: 4,
+        }),
       ],
     }),
 
