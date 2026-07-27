@@ -14,6 +14,8 @@ type Item = {
   source?: string | null;
   date?: string | null;
   href?: string | null;
+  imageUrl?: string | null;
+  imageAlt?: string | null;
 };
 
 type Props = {
@@ -107,7 +109,8 @@ export default function MediaTeaser({
           className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-3"
         >
           {items.map((it, i) => {
-            const img = PLACEHOLDER_IMAGES.mediaItems[i % PLACEHOLDER_IMAGES.mediaItems.length];
+            const img =
+              it.imageUrl || PLACEHOLDER_IMAGES.mediaItems[i % PLACEHOLDER_IMAGES.mediaItems.length];
             return (
               <motion.li key={`${it.title}-${i}`} variants={item}>
                 <TiltCard className="h-full">
@@ -118,7 +121,7 @@ export default function MediaTeaser({
                     <div className="relative aspect-[16/10] w-full overflow-hidden">
                       <Image
                         src={img}
-                        alt=""
+                        alt={it.imageAlt || ""}
                         fill
                         sizes="(max-width: 768px) 100vw, 33vw"
                         className="object-cover transition-transform duration-700 group-hover:scale-110"

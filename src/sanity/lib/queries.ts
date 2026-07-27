@@ -127,6 +127,10 @@ export const HOME_PAGE_QUERY = defineQuery(`
       eyebrow, heading, body,
       items[]{ kind, title, source, date, href },
       ctaLabel, ctaHref
+    },
+    "mediaArticles": *[_type == "mediaPage"][0].articlesSection.items | order(date desc) [0...3]{
+      "kind": topic, title, source, date, href,
+      "imageUrl": image.asset->url, "imageAlt": image.alt
     }
   }
 `);

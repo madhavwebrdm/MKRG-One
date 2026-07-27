@@ -81,6 +81,15 @@ type HomeData = {
     ctaLabel?: string;
     ctaHref?: string;
   };
+  mediaArticles?: Array<{
+    kind?: string | null;
+    title?: string | null;
+    source?: string | null;
+    date?: string | null;
+    href?: string | null;
+    imageUrl?: string | null;
+    imageAlt?: string | null;
+  }>;
 } | null;
 
 export default async function Home() {
@@ -105,7 +114,10 @@ export default async function Home() {
       <ParallaxImpact />
       <ProcessesTeaser {...(page?.processesTeaser ?? {})} />
       <CertificationsTeaser {...(page?.certificationsTeaser ?? {})} />
-      <MediaTeaser {...(page?.mediaTeaser ?? {})} />
+      <MediaTeaser
+        {...(page?.mediaTeaser ?? {})}
+        items={page?.mediaArticles?.length ? page.mediaArticles : page?.mediaTeaser?.items}
+      />
     </>
   );
 }
