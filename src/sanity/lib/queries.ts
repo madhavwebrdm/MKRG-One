@@ -288,7 +288,8 @@ export const PRODUCT_PAGE_QUERY = defineQuery(`
         "imageUrl": image.asset->url, "imageAlt": image.alt
       },
       calloutTitle, calloutBody,
-      noteHeading, noteBody
+      noteHeading, noteBody,
+      noteSpecs[]{ label, value }
     },
     closingCta{ heading, body, primaryLabel, primaryHref },
     ${SEO_FRAGMENT}

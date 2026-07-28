@@ -38,6 +38,7 @@ type SectionData = {
   calloutBody?: string | null;
   noteHeading?: string | null;
   noteBody?: string | null;
+  noteSpecs?: Array<{ label?: string | null; value?: string | null }> | null;
 };
 
 export type ProductPageData = {
@@ -153,6 +154,15 @@ const ZINC_RANGE: RangeItem[] = [
     desc: "Reliable raw material for downstream industrial processes.",
     image: IMG.zincRange[2],
   },
+];
+
+const ZINC_INGOT_SPECS: Array<{ label: string; value: string }> = [
+  { label: "Dimensions", value: "485 × 245 × 33 MM (L × W × T)" },
+  { label: "Weight", value: "25 KG per ingot" },
+  { label: "Bundle", value: "40 Ingots / Bundle · 1000 KG Total" },
+  { label: "Composition", value: "99.7% Purity" },
+  { label: "Testing", value: "MP-AES Tested for uniform purity" },
+  { label: "Plant Capacity", value: "6,000 MT P.A." },
 ];
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -364,6 +374,9 @@ export default function ProductPageContent({ data }: { data?: ProductPageData })
             zn?.noteBody,
             "Every batch is tested for purity and traceable back to the waste stream it was recovered from, so partners can plan around a supply that meets specification every time.",
           ),
+          specs: zn?.noteSpecs?.length
+            ? zn.noteSpecs.map((s) => ({ label: s.label ?? "", value: s.value ?? "" }))
+            : ZINC_INGOT_SPECS,
         }}
       />
 
@@ -407,7 +420,7 @@ type ProductRangeProps = {
   items: RangeItem[];
   columns: 3 | 4;
   callout: { title: string; body: string };
-  note?: { heading: string; body: string };
+  note?: { heading: string; body: string; specs?: Array<{ label: string; value: string }> };
 };
 
 function ProductRange({
@@ -472,20 +485,47 @@ function ProductRange({
         </ul>
 
         {note && (
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.6, ease: EASE }}
-            className="mt-14 max-w-3xl"
-          >
-            <h3 className="font-serif text-2xl leading-snug text-ink sm:text-3xl">
-              {note.heading}
-            </h3>
-            <p className="mt-4 text-base leading-relaxed text-body sm:text-lg">
-              {note.body}
-            </p>
-          </motion.div>
+          <div className="mt-14 grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-16">
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.6, ease: EASE }}
+            >
+              <h3 className="font-serif text-2xl leading-snug text-ink sm:text-3xl">
+                {note.heading}
+              </h3>
+              <p className="mt-4 text-base leading-relaxed text-body sm:text-lg">
+                {note.body}
+              </p>
+            </motion.div>
+
+            {note.specs && note.specs.length > 0 && (
+              <motion.div
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.6, delay: 0.1, ease: EASE }}
+                className="overflow-hidden rounded-2xl border border-deep-green/15 bg-white"
+              >
+                <dl className="divide-y divide-deep-green/10">
+                  {note.specs.map((s) => (
+                    <div
+                      key={s.label}
+                      className="flex items-baseline justify-between gap-6 px-6 py-4"
+                    >
+                      <dt className="text-sm font-medium uppercase tracking-wider text-muted">
+                        {s.label}
+                      </dt>
+                      <dd className="text-right text-sm leading-relaxed text-ink">
+                        {s.value}
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+              </motion.div>
+            )}
+          </div>
         )}
 
         <motion.div

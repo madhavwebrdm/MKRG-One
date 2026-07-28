@@ -127,15 +127,31 @@ export const productPage = defineType({
         defineField({
           name: "noteHeading",
           title: "Note heading",
-          description: "Plain heading shown after the callout box.",
+          description: "Plain heading shown above the callout box.",
           type: "string",
         }),
         defineField({
           name: "noteBody",
           title: "Note text",
-          description: "Plain paragraph shown after the callout box.",
+          description: "Plain paragraph shown above the callout box.",
           type: "text",
           rows: 4,
+        }),
+        defineField({
+          name: "noteSpecs",
+          title: "Note spec table",
+          description: "Label/value rows shown as a table to the right of the note text.",
+          type: "array",
+          of: [
+            defineArrayMember({
+              type: "object",
+              fields: [
+                defineField({ name: "label", type: "string", validation: (r) => r.required() }),
+                defineField({ name: "value", type: "string", validation: (r) => r.required() }),
+              ],
+              preview: { select: { title: "label", subtitle: "value" } },
+            }),
+          ],
         }),
       ],
     }),
