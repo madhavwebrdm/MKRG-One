@@ -357,11 +357,6 @@ export default function AboutPageContent({ data }: { data?: AboutPageData }) {
                 className="object-cover transition-transform duration-1000 hover:scale-110"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-deep-green/40 via-transparent to-transparent" />
-              <div className="absolute bottom-5 left-5 right-5 flex items-center gap-3 rounded-2xl bg-white/90 px-5 py-3.5 backdrop-blur">
-                <p className="text-sm font-medium text-ink">
-                  {str(brandIdentity?.caption, "Madhav KRG Group, the mother brand for everything we recycle.")}
-                </p>
-              </div>
             </motion.div>
 
             <div className="lg:col-span-7">
