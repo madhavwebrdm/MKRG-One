@@ -7,7 +7,13 @@ import AnimatedHeading from "./AnimatedHeading";
 
 const DEFAULT_HEADING = "Every Recycled Tonne\nIs a Step Towards\na Greener Earth.";
 
-export default function ParallaxImpact({ heading }: { heading?: string }) {
+export default function ParallaxImpact({
+  heading,
+  imageUrl,
+}: {
+  heading?: string;
+  imageUrl?: string;
+}) {
   const root = useRef<HTMLElement>(null);
 
   return (
@@ -16,7 +22,7 @@ export default function ParallaxImpact({ heading }: { heading?: string }) {
       data-section="Parallax impact"
       className="relative isolate flex min-h-screen items-center justify-center overflow-hidden bg-ink text-white"
       style={{
-        backgroundImage: `url(${PLACEHOLDER_IMAGES.parallaxImpact})`,
+        backgroundImage: `url(${imageUrl ?? PLACEHOLDER_IMAGES.parallaxImpact})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundAttachment: "fixed",

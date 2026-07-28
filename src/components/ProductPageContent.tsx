@@ -347,7 +347,10 @@ export default function ProductPageContent({ data }: { data?: ProductPageData })
         }}
       />
 
-      <ParallaxImpact heading={"Recycled. Certified.\nReady for Industry."} />
+      <ParallaxImpact
+        heading={"Recycled. Certified.\nReady for Industry."}
+        imageUrl="/images/product-parallax.jpeg"
+      />
 
       {/* Zinc detail */}
       <ProductRange
