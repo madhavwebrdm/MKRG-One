@@ -319,7 +319,7 @@ export default function SustainabilityPageContent({
             >
               <Image
                 src={PLACEHOLDER_IMAGES.sustStatsAccent}
-                alt="Electric arc furnace"
+                alt="MKRG plant, APCD dust collection and stack infrastructure"
                 fill
                 sizes="(max-width: 1024px) 100vw, 40vw"
                 className="object-cover"

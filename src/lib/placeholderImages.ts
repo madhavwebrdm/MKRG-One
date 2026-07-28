@@ -119,7 +119,7 @@ export const PLACEHOLDER_IMAGES = {
     u(PHOTO.moltenPour, 900, 1100),
     u(PHOTO.steelRodsGray, 900, 1100),
   ],
-  metricsBg: u(PHOTO.factoryInterior, 1800, 1000),
+  metricsBg: "/images/sustainability-recycling-stats.jpeg",
   missionVision: u(PHOTO.workersOnMetal, 900, 1100),
   sustainability1: u(PHOTO.aerialForest, 800, 900),
   sustainability2: u(PHOTO.solarGreenField, 800, 900),
@@ -154,7 +154,7 @@ export const PLACEHOLDER_IMAGES = {
 
   // Sustainability page
   sustHero: u(PHOTO.aerialForest, 1600, 1000),
-  sustStatsAccent: u(PHOTO.factoryInterior, 1200, 900),
+  sustStatsAccent: "/images/sustainability-recycling-stats.jpeg",
   sustPillars: [
     u(PHOTO.pineTrees, 800, 700),
     u(PHOTO.forestRoad, 800, 700),

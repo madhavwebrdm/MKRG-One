@@ -59,7 +59,7 @@ export default function MissionVisionTeaser({
             data-cursor="grow"
           >
             <Image
-              src={imageUrl || "/images/mkrg-1.jpeg"}
+              src={imageUrl || "/images/home-about-plant.jpeg"}
               alt="Madhav KRG Group operations"
               fill
               sizes="(max-width: 1024px) 100vw, 40vw"
