@@ -400,7 +400,7 @@ export default function AboutPageContent({ data }: { data?: AboutPageData }) {
                 viewport={{ once: true, margin: "-80px" }}
                 transition={{ duration: 0.6, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
               >
-                <TiltCard className="group h-full overflow-hidden rounded-2xl bg-white">
+                <div className="group h-full overflow-hidden rounded-2xl bg-white shadow-sm transition-shadow duration-300 hover:shadow-lg">
                   <div className="relative aspect-[5/3] w-full overflow-hidden">
                     <Image
                       src={d.image}
@@ -419,7 +419,7 @@ export default function AboutPageContent({ data }: { data?: AboutPageData }) {
                       {d.body}
                     </p>
                   </div>
-                </TiltCard>
+                </div>
               </motion.li>
             ))}
           </ul>
