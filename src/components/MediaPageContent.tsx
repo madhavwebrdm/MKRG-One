@@ -3,14 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import {
-  ArrowRight,
-  ArrowUpRight,
-  FileText,
-  Mic,
-  Newspaper,
-  Play,
-} from "lucide-react";
+import { ArrowRight, Play } from "lucide-react";
 
 import { PLACEHOLDER_IMAGES } from "@/lib/placeholderImages";
 import AnimatedHeading from "./AnimatedHeading";
@@ -53,85 +46,6 @@ const ARTICLES: Article[] = [
   },
 ];
 
-type NewsKind = "Certification" | "Expansion" | "CSR" | "Milestone";
-
-type NewsItem = {
-  kind: NewsKind;
-  title: string;
-  body: string;
-  date: string;
-  href: string;
-  imageUrl?: string;
-};
-
-const COMPANY_NEWS: NewsItem[] = [
-  {
-    kind: "Certification",
-    title: "MKRG renews ISO 14001 across all operating plants",
-    body: "Re-certification confirms continued conformance to international environmental management standards.",
-    date: "2026-04-10",
-    href: "#",
-  },
-  {
-    kind: "Expansion",
-    title: "Mehsana Recycle2X plant adds 120K tpa zinc capacity",
-    body: "New leaching and electrolyzation line commissioned, lifting zinc throughput by ~35%.",
-    date: "2026-03-02",
-    href: "#",
-  },
-  {
-    kind: "CSR",
-    title: "Mehsana school infrastructure program reaches 12,000 students",
-    body: "Year four of MKRG's school CSR initiative completes upgrades across 24 schools in the plant catchment.",
-    date: "2026-02-15",
-    href: "#",
-  },
-  {
-    kind: "Milestone",
-    title: "1 million tonnes of steel recycled this financial year",
-    body: "An eight-figure milestone for the group and an eight-figure amount of virgin ore left in the ground.",
-    date: "2026-01-05",
-    href: "#",
-  },
-];
-
-type PressRelease = {
-  title: string;
-  summary: string;
-  date: string;
-  href: string;
-};
-
-const PRESS_RELEASES: PressRelease[] = [
-  {
-    title: "Madhav KRG Group expands recycled steel capacity at Mehsana plant",
-    summary:
-      "Formal announcement of the new EAC line, projected to add 250K tpa of structural-grade recycled steel.",
-    date: "2026-04-22",
-    href: "#",
-  },
-  {
-    title: "MKRG signs MOU with municipal authorities for hazardous-waste pickup",
-    summary:
-      "Public-private partnership formalises hazardous-waste collection across three districts in Gujarat.",
-    date: "2026-03-11",
-    href: "#",
-  },
-  {
-    title: "Recycle2X process whitepaper released for industry partners",
-    summary:
-      "Technical whitepaper detailing input streams, conversion ratios and APCD performance is now available.",
-    date: "2026-02-08",
-    href: "#",
-  },
-  {
-    title: "MKRG announces 75% renewable energy target by 2030",
-    summary:
-      "Group-wide commitment to lift renewable-energy share from the current 42% to 75% within five years.",
-    date: "2026-01-18",
-    href: "#",
-  },
-];
 
 type VideoItem = {
   title: string;
@@ -169,21 +83,6 @@ export type MediaPageData = {
     href?: string | null;
     imageUrl?: string | null;
   }>;
-  companyNewsSection?: ItemsSection<{
-    kind?: string | null;
-    title?: string | null;
-    body?: string | null;
-    date?: string | null;
-    href?: string | null;
-    imageUrl?: string | null;
-  }>;
-  pressReleasesSection?: ItemsSection<{
-    title?: string | null;
-    summary?: string | null;
-    date?: string | null;
-    href?: string | null;
-    downloadUrl?: string | null;
-  }>;
   videosSection?: ItemsSection<{
     title?: string | null;
     duration?: string | null;
@@ -203,18 +102,9 @@ function formatDate(input: string) {
   });
 }
 
-const NEWS_ICON: Record<NewsKind, typeof Newspaper> = {
-  Certification: FileText,
-  Expansion: ArrowUpRight,
-  CSR: Mic,
-  Milestone: ArrowUpRight,
-};
-
 export default function MediaPageContent({ data }: { data?: MediaPageData }) {
   const hero = data?.hero;
   const articlesSection = data?.articlesSection;
-  const companyNewsSection = data?.companyNewsSection;
-  const pressReleasesSection = data?.pressReleasesSection;
   const videosSection = data?.videosSection;
 
   const articles: Article[] = articlesSection?.items?.length
@@ -227,26 +117,6 @@ export default function MediaPageContent({ data }: { data?: MediaPageData }) {
         imageUrl: a.imageUrl ?? undefined,
       }))
     : ARTICLES;
-
-  const companyNews: NewsItem[] = companyNewsSection?.items?.length
-    ? companyNewsSection.items.map((n) => ({
-        kind: (n.kind as NewsKind) || "Milestone",
-        title: n.title ?? "",
-        body: n.body ?? "",
-        date: n.date ?? "",
-        href: n.href || "#",
-        imageUrl: n.imageUrl ?? undefined,
-      }))
-    : COMPANY_NEWS;
-
-  const pressReleases: PressRelease[] = pressReleasesSection?.items?.length
-    ? pressReleasesSection.items.map((p) => ({
-        title: p.title ?? "",
-        summary: p.summary ?? "",
-        date: p.date ?? "",
-        href: p.href || p.downloadUrl || "#",
-      }))
-    : PRESS_RELEASES;
 
   const videos: VideoItem[] = videosSection?.items?.length
     ? videosSection.items.map((v, i) => {
@@ -341,137 +211,6 @@ export default function MediaPageContent({ data }: { data?: MediaPageData }) {
                     </div>
                   </Link>
                 </TiltCard>
-              </motion.li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      {/* Company news */}
-      <section className="bg-beige py-24 sm:py-32">
-        <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
-          <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-            <div className="max-w-2xl">
-              <span className="text-xs uppercase tracking-[0.2em] text-accent">
-                {str(companyNewsSection?.eyebrow, "Company news")}
-              </span>
-              <AnimatedHeading className="mt-3 font-serif text-3xl leading-tight text-ink sm:text-4xl lg:text-5xl">
-                {str(companyNewsSection?.heading, "Certifications, expansions, CSR and milestones.")}
-              </AnimatedHeading>
-            </div>
-          </div>
-
-          <ul className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2">
-            {companyNews.map((n, i) => {
-              const Icon = NEWS_ICON[n.kind] ?? Newspaper;
-              return (
-                <motion.li
-                  key={n.title}
-                  initial={{ opacity: 0, y: 24 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-80px" }}
-                  transition={{ duration: 0.6, delay: i * 0.06, ease: [0.16, 1, 0.3, 1] }}
-                  className="group overflow-hidden rounded-2xl bg-white ring-1 ring-deep-green/10"
-                >
-                  <Link
-                    href={n.href}
-                    target={n.href.startsWith("http") ? "_blank" : undefined}
-                    rel={n.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                    className="grid grid-cols-1 sm:grid-cols-12"
-                  >
-                    <div className="relative aspect-[5/3] w-full overflow-hidden sm:col-span-5 sm:aspect-auto">
-                      <Image
-                        src={
-                          n.imageUrl ||
-                          PLACEHOLDER_IMAGES.mediaCompanyNews[
-                            i % PLACEHOLDER_IMAGES.mediaCompanyNews.length
-                          ]
-                        }
-                        alt=""
-                        fill
-                        sizes="(max-width: 768px) 100vw, 33vw"
-                        className="object-cover transition-transform duration-700 group-hover:scale-110"
-                      />
-                    </div>
-                    <div className="flex flex-col gap-3 p-7 sm:col-span-7">
-                      <div className="flex items-center gap-3 text-xs">
-                        <span className="inline-flex items-center gap-1.5 rounded-full bg-accent/10 px-3 py-1 font-medium uppercase tracking-wider text-accent">
-                          <Icon className="h-3.5 w-3.5" />
-                          {n.kind}
-                        </span>
-                        <span className="text-muted">{formatDate(n.date)}</span>
-                      </div>
-                      <h3 className="font-serif text-xl leading-snug text-ink group-hover:text-deep-green">
-                        {n.title}
-                      </h3>
-                      <p className="text-sm leading-relaxed text-body">{n.body}</p>
-                    </div>
-                  </Link>
-                </motion.li>
-              );
-            })}
-          </ul>
-        </div>
-      </section>
-
-      {/* Press releases */}
-      <section className="bg-deep-green py-24 sm:py-32">
-        <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
-          <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-            <div className="max-w-2xl">
-              <span className="text-xs uppercase tracking-[0.2em] text-white/60">
-                {str(pressReleasesSection?.eyebrow, "Press releases")}
-              </span>
-              <AnimatedHeading className="mt-3 font-serif text-3xl leading-tight text-white sm:text-4xl lg:text-5xl">
-                {str(pressReleasesSection?.heading, "Formal announcements for the media.")}
-              </AnimatedHeading>
-              <p className="mt-5 text-base leading-relaxed text-white/80 sm:text-lg">
-                Journalists, analysts and partners every release is here, in
-                chronological order, with full PDFs available on request.
-              </p>
-            </div>
-            <Link
-              href="/media/press-releases"
-              className="inline-flex items-center gap-2 text-sm font-medium text-white underline-offset-4 hover:underline"
-            >
-              View full archive
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
-
-          <ul className="mt-12 divide-y divide-white/10 rounded-2xl border border-white/15 bg-white/5">
-            {pressReleases.map((p, i) => (
-              <motion.li
-                key={p.title}
-                initial={{ opacity: 0, x: -16 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: "-80px" }}
-                transition={{ duration: 0.5, delay: i * 0.05, ease: [0.16, 1, 0.3, 1] }}
-              >
-                <Link
-                  href={p.href}
-                  target={p.href.startsWith("http") ? "_blank" : undefined}
-                  rel={p.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                  className="group flex flex-col gap-2 p-6 transition-colors hover:bg-white/10 sm:flex-row sm:items-start sm:justify-between sm:gap-8 sm:p-8"
-                >
-                  <div className="flex flex-1 items-start gap-4">
-                    <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white/15 text-white">
-                      <FileText className="h-4 w-4" />
-                    </span>
-                    <div>
-                      <p className="text-xs font-medium uppercase tracking-wider text-white/55">
-                        {formatDate(p.date)}
-                      </p>
-                      <h3 className="mt-2 font-serif text-xl leading-snug text-white group-hover:text-white/80">
-                        {p.title}
-                      </h3>
-                      <p className="mt-2 text-sm leading-relaxed text-white/70">
-                        {p.summary}
-                      </p>
-                    </div>
-                  </div>
-                  <ArrowRight className="hidden h-5 w-5 shrink-0 self-center text-white/50 transition-transform group-hover:translate-x-1 sm:block" />
-                </Link>
               </motion.li>
             ))}
           </ul>

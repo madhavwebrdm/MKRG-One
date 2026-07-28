@@ -373,20 +373,6 @@ export const MEDIA_PAGE_QUERY = defineQuery(`
         "imageUrl": image.asset->url, "imageAlt": image.alt
       }
     },
-    companyNewsSection{
-      eyebrow, heading,
-      items[]{
-        kind, title, body, date, href,
-        "imageUrl": image.asset->url, "imageAlt": image.alt
-      }
-    },
-    pressReleasesSection{
-      eyebrow, heading,
-      items[]{
-        title, summary, date, href,
-        "downloadUrl": downloadFile.asset->url
-      }
-    },
     videosSection{
       eyebrow, heading,
       items[]{
