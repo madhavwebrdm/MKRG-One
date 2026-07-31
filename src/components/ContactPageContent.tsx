@@ -6,7 +6,6 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
-  Briefcase,
   Building2,
   CheckCircle2,
   Factory,
@@ -33,7 +32,7 @@ import {
 const str = (v: string | null | undefined, fallback: string): string =>
   v && v.trim() ? v : fallback;
 
-const DEFAULT_PRODUCT_OPTIONS = ["TMT", "PIPE", "COIL", "ZINC", "LEAD"];
+const DEFAULT_PRODUCT_OPTIONS = ["Zinc Ingots", "Zinc Sheets", "Zinc Feedstock"];
 
 export type ContactPageData = {
   hero?:
@@ -52,33 +51,12 @@ type ContactLineView = { label: string; Icon: LucideIcon; value: string; href: s
 
 const OFFICES = [
   {
-    label: "Registered office",
-    icon: Building2,
-    lines: [
-      "Madhav KRG Group",
-      "1002-3 Agarwal Millennium Tower",
-      "Netaji Subhash Place",
-      "New Delhi 110034",
-      "India",
-    ],
-  },
-  {
-    label: "Corporate office",
-    icon: Briefcase,
-    lines: [
-      "Level 1, Celebration Bazaar",
-      "GT Road, Khanna",
-      "Punjab 141401",
-      "India",
-    ],
-  },
-  {
-    label: "Work office",
+    label: "Office",
     icon: Factory,
     lines: [
-      "Vill. Akalgarh, Amloh-Bhadson Road",
-      "Near Toll Plaza, Dist Patiala",
-      "Punjab 147203",
+      "Madhav KRG Environmental Solutions Pvt. Ltd.",
+      "Vill. Bhadal Thuha, Amloh Bhadson Road",
+      "Distt. Fatehgarh Sahib, Punjab",
       "India",
     ],
   },

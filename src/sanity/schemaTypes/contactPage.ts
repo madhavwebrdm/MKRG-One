@@ -97,7 +97,7 @@ export const contactPage = defineType({
           type: "array",
           of: [{ type: "string" }],
           description:
-            "Short product codes shown as selectable chips (e.g. TMT, PIPE, COIL, ZINC, LEAD).",
+            "Product names shown as selectable chips (e.g. Zinc Ingots, Zinc Sheets, Zinc Feedstock).",
         }),
         defineField({ name: "submitLabel", type: "string", initialValue: "Send enquiry" }),
         defineField({ name: "successMessage", type: "string" }),
