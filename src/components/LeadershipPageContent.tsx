@@ -79,19 +79,6 @@ const RAHUL: Principal = {
   ],
 };
 
-const RANDHIR: Principal = {
-  name: "Randhir Singh Rathaur",
-  title: "President Sales & Marketing",
-  portrait: "/images/leadership/team8.jpg",
-  pullQuote:
-    "Every tonne we move is a relationship we've earned, with customers, transporters and partners who trust Madhav KRG Group to deliver, every time.",
-  body: [
-    "Sales in this industry isn't won with a single order, it's won by being the mill a customer calls first when the market gets tight. That reputation is built shipment by shipment, not campaign by campaign.",
-    "We work directly with contractors, dealers and infrastructure players across the region, carrying what the market needs back to the plant floor so our production stays aligned with real demand.",
-    "Growth, for us, means widening the base of customers who choose Madhav KRG Group not because we are the cheapest, but because we are the most dependable.",
-  ],
-};
-
 const resolvePrincipal = (input: PrincipalInput | undefined, fallback: Principal): ResolvedPrincipal => {
   const name = str(input?.name, fallback.name);
   const title = str(input?.role, fallback.title);
@@ -118,7 +105,7 @@ export default function LeadershipPageContent({
   const md = resolvePrincipal(data?.founder, MD);
   const director = resolvePrincipal(data?.director, DIRECTOR);
 
-  const additionalFallbacks = [RAHUL, RANDHIR];
+  const additionalFallbacks = [RAHUL];
   const additionalLeaders: ResolvedPrincipal[] = data?.additionalLeaders?.length
     ? data.additionalLeaders.map((leader, i) =>
         resolvePrincipal(leader, {
