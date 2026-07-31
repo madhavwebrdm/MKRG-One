@@ -312,7 +312,19 @@ export const CSR_PAGE_QUERY = defineQuery(`
 export const EHS_PAGE_QUERY = defineQuery(`
   *[_type == "ehsPage"][0]{
     ${HERO_FRAGMENT},
-    comingSoon{ eyebrow, heading, body },
+    overview{ eyebrow, heading, body },
+    environment{
+      eyebrow, heading, intro,
+      items[]{ title, body, icon }
+    },
+    health{
+      eyebrow, heading, intro,
+      items[]{ title, body, icon }
+    },
+    safety{
+      eyebrow, heading, intro,
+      items[]{ title, body, icon }
+    },
     closingCta{ heading, body, primaryLabel, primaryHref },
     ${SEO_FRAGMENT}
   }
