@@ -1,6 +1,6 @@
 ﻿# MKRG-One
 
-Steel recycling / sustainability website. Next.js 15 + Sanity + Vercel, animated with GSAP and Framer Motion.
+Zinc recycling / sustainability website. Next.js 15 + Sanity + Vercel, animated with GSAP and Framer Motion.
 
 ## Stack
 

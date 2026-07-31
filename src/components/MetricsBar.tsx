@@ -21,7 +21,7 @@ type Props = {
 
 const DEFAULTS: Metric[] = [
   { value: 1.2, suffix: "M t", label: "CO₂ offset", note: "Annual avoided emissions" },
-  { value: 850, suffix: "K t", label: "Tonnes recycled", note: "Steel, zinc, lead last FY" },
+  { value: 18, suffix: "K t", label: "Tonnes recycled", note: "Zinc recovered last FY" },
   { value: 42, suffix: "%", label: "Renewable energy", note: "Powering our plants" },
 ];
 

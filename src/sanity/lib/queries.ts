@@ -200,10 +200,6 @@ export const SUSTAINABILITY_PAGE_QUERY = defineQuery(`
 export const PROCESSES_PAGE_QUERY = defineQuery(`
   *[_type == "processesPage"][0]{
     ${HERO_FRAGMENT},
-    scrapToSteel{
-      eyebrow, heading, body, accent,
-      steps[]{ label, icon }
-    },
     wasteToZinc{
       eyebrow, heading, body, accent,
       steps[]{ label, icon }
@@ -272,14 +268,6 @@ export const PRODUCT_PAGE_QUERY = defineQuery(`
         productsIncluded, applications,
         ctaLabel, ctaHref
       }
-    },
-    greenSteel{
-      eyebrow, heading, intro,
-      products[]{
-        name, description,
-        "imageUrl": image.asset->url, "imageAlt": image.alt
-      },
-      calloutTitle, calloutBody
     },
     zinc{
       eyebrow, heading, intro,

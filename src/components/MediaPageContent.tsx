@@ -25,7 +25,7 @@ type Article = {
 const ARTICLES: Article[] = [
   {
     topic: "Recycling innovation",
-    title: "How India's recyclers are rebuilding steel without rebuilding the planet",
+    title: "How India's recyclers are turning hazardous waste into high-purity zinc",
     source: "Economic Times",
     date: "2026-03-18",
     href: "#",
@@ -39,7 +39,7 @@ const ARTICLES: Article[] = [
   },
   {
     topic: "Circular economy",
-    title: "From scrap to spec: the case for closed-loop steel in Indian infrastructure",
+    title: "From waste to spec: the case for closed-loop zinc in Indian industry",
     source: "Business Standard",
     date: "2026-01-22",
     href: "#",

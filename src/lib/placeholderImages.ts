@@ -1,6 +1,6 @@
 ﻿/**
  * Curated Unsplash photos chosen to match MKRG's brand:
- * steel recycling, foundry operations, renewable energy, and Indian infrastructure.
+ * zinc recycling, industrial operations, renewable energy, and Indian infrastructure.
  *
  * Swap with real Sanity-uploaded brand photography when assets land.
  */
@@ -10,10 +10,8 @@ const u = (id: string, w: number, h: number) =>
 
 // --- Photo library (semantic IDs so it's easy to swap or reuse) ---
 const PHOTO = {
-  // Steel + foundry
-  moltenPour: "1697281679213-fcab27e10ad4", // molten metal being poured
+  // Industrial / plant
   factoryInterior: "1496247749665-49cf5b1022e9", // large industrial factory interior
-  steelRolls: "1697698532634-ea59b636ccea", // rolls of steel in warehouse
   workersOnMetal: "1684259499227-e9844ab79747", // two men working on a metal piece
   overheadCrane: "1489689680823-fdc334aa73a4", // overhead crane in monochrome
   factoryExterior: "1743650050124-78df792c751d", // industrial factory building exterior
@@ -21,17 +19,14 @@ const PHOTO = {
 
   // Welding / process
   welderSparks: "1504328345606-18bbc8c9d7d1", // welder with bright sparks
-  welderFrame: "1455165814004-1126a7199f9b", // welder on steel frame
+  welderFrame: "1455165814004-1126a7199f9b", // welder working with a metal frame
   grinderSparks: "1564182998523-6923112e7d6b", // angle grinder with sparks
   welderClose: "1558611997-dd5b20e08c71", // welder close-up
 
-  // Steel products
-  metalRodsBundled: "1623428454598-1bfe414bac03", // bundled metal rods
-  steelRodsGray: "1520697517317-6767553cc51a", // pile of gray steel rods
+  // Metal products
   metalCylinders: "1681108212545-04cabe9cf771", // metal cylinders side by side
 
   // Scrap / recycling
-  scrapTrain: "1753104228785-66d4f53c2ac7", // train cars filled with scrap metal
   industrialRefuse: "1710189605189-9b7e94dc04cb", // pile of refuse inside industrial space
   wasteWorker: "1558583055-d7ac00b1adca", // person standing among waste containers
   wasteBins: "1722482445685-91a6b17d5d02", // row of coloured waste bins
@@ -75,21 +70,13 @@ const PHOTO = {
 
 export const PLACEHOLDER_IMAGES = {
   // Home Hero, metrics, mission, sustainability, processes, leadership, certs, media
-  hero: u(PHOTO.moltenPour, 1600, 1200),
+  hero: u(PHOTO.factoryExterior, 1600, 1200),
   parallaxImpact: u(PHOTO.aerialForest, 2400, 1400),
-  productsBg: u(PHOTO.steelRodsGray, 1600, 1000),
 
-  // Product page (overview cards + steel/zinc product ranges)
+  // Product page (zinc product range)
   product: {
-    hero: u(PHOTO.steelRolls, 1600, 1000),
-    greenSteel: "/images/finished-green-steel.jpg",
+    hero: "/images/Zinc%20Feedstock.png",
     zinc: "/images/zinc-recovery.png",
-    steelRange: [
-      u(PHOTO.metalRodsBundled, 800, 800), // TMT Bars
-      "/images/Structural%20Steel.jpg", // Structural Steel
-      "/images/Steel%20Pipes.jpg", // Steel Pipes
-      u(PHOTO.steelRolls, 800, 800), // Hot Rolled Coils
-    ],
     zincRange: [
       "/images/zinc-recovery.png", // Zinc Ingots
       "/images/Zinc%20Sheets.jpg", // Zinc Sheets
@@ -98,13 +85,6 @@ export const PLACEHOLDER_IMAGES = {
   },
 
   // Process flow step images one per step for the sticky-image scroll on home.
-  processSteel: [
-    u(PHOTO.scrapTrain, 900, 1100),
-    u(PHOTO.overheadCrane, 900, 1100),
-    u(PHOTO.moltenPour, 900, 1100),
-    u(PHOTO.workersOnMetal, 900, 1100),
-    u(PHOTO.metalRodsBundled, 900, 1100),
-  ],
   processZinc: [
     u(PHOTO.industrialRefuse, 900, 1100),
     u(PHOTO.wasteBins, 900, 1100),
@@ -112,26 +92,11 @@ export const PLACEHOLDER_IMAGES = {
     u(PHOTO.grinderSparks, 900, 1100),
     u(PHOTO.metalCylinders, 900, 1100),
   ],
-  products: [
-    u(PHOTO.metalRodsBundled, 900, 1100),
-    u(PHOTO.steelRolls, 900, 1100),
-    u(PHOTO.metalCylinders, 900, 1100),
-    u(PHOTO.moltenPour, 900, 1100),
-    u(PHOTO.steelRodsGray, 900, 1100),
-  ],
   metricsBg: "/images/sustainability-recycling-stats.jpeg",
   missionVision: u(PHOTO.workersOnMetal, 900, 1100),
   sustainability1: u(PHOTO.aerialForest, 800, 900),
   sustainability2: u(PHOTO.solarGreenField, 800, 900),
   sustainability3: u(PHOTO.wasteWorker, 800, 900),
-  processes: [
-    u(PHOTO.scrapTrain, 800, 600),
-    u(PHOTO.metalRodsBundled, 800, 600),
-    u(PHOTO.moltenPour, 800, 600),
-    u(PHOTO.metalCylinders, 800, 600),
-    u(PHOTO.factoryExterior, 800, 600),
-    u(PHOTO.steelRolls, 800, 600),
-  ],
   leadershipPortrait: u(PHOTO.portraitMan1, 900, 1100),
   leadershipBg: u(PHOTO.factoryInterior, 1800, 1000),
   certificationsAccent: u(PHOTO.overheadCrane, 1400, 900),
@@ -143,13 +108,13 @@ export const PLACEHOLDER_IMAGES = {
 
   // About page
   aboutHero: u(PHOTO.workersOnMetal, 1600, 1000),
-  aboutBrand: u(PHOTO.steelRolls, 1200, 1000),
+  aboutBrand: "/images/home-about-plant.jpeg",
   aboutTimeline: u(PHOTO.factoryExterior, 1600, 700),
   aboutDifferentiators: [
-    u(PHOTO.moltenPour, 800, 600),
+    u(PHOTO.industrialRefuse, 800, 600),
     u(PHOTO.factoryExterior, 800, 600),
-    u(PHOTO.metalRodsBundled, 800, 600),
-    u(PHOTO.steelRodsGray, 800, 600),
+    u(PHOTO.metalCylinders, 800, 600),
+    u(PHOTO.welderClose, 800, 600),
   ],
 
   // Sustainability page
@@ -171,15 +136,7 @@ export const PLACEHOLDER_IMAGES = {
   ],
 
   // Processes page
-  processesHero: u(PHOTO.moltenPour, 1600, 1000),
-  scrapToSteelBg: u(PHOTO.factoryInterior, 1600, 700),
-  wasteToZincBg: u(PHOTO.steelRolls, 1600, 700),
-  apcdAccent: u(PHOTO.factoryExterior, 1200, 800),
-  processesSubpages: [
-    u(PHOTO.factoryInterior, 800, 600),
-    u(PHOTO.metalRodsBundled, 800, 600),
-    u(PHOTO.overheadCrane, 800, 600),
-  ],
+  processesHero: u(PHOTO.weatheredFactory, 1600, 1000),
 
   // Projects page (Waste Recycling Division, Mandi Gobindgarh)
   // Real plant/product photography where available, matching the CSR page precedent.
@@ -221,13 +178,7 @@ export const PLACEHOLDER_IMAGES = {
   mediaArticles: [
     u(PHOTO.factoryInterior, 800, 600),
     u(PHOTO.aerialForest, 800, 600),
-    u(PHOTO.metalRodsBundled, 800, 600),
-  ],
-  mediaCompanyNews: [
-    u(PHOTO.awardPlaque, 800, 600),
-    u(PHOTO.factoryInterior, 800, 600),
-    u(PHOTO.wasteWorker, 800, 600),
-    u(PHOTO.steelRolls, 800, 600),
+    u(PHOTO.metalCylinders, 800, 600),
   ],
   mediaVideos: [
     u(PHOTO.workersOnMetal, 1200, 700),

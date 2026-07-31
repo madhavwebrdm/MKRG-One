@@ -28,7 +28,7 @@ type Props = {
 };
 
 const DEFAULTS: Item[] = [
-  { kind: "Press", title: "MKRG expands recycled steel capacity in Western India", source: "Business Standard", date: "2025-09-12", href: "#" },
+  { kind: "Press", title: "MKRG expands zinc recovery capacity in Western India", source: "Business Standard", date: "2025-09-12", href: "#" },
   { kind: "Video", title: "Inside the Recycle2X plant a 4-minute walkthrough", source: "Plant tour", date: "2025-07-22", href: "#" },
   { kind: "Event", title: "MKRG at India Sustainability Summit 2025", source: "Mumbai · Sept 2025", date: "2025-09-04", href: "#" },
 ];

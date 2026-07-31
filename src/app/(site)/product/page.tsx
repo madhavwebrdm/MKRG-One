@@ -5,7 +5,7 @@ import { PRODUCT_PAGE_QUERY } from "@/sanity/lib/queries";
 export const metadata = {
   title: "Products Madhav KRG Group",
   description:
-    "Certified green steel and high-purity commercial zinc recovered from industrial scrap and hazardous waste. TMT bars, structural steel, pipes, coils, zinc ingots, sheets and feedstock.",
+    "High-purity commercial zinc recovered from hazardous industrial waste. Zinc ingots, sheets and feedstock, refined to 99.9% purity.",
 };
 
 export default async function ProductPage() {

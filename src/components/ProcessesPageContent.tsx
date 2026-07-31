@@ -28,7 +28,7 @@ export default function ProcessesPageContent({
         heading={str(hero?.heading, "The Recycle2X Process.")}
         intro={str(
           hero?.intro,
-          "Two output streams from one closed loop. Industrial scrap becomes structural steel; the hazardous waste that steel-making would otherwise send to landfill becomes commercial zinc. Air Pollution Control Devices keep the airborne stream well within International Standards.",
+          "One closed loop. The hazardous waste that steel-making would otherwise send to landfill becomes commercial zinc. Air Pollution Control Devices keep the airborne stream well within International Standards.",
         )}
         imageUrl={hero?.imageUrl || PLACEHOLDER_IMAGES.processesHero}
         imageAlt={str(hero?.imageAlt, "Recycle2X plant")}

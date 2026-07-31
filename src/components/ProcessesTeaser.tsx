@@ -16,38 +16,21 @@ type Flow = {
   steps: Step[];
 };
 
-const FLOWS: Flow[] = [
-  {
-    id: "scrap-to-steel",
-    title: "Scrap to Steel",
-    caption:
-      "From raw scrap to finished TMT bars, pipes, and coils every step optimized.",
-    image: "/images/process-steel.webp",
-    steps: [
-      { title: "Scrap Collection", body: "Source ferrous scrap from industrial channels" },
-      { title: "Sorting & Grading", body: "Magnetic separation and classification" },
-      { title: "Electric Arc Furnace", body: "Melting at 1,800°C with precision" },
-      { title: "Continuous Casting", body: "Forming billets consistently" },
-      { title: "Rolling & Forming", body: "Thermo-mechanical treatment" },
-      { title: "Finished Green Steel", body: "TMT bars, pipes, and coils" },
-    ],
-  },
-  {
-    id: "waste-to-zinc",
-    title: "Waste to Zinc",
-    caption:
-      "Our hydrometallurgical process recovers 99.9% pure zinc from hazardous waste.",
-    image: "/images/waste to zinc.jpeg",
-    steps: [
-      { title: "Waste Receipt", body: "Secure hazardous waste handling" },
-      { title: "Washing & Prep", body: "Remove contaminants" },
-      { title: "Acid Leaching", body: "Dissolve zinc content" },
-      { title: "Filtration", body: "Purify the solution" },
-      { title: "Electrolysis", body: "99.9% pure zinc recovery" },
-      { title: "Zinc Sheets", body: "Clean and package" },
-    ],
-  },
-];
+const FLOW: Flow = {
+  id: "waste-to-zinc",
+  title: "Waste to Zinc",
+  caption:
+    "Our hydrometallurgical process recovers 99.9% pure zinc from hazardous waste.",
+  image: "/images/waste to zinc.jpeg",
+  steps: [
+    { title: "Waste Receipt", body: "Secure hazardous waste handling" },
+    { title: "Washing & Prep", body: "Remove contaminants" },
+    { title: "Acid Leaching", body: "Dissolve zinc content" },
+    { title: "Filtration", body: "Purify the solution" },
+    { title: "Electrolysis", body: "99.9% pure zinc recovery" },
+    { title: "Zinc Sheets", body: "Clean and package" },
+  ],
+};
 
 type Props = {
   eyebrow?: string;
@@ -69,7 +52,7 @@ export default function ProcessesTeaser({
     headingProp ?? "From scrap and waste to high-value resources.";
   const body =
     bodyProp ??
-    "Two parallel processes, one closed loop. Industrial scrap returns as structural steel; hazardous waste returns as commercial-grade zinc every step verified and optimized.";
+    "One closed loop. Hazardous waste returns as commercial-grade zinc every step verified and optimized.";
   const ctaLabel = ctaLabelProp ?? "Explore our process";
   const ctaHref = ctaHrefProp ?? "/processes";
 
@@ -93,10 +76,8 @@ export default function ProcessesTeaser({
           </div>
         </div>
 
-        {/* Flows */}
-        {FLOWS.map((flow, fi) => (
-          <FlowBlock key={flow.id} flow={flow} index={fi} />
-        ))}
+        {/* Flow */}
+        <FlowBlock flow={FLOW} index={0} />
 
         <motion.div whileHover={{ x: 4 }} className="mt-14 inline-flex">
           <Link

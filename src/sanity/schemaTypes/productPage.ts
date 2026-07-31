@@ -47,14 +47,14 @@ export const productPage = defineType({
   fields: [
     { ...heroField, group: "hero" },
 
-    // Overview: the two product-family cards (Green Steel / Commercial Zinc)
+    // Overview: the Commercial Zinc product-family card
     defineField({
       name: "overview",
-      title: "Overview (product families)",
+      title: "Overview (product family)",
       type: "object",
       group: "content",
       fields: [
-        defineField({ name: "eyebrow", type: "string", initialValue: "Two output streams" }),
+        defineField({ name: "eyebrow", type: "string", initialValue: "Commercial Zinc" }),
         defineField({ name: "heading", type: "string" }),
         defineField({ name: "intro", type: "text", rows: 3 }),
         defineField({
@@ -92,22 +92,6 @@ export const productPage = defineType({
             }),
           ],
         }),
-      ],
-    }),
-
-    // Green Steel detail
-    defineField({
-      name: "greenSteel",
-      title: "Green Steel section",
-      type: "object",
-      group: "content",
-      fields: [
-        defineField({ name: "eyebrow", type: "string", initialValue: "Green Steel" }),
-        defineField({ name: "heading", type: "string" }),
-        defineField({ name: "intro", type: "text", rows: 3 }),
-        productRange(),
-        defineField({ name: "calloutTitle", type: "string" }),
-        defineField({ name: "calloutBody", type: "text", rows: 3 }),
       ],
     }),
 

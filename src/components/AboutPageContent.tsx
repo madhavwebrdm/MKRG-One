@@ -119,13 +119,13 @@ const VALUES = [
 
 const DEFAULT_BRAND_PARAGRAPHS = [
   "Madhav KRG Group is the principal brand under which every recycling, refining and manufacturing operation sits. This website is the place we are building that identity as a state-of-the-art recycler trusted by industry, regulators and the communities we operate in.",
-  "When a partner buys recycled steel or zinc from any plant in our group, the same standards, the same audit trail and the same promise sit behind the badge.",
+  "When a partner buys recycled zinc from any plant in our group, the same standards, the same audit trail and the same promise sit behind the badge.",
 ];
 
 const DIFFERENTIATORS = [
   {
     title: "Recycle2X process",
-    body: "Two output streams structural steel and commercial zinc from a single closed loop. Nothing leaves as landfill.",
+    body: "Hazardous waste is converted into commercial-grade zinc through a single closed loop. Nothing leaves as landfill.",
     icon: Factory,
   },
   {
@@ -152,19 +152,14 @@ const TIMELINE = [
     body: "Madhav KRG Group is founded on a single belief that industrial waste is a resource the country can't afford to throw away.",
   },
   {
-    year: "1998",
-    title: "First steel recycling plant",
-    body: "Commissioning of our first dedicated steel recycling facility in Western India sets the template for what comes next.",
-  },
-  {
     year: "2009",
     title: "Zinc recovery launched",
-    body: "We add waste-to-zinc to the process, closing a loop that the industry had long resigned to landfill.",
+    body: "We launch waste-to-zinc recovery, closing a loop that the industry had long resigned to landfill.",
   },
   {
     year: "2018",
     title: "Recycle2X formalised",
-    body: "Two parallel output streams steel and zinc are unified under a single integrated process.",
+    body: "Our zinc recovery process is formalised as Recycle2X, the standard we hold every plant to.",
   },
   {
     year: "2024",
@@ -221,7 +216,7 @@ export default function AboutPageContent({ data }: { data?: AboutPageData }) {
         heading={str(hero?.heading, "The recycler India can build its future on.")}
         intro={str(
           hero?.intro,
-          "Madhav KRG Group has spent decades closing the loop turning end-of-life steel and process waste into materials that meet International Standards. We are building our identity as a state-of-the-art recycler so that industry, communities and the planet can grow together.",
+          "Madhav KRG Group has spent decades closing the loop turning hazardous industrial waste into zinc that meets International Standards. We are building our identity as a state-of-the-art recycler so that industry, communities and the planet can grow together.",
         )}
         imageUrl={hero?.imageUrl || PLACEHOLDER_IMAGES.aboutHero}
         imageAlt={str(hero?.imageAlt, "MKRG plant operations")}
@@ -232,7 +227,7 @@ export default function AboutPageContent({ data }: { data?: AboutPageData }) {
       />
 
       {/* Mission & Vision */}
-      <section className="bg-white py-24 sm:py-32">
+      <section id="mission-vision" className="bg-white py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
           <div className="mx-auto max-w-3xl text-center">
             <span className="text-xs uppercase tracking-[0.2em] text-accent">
@@ -284,6 +279,7 @@ export default function AboutPageContent({ data }: { data?: AboutPageData }) {
 
       {/* Values */}
       <section
+        id="values"
         className="relative isolate overflow-hidden bg-deep-green py-24 text-white sm:py-32"
         style={{
           backgroundImage: `url("/images/about-parallax.jpeg")`,
@@ -338,7 +334,7 @@ export default function AboutPageContent({ data }: { data?: AboutPageData }) {
       </section>
 
       {/* Brand identity */}
-      <section className="bg-beige py-24 sm:py-32">
+      <section id="company-brief" className="bg-beige py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
           <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-16">
             <motion.div

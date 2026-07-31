@@ -1,12 +1,11 @@
 ﻿"use client";
 
-import { Fragment, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import Image, { type StaticImageData } from "next/image";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 
-import { PLACEHOLDER_IMAGES } from "@/lib/placeholderImages";
 import AnimatedHeading from "./AnimatedHeading";
 
 type Step = {
@@ -25,51 +24,9 @@ type Flow = {
   callout?: string;
 };
 
-const FLOWS: Flow[] = [
-  {
-    id: "scrap-to-steel",
-    index: "01",
-    title: "Scrap to Steel",
-    caption:
-      "From raw scrap to finished TMT bars, pipes, and coils every step optimized.",
-    callout:
-      "This process transforms industrial scrap into certified steel products ready for construction, infrastructure and manufacturing.",
-    steps: [
-      {
-        label: "Scrap Collection",
-        note: "Source ferrous scrap from industrial channels",
-        body: "Construction demolition, end-of-life manufacturing and automotive scrap arrive from verified aggregators across India. Every kilogram is weighed, graded and logged at the gate.",
-        image: PLACEHOLDER_IMAGES.processSteel[0],
-      },
-      {
-        label: "Sorting & Grading",
-        note: "Magnetic separation and classification",
-        body: "Magnets and density separators isolate ferrous fractions; alloy spectrometry confirms the chemistry of each lot so it enters the furnace at the right grade.",
-        image: PLACEHOLDER_IMAGES.processSteel[1],
-      },
-      {
-        label: "Electric Arc Furnace",
-        note: "Melting at 1,800°C with precision",
-        body: "Electric arc furnaces return cold scrap to liquid steel using electricity increasingly renewable. No coke, no blast furnace, a fraction of the CO₂ of the virgin route.",
-        image: "/images/steel.jpg",
-      },
-      {
-        label: "Continuous Casting",
-        note: "Forming billets consistently",
-        body: "Liquid steel casts straight into structural billets and slabs. Continuous casting means fewer defects, tighter tolerances and steady supply to downstream rolling.",
-        image: "/images/mkrg-2.jpeg",
-      },
-      {
-        label: "Finished Green Steel",
-        note: "TMT bars, pipes, and coils",
-        body: "TMT rebar, structural pipes and hot-rolled coils ship under IS 1786, IS 1239 and IS 2062. Every batch is mill-tested and traceable to the heat number.",
-        image: "/images/finished-green-steel.jpg",
-      },
-    ],
-  },
-  {
+const FLOW: Flow = {
     id: "waste-to-zinc",
-    index: "02",
+    index: "01",
     title: "Waste to Zinc",
     caption:
       "Our hydrometallurgical process recovers 99.9% pure zinc from hazardous waste.",
@@ -107,8 +64,7 @@ const FLOWS: Flow[] = [
         image: "/images/zinc-recovery.png",
       },
     ],
-  },
-];
+  };
 
 type Props = {
   eyebrow?: string;
@@ -122,10 +78,10 @@ export default function ProcessesFlow({
   body: bodyProp,
 }: Props) {
   const eyebrow = eyebrowProp ?? "Our Process";
-  const heading = headingProp ?? "From scrap and waste to high-value resources.";
+  const heading = headingProp ?? "From hazardous waste to high-value zinc.";
   const body =
     bodyProp ??
-    "Two parallel processes, one closed loop. Industrial scrap returns as structural steel; hazardous waste returns as commercial-grade zinc every step verified and optimized.";
+    "One closed loop. Hazardous waste returns as commercial-grade zinc every step verified and optimized.";
 
   return (
     <>
@@ -147,22 +103,11 @@ export default function ProcessesFlow({
             </div>
           </div>
 
-          <FlowSection flow={FLOWS[0]} />
+          <FlowSection flow={FLOW} />
         </div>
       </section>
 
-      {FLOWS[0].callout && <FlowCallout text={FLOWS[0].callout} />}
-
-      {FLOWS.slice(1).map((flow) => (
-        <Fragment key={flow.id}>
-          <section className="bg-beige py-24 sm:py-32">
-            <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
-              <FlowSection flow={flow} />
-            </div>
-          </section>
-          {flow.callout && <FlowCallout text={flow.callout} />}
-        </Fragment>
-      ))}
+      {FLOW.callout && <FlowCallout text={FLOW.callout} />}
     </>
   );
 }

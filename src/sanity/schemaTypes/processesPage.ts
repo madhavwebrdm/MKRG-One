@@ -65,7 +65,6 @@ export const processesPage = defineType({
   fields: [
     { ...heroField, group: "hero" },
 
-    processFlow("scrapToSteel", "Scrap → Steel flow"),
     processFlow("wasteToZinc", "Waste → Zinc flow"),
 
     defineField({

@@ -7,7 +7,7 @@ import { PROCESSES_PAGE_QUERY } from "@/sanity/lib/queries";
 export const metadata = {
   title: "Processes Madhav KRG Group",
   description:
-    "The Recycle2X process Scrap to Steel and Waste to Zinc. Two output streams, one closed loop, APCD air protection and zero landfill.",
+    "The Recycle2X process Waste to Zinc. One closed loop, APCD air protection and zero landfill.",
 };
 
 export default async function ProcessesPage() {

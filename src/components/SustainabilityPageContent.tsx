@@ -47,7 +47,7 @@ export type SustainabilityPageData = {
 
 const METRICS = [
   { value: 1.2, suffix: "M t", label: "CO₂ offset", note: "Avoided emissions per year" },
-  { value: 850, suffix: "K t", label: "Tonnes recycled", note: "Steel, zinc and lead last FY" },
+  { value: 18, suffix: "K t", label: "Tonnes recycled", note: "Zinc recovered last FY" },
   { value: 42, suffix: "%", label: "Renewable energy", note: "Powering our plants today" },
 ];
 
@@ -70,7 +70,7 @@ const PILLARS: Array<{
   },
   {
     title: "Less Energy Consumption",
-    body: "Recycled steel needs a fraction of the energy of primary smelting.",
+    body: "Recycled zinc needs a fraction of the energy of primary smelting.",
     icon: Zap,
     image: "/images/mkrg-5.jpeg",
   },
@@ -89,11 +89,6 @@ const PILLARS: Array<{
 ];
 
 const RECYCLING_STATS = [
-  {
-    label: "Scrap → Steel",
-    value: "850K t",
-    note: "Annual electric-arc furnace throughput, cast into billets and coils.",
-  },
   {
     label: "Waste → Zinc",
     value: "18K t",
@@ -332,16 +327,16 @@ export default function SustainabilityPageContent({
                 Recycling statistics
               </span>
               <AnimatedHeading className="mt-3 font-serif text-3xl leading-tight text-white sm:text-4xl lg:text-5xl">
-                {str(rs?.heading, "Two output streams. One closed loop.")}
+                {str(rs?.heading, "One closed loop, zero landfill.")}
               </AnimatedHeading>
               <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/90 sm:text-lg">
                 {str(
                   rs?.intro,
-                  "Scrap is converted to structural steel; hazardous flue dust is processed into commercial-grade zinc. Air Pollution Control Devices keep what is left of the airborne stream well within International Standards.",
+                  "Hazardous flue dust is processed into commercial-grade zinc. Air Pollution Control Devices keep what is left of the airborne stream well within International Standards.",
                 )}
               </p>
 
-              <dl className="mt-10 grid grid-cols-1 gap-px overflow-hidden rounded-2xl bg-white/15 md:grid-cols-3">
+              <dl className="mt-10 grid grid-cols-1 gap-px overflow-hidden rounded-2xl bg-white/15 md:grid-cols-2">
                 {recyclingItems.map((s) => (
                   <div
                     key={s.label}

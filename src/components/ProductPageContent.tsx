@@ -48,7 +48,6 @@ export type ProductPageData = {
   overview?:
     | { eyebrow?: string | null; heading?: string | null; intro?: string | null; families?: FamilyData[] | null }
     | null;
-  greenSteel?: SectionData | null;
   zinc?: SectionData | null;
   closingCta?:
     | { heading?: string | null; body?: string | null; primaryLabel?: string | null; primaryHref?: string | null }
@@ -80,22 +79,6 @@ type Overview = {
 
 const OVERVIEW: Overview[] = [
   {
-    id: "green-steel",
-    icon: Factory,
-    title: "Green Steel",
-    tagline:
-      "Produced from recycled ferrous scrap through our advanced steel recovery ecosystem.",
-    image: IMG.greenSteel,
-    products: ["TMT Bars", "Structural Steel", "Steel Pipes", "Hot Rolled Coils"],
-    applications: [
-      "Construction",
-      "Infrastructure Projects",
-      "Industrial Manufacturing",
-      "Engineering & Fabrication",
-    ],
-    cta: { label: "Explore Green Steel Process", href: "/processes#processes" },
-  },
-  {
     id: "commercial-zinc",
     icon: Recycle,
     title: "Commercial Zinc",
@@ -114,29 +97,6 @@ const OVERVIEW: Overview[] = [
 ];
 
 type RangeItem = { name: string; desc: string; image: string };
-
-const STEEL_RANGE: RangeItem[] = [
-  {
-    name: "TMT Bars",
-    desc: "High-strength reinforcement steel for residential, commercial and infrastructure projects.",
-    image: IMG.steelRange[0],
-  },
-  {
-    name: "Structural Steel",
-    desc: "Reliable sections and billets for fabrication and engineering applications.",
-    image: IMG.steelRange[1],
-  },
-  {
-    name: "Steel Pipes",
-    desc: "Durable piping solutions for industrial and structural requirements.",
-    image: IMG.steelRange[2],
-  },
-  {
-    name: "Hot Rolled Coils",
-    desc: "Versatile steel products for downstream manufacturing.",
-    image: IMG.steelRange[3],
-  },
-];
 
 const ZINC_RANGE: RangeItem[] = [
   {
@@ -185,7 +145,6 @@ function mergeRange(
 export default function ProductPageContent({ data }: { data?: ProductPageData }) {
   const hero = data?.hero;
   const ov = data?.overview;
-  const gs = data?.greenSteel;
   const zn = data?.zinc;
   const cc = data?.closingCta;
 
@@ -215,35 +174,35 @@ export default function ProductPageContent({ data }: { data?: ProductPageData })
         eyebrow={str(hero?.eyebrow, "Our Products")}
         heading={str(
           hero?.heading,
-          "Certified steel and high-purity zinc, recovered from waste.",
+          "High-purity zinc, recovered from waste.",
         )}
         intro={str(
           hero?.intro,
-          "From industrial scrap and hazardous waste, we create certified steel and high-purity zinc products that power infrastructure, manufacturing and sustainable growth.",
+          "From hazardous industrial waste, we recover high-purity zinc products that power galvanizing, alloy manufacturing and sustainable growth.",
         )}
         imageUrl={hero?.imageUrl || IMG.hero}
-        imageAlt={str(hero?.imageAlt, "Madhav KRG Group steel and zinc products")}
+        imageAlt={str(hero?.imageAlt, "Madhav KRG Group zinc products")}
       />
 
-      {/* Two product families overview */}
+      {/* Product family overview */}
       <section className="bg-white py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
           <div className="max-w-3xl">
             <span className="text-xs uppercase tracking-[0.2em] text-accent">
-              {str(ov?.eyebrow, "Two output streams")}
+              {str(ov?.eyebrow, "Commercial Zinc")}
             </span>
             <AnimatedHeading className="mt-3 font-serif text-3xl leading-tight text-ink sm:text-4xl lg:text-5xl">
-              {str(ov?.heading, "One closed loop, two families of products.")}
+              {str(ov?.heading, "One closed loop, high-purity zinc.")}
             </AnimatedHeading>
             <p className="mt-5 text-base leading-relaxed text-body sm:text-lg">
               {str(
                 ov?.intro,
-                "Industrial scrap returns as structural steel, while the hazardous waste that steel-making would otherwise send to landfill is recovered as commercial zinc.",
+                "The hazardous waste that industrial manufacturing would otherwise send to landfill is recovered as commercial-grade zinc.",
               )}
             </p>
           </div>
 
-          <div className="mt-14 grid grid-cols-1 gap-8 lg:grid-cols-2">
+          <div className="mt-14 grid grid-cols-1 gap-8 lg:mx-auto lg:max-w-2xl">
             {families.map((item, i) => {
               return (
                 <motion.article
@@ -326,27 +285,6 @@ export default function ProductPageContent({ data }: { data?: ProductPageData })
         </div>
       </section>
 
-      {/* Green Steel detail */}
-      <ProductRange
-        id="green-steel-detail"
-        background="beige"
-        eyebrow={str(gs?.eyebrow, "Green Steel")}
-        heading={str(gs?.heading, "Certified Green Steel for Tomorrow's Infrastructure")}
-        intro={str(
-          gs?.intro,
-          "Produced through responsible recycling and engineered to meet the demands of modern construction and manufacturing.",
-        )}
-        items={mergeRange(gs?.products, STEEL_RANGE)}
-        columns={4}
-        callout={{
-          title: str(gs?.calloutTitle, "Transforming Waste into Value"),
-          body: str(
-            gs?.calloutBody,
-            "Instead of extracting virgin resources, our steel products are created by returning valuable scrap to productive use, reducing waste, conserving resources and lowering emissions across the value chain.",
-          ),
-        }}
-      />
-
       <ParallaxImpact
         heading={"Recycled. Certified.\nReady for Industry."}
         imageUrl="/images/product-parallax.jpeg"
@@ -389,7 +327,7 @@ export default function ProductPageContent({ data }: { data?: ProductPageData })
           <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-12">
             <div className="lg:col-span-8">
               <AnimatedHeading className="font-serif text-3xl leading-tight text-white sm:text-4xl">
-                {str(cc?.heading, "Looking for a reliable supply of green steel or zinc?")}
+                {str(cc?.heading, "Looking for a reliable supply of commercial zinc?")}
               </AnimatedHeading>
               <p className="mt-4 max-w-2xl text-base leading-relaxed text-white/80">
                 {str(
