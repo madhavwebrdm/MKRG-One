@@ -74,22 +74,35 @@ export const productPage = defineType({
                 defineField({ name: "tagline", type: "text", rows: 2 }),
                 iconKeyField,
                 imageWithAlt(),
-                defineField({
-                  name: "productsIncluded",
-                  title: "Products included",
-                  type: "array",
-                  of: [{ type: "string" }],
-                }),
-                defineField({
-                  name: "applications",
-                  type: "array",
-                  of: [{ type: "string" }],
-                }),
-                defineField({ name: "ctaLabel", type: "string" }),
-                defineField({ name: "ctaHref", type: "string" }),
               ],
               preview: { select: { title: "title", subtitle: "tagline", media: "image" } },
             }),
+          ],
+        }),
+        defineField({
+          name: "applications",
+          title: "Zinc applications (numbered grid)",
+          description: "Rendered as a numbered card grid below the Commercial Zinc box, no heading or intro shown.",
+          type: "object",
+          fields: [
+            defineField({
+              name: "items",
+              title: "Application items",
+              type: "array",
+              validation: (r) => r.min(1).max(10),
+              of: [
+                defineArrayMember({
+                  type: "object",
+                  fields: [
+                    defineField({ name: "title", type: "string", validation: (r) => r.required() }),
+                    defineField({ name: "body", type: "text", rows: 3 }),
+                  ],
+                  preview: { select: { title: "title", subtitle: "body" } },
+                }),
+              ],
+            }),
+            defineField({ name: "ctaLabel", type: "string", initialValue: "Explore the process" }),
+            defineField({ name: "ctaHref", type: "string", initialValue: "/processes" }),
           ],
         }),
       ],

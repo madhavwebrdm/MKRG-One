@@ -264,8 +264,10 @@ export const PRODUCT_PAGE_QUERY = defineQuery(`
       eyebrow, heading, intro,
       families[]{
         title, tagline, icon,
-        "imageUrl": image.asset->url, "imageAlt": image.alt,
-        productsIncluded, applications,
+        "imageUrl": image.asset->url, "imageAlt": image.alt
+      },
+      applications{
+        items[]{ title, body },
         ctaLabel, ctaHref
       }
     },

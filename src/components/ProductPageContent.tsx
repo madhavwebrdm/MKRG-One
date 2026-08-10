@@ -23,11 +23,9 @@ type FamilyData = SanityImg & {
   title?: string | null;
   tagline?: string | null;
   icon?: string | null;
-  productsIncluded?: string[] | null;
-  applications?: string[] | null;
-  ctaLabel?: string | null;
-  ctaHref?: string | null;
 };
+
+type ApplicationItem = { title?: string | null; body?: string | null };
 
 type SectionData = {
   eyebrow?: string | null;
@@ -46,7 +44,19 @@ export type ProductPageData = {
     | (SanityImg & { eyebrow?: string | null; heading?: string | null; intro?: string | null })
     | null;
   overview?:
-    | { eyebrow?: string | null; heading?: string | null; intro?: string | null; families?: FamilyData[] | null }
+    | {
+        eyebrow?: string | null;
+        heading?: string | null;
+        intro?: string | null;
+        families?: FamilyData[] | null;
+        applications?:
+          | {
+              items?: ApplicationItem[] | null;
+              ctaLabel?: string | null;
+              ctaHref?: string | null;
+            }
+          | null;
+      }
     | null;
   zinc?: SectionData | null;
   closingCta?:
@@ -72,9 +82,6 @@ type Overview = {
   title: string;
   tagline: string;
   image: string;
-  products: string[];
-  applications: string[];
-  cta: { label: string; href: string };
 };
 
 const OVERVIEW: Overview[] = [
@@ -85,14 +92,33 @@ const OVERVIEW: Overview[] = [
     tagline:
       "Recovered from hazardous industrial waste through advanced hydrometallurgical recovery.",
     image: IMG.zinc,
-    products: ["Zinc Ingots", "Zinc Sheets", "Industrial Zinc Feedstock"],
-    applications: [
-      "Galvanizing",
-      "Metal Coating",
-      "Alloy Manufacturing",
-      "Chemical Industries",
-    ],
-    cta: { label: "Explore Commercial Zinc Process", href: "/processes" },
+  },
+];
+
+const ZINC_APPLICATIONS: Array<{ title: string; body: string }> = [
+  {
+    title: "Galvanization",
+    body: "Over half of all zinc ingots produced each year go into galvanization, dipping steel into molten zinc to shield it from corrosion.",
+  },
+  {
+    title: "Zinc Alloys",
+    body: "Combined with metals like aluminum and copper, zinc forms alloys used across industry, brass for plumbing, electrical fittings and musical instruments; ZL12, a 12% aluminum-zinc alloy for gravity casting; and ZL5, copper-strengthened for automotive parts.",
+  },
+  {
+    title: "Battery Production",
+    body: "Zinc ingots are a core input in dry-cell batteries, driving the voltage generation that powers them.",
+  },
+  {
+    title: "Zinc Oxide & Pharmaceutical Use",
+    body: "Zinc ingots can be refined into zinc oxide, which is widely used in rubber, ceramics, chemicals, and pharmaceuticals. In healthcare, zinc oxide supports skin protection, antimicrobial and soothing applications, oral and dental care, and dietary supplements.",
+  },
+  {
+    title: "Electroplating",
+    body: "Applied as a protective, decorative coating on metal surfaces, guarding against oxidation while adding durability.",
+  },
+  {
+    title: "Manufacturing & Industrial Use",
+    body: "Beyond the above, zinc ingots support chemical processing, furniture manufacturing and automotive production.",
   },
 ];
 
@@ -155,18 +181,12 @@ export default function ProductPageContent({ data }: { data?: ProductPageData })
         title: str(f.title, OVERVIEW[i]?.title ?? `Product family ${i + 1}`),
         tagline: str(f.tagline, OVERVIEW[i]?.tagline ?? ""),
         image: f.imageUrl || OVERVIEW[i]?.image || IMG.hero,
-        products: f.productsIncluded?.length
-          ? f.productsIncluded
-          : OVERVIEW[i]?.products ?? [],
-        applications: f.applications?.length
-          ? f.applications
-          : OVERVIEW[i]?.applications ?? [],
-        cta: {
-          label: str(f.ctaLabel, OVERVIEW[i]?.cta.label ?? "Learn more"),
-          href: str(f.ctaHref, OVERVIEW[i]?.cta.href ?? "/processes"),
-        },
       }))
     : OVERVIEW;
+
+  const zincApplications = ov?.applications?.items?.length
+    ? ov.applications.items.map((a) => ({ title: str(a.title, ""), body: str(a.body, "") }))
+    : ZINC_APPLICATIONS;
 
   return (
     <main className="bg-beige">
@@ -202,85 +222,75 @@ export default function ProductPageContent({ data }: { data?: ProductPageData })
             </p>
           </div>
 
-          <div className="mt-14 grid grid-cols-1 gap-8 lg:mx-auto lg:max-w-2xl">
-            {families.map((item, i) => {
-              return (
-                <motion.article
-                  key={item.id}
-                  initial={{ opacity: 0, y: 28 }}
+          {/* Commercial Zinc, full width */}
+          <div className="mt-14 space-y-6">
+            {families.map((item, i) => (
+              <motion.article
+                key={item.id}
+                initial={{ opacity: 0, y: 28 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.6, delay: i * 0.08, ease: EASE }}
+                className="flex flex-col overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-deep-green/10"
+              >
+                <div className="relative aspect-[16/9] overflow-hidden">
+                  <Image
+                    src={item.image}
+                    alt={item.title}
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    className="object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-deep-green/80 via-deep-green/15 to-transparent" />
+                  <h2 className="absolute bottom-4 left-5 font-serif text-2xl text-white sm:text-3xl">
+                    {item.title}
+                  </h2>
+                </div>
+
+                <div className="flex flex-1 flex-col p-8 sm:p-10">
+                  <p className="text-base leading-relaxed text-body sm:text-lg">
+                    {item.tagline}
+                  </p>
+                </div>
+              </motion.article>
+            ))}
+          </div>
+
+          {/* Zinc applications, full width */}
+          <div className="mt-20">
+            <ol className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {zincApplications.map((a, i) => (
+                <motion.li
+                  key={a.title}
+                  initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-80px" }}
-                  transition={{ duration: 0.6, delay: i * 0.08, ease: EASE }}
-                  className="flex flex-col overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-deep-green/10"
+                  viewport={{ once: true, margin: "-60px" }}
+                  transition={{ duration: 0.5, delay: i * 0.05, ease: EASE }}
+                  className="flex h-full flex-col rounded-2xl border border-deep-green/15 bg-beige p-6"
                 >
-                  <div className="relative aspect-[16/9] overflow-hidden">
-                    <Image
-                      src={item.image}
-                      alt={item.title}
-                      fill
-                      sizes="(max-width: 1024px) 100vw, 50vw"
-                      className="object-cover"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-deep-green/80 via-deep-green/15 to-transparent" />
-                    <h2 className="absolute bottom-4 left-5 font-serif text-2xl text-white sm:text-3xl">
-                      {item.title}
-                    </h2>
-                  </div>
+                  <span className="flex h-8 w-8 flex-none items-center justify-center rounded-full bg-accent/10 font-serif text-sm text-accent">
+                    {i + 1}
+                  </span>
+                  <h4 className="mt-4 font-serif text-lg leading-snug text-ink">
+                    {a.title}
+                  </h4>
+                  <p className="mt-2 text-sm leading-relaxed text-body">
+                    {a.body}
+                  </p>
+                </motion.li>
+              ))}
+            </ol>
 
-                  <div className="flex flex-1 flex-col p-6 sm:p-8">
-                    <p className="text-base leading-relaxed text-body">
-                      {item.tagline}
-                    </p>
-
-                    <div className="mt-7 grid grid-cols-1 gap-6 sm:grid-cols-2">
-                      <div>
-                        <p className="text-[11px] uppercase tracking-[0.18em] text-accent">
-                          Products include
-                        </p>
-                        <ul className="mt-3 space-y-2">
-                          {item.products.map((p) => (
-                            <li
-                              key={p}
-                              className="flex items-start gap-2.5 text-sm text-body"
-                            >
-                              <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-deep-green" />
-                              {p}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                      <div>
-                        <p className="text-[11px] uppercase tracking-[0.18em] text-accent">
-                          Applications
-                        </p>
-                        <ul className="mt-3 space-y-2">
-                          {item.applications.map((a) => (
-                            <li
-                              key={a}
-                              className="flex items-start gap-2.5 text-sm text-body"
-                            >
-                              <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-light-green" />
-                              {a}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-
-                    <Link
-                      href={item.cta.href}
-                      className="group mt-8 inline-flex w-fit items-center gap-1.5 text-sm font-medium text-deep-green transition-colors hover:text-accent"
-                    >
-                      {item.cta.label}
-                      <ArrowRight
-                        className="h-4 w-4 transition-transform group-hover:translate-x-1"
-                        aria-hidden
-                      />
-                    </Link>
-                  </div>
-                </motion.article>
-              );
-            })}
+            <Link
+              href={str(ov?.applications?.ctaHref, "/processes")}
+              className="group mt-10 inline-flex w-fit items-center gap-1.5 text-sm font-medium text-deep-green transition-colors hover:text-accent"
+            >
+              {str(ov?.applications?.ctaLabel, "Explore the process")}
+              <ArrowRight
+                className="h-4 w-4 transition-transform group-hover:translate-x-1"
+                aria-hidden
+              />
+            </Link>
           </div>
         </div>
       </section>
@@ -379,6 +389,38 @@ function ProductRange({
   const gridCols =
     columns === 4 ? "sm:grid-cols-2 lg:grid-cols-4" : "sm:grid-cols-2 lg:grid-cols-3";
 
+  const [pairedItem, ...restItems] = items;
+  const gridItems = note ? restItems : items;
+
+  const renderCard = (item: RangeItem, i: number) => (
+    <motion.li
+      key={`${item.name}-${i}`}
+      initial={{ opacity: 0, y: 28 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-80px" }}
+      transition={{ duration: 0.6, delay: i * 0.06, ease: EASE }}
+      className="group flex h-full flex-col overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-deep-green/10 transition-shadow hover:shadow-xl"
+    >
+      <div className="relative aspect-[4/3] overflow-hidden">
+        <Image
+          src={item.image}
+          alt={item.name}
+          fill
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+          className="object-cover transition-transform duration-700 group-hover:scale-105"
+        />
+      </div>
+      <div className="flex flex-1 flex-col justify-center p-6">
+        <h3 className="font-serif text-xl leading-snug text-ink">
+          {item.name}
+        </h3>
+        <p className="mt-2 text-sm leading-relaxed text-body">
+          {item.desc}
+        </p>
+      </div>
+    </motion.li>
+  );
+
   return (
     <section id={id} className={`${sectionBg} py-24 sm:py-32`}>
       <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
@@ -395,51 +437,12 @@ function ProductRange({
         </div>
 
         <ul className={`mt-14 grid grid-cols-1 gap-6 ${gridCols} lg:gap-8`}>
-          {items.map((item, i) => (
-            <motion.li
-              key={`${item.name}-${i}`}
-              initial={{ opacity: 0, y: 28 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.6, delay: i * 0.06, ease: EASE }}
-              className="group overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-deep-green/10 transition-shadow hover:shadow-xl"
-            >
-              <div className="relative aspect-[4/3] overflow-hidden">
-                <Image
-                  src={item.image}
-                  alt={item.name}
-                  fill
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-              </div>
-              <div className="p-6">
-                <h3 className="font-serif text-xl leading-snug text-ink">
-                  {item.name}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-body">
-                  {item.desc}
-                </p>
-              </div>
-            </motion.li>
-          ))}
+          {gridItems.map((item, i) => renderCard(item, i))}
         </ul>
 
         {note && (
-          <div className="mt-14 grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-16">
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.6, ease: EASE }}
-            >
-              <h3 className="font-serif text-2xl leading-snug text-ink sm:text-3xl">
-                {note.heading}
-              </h3>
-              <p className="mt-4 text-base leading-relaxed text-body sm:text-lg">
-                {note.body}
-              </p>
-            </motion.div>
+          <div className="mt-14 grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-16">
+            <ul className="flex">{renderCard(pairedItem, 0)}</ul>
 
             {note.specs && note.specs.length > 0 && (
               <motion.div
@@ -447,13 +450,13 @@ function ProductRange({
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-80px" }}
                 transition={{ duration: 0.6, delay: 0.1, ease: EASE }}
-                className="overflow-hidden rounded-2xl border border-deep-green/15 bg-white"
+                className="flex h-full flex-col overflow-hidden rounded-2xl border border-deep-green/15 bg-white"
               >
-                <dl className="divide-y divide-deep-green/10">
+                <dl className="flex flex-1 flex-col divide-y divide-deep-green/10">
                   {note.specs.map((s) => (
                     <div
                       key={s.label}
-                      className="flex items-baseline justify-between gap-6 px-6 py-4"
+                      className="flex flex-1 items-center justify-between gap-6 px-6 py-4"
                     >
                       <dt className="text-sm font-medium uppercase tracking-wider text-muted">
                         {s.label}
@@ -467,6 +470,23 @@ function ProductRange({
               </motion.div>
             )}
           </div>
+        )}
+
+        {note && (
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.6, ease: EASE }}
+            className="mt-10"
+          >
+            <h3 className="font-serif text-2xl leading-snug text-ink sm:text-3xl">
+              {note.heading}
+            </h3>
+            <p className="mt-4 text-base leading-relaxed text-body sm:text-lg">
+              {note.body}
+            </p>
+          </motion.div>
         )}
 
         <motion.div
