@@ -1,6 +1,6 @@
 "use client";
 
-import { Fragment, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ArrowRight, Recycle } from "lucide-react";
@@ -38,7 +38,6 @@ const DEFAULT_TAGS: string[] = [];
 export default function Hero({
   eyebrow: eyebrowProp,
   heading: headingProp,
-  subheading: subheadingProp,
   positioningTags: positioningTagsProp,
   imageUrl,
   primaryCtaLabel: primaryCtaLabelProp,
@@ -48,9 +47,6 @@ export default function Hero({
 }: HeroProps) {
   const eyebrow = eyebrowProp ?? "Waste is a Resource, Not a Problem";
   const heading = headingProp ?? "Waste is a Resource, Not a Problem";
-  const subheading =
-    subheadingProp ??
-    "Recycled with zero degradation or contamination, intact properties per International Standards virtually identical to virgin material with lesser environmental impact.";
   const positioningTags = positioningTagsProp ?? DEFAULT_TAGS;
   const primaryCtaLabel = primaryCtaLabelProp ?? "See our impact";
   const primaryCtaHref = primaryCtaHrefProp ?? "#metrics";
@@ -84,25 +80,14 @@ export default function Hero({
     () => {
       const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
-      tl.from(".hero-eyebrow", { y: 24, opacity: 0, duration: 0.7 })
-        .from(
-          ".hero-char",
-          {
-            yPercent: 110,
-            opacity: 0,
-            duration: 0.9,
-            stagger: 0.03,
-            ease: "power4.out",
-          },
-          "-=0.3",
-        )
-        .from(".hero-sub", { y: 30, opacity: 0, duration: 0.9 }, "-=0.5")
+      tl.from(".hero-eyebrow", { y: 16, opacity: 0, duration: 0.6 })
+        .from(".hero-heading", { y: 20, opacity: 0, duration: 0.7 }, "-=0.3")
         .from(
           ".hero-tag",
-          { y: 20, opacity: 0, duration: 0.6, stagger: 0.08 },
-          "-=0.6",
+          { y: 12, opacity: 0, duration: 0.5, stagger: 0.06 },
+          "-=0.3",
         )
-        .from(".hero-cta", { y: 24, opacity: 0, duration: 0.7 }, "-=0.4");
+        .from(".hero-cta", { y: 16, opacity: 0, duration: 0.6 }, "-=0.3");
     },
     { scope: root },
   );
@@ -151,38 +136,14 @@ export default function Hero({
           {eyebrow}
         </span>
 
-        <h1 className="mt-7 max-w-5xl font-serif text-5xl leading-[1.05] tracking-tight text-white sm:text-6xl lg:text-[clamp(3.5rem,6.5vw,6rem)]">
+        <h1 className="hero-heading mt-7 max-w-5xl font-serif text-5xl leading-[1.05] tracking-tight text-white sm:text-6xl lg:text-[clamp(3.5rem,6.5vw,6rem)]">
           {headingRows.map((row, ri) => (
             <span key={ri} className="block">
-              {row.split(" ").map((word, wi) => (
-                <Fragment key={`${word}-${ri}-${wi}`}>
-                  <span className="inline-block overflow-hidden pb-[0.15em] align-bottom">
-                    {word.split("").map((char, ci) => (
-                      <span key={ci} className="hero-char inline-block">
-                        {char}
-                      </span>
-                    ))}
-                  </span>
-                  {wi < row.split(" ").length - 1 && " "}
-                </Fragment>
-              ))}
-              {ri < headingRows.length - 1 && (
-                <span className="inline-block overflow-hidden pb-[0.15em] align-bottom">
-                  <span className="hero-char inline-block">,</span>
-                </span>
-              )}
+              {row}
+              {ri < headingRows.length - 1 && ","}
             </span>
           ))}
         </h1>
-
-        {subheading && (
-          <p
-            className="hero-sub mt-7 max-w-2xl text-pretty text-lg leading-relaxed text-white/75 sm:text-xl"
-            data-cursor="text"
-          >
-            {subheading}
-          </p>
-        )}
 
         {positioningTags && positioningTags.length > 0 && (
           <ul className="mt-7 flex flex-wrap items-center gap-2.5">
@@ -201,7 +162,7 @@ export default function Hero({
         <div className="hero-cta mt-9 flex flex-wrap items-center gap-4">
           <MagneticButton
             href={primaryCtaHref}
-            className="group inline-flex items-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-medium text-deep-green shadow-lg shadow-black/20 transition-shadow hover:shadow-xl"
+            className="group inline-flex items-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-medium text-forest shadow-lg shadow-black/20 transition-shadow hover:shadow-xl"
           >
             {primaryCtaLabel}
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />

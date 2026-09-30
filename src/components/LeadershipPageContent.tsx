@@ -195,9 +195,8 @@ function PrincipalSection({
       initial={{ opacity: 0, scale: 0.96 }}
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
       className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl lg:col-span-5"
-      data-cursor="grow"
     >
       <Image
         src={principal.portrait}

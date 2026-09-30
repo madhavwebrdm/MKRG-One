@@ -258,10 +258,10 @@ export default function SustainabilityPageContent({
               return (
                 <motion.li
                   key={p.title}
-                  initial={{ opacity: 0, y: 28 }}
+                  initial={{ opacity: 0, y: 16 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-80px" }}
-                  transition={{ duration: 0.6, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
+                  transition={{ duration: 0.5, delay: i * 0.04, ease: [0.16, 1, 0.3, 1] }}
                 >
                   <TiltCard className="group h-full overflow-hidden rounded-2xl bg-white">
                     <div className="relative aspect-[5/4] w-full overflow-hidden">
@@ -291,26 +291,15 @@ export default function SustainabilityPageContent({
       </section>
 
       {/* Recycling statistics */}
-      <section
-        className="relative isolate overflow-hidden bg-brand-green py-24 text-white sm:py-32"
-        style={{
-          backgroundImage: `url(${PLACEHOLDER_IMAGES.metricsBg})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundAttachment: "fixed",
-          backgroundRepeat: "no-repeat",
-        }}
-      >
-        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-brand-green/85 via-brand-green/80 to-brand-green/90" />
+      <section className="bg-white py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
           <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-16">
             <motion.div
               initial={{ opacity: 0, scale: 0.96 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
               className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl lg:col-span-5"
-              data-cursor="grow"
             >
               <Image
                 src={PLACEHOLDER_IMAGES.sustStatsAccent}
@@ -319,36 +308,36 @@ export default function SustainabilityPageContent({
                 sizes="(max-width: 1024px) 100vw, 40vw"
                 className="object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-deep-green/55 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-deep-green/40 via-transparent to-transparent" />
             </motion.div>
 
             <div className="lg:col-span-7">
-              <span className="text-xs uppercase tracking-[0.2em] text-white/80">
+              <span className="text-xs uppercase tracking-[0.2em] text-accent">
                 Recycling statistics
               </span>
-              <AnimatedHeading className="mt-3 font-serif text-3xl leading-tight text-white sm:text-4xl lg:text-5xl">
+              <AnimatedHeading className="mt-3 font-serif text-3xl leading-tight text-ink sm:text-4xl lg:text-5xl">
                 {str(rs?.heading, "One closed loop, zero landfill.")}
               </AnimatedHeading>
-              <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/90 sm:text-lg">
+              <p className="mt-5 max-w-2xl text-base leading-relaxed text-body sm:text-lg">
                 {str(
                   rs?.intro,
                   "Hazardous flue dust is processed into commercial-grade zinc. Air Pollution Control Devices keep what is left of the airborne stream well within International Standards.",
                 )}
               </p>
 
-              <dl className="mt-10 grid grid-cols-1 gap-px overflow-hidden rounded-2xl bg-white/15 md:grid-cols-2">
+              <dl className="mt-10 grid grid-cols-1 gap-px overflow-hidden rounded-2xl bg-forest/10 md:grid-cols-2">
                 {recyclingItems.map((s) => (
                   <div
                     key={s.label}
-                    className="flex flex-col gap-2 bg-brand-green p-6 sm:p-7"
+                    className="flex flex-col gap-2 bg-beige p-6 sm:p-7"
                   >
-                    <dt className="text-xs font-medium uppercase tracking-wider text-white/85">
+                    <dt className="text-xs font-medium uppercase tracking-wider text-muted">
                       {s.label}
                     </dt>
-                    <dd className="font-serif text-4xl leading-none text-white sm:text-5xl">
+                    <dd className="font-serif text-4xl leading-none text-ink sm:text-5xl">
                       {s.value}
                     </dd>
-                    <p className="text-sm leading-relaxed text-white/85">{s.note}</p>
+                    <p className="text-sm leading-relaxed text-body">{s.note}</p>
                   </div>
                 ))}
               </dl>
@@ -376,10 +365,10 @@ export default function SustainabilityPageContent({
 
           <div className="mt-14 grid grid-cols-1 gap-8 lg:grid-cols-2">
             <motion.article
-              initial={{ opacity: 0, y: 28 }}
+              initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
               className="group overflow-hidden rounded-2xl bg-white"
             >
               <div className="relative aspect-[5/3] w-full overflow-hidden">
@@ -408,10 +397,10 @@ export default function SustainabilityPageContent({
             </motion.article>
 
             <motion.article
-              initial={{ opacity: 0, y: 28 }}
+              initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.5, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
               className="group overflow-hidden rounded-2xl bg-white"
             >
               <div className="relative aspect-[5/3] w-full overflow-hidden">

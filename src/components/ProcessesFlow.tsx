@@ -10,7 +10,6 @@ import AnimatedHeading from "./AnimatedHeading";
 
 type Step = {
   label: string;
-  note: string;
   body: string;
   image: string | StaticImageData;
 };
@@ -29,38 +28,28 @@ const FLOW: Flow = {
     index: "01",
     title: "Waste to Zinc",
     caption:
-      "Our hydrometallurgical process recovers 99.9% pure zinc from hazardous waste.",
+      "Steel plants produce a hazardous dust. We turn it into 99.9% pure zinc.",
     callout:
       "This entire process turns hazardous waste into high-quality zinc reusable, traceable and in high demand across industry.",
     steps: [
       {
         label: "Waste Collection",
-        note: "Secure hazardous waste handling",
-        body: "Flue dust and hazardous by-products from galvanising and steel-making arrive under MOEFCC authorisation chain of custody documented from origin to plant.",
+        body: "Dust from steel and galvanising plants is collected under government approval. Every load is tracked from the originating plant to our facility.",
         image: "/images/Waste Collection.jpg",
       },
       {
-        label: "Washing & Prep",
-        note: "Conditioned for hydrometallurgical recovery",
-        body: "Wet washing strips impurities, conditions particle size and prepares the feed for leaching. Process water is recycled in a closed loop with zero liquid discharge.",
+        label: "Washing & Preparation",
+        body: "The dust is washed to remove dirt and unwanted material. The water is treated, cleaned and reused, with no discharge.",
         image: "/images/washing-and-prep.jpg",
       },
       {
-        label: "Acid Leaching",
-        note: "Dissolve zinc content",
-        body: "A precision sulphuric leach pulls zinc into solution while leaving iron, lead and other impurities behind. Recovery rates are tracked batch by batch.",
-        image: "/images/acid-leaching.jpg",
-      },
-      {
         label: "Purification",
-        note: "Purify the solution",
-        body: "Successive precipitation, filtration and ion-exchange stages remove cadmium, copper and trace metals delivering high-grade pregnant liquor to the electrolysis cells.",
+        body: "The processed material undergoes several filtration stages to remove unwanted metals, including cadmium and copper. This produces a purified zinc solution ready for recovery.",
         image: "/images/purification.jpg",
       },
       {
         label: "Zinc Recovery",
-        note: "99.9% pure zinc, cast to sheets",
-        body: "Electrolysis deposits zinc on cathode sheets; the metal is stripped, melted and cast into commercial-grade ingots and sheets. Output purity above 99.9%.",
+        body: "An electric current deposits the zinc from the solution onto metal plates. The recovered zinc is then melted and cast into ingots and sheets, achieving purity above 99.9%.",
         image: "/images/zinc-recovery.png",
       },
     ],
@@ -213,11 +202,11 @@ function FlowSection({ flow }: { flow: Flow }) {
         <div className="relative order-2 lg:order-2 lg:col-span-6">
           <div
             aria-hidden
-            className="absolute left-3 top-2 bottom-2 w-px bg-deep-green/15 sm:left-4"
+            className="absolute left-3 top-2 bottom-2 w-px bg-forest/15 sm:left-4"
           />
           <div
             aria-hidden
-            className="absolute left-3 top-2 w-px origin-top bg-deep-green/55 sm:left-4"
+            className="absolute left-3 top-2 w-px origin-top bg-forest/55 sm:left-4"
             style={{
               height: `${((active + 1) / flow.steps.length) * 100}%`,
               transition: "height 0.6s cubic-bezier(0.16, 1, 0.3, 1)",
@@ -237,7 +226,7 @@ function FlowSection({ flow }: { flow: Flow }) {
                     className={`absolute left-0 top-0.5 inline-flex h-7 w-7 items-center justify-center rounded-full ring-4 ring-beige transition-colors duration-500 sm:left-0.5 ${
                       active >= i
                         ? "bg-deep-green text-white"
-                        : "border border-deep-green/30 bg-white text-deep-green"
+                        : "border border-forest/30 bg-white text-forest"
                     }`}
                   >
                     <span className="text-[11px] font-semibold">{i + 1}</span>
@@ -248,10 +237,7 @@ function FlowSection({ flow }: { flow: Flow }) {
                       active === i ? "opacity-100" : "opacity-55"
                     }`}
                   >
-                    <p className="text-[11px] uppercase tracking-[0.22em] text-accent">
-                      {s.note}
-                    </p>
-                    <h4 className="mt-2 font-serif text-2xl leading-tight text-ink sm:text-3xl">
+                    <h4 className="font-serif text-2xl leading-tight text-ink sm:text-3xl">
                       {s.label}
                     </h4>
                     <p className="mt-4 max-w-xl text-base leading-relaxed text-body">

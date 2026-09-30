@@ -172,17 +172,17 @@ export default function MediaPageContent({ data }: { data?: MediaPageData }) {
             {articles.map((a, i) => (
               <motion.li
                 key={a.title}
-                initial={{ opacity: 0, y: 28 }}
+                initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-80px" }}
-                transition={{ duration: 0.6, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: 0.5, delay: i * 0.04, ease: [0.16, 1, 0.3, 1] }}
               >
                 <TiltCard className="h-full">
                   <Link
                     href={a.href}
                     target={a.href.startsWith("http") ? "_blank" : undefined}
                     rel={a.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                    className="group flex h-full flex-col overflow-hidden rounded-2xl bg-beige ring-1 ring-deep-green/10 transition-colors hover:ring-deep-green/30"
+                    className="group flex h-full flex-col overflow-hidden rounded-2xl bg-beige ring-1 ring-forest/10 transition-colors hover:ring-forest/30"
                   >
                     <div className="relative aspect-[5/3] w-full overflow-hidden">
                       <Image
@@ -204,7 +204,7 @@ export default function MediaPageContent({ data }: { data?: MediaPageData }) {
                     </div>
                     <div className="flex flex-1 flex-col gap-3 p-6">
                       <p className="text-xs text-muted">{formatDate(a.date)}</p>
-                      <h3 className="font-serif text-xl leading-snug text-ink group-hover:text-deep-green">
+                      <h3 className="font-serif text-xl leading-snug text-ink group-hover:text-forest">
                         {a.title}
                       </h3>
                       <p className="mt-auto text-sm font-medium text-body">{a.source}</p>
@@ -222,7 +222,7 @@ export default function MediaPageContent({ data }: { data?: MediaPageData }) {
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-2xl">
-              <span className="text-xs uppercase tracking-[0.2em] text-deep-green">
+              <span className="text-xs uppercase tracking-[0.2em] text-forest">
                 {str(videosSection?.eyebrow, "Videos")}
               </span>
               <AnimatedHeading className="mt-3 font-serif text-3xl leading-tight text-ink sm:text-4xl lg:text-5xl">
@@ -235,7 +235,7 @@ export default function MediaPageContent({ data }: { data?: MediaPageData }) {
             </div>
             <Link
               href="/media/videos"
-              className="inline-flex items-center gap-2 text-sm font-medium text-deep-green underline-offset-4 hover:underline"
+              className="inline-flex items-center gap-2 text-sm font-medium text-forest underline-offset-4 hover:underline"
             >
               All videos
               <ArrowRight className="h-4 w-4" />
@@ -248,10 +248,10 @@ export default function MediaPageContent({ data }: { data?: MediaPageData }) {
               return (
                 <motion.li
                   key={v.title}
-                  initial={{ opacity: 0, y: 28 }}
+                  initial={{ opacity: 0, y: 16 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-80px" }}
-                  transition={{ duration: 0.6, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
+                  transition={{ duration: 0.5, delay: i * 0.04, ease: [0.16, 1, 0.3, 1] }}
                 >
                   <Link
                     href={v.href}

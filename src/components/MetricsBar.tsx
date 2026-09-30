@@ -43,9 +43,9 @@ export default function MetricsBar({
 
       gsap.from(".metrics-head > :not(h2)", {
         scrollTrigger: { trigger: root.current, start: "top 75%" },
-        y: 30,
+        y: 16,
         opacity: 0,
-        duration: 0.8,
+        duration: 0.5,
         stagger: 0.12,
         ease: "power3.out",
       });
@@ -68,10 +68,10 @@ export default function MetricsBar({
 
       gsap.from(".metric-card", {
         scrollTrigger: { trigger: root.current, start: "top 70%" },
-        y: 40,
+        y: 16,
         opacity: 0,
         stagger: 0.1,
-        duration: 0.8,
+        duration: 0.5,
         ease: "power3.out",
       });
     },

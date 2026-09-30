@@ -4,7 +4,6 @@ import { VisualEditing } from "next-sanity/visual-editing";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SmoothScroll from "@/components/SmoothScroll";
-import CustomCursor from "@/components/CustomCursor";
 import { SanityLive, sanityFetch } from "@/sanity/lib/live";
 import { SITE_SETTINGS_QUERY } from "@/sanity/lib/queries";
 
@@ -45,7 +44,6 @@ export default async function SiteLayout({
 
   return (
     <SmoothScroll>
-      <CustomCursor />
       <Header
         siteTitle={settings?.title}
         logoUrl={settings?.logoUrl}

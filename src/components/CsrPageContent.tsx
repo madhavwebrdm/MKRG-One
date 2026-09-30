@@ -74,10 +74,10 @@ export default function CsrPageContent({ data }: { data?: CsrPageData }) {
             {stats.map((stat, i) => (
               <motion.div
                 key={`${stat.label}-${i}`}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.6, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: 0.5, delay: i * 0.04, ease: [0.16, 1, 0.3, 1] }}
               >
                 <dt className="font-serif text-4xl text-white sm:text-5xl">
                   {stat.value}
@@ -112,11 +112,11 @@ export default function CsrPageContent({ data }: { data?: CsrPageData }) {
               return (
                 <motion.li
                   key={area.slug}
-                  initial={{ opacity: 0, y: 28 }}
+                  initial={{ opacity: 0, y: 16 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-80px" }}
-                  transition={{ duration: 0.6, delay: i * 0.06, ease: [0.16, 1, 0.3, 1] }}
-                  className="group relative overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-deep-green/10 transition-shadow hover:shadow-xl"
+                  transition={{ duration: 0.5, delay: i * 0.04, ease: [0.16, 1, 0.3, 1] }}
+                  className="group relative overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-forest/10 transition-shadow hover:shadow-xl"
                 >
                   <Link href={`/csr/${area.slug}`} className="block">
                     <div className="relative aspect-[4/3] overflow-hidden">
@@ -144,7 +144,7 @@ export default function CsrPageContent({ data }: { data?: CsrPageData }) {
                       <p className="mt-2 text-sm leading-relaxed text-body">
                         {area.tagline}
                       </p>
-                      <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-deep-green transition-colors group-hover:text-accent">
+                      <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-forest transition-colors group-hover:text-accent">
                         Explore focus area
                         <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden />
                       </span>
@@ -173,7 +173,7 @@ export default function CsrPageContent({ data }: { data?: CsrPageData }) {
               </p>
               <Link
                 href={str(cc?.primaryHref, "/contact")}
-                className="mt-8 inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-medium text-deep-green transition-colors hover:bg-light-green"
+                className="mt-8 inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-medium text-forest transition-colors hover:bg-light-green"
               >
                 {str(cc?.primaryLabel, "Get in touch")}
                 <ArrowUpRight className="h-4 w-4" aria-hidden />

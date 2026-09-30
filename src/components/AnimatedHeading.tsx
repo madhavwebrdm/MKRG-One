@@ -1,6 +1,6 @@
 "use client";
 
-import { Fragment, useRef } from "react";
+import { useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -22,15 +22,12 @@ export default function AnimatedHeading({
   useGSAP(
     () => {
       gsap.registerPlugin(ScrollTrigger);
-      const chars = ref.current?.querySelectorAll<HTMLElement>(".ah-char");
-      if (!chars?.length) return;
 
-      gsap.from(chars, {
-        yPercent: 110,
+      gsap.from(ref.current, {
+        y: 16,
         opacity: 0,
-        duration: 0.8,
-        ease: "power4.out",
-        stagger: 0.03,
+        duration: 0.6,
+        ease: "power2.out",
         scrollTrigger: {
           trigger: ref.current,
           start: "top 88%",
@@ -42,32 +39,15 @@ export default function AnimatedHeading({
   );
 
   const lines = children.split("\n");
-  const isMultiLine = lines.length > 1;
 
   return (
     <Tag ref={ref} className={className} {...rest}>
-      {lines.map((line, li) => {
-        const words = line.split(" ");
-        return (
-          <span
-            key={li}
-            className={isMultiLine ? "block text-balance" : "block"}
-          >
-            {words.map((word, wi) => (
-              <Fragment key={`${word}-${li}-${wi}`}>
-                <span className="inline-block overflow-hidden pb-[0.15em] align-bottom">
-                  {word.split("").map((char, ci) => (
-                    <span key={ci} className="ah-char inline-block">
-                      {char}
-                    </span>
-                  ))}
-                </span>
-                {wi < words.length - 1 && " "}
-              </Fragment>
-            ))}
-          </span>
-        );
-      })}
+      {lines.map((line, li) => (
+        <span key={li} className="block text-balance">
+          {line}
+          {li < lines.length - 1 && "\n"}
+        </span>
+      ))}
     </Tag>
   );
 }

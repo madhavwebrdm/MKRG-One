@@ -227,11 +227,11 @@ export default function ProductPageContent({ data }: { data?: ProductPageData })
             {families.map((item, i) => (
               <motion.article
                 key={item.id}
-                initial={{ opacity: 0, y: 28 }}
+                initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-80px" }}
-                transition={{ duration: 0.6, delay: i * 0.08, ease: EASE }}
-                className="flex flex-col overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-deep-green/10"
+                transition={{ duration: 0.5, delay: i * 0.04, ease: EASE }}
+                className="flex flex-col overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-forest/10"
               >
                 <div className="relative aspect-[16/9] overflow-hidden">
                   <Image
@@ -262,11 +262,11 @@ export default function ProductPageContent({ data }: { data?: ProductPageData })
               {zincApplications.map((a, i) => (
                 <motion.li
                   key={a.title}
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 16 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-60px" }}
-                  transition={{ duration: 0.5, delay: i * 0.05, ease: EASE }}
-                  className="flex h-full flex-col rounded-2xl border border-deep-green/15 bg-beige p-6"
+                  transition={{ duration: 0.5, delay: i * 0.04, ease: EASE }}
+                  className="flex h-full flex-col rounded-2xl border border-forest/15 bg-beige p-6"
                 >
                   <span className="flex h-8 w-8 flex-none items-center justify-center rounded-full bg-accent/10 font-serif text-sm text-accent">
                     {i + 1}
@@ -283,7 +283,7 @@ export default function ProductPageContent({ data }: { data?: ProductPageData })
 
             <Link
               href={str(ov?.applications?.ctaHref, "/processes")}
-              className="group mt-10 inline-flex w-fit items-center gap-1.5 text-sm font-medium text-deep-green transition-colors hover:text-accent"
+              className="group mt-10 inline-flex w-fit items-center gap-1.5 text-sm font-medium text-forest transition-colors hover:text-accent"
             >
               {str(ov?.applications?.ctaLabel, "Explore the process")}
               <ArrowRight
@@ -297,7 +297,7 @@ export default function ProductPageContent({ data }: { data?: ProductPageData })
 
       <ParallaxImpact
         heading={"Recycled. Certified.\nReady for Industry."}
-        imageUrl="/images/product-parallax.jpeg"
+        imageUrl="/images/product-parallax.webp"
       />
 
       {/* Zinc detail */}
@@ -306,10 +306,7 @@ export default function ProductPageContent({ data }: { data?: ProductPageData })
         background="white"
         eyebrow={str(zn?.eyebrow, "Commercial Zinc")}
         heading={str(zn?.heading, "High-Purity Zinc Recovered Through Circular Innovation")}
-        intro={str(
-          zn?.intro,
-          "Commercial-grade zinc products are recovered from industrial waste streams and refined to 99.9% purity.",
-        )}
+        intro={str(zn?.intro, "")}
         items={mergeRange(zn?.products, ZINC_RANGE)}
         columns={3}
         callout={{
@@ -349,7 +346,7 @@ export default function ProductPageContent({ data }: { data?: ProductPageData })
             <div className="lg:col-span-4 lg:justify-self-end">
               <Link
                 href={str(cc?.primaryHref, "/contact")}
-                className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-medium text-deep-green transition-colors hover:bg-light-green"
+                className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-medium text-forest transition-colors hover:bg-light-green"
               >
                 {str(cc?.primaryLabel, "Get in touch")}
                 <ArrowUpRight className="h-4 w-4" aria-hidden />
@@ -395,11 +392,11 @@ function ProductRange({
   const renderCard = (item: RangeItem, i: number) => (
     <motion.li
       key={`${item.name}-${i}`}
-      initial={{ opacity: 0, y: 28 }}
+      initial={{ opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.6, delay: i * 0.06, ease: EASE }}
-      className="group flex h-full flex-col overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-deep-green/10 transition-shadow hover:shadow-xl"
+      transition={{ duration: 0.5, delay: i * 0.04, ease: EASE }}
+      className="group flex h-full flex-col overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-forest/10 transition-shadow hover:shadow-xl"
     >
       <div className="relative aspect-[4/3] overflow-hidden">
         <Image
@@ -431,9 +428,11 @@ function ProductRange({
           <AnimatedHeading className="mt-3 font-serif text-3xl leading-tight text-ink sm:text-4xl lg:text-5xl">
             {heading}
           </AnimatedHeading>
-          <p className="mt-5 text-base leading-relaxed text-body sm:text-lg">
-            {intro}
-          </p>
+          {intro && (
+            <p className="mt-5 text-base leading-relaxed text-body sm:text-lg">
+              {intro}
+            </p>
+          )}
         </div>
 
         <ul className={`mt-14 grid grid-cols-1 gap-6 ${gridCols} lg:gap-8`}>
@@ -446,13 +445,13 @@ function ProductRange({
 
             {note.specs && note.specs.length > 0 && (
               <motion.div
-                initial={{ opacity: 0, y: 24 }}
+                initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-80px" }}
-                transition={{ duration: 0.6, delay: 0.1, ease: EASE }}
-                className="flex h-full flex-col overflow-hidden rounded-2xl border border-deep-green/15 bg-white"
+                transition={{ duration: 0.5, delay: 0.1, ease: EASE }}
+                className="flex h-full flex-col overflow-hidden rounded-2xl border border-forest/15 bg-white"
               >
-                <dl className="flex flex-1 flex-col divide-y divide-deep-green/10">
+                <dl className="flex flex-1 flex-col divide-y divide-forest/10">
                   {note.specs.map((s) => (
                     <div
                       key={s.label}
@@ -474,10 +473,10 @@ function ProductRange({
 
         {note && (
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.6, ease: EASE }}
+            transition={{ duration: 0.5, ease: EASE }}
             className="mt-10"
           >
             <h3 className="font-serif text-2xl leading-snug text-ink sm:text-3xl">
@@ -490,10 +489,10 @@ function ProductRange({
         )}
 
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.6, ease: EASE }}
+          transition={{ duration: 0.5, ease: EASE }}
           className="mt-14 overflow-hidden rounded-3xl bg-deep-green px-8 py-12 sm:px-14 sm:py-14"
         >
           <div className="max-w-3xl">

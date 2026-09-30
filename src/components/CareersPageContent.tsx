@@ -22,7 +22,7 @@ function CareersForm() {
 
   if (status === "sent") {
     return (
-      <div className="flex flex-col items-start gap-4 rounded-2xl border border-deep-green/15 bg-white p-8 sm:p-10">
+      <div className="flex flex-col items-start gap-4 rounded-2xl border border-forest/15 bg-white p-8 sm:p-10">
         <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-accent/15 text-accent">
           <CheckCircle2 className="h-6 w-6" />
         </span>
@@ -34,7 +34,7 @@ function CareersForm() {
           enquiries you can also write to{" "}
           <Link
             href="mailto:info@madhavkrggroup.com"
-            className="text-deep-green underline-offset-4 hover:underline"
+            className="text-forest underline-offset-4 hover:underline"
           >
             info@madhavkrggroup.com
           </Link>
@@ -47,7 +47,7 @@ function CareersForm() {
   return (
     <form
       onSubmit={onSubmit}
-      className="rounded-2xl border border-deep-green/15 bg-white p-7 sm:p-9"
+      className="rounded-2xl border border-forest/15 bg-white p-7 sm:p-9"
     >
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
         <Field id="careersName" name="name" label="Full name" required />
@@ -62,13 +62,13 @@ function CareersForm() {
           id="careersMessage"
           name="message"
           rows={4}
-          className="mt-2 w-full rounded-xl border border-deep-green/20 bg-beige/40 px-4 py-3 text-sm text-ink shadow-inner focus:border-deep-green focus:outline-none focus:ring-2 focus:ring-deep-green/30"
+          className="mt-2 w-full rounded-xl border border-forest/20 bg-beige/40 px-4 py-3 text-sm text-ink shadow-inner focus:border-forest focus:outline-none focus:ring-2 focus:ring-forest/30"
         />
       </div>
 
       <div className="mt-6">
         <Label>CV (PDF, up to 5 MB)</Label>
-        <label className="mt-2 flex cursor-pointer items-center gap-3 rounded-xl border border-dashed border-deep-green/30 bg-beige/40 px-4 py-3 text-sm text-body transition-colors hover:border-deep-green">
+        <label className="mt-2 flex cursor-pointer items-center gap-3 rounded-xl border border-dashed border-forest/30 bg-beige/40 px-4 py-3 text-sm text-body transition-colors hover:border-forest">
           <Upload className="h-4 w-4 text-accent" />
           <span className="truncate">
             {fileName ? fileName : "Choose a PDF to upload"}
@@ -137,7 +137,7 @@ function Field({
         name={name ?? id}
         type={type}
         required={required}
-        className="mt-2 w-full rounded-xl border border-deep-green/20 bg-beige/40 px-4 py-3 text-sm text-ink shadow-inner focus:border-deep-green focus:outline-none focus:ring-2 focus:ring-deep-green/30"
+        className="mt-2 w-full rounded-xl border border-forest/20 bg-beige/40 px-4 py-3 text-sm text-ink shadow-inner focus:border-forest focus:outline-none focus:ring-2 focus:ring-forest/30"
       />
     </div>
   );

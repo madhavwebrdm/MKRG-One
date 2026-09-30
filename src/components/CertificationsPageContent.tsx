@@ -209,17 +209,17 @@ export default function CertificationsPageContent({
               return (
                 <motion.li
                   key={c.title}
-                  initial={{ opacity: 0, y: 28 }}
+                  initial={{ opacity: 0, y: 16 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-80px" }}
-                  transition={{ duration: 0.6, delay: i * 0.07, ease: [0.16, 1, 0.3, 1] }}
+                  transition={{ duration: 0.5, delay: i * 0.04, ease: [0.16, 1, 0.3, 1] }}
                   className="h-full"
                 >
                   <a
                     href={c.downloadHref}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group flex h-full flex-col rounded-2xl border border-deep-green/15 bg-beige p-7 transition-colors hover:border-deep-green/40"
+                    className="group flex h-full flex-col rounded-2xl border border-forest/15 bg-beige p-7 transition-colors hover:border-forest/40"
                   >
                     <div className="flex items-center justify-between">
                       <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10 text-accent transition-transform group-hover:scale-110">
@@ -240,7 +240,7 @@ export default function CertificationsPageContent({
                     </p>
                     <p className="mt-4 text-sm leading-relaxed text-body">{c.body}</p>
                     {c.downloadHref && (
-                      <span className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-deep-green underline-offset-4 group-hover:underline">
+                      <span className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-forest underline-offset-4 group-hover:underline">
                         <Eye className="h-4 w-4" />
                         View certificate
                       </span>
@@ -279,17 +279,17 @@ export default function CertificationsPageContent({
               return (
                 <motion.li
                   key={`${c.title}-doc`}
-                  initial={{ opacity: 0, y: 24 }}
+                  initial={{ opacity: 0, y: 16 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-80px" }}
-                  transition={{ duration: 0.55, delay: i * 0.06, ease: [0.16, 1, 0.3, 1] }}
+                  transition={{ duration: 0.5, delay: i * 0.04, ease: [0.16, 1, 0.3, 1] }}
                 >
                   <a
                     href={c.downloadHref}
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={`View ${c.title} certificate`}
-                    className="group block overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-deep-green/10"
+                    className="group block overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-forest/10"
                   >
                     <div className="relative aspect-[3/4] w-full overflow-hidden">
                       <Image

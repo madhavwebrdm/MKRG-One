@@ -238,12 +238,12 @@ export default function AboutPageContent({ data }: { data?: AboutPageData }) {
             </AnimatedHeading>
           </div>
 
-          <div className="mt-12 grid grid-cols-1 gap-px overflow-hidden rounded-2xl bg-deep-green/10 sm:grid-cols-2">
+          <div className="mt-12 grid grid-cols-1 gap-px overflow-hidden rounded-2xl bg-forest/10 sm:grid-cols-2">
             <motion.article
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
               className="bg-beige p-8 sm:p-10"
             >
               <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-wider text-accent">
@@ -259,10 +259,10 @@ export default function AboutPageContent({ data }: { data?: AboutPageData }) {
             </motion.article>
 
             <motion.article
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.5, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
               className="bg-beige p-8 sm:p-10"
             >
               <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-wider text-teal">
@@ -278,27 +278,16 @@ export default function AboutPageContent({ data }: { data?: AboutPageData }) {
       </section>
 
       {/* Values */}
-      <section
-        id="values"
-        className="relative isolate overflow-hidden bg-deep-green py-24 text-white sm:py-32"
-        style={{
-          backgroundImage: `url("/images/about-parallax.jpeg")`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundAttachment: "fixed",
-          backgroundRepeat: "no-repeat",
-        }}
-      >
-        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-deep-green/70 via-deep-green/55 to-deep-green/75" />
+      <section id="values" className="bg-white py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
           <div className="max-w-3xl">
-            <span className="text-xs uppercase tracking-[0.2em] text-white/80">
+            <span className="text-xs uppercase tracking-[0.2em] text-accent">
               {str(values?.eyebrow, "Values")}
             </span>
-            <AnimatedHeading className="mt-3 font-serif text-3xl leading-tight text-white sm:text-4xl lg:text-5xl">
+            <AnimatedHeading className="mt-3 font-serif text-3xl leading-tight text-ink sm:text-4xl lg:text-5xl">
               {str(values?.heading, "Six values. One way of working.")}
             </AnimatedHeading>
-            <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/85 sm:text-lg">
+            <p className="mt-5 max-w-2xl text-base leading-relaxed text-body sm:text-lg">
               {str(
                 values?.intro,
                 "Integrity · Excellence · Patriotism · Empowerment · Humility · Unity, the principles that pre-date every plant, every audit, and every hire.",
@@ -312,17 +301,17 @@ export default function AboutPageContent({ data }: { data?: AboutPageData }) {
               return (
                 <motion.li
                   key={v.title}
-                  initial={{ opacity: 0, y: 28 }}
+                  initial={{ opacity: 0, y: 16 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-80px" }}
-                  transition={{ duration: 0.5, delay: i * 0.06, ease: [0.16, 1, 0.3, 1] }}
+                  transition={{ duration: 0.5, delay: i * 0.04, ease: [0.16, 1, 0.3, 1] }}
                 >
-                  <TiltCard className="h-full rounded-2xl border border-white/10 bg-white/5 p-7 backdrop-blur transition-colors hover:border-white/30">
-                    <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/15 text-white">
+                  <TiltCard className="h-full rounded-2xl border border-forest/15 bg-beige p-7 transition-colors hover:border-forest/40">
+                    <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-forest/10 text-forest">
                       <Icon className="h-5 w-5" aria-hidden />
                     </div>
-                    <h3 className="mt-5 font-serif text-2xl text-white">{v.title}</h3>
-                    <p className="mt-2 text-sm leading-relaxed text-white/80">
+                    <h3 className="mt-5 font-serif text-2xl text-ink">{v.title}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-body">
                       {v.body}
                     </p>
                   </TiltCard>
@@ -341,9 +330,8 @@ export default function AboutPageContent({ data }: { data?: AboutPageData }) {
               initial={{ opacity: 0, scale: 0.96 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
               className="relative aspect-[5/4] w-full overflow-hidden rounded-2xl lg:col-span-5"
-              data-cursor="grow"
             >
               <Image
                 src={brandIdentity?.imageUrl || PLACEHOLDER_IMAGES.aboutBrand}
@@ -391,10 +379,10 @@ export default function AboutPageContent({ data }: { data?: AboutPageData }) {
             {differentiatorItems.map((d, i) => (
               <motion.li
                 key={d.title}
-                initial={{ opacity: 0, y: 28 }}
+                initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-80px" }}
-                transition={{ duration: 0.6, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: 0.5, delay: i * 0.04, ease: [0.16, 1, 0.3, 1] }}
               >
                 <div className="group h-full overflow-hidden rounded-2xl bg-white shadow-sm transition-shadow duration-300 hover:shadow-lg">
                   <div className="relative aspect-[5/3] w-full overflow-hidden">
@@ -438,7 +426,7 @@ export default function AboutPageContent({ data }: { data?: AboutPageData }) {
             {/* Central / left vertical line */}
             <div
               aria-hidden
-              className="pointer-events-none absolute bottom-0 left-4 top-0 w-0.5 bg-deep-green/20 sm:left-6 lg:left-1/2 lg:-translate-x-1/2"
+              className="pointer-events-none absolute bottom-0 left-4 top-0 w-0.5 bg-forest/20 sm:left-6 lg:left-1/2 lg:-translate-x-1/2"
             />
 
             {timelineEntries.map((t, i) => {
@@ -446,12 +434,12 @@ export default function AboutPageContent({ data }: { data?: AboutPageData }) {
               return (
                 <motion.li
                   key={`${t.year}-${i}`}
-                  initial={{ opacity: 0, x: isLeft ? -30 : 30, y: 12 }}
+                  initial={{ opacity: 0, x: isLeft ? -16 : 16, y: 12 }}
                   whileInView={{ opacity: 1, x: 0, y: 0 }}
                   viewport={{ once: true, margin: "-80px" }}
                   transition={{
-                    duration: 0.7,
-                    delay: i * 0.08,
+                    duration: 0.5,
+                    delay: i * 0.04,
                     ease: [0.16, 1, 0.3, 1],
                   }}
                   className="relative pb-14 last:pb-0 lg:grid lg:grid-cols-2 lg:gap-x-16"
@@ -459,7 +447,7 @@ export default function AboutPageContent({ data }: { data?: AboutPageData }) {
                   {/* Dot on the line */}
                   <span
                     aria-hidden
-                    className="absolute left-4 top-2 inline-flex h-5 w-5 -translate-x-1/2 items-center justify-center rounded-full bg-deep-green ring-4 ring-beige sm:left-6 lg:left-1/2"
+                    className="absolute left-4 top-2 inline-flex h-5 w-5 -translate-x-1/2 items-center justify-center rounded-full bg-forest ring-4 ring-beige sm:left-6 lg:left-1/2"
                   >
                     <span className="h-1.5 w-1.5 rounded-full bg-white" />
                   </span>

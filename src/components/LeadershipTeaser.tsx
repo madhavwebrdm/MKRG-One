@@ -47,9 +47,8 @@ export default function LeadershipTeaser({
               initial={{ opacity: 0, scale: 0.96 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
               className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl bg-brand-green/30"
-              data-cursor="grow"
             >
               <Image
                 src={portrait}
@@ -74,10 +73,10 @@ export default function LeadershipTeaser({
             </AnimatedHeading>
 
             <motion.figure
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.5, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
               className="mt-10 max-w-2xl border-l-2 border-white/40 pl-6"
             >
               <Quote className="h-6 w-6 text-white/70" aria-hidden />
@@ -92,7 +91,6 @@ export default function LeadershipTeaser({
             <motion.div whileHover={{ x: 4 }} className="mt-10 inline-flex">
               <Link
                 href={ctaHref}
-                data-cursor="grow"
                 className="inline-flex items-center gap-2 text-sm font-medium text-white underline-offset-4 hover:underline"
               >
                 {ctaLabel}

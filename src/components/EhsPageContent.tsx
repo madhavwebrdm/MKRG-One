@@ -146,11 +146,11 @@ function Pillar({
             return (
               <motion.li
                 key={item.title}
-                initial={{ opacity: 0, y: 28 }}
+                initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-80px" }}
-                transition={{ duration: 0.6, delay: i * 0.06, ease: [0.16, 1, 0.3, 1] }}
-                className="flex h-full flex-col rounded-2xl border border-deep-green/15 bg-beige p-7 transition-colors hover:border-deep-green/40"
+                transition={{ duration: 0.5, delay: i * 0.04, ease: [0.16, 1, 0.3, 1] }}
+                className="flex h-full flex-col rounded-2xl border border-forest/15 bg-beige p-7 transition-colors hover:border-forest/40"
               >
                 <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10 text-accent">
                   <Icon className="h-5 w-5" aria-hidden />
@@ -244,7 +244,7 @@ export default function EhsPageContent({ data }: { data?: EhsPageData }) {
             <div className="lg:col-span-4 lg:justify-self-end">
               <Link
                 href={str(cc?.primaryHref, "/contact")}
-                className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-medium text-deep-green transition-colors hover:bg-light-green"
+                className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-medium text-forest transition-colors hover:bg-light-green"
               >
                 {str(cc?.primaryLabel, "Get in touch")}
                 <ArrowUpRight className="h-4 w-4" aria-hidden />

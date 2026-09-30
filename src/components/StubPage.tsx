@@ -33,7 +33,7 @@ export default function StubPage({ eyebrow, heading, body }: Props) {
         <div className="mt-10">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 text-sm font-medium text-deep-green underline-offset-4 hover:underline"
+            className="inline-flex items-center gap-2 text-sm font-medium text-forest underline-offset-4 hover:underline"
           >
             <ArrowLeft className="h-4 w-4" />
             Back to home

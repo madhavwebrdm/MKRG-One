@@ -25,7 +25,6 @@ const FLOW: Flow = {
   steps: [
     { title: "Waste Receipt", body: "Secure hazardous waste handling" },
     { title: "Washing & Prep", body: "Remove contaminants" },
-    { title: "Acid Leaching", body: "Dissolve zinc content" },
     { title: "Filtration", body: "Purify the solution" },
     { title: "Electrolysis", body: "99.9% pure zinc recovery" },
     { title: "Zinc Sheets", body: "Clean and package" },
@@ -82,7 +81,6 @@ export default function ProcessesTeaser({
         <motion.div whileHover={{ x: 4 }} className="mt-14 inline-flex">
           <Link
             href={ctaHref}
-            data-cursor="grow"
             className="inline-flex items-center gap-2 text-sm font-medium text-accent underline-offset-4 hover:underline"
           >
             {ctaLabel}
@@ -117,11 +115,11 @@ function FlowBlock({ flow, index }: { flow: Flow; index: number }) {
 
       {/* Illustration */}
       <motion.div
-        initial={{ opacity: 0, y: 24 }}
+        initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-80px" }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className="relative mt-10 overflow-hidden rounded-2xl border border-deep-green/10 bg-white shadow-sm"
+        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+        className="relative mt-10 overflow-hidden rounded-2xl border border-forest/10 bg-white shadow-sm"
       >
         <Image
           src={flow.image}
@@ -135,7 +133,7 @@ function FlowBlock({ flow, index }: { flow: Flow; index: number }) {
       </motion.div>
 
       {/* Step cards */}
-      <ol className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+      <ol className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
         {flow.steps.map((s, i) => (
           <motion.li
             key={s.title}
@@ -147,7 +145,7 @@ function FlowBlock({ flow, index }: { flow: Flow; index: number }) {
               delay: i * 0.05,
               ease: [0.16, 1, 0.3, 1],
             }}
-            className="rounded-2xl border border-deep-green/10 bg-white p-5 shadow-sm"
+            className="rounded-2xl border border-forest/10 bg-white p-5 shadow-sm"
           >
             <p className="font-serif text-sm text-accent">
               {String(i + 1).padStart(2, "0")}

@@ -1,9 +1,11 @@
 ﻿@import "tailwindcss";
 
 :root {
-  /* MKRG brand palette primary: deep forest green */
-  --color-deep-green: #2A5417;
-  --color-brand-green: #2A5417;
+  /* MKRG brand palette primary: forest green (section backgrounds) */
+  --color-deep-green: #3B6D11;
+  --color-brand-green: #3B6D11;
+  /* Darker shade reserved for text/icon/border accents on light sections */
+  --color-forest: #2A5417;
   --color-light-green: #d1f2e0;
   --color-teal: #0f6e56;
   --color-light-teal: #e1f5ee;
@@ -28,6 +30,7 @@
 
   --color-deep-green: var(--color-deep-green);
   --color-brand-green: var(--color-brand-green);
+  --color-forest: var(--color-forest);
   --color-light-green: var(--color-light-green);
   --color-teal: var(--color-teal);
   --color-light-teal: var(--color-light-teal);

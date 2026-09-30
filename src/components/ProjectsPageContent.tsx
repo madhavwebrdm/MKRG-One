@@ -230,9 +230,9 @@ function ImpactStats({
 
       gsap.from(".projects-stats-head > :not(h2)", {
         scrollTrigger: { trigger: root.current, start: "top 75%" },
-        y: 30,
+        y: 16,
         opacity: 0,
-        duration: 0.8,
+        duration: 0.5,
         stagger: 0.12,
         ease: "power3.out",
       });
@@ -254,10 +254,10 @@ function ImpactStats({
 
       gsap.from(".projects-stat-card", {
         scrollTrigger: { trigger: root.current, start: "top 70%" },
-        y: 40,
+        y: 16,
         opacity: 0,
         stagger: 0.1,
-        duration: 0.8,
+        duration: 0.5,
         ease: "power3.out",
       });
     },
@@ -391,11 +391,11 @@ export default function ProjectsPageContent({ data }: { data?: ProjectsPageData 
               return (
                 <motion.li
                   key={h.title}
-                  initial={{ opacity: 0, y: 28 }}
+                  initial={{ opacity: 0, y: 16 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-80px" }}
-                  transition={{ duration: 0.6, delay: i * 0.07, ease: [0.16, 1, 0.3, 1] }}
-                  className="flex h-full flex-col rounded-2xl border border-deep-green/15 bg-beige p-7 transition-colors hover:border-deep-green/40"
+                  transition={{ duration: 0.5, delay: i * 0.04, ease: [0.16, 1, 0.3, 1] }}
+                  className="flex h-full flex-col rounded-2xl border border-forest/15 bg-beige p-7 transition-colors hover:border-forest/40"
                 >
                   <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10 text-accent">
                     <Icon className="h-5 w-5" aria-hidden />
@@ -416,9 +416,8 @@ export default function ProjectsPageContent({ data }: { data?: ProjectsPageData 
               initial={{ opacity: 0, scale: 0.96 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
               className="relative aspect-[5/4] w-full overflow-hidden rounded-2xl lg:col-span-5"
-              data-cursor="grow"
             >
               <Image
                 src={overview?.imageUrl || PLACEHOLDER_IMAGES.projects.overview}
@@ -450,26 +449,16 @@ export default function ProjectsPageContent({ data }: { data?: ProjectsPageData 
       </section>
 
       {/* The need for sustainable waste management */}
-      <section
-        className="relative isolate overflow-hidden bg-deep-green py-24 text-white sm:py-32"
-        style={{
-          backgroundImage: `url("${challenge?.backgroundImageUrl || PLACEHOLDER_IMAGES.projects.challengeBg}")`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundAttachment: "fixed",
-          backgroundRepeat: "no-repeat",
-        }}
-      >
-        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-deep-green/80 via-deep-green/70 to-deep-green/85" />
+      <section className="bg-white py-24 sm:py-32">
         <div className="mx-auto max-w-4xl px-6 text-center sm:px-10 lg:px-16">
-          <span className="text-xs uppercase tracking-[0.2em] text-white/80">
+          <span className="text-xs uppercase tracking-[0.2em] text-accent">
             {str(challenge?.eyebrow, "The need for sustainable waste management")}
           </span>
-          <AnimatedHeading className="mt-3 font-serif text-3xl leading-tight text-white sm:text-4xl lg:text-5xl">
+          <AnimatedHeading className="mt-3 font-serif text-3xl leading-tight text-ink sm:text-4xl lg:text-5xl">
             {str(challenge?.heading, "Converting pollution challenges into resource opportunities.")}
           </AnimatedHeading>
           {challengeParagraphs.map((p, i) => (
-            <p key={i} className={`text-base leading-relaxed text-white/85 sm:text-lg ${i === 0 ? "mt-6" : "mt-4"}`}>
+            <p key={i} className={`text-base leading-relaxed text-body sm:text-lg ${i === 0 ? "mt-6" : "mt-4"}`}>
               {p}
             </p>
           ))}
@@ -497,7 +486,7 @@ export default function ProjectsPageContent({ data }: { data?: ProjectsPageData 
           <ol className="relative mt-14">
             <div
               aria-hidden
-              className="pointer-events-none absolute bottom-0 left-4 top-0 w-0.5 bg-deep-green/20 sm:left-6 lg:left-1/2 lg:-translate-x-1/2"
+              className="pointer-events-none absolute bottom-0 left-4 top-0 w-0.5 bg-forest/20 sm:left-6 lg:left-1/2 lg:-translate-x-1/2"
             />
 
             {timelineEntries.map((t, i) => {
@@ -508,12 +497,12 @@ export default function ProjectsPageContent({ data }: { data?: ProjectsPageData 
                   initial={{ opacity: 0, x: isLeft ? -30 : 30, y: 12 }}
                   whileInView={{ opacity: 1, x: 0, y: 0 }}
                   viewport={{ once: true, margin: "-80px" }}
-                  transition={{ duration: 0.7, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
+                  transition={{ duration: 0.5, delay: i * 0.04, ease: [0.16, 1, 0.3, 1] }}
                   className="relative pb-14 last:pb-0 lg:grid lg:grid-cols-2 lg:gap-x-16"
                 >
                   <span
                     aria-hidden
-                    className="absolute left-4 top-2 inline-flex h-5 w-5 -translate-x-1/2 items-center justify-center rounded-full bg-deep-green ring-4 ring-beige sm:left-6 lg:left-1/2"
+                    className="absolute left-4 top-2 inline-flex h-5 w-5 -translate-x-1/2 items-center justify-center rounded-full bg-forest ring-4 ring-beige sm:left-6 lg:left-1/2"
                   >
                     <span className="h-1.5 w-1.5 rounded-full bg-white" />
                   </span>
@@ -562,12 +551,12 @@ export default function ProjectsPageContent({ data }: { data?: ProjectsPageData 
               return (
                 <motion.li
                   key={p.title}
-                  initial={{ opacity: 0, y: 28 }}
+                  initial={{ opacity: 0, y: 16 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-80px" }}
-                  transition={{ duration: 0.6, delay: i * 0.07, ease: [0.16, 1, 0.3, 1] }}
+                  transition={{ duration: 0.5, delay: i * 0.04, ease: [0.16, 1, 0.3, 1] }}
                 >
-                  <TiltCard className="h-full rounded-2xl border border-deep-green/15 bg-beige p-7 transition-colors hover:border-deep-green/40">
+                  <TiltCard className="h-full rounded-2xl border border-forest/15 bg-beige p-7 transition-colors hover:border-forest/40">
                     <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10 text-accent">
                       <Icon className="h-5 w-5" aria-hidden />
                     </div>
@@ -583,13 +572,13 @@ export default function ProjectsPageContent({ data }: { data?: ProjectsPageData 
             {capacityStats.map((s, i) => (
               <motion.div
                 key={s.label}
-                initial={{ opacity: 0, y: 24 }}
+                initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-80px" }}
-                transition={{ duration: 0.6, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
-                className="rounded-2xl bg-deep-green/5 p-8 text-center"
+                transition={{ duration: 0.5, delay: i * 0.04, ease: [0.16, 1, 0.3, 1] }}
+                className="rounded-2xl bg-forest/5 p-8 text-center"
               >
-                <p className="font-serif text-4xl text-deep-green sm:text-5xl">{s.value}</p>
+                <p className="font-serif text-4xl text-forest sm:text-5xl">{s.value}</p>
                 <p className="mt-2 text-sm font-medium uppercase tracking-wider text-muted">
                   {s.label}
                 </p>
@@ -623,7 +612,7 @@ export default function ProjectsPageContent({ data }: { data?: ProjectsPageData 
                     initial={{ opacity: 0, x: -16 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true, margin: "-80px" }}
-                    transition={{ duration: 0.5, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
+                    transition={{ duration: 0.5, delay: i * 0.04, ease: [0.16, 1, 0.3, 1] }}
                     className="flex items-start gap-3"
                   >
                     <CheckCircle2 className="mt-0.5 h-5 w-5 flex-none text-accent" aria-hidden />
@@ -637,9 +626,8 @@ export default function ProjectsPageContent({ data }: { data?: ProjectsPageData 
               initial={{ opacity: 0, scale: 0.96 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
               className="relative aspect-[5/4] w-full overflow-hidden rounded-2xl lg:col-span-5"
-              data-cursor="grow"
             >
               <Image
                 src={impact?.imageUrl || PLACEHOLDER_IMAGES.projects.impact}
@@ -677,13 +665,13 @@ export default function ProjectsPageContent({ data }: { data?: ProjectsPageData 
               return (
                 <motion.li
                   key={c.title}
-                  initial={{ opacity: 0, y: 28 }}
+                  initial={{ opacity: 0, y: 16 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-80px" }}
-                  transition={{ duration: 0.5, delay: i * 0.06, ease: [0.16, 1, 0.3, 1] }}
+                  transition={{ duration: 0.5, delay: i * 0.04, ease: [0.16, 1, 0.3, 1] }}
                 >
                   <TiltCard className="h-full rounded-2xl border border-black/10 bg-white/60 p-7 backdrop-blur transition-colors hover:border-black/25">
-                    <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-white text-deep-green">
+                    <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-white text-forest">
                       <Icon className="h-5 w-5" aria-hidden />
                     </div>
                     <h3 className="mt-5 font-serif text-xl leading-snug text-ink">{c.title}</h3>

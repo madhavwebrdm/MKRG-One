@@ -75,10 +75,10 @@ export const PLACEHOLDER_IMAGES = {
 
   // Product page (zinc product range)
   product: {
-    hero: "/images/Zinc%20Feedstock.png",
-    zinc: "/images/zinc-recovery.png",
+    hero: "/images/product-hero.webp",
+    zinc: "/images/zinc-recovery.webp",
     zincRange: [
-      "/images/zinc-recovery.png", // Zinc Ingots
+      "/images/zinc-recovery.webp", // Zinc Ingots
       "/images/Zinc%20Sheets.jpg", // Zinc Sheets
       "/images/Zinc%20Feedstock.png", // Zinc Feedstock
     ],
@@ -108,7 +108,7 @@ export const PLACEHOLDER_IMAGES = {
 
   // About page
   aboutHero: u(PHOTO.workersOnMetal, 1600, 1000),
-  aboutBrand: "/images/home-about-plant.jpeg",
+  aboutBrand: "/images/about-brand-identity.webp",
   aboutTimeline: u(PHOTO.factoryExterior, 1600, 700),
   aboutDifferentiators: [
     u(PHOTO.industrialRefuse, 800, 600),
@@ -141,10 +141,10 @@ export const PLACEHOLDER_IMAGES = {
   // Projects page (Waste Recycling Division, Mandi Gobindgarh)
   // Real plant/product photography where available, matching the CSR page precedent.
   projects: {
-    hero: "/images/Zinc%20Feedstock.png",
-    overview: "/images/washing-and-prep.jpg",
+    hero: "/images/product-hero.webp",
+    overview: "/images/projects-overview.webp",
     challengeBg: "/images/purification.jpg",
-    impact: "/images/zinc-recovery.png",
+    impact: "/images/zinc-recovery.webp",
   },
 
   // Leadership page

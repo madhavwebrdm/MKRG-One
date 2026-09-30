@@ -52,7 +52,6 @@ export default function HeroIllustration({ imageUrl, imageAlt }: Props) {
         transformStyle: "preserve-3d",
         transformPerspective: 1200,
       }}
-      data-cursor="grow"
     >
       <motion.div
         className="absolute inset-0"

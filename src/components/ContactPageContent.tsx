@@ -143,7 +143,7 @@ function EnquiryForm({
 
   if (status === "sent") {
     return (
-      <div className="flex flex-col items-start gap-4 rounded-2xl border border-deep-green/15 bg-white p-8 sm:p-10">
+      <div className="flex flex-col items-start gap-4 rounded-2xl border border-forest/15 bg-white p-8 sm:p-10">
         <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-accent/15 text-accent">
           <CheckCircle2 className="h-6 w-6" />
         </span>
@@ -156,7 +156,7 @@ function EnquiryForm({
         <button
           type="button"
           onClick={() => setStatus("idle")}
-          className="mt-2 inline-flex items-center gap-2 text-sm font-medium text-deep-green underline-offset-4 hover:underline"
+          className="mt-2 inline-flex items-center gap-2 text-sm font-medium text-forest underline-offset-4 hover:underline"
         >
           Send another enquiry
           <ArrowRight className="h-4 w-4" />
@@ -168,7 +168,7 @@ function EnquiryForm({
   return (
     <form
       onSubmit={onSubmit}
-      className="rounded-2xl border border-deep-green/15 bg-white p-7 sm:p-9"
+      className="rounded-2xl border border-forest/15 bg-white p-7 sm:p-9"
     >
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
         <Field id="name" label="Name" required />
@@ -184,7 +184,7 @@ function EnquiryForm({
           name="message"
           required
           rows={5}
-          className="mt-2 w-full rounded-xl border border-deep-green/20 bg-beige/40 px-4 py-3 text-sm text-ink shadow-inner focus:border-deep-green focus:outline-none focus:ring-2 focus:ring-deep-green/30"
+          className="mt-2 w-full rounded-xl border border-forest/20 bg-beige/40 px-4 py-3 text-sm text-ink shadow-inner focus:border-forest focus:outline-none focus:ring-2 focus:ring-forest/30"
         />
       </div>
 
@@ -201,7 +201,7 @@ function EnquiryForm({
                 className={`rounded-full border px-4 py-1.5 text-sm font-medium transition-colors ${
                   active
                     ? "border-deep-green bg-deep-green text-white"
-                    : "border-deep-green/20 bg-white text-ink hover:border-deep-green/40"
+                    : "border-forest/20 bg-white text-ink hover:border-forest/40"
                 }`}
               >
                 {opt}
@@ -265,7 +265,7 @@ function Field({
         name={name ?? id}
         type={type}
         required={required}
-        className="mt-2 w-full rounded-xl border border-deep-green/20 bg-beige/40 px-4 py-3 text-sm text-ink shadow-inner focus:border-deep-green focus:outline-none focus:ring-2 focus:ring-deep-green/30"
+        className="mt-2 w-full rounded-xl border border-forest/20 bg-beige/40 px-4 py-3 text-sm text-ink shadow-inner focus:border-forest focus:outline-none focus:ring-2 focus:ring-forest/30"
       />
     </div>
   );
@@ -356,7 +356,7 @@ export default function ContactPageContent({ data }: { data?: ContactPageData })
                   return (
                     <li
                       key={o.label}
-                      className="flex gap-4 rounded-2xl border border-deep-green/15 bg-beige/40 p-5"
+                      className="flex gap-4 rounded-2xl border border-forest/15 bg-beige/40 p-5"
                     >
                       <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent/10 text-accent">
                         <Icon className="h-5 w-5" />
@@ -378,7 +378,7 @@ export default function ContactPageContent({ data }: { data?: ContactPageData })
                 })}
               </ul>
 
-              <ul className="mt-6 divide-y divide-deep-green/10 rounded-2xl border border-deep-green/15 bg-beige/40">
+              <ul className="mt-6 divide-y divide-forest/10 rounded-2xl border border-forest/15 bg-beige/40">
                 {contactLines.map((c) => {
                   const Icon = c.Icon;
                   return (
@@ -392,7 +392,7 @@ export default function ContactPageContent({ data }: { data?: ContactPageData })
                         </p>
                         <Link
                           href={c.href}
-                          className="block truncate text-sm font-medium text-ink hover:text-deep-green"
+                          className="block truncate text-sm font-medium text-ink hover:text-forest"
                         >
                           {c.value}
                         </Link>
@@ -445,7 +445,7 @@ export default function ContactPageContent({ data }: { data?: ContactPageData })
           </div>
 
           <div className="mt-12 grid grid-cols-1 gap-6 lg:grid-cols-12">
-            <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl ring-1 ring-deep-green/10 lg:col-span-8 lg:aspect-auto">
+            <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl ring-1 ring-forest/10 lg:col-span-8 lg:aspect-auto">
               <iframe
                 src={mapEmbed}
                 width="100%"
@@ -459,7 +459,7 @@ export default function ContactPageContent({ data }: { data?: ContactPageData })
               />
             </div>
             <div className="flex flex-col gap-4 lg:col-span-4">
-              <div className="flex gap-4 rounded-2xl border border-deep-green/15 bg-white p-6">
+              <div className="flex gap-4 rounded-2xl border border-forest/15 bg-white p-6">
                 <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent/10 text-accent">
                   <MapPin className="h-5 w-5" />
                 </span>

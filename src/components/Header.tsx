@@ -17,9 +17,9 @@ const NAV: NavItem[] = [
     label: "About us",
     href: "/about",
     children: [
+      { label: "Company Brief", href: "/about#company-brief" },
       { label: "Mission & Vision", href: "/about#mission-vision" },
       { label: "Values", href: "/about#values" },
-      { label: "Company Brief", href: "/about#company-brief" },
       { label: "Process", href: "/processes" },
       { label: "Certifications", href: "/certifications" },
       { label: "Projects", href: "/projects" },
@@ -67,7 +67,7 @@ export default function Header({
       initial={false}
       className={`fixed inset-x-0 top-0 z-50 transition-[background-color,border-color] duration-300 ease-out ${
         scrolled
-          ? "border-b border-deep-green/10 bg-beige/85 backdrop-blur"
+          ? "border-b border-forest/10 bg-beige/85 backdrop-blur"
           : "bg-black/50"
       }`}
     >
@@ -99,7 +99,7 @@ export default function Header({
                   />
                 </Link>
                 <div className="invisible absolute left-1/2 top-full z-50 w-52 -translate-x-1/2 pt-3 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100">
-                  <ul className="overflow-hidden rounded-xl border border-deep-green/10 bg-beige/95 py-1.5 shadow-lg backdrop-blur">
+                  <ul className="overflow-hidden rounded-xl border border-forest/10 bg-beige/95 py-1.5 shadow-lg backdrop-blur">
                     {item.children.map((child) => (
                       <li key={child.href}>
                         <Link
@@ -127,7 +127,7 @@ export default function Header({
 
         <Link
           href="/contact"
-          className={`hidden rounded-full px-5 py-2.5 text-sm font-medium shadow-sm transition-colors lg:inline-flex ${darkTop ? "bg-white text-deep-green hover:bg-accent hover:text-white" : "bg-deep-green text-white hover:bg-accent"}`}
+          className={`hidden rounded-full px-5 py-2.5 text-sm font-medium shadow-sm transition-colors lg:inline-flex ${darkTop ? "bg-white text-forest hover:bg-accent hover:text-white" : "bg-deep-green text-white hover:bg-accent"}`}
         >
           Get in touch
         </Link>
@@ -149,7 +149,7 @@ export default function Header({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.2 }}
-            className="border-t border-deep-green/10 bg-beige px-6 pb-6 pt-3 lg:hidden"
+            className="border-t border-forest/10 bg-beige px-6 pb-6 pt-3 lg:hidden"
           >
             <ul className="flex flex-col gap-1">
               {nav.map((item) => (
@@ -162,7 +162,7 @@ export default function Header({
                     {item.label}
                   </Link>
                   {item.children && item.children.length > 0 && (
-                    <ul className="ml-3 border-l border-deep-green/10 pl-3">
+                    <ul className="ml-3 border-l border-forest/10 pl-3">
                       {item.children.map((child) => (
                         <li key={child.href}>
                           <Link

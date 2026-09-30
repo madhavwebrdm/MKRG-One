@@ -39,11 +39,11 @@ const container = {
 };
 
 const item = {
-  hidden: { opacity: 0, y: 28 },
+  hidden: { opacity: 0, y: 16 },
   show: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const },
+    transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] as const },
   },
 };
 
@@ -79,7 +79,7 @@ export default function MediaTeaser({
       <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-2xl">
-            <span className="text-xs uppercase tracking-[0.2em] text-deep-green">
+            <span className="text-xs uppercase tracking-[0.2em] text-forest">
               {eyebrow}
             </span>
             <AnimatedHeading className="mt-3 text-balance font-serif text-3xl leading-tight text-ink sm:text-4xl lg:text-5xl">
@@ -92,8 +92,7 @@ export default function MediaTeaser({
           <motion.div whileHover={{ x: 4 }} className="inline-flex">
             <Link
               href={ctaHref}
-              data-cursor="grow"
-              className="inline-flex items-center gap-2 text-sm font-medium text-deep-green underline-offset-4 hover:underline"
+              className="inline-flex items-center gap-2 text-sm font-medium text-forest underline-offset-4 hover:underline"
             >
               {ctaLabel}
               <ArrowRight className="h-4 w-4" />

@@ -29,11 +29,11 @@ const container = {
 };
 
 const item = {
-  hidden: { opacity: 0, y: 24 },
+  hidden: { opacity: 0, y: 16 },
   show: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const },
+    transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] as const },
   },
 };
 
@@ -59,12 +59,11 @@ export default function CertificationsTeaser({
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-5">
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
               className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl"
-              data-cursor="grow"
             >
               <Image
                 src="/images/mkrg-6.jpeg"
@@ -103,7 +102,7 @@ export default function CertificationsTeaser({
         >
           {badges.map((b, i) => (
             <motion.li key={`${b.label}-${i}`} variants={item}>
-              <TiltCard className="group h-full rounded-2xl border border-deep-green/15 bg-beige p-7 transition-colors hover:border-deep-green/40">
+              <TiltCard className="group h-full rounded-2xl border border-forest/15 bg-beige p-7 transition-colors hover:border-forest/40">
                 <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-accent/10 text-accent transition-transform group-hover:scale-110">
                   <ShieldCheck className="h-5 w-5" aria-hidden />
                 </div>
@@ -119,7 +118,6 @@ export default function CertificationsTeaser({
         <motion.div whileHover={{ x: 4 }} className="mt-12 inline-flex">
           <Link
             href={ctaHref}
-            data-cursor="grow"
             className="inline-flex items-center gap-2 text-sm font-medium text-black underline-offset-4 hover:underline"
           >
             {ctaLabel}

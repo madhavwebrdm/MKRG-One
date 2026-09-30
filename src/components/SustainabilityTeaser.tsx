@@ -65,7 +65,6 @@ export default function SustainabilityTeaser({
             <motion.div whileHover={{ x: 4 }} className="mt-6 inline-flex">
               <Link
                 href={ctaHref}
-                data-cursor="grow"
                 className="inline-flex items-center gap-2 text-sm font-medium text-white underline-offset-4 hover:underline"
               >
                 {ctaLabel}
@@ -108,13 +107,12 @@ export default function SustainabilityTeaser({
             return (
               <motion.li
                 key={`${h.label}-${i}`}
-                initial={{ opacity: 0, y: 28 }}
+                initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-80px" }}
-                transition={{ duration: 0.6, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: 0.5, delay: i * 0.05, ease: [0.16, 1, 0.3, 1] }}
                 whileHover={{ y: -6 }}
                 className="group relative overflow-hidden rounded-2xl border border-white/20 bg-deep-green"
-                data-cursor="grow"
               >
                 {h.href ? (
                   <Link href={h.href} className="block h-full">

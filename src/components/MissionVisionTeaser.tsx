@@ -51,15 +51,14 @@ export default function MissionVisionTeaser({
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
           {/* Image column */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
             className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl lg:col-span-5"
-            data-cursor="grow"
           >
             <Image
-              src={imageUrl || "/images/home-about-plant.jpeg"}
+              src={imageUrl || "/images/home-about-teaser.webp"}
               alt="Madhav KRG Group operations"
               fill
               sizes="(max-width: 1024px) 100vw, 40vw"
@@ -82,12 +81,12 @@ export default function MissionVisionTeaser({
               {heading}
             </AnimatedHeading>
 
-            <div className="mt-10 grid grid-cols-1 gap-px overflow-hidden rounded-2xl bg-deep-green/10 sm:grid-cols-2">
+            <div className="mt-10 grid grid-cols-1 gap-px overflow-hidden rounded-2xl bg-forest/10 sm:grid-cols-2">
               <motion.article
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-80px" }}
-                transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                 className="bg-beige p-7 sm:p-8"
               >
                 <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-wider text-accent">
@@ -100,10 +99,10 @@ export default function MissionVisionTeaser({
               </motion.article>
 
               <motion.article
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-80px" }}
-                transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: 0.5, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
                 className="bg-beige p-7 sm:p-8"
               >
                 <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-wider text-teal">
@@ -119,7 +118,6 @@ export default function MissionVisionTeaser({
             <motion.div whileHover={{ x: 4 }} className="mt-10 inline-flex">
               <Link
                 href={ctaHref}
-                data-cursor="grow"
                 className="inline-flex items-center gap-2 text-sm font-medium text-accent underline-offset-4 hover:underline"
               >
                 {ctaLabel}

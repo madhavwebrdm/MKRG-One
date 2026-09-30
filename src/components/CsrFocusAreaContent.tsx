@@ -37,7 +37,7 @@ export default function CsrFocusAreaContent({
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
           <Link
             href="/csr"
-            className="inline-flex items-center gap-1.5 text-sm font-medium text-deep-green transition-colors hover:text-accent"
+            className="inline-flex items-center gap-1.5 text-sm font-medium text-forest transition-colors hover:text-accent"
           >
             <ArrowLeft className="h-4 w-4" aria-hidden />
             All focus areas
@@ -47,11 +47,11 @@ export default function CsrFocusAreaContent({
             {area.stats.map((stat, i) => (
               <motion.div
                 key={stat.label}
-                initial={{ opacity: 0, y: 18 }}
+                initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.5, delay: i * 0.07, ease: [0.16, 1, 0.3, 1] }}
-                className="rounded-2xl border border-deep-green/10 bg-beige p-6"
+                transition={{ duration: 0.5, delay: i * 0.04, ease: [0.16, 1, 0.3, 1] }}
+                className="rounded-2xl border border-forest/10 bg-beige p-6"
               >
                 <dt className="font-serif text-3xl text-ink sm:text-4xl">
                   {stat.value}
@@ -81,14 +81,14 @@ export default function CsrFocusAreaContent({
               return (
                 <motion.article
                   key={it.title}
-                  initial={{ opacity: 0, y: 32 }}
+                  initial={{ opacity: 0, y: 16 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-100px" }}
-                  transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+                  transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                   className="grid items-center gap-8 lg:grid-cols-2 lg:gap-14"
                 >
                   <div
-                    className={`relative aspect-[4/3] overflow-hidden rounded-3xl shadow-sm ring-1 ring-deep-green/10 ${
+                    className={`relative aspect-[4/3] overflow-hidden rounded-3xl shadow-sm ring-1 ring-forest/10 ${
                       imageFirst ? "" : "lg:order-2"
                     }`}
                   >
@@ -144,7 +144,7 @@ export default function CsrFocusAreaContent({
             </AnimatedHeading>
             <Link
               href="/csr"
-              className="hidden shrink-0 items-center gap-1.5 text-sm font-medium text-deep-green transition-colors hover:text-accent sm:inline-flex"
+              className="hidden shrink-0 items-center gap-1.5 text-sm font-medium text-forest transition-colors hover:text-accent sm:inline-flex"
             >
               View all
               <ArrowRight className="h-4 w-4" aria-hidden />
@@ -158,7 +158,7 @@ export default function CsrFocusAreaContent({
                 <li key={a.slug}>
                   <Link
                     href={`/csr/${a.slug}`}
-                    className="group flex h-full items-center gap-4 rounded-2xl border border-deep-green/10 bg-white p-5 transition-colors hover:border-deep-green/30"
+                    className="group flex h-full items-center gap-4 rounded-2xl border border-forest/10 bg-white p-5 transition-colors hover:border-forest/30"
                   >
                     <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent/10 text-accent">
                       <Icon className="h-5 w-5" aria-hidden />
@@ -171,7 +171,7 @@ export default function CsrFocusAreaContent({
                         {a.cardStat.value} · {a.cardStat.label}
                       </span>
                     </span>
-                    <ArrowUpRight className="h-4 w-4 shrink-0 text-deep-green transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden />
+                    <ArrowUpRight className="h-4 w-4 shrink-0 text-forest transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden />
                   </Link>
                 </li>
               );
