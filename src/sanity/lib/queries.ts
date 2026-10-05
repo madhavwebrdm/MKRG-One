@@ -118,6 +118,7 @@ export const HOME_PAGE_QUERY = defineQuery(`
       "portraitUrl": portrait.asset->url,
       ctaLabel, ctaHref
     },
+    "leaderPortraitUrl": *[_type == "leadershipPage"][0].additionalLeaders[name match "Rahul*"][0].image.asset->url,
     certificationsTeaser{
       eyebrow, heading, body,
       badges[]{ label, issuer },

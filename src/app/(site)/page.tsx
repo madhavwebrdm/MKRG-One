@@ -50,6 +50,7 @@ type HomeData = {
     ctaLabel?: string;
     ctaHref?: string;
   };
+  leaderPortraitUrl?: string | null;
   leadershipTeaser?: {
     eyebrow?: string;
     heading?: string;
@@ -108,7 +109,11 @@ export default async function Home() {
         heading={page?.metricsHeading}
         intro={page?.metricsIntro}
         metrics={page?.metrics}
-        leader={page?.leadershipTeaser}
+        leader={{
+          ...page?.leadershipTeaser,
+          // Same photo the Leadership page shows for Rahul Goel.
+          portraitUrl: page?.leadershipTeaser?.portraitUrl || page?.leaderPortraitUrl,
+        }}
       />
       <MissionVisionTeaser {...(page?.missionVision ?? {})} />
       <SustainabilityTeaser {...(page?.sustainabilityTeaser ?? {})} />
