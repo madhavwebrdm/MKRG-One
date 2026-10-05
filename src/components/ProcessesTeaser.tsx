@@ -23,7 +23,7 @@ const FLOW: Flow = {
   caption:
     "Our hydrometallurgical process recovers 99.9% pure zinc from hazardous waste.",
   image: "/images/waste to zinc.jpeg",
-  badge: "/images/patented-process-seal.png",
+  badge: "/images/patented-process-in-india-seal.png",
   steps: [
     { title: "Waste Receipt", body: "Secure hazardous waste handling" },
     { title: "Washing & Prep", body: "Remove contaminants" },
@@ -134,20 +134,14 @@ function FlowBlock({ flow, index }: { flow: Flow; index: number }) {
           priority={index === 0}
         />
         {flow.badge && (
-          <div className="absolute right-2 top-2 flex flex-col items-center sm:right-5 sm:top-5">
-            <Image
-              src={flow.badge}
-              alt="Hydrometallurgical Patented Process seal"
-              width={1200}
-              height={1200}
-              sizes="(max-width: 640px) 80px, (max-width: 1024px) 128px, 160px"
-              className="h-20 w-20 shrink-0 drop-shadow-lg sm:h-32 sm:w-32 lg:h-40 lg:w-40"
-            />
-            {/* Tucks into the seal's bottom margin so it adds little height */}
-            <span className="relative -mt-3 rounded-full bg-deep-green px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-white shadow-md sm:-mt-5 sm:px-4 sm:py-1.5 sm:text-xs">
-              In India
-            </span>
-          </div>
+          <Image
+            src={flow.badge}
+            alt="Hydrometallurgical Patented Process in India"
+            width={1200}
+            height={1200}
+            sizes="(max-width: 640px) 80px, (max-width: 1024px) 128px, 160px"
+            className="absolute right-2 top-2 h-20 w-20 drop-shadow-lg sm:right-5 sm:top-5 sm:h-32 sm:w-32 lg:h-40 lg:w-40"
+          />
         )}
       </motion.div>
 

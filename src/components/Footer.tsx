@@ -104,14 +104,15 @@ export default function Footer({
             <div className="flex flex-col items-center text-center">
               <Link href="/" className="inline-block">
                 <Image
-                  src="/images/mkrg-logo.png"
-                  alt={siteTitle}
-                  width={150}
-                  height={150}
-                  className="h-auto w-[100px] sm:w-[150px]"
+                  src="/brand/MKRG_footer_on-dark.svg"
+                  alt="MKRG Environmental Solutions, a Madhav KRG Group company"
+                  width={240}
+                  height={108}
+                  unoptimized
+                  className="h-auto w-[240px]"
                 />
               </Link>
-              <p className="mt-3 max-w-[18rem] text-sm leading-relaxed text-white/65">
+              <p className="mt-4 max-w-[18rem] text-sm leading-relaxed text-white/65">
                 {tagline}
               </p>
             </div>
@@ -215,7 +216,7 @@ export default function Footer({
             <div className="mt-8 rounded-2xl border border-white/15 bg-white/10 px-5 py-5 backdrop-blur-sm">
               <p className="text-balance font-serif text-lg leading-snug text-white">
                 Let&apos;s Build a{" "}
-                <span className="text-light-green">GREENER India.</span>
+                <span className="text-light-green">Greener India.</span>
               </p>
               <p className="mt-2 text-xs leading-relaxed text-white/65">
                 Reach out to explore partnership, sourcing, or sustainability goals.
@@ -240,6 +241,9 @@ export default function Footer({
             {cin && (
               <> &nbsp;·&nbsp; CIN: <span className="text-white/60">{cin}</span></>
             )}
+          </span>
+          <span className="text-white/30">
+            Together for a Greener India.
           </span>
           <nav className="flex items-center gap-4">
             <Link href="/privacy" className="transition-colors hover:text-white">
