@@ -35,7 +35,7 @@ export default function MissionVisionTeaser({
   const ctaLabel = ctaLabelProp ?? "Learn more about us";
   const ctaHref = ctaHrefProp ?? "/about";
   return (
-    <section className="relative bg-beige py-24 sm:py-32">
+    <section className="relative bg-white py-24 sm:py-32">
       <video
         className="pointer-events-none absolute bottom-0 right-0 mix-blend-multiply"
         style={{ width: "30%", zIndex: 100, paddingBottom: "3%" }}
@@ -87,7 +87,7 @@ export default function MissionVisionTeaser({
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-80px" }}
                 transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                className="bg-beige p-7 sm:p-8"
+                className="bg-mint p-7 sm:p-8"
               >
                 <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-wider text-accent">
                   <Target className="h-4 w-4" />
@@ -103,7 +103,7 @@ export default function MissionVisionTeaser({
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-80px" }}
                 transition={{ duration: 0.5, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-                className="bg-beige p-7 sm:p-8"
+                className="bg-mint p-7 sm:p-8"
               >
                 <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-wider text-teal">
                   <Compass className="h-4 w-4" />

@@ -108,6 +108,7 @@ export default async function Home() {
         heading={page?.metricsHeading}
         intro={page?.metricsIntro}
         metrics={page?.metrics}
+        leader={page?.leadershipTeaser}
       />
       <MissionVisionTeaser {...(page?.missionVision ?? {})} />
       <SustainabilityTeaser {...(page?.sustainabilityTeaser ?? {})} />

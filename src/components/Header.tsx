@@ -67,7 +67,7 @@ export default function Header({
       initial={false}
       className={`fixed inset-x-0 top-0 z-50 transition-[background-color,border-color] duration-300 ease-out ${
         scrolled
-          ? "border-b border-forest/10 bg-beige/85 backdrop-blur"
+          ? "border-b border-forest/10 bg-mint/85 backdrop-blur"
           : "bg-black/50"
       }`}
     >
@@ -99,7 +99,7 @@ export default function Header({
                   />
                 </Link>
                 <div className="invisible absolute left-1/2 top-full z-50 w-52 -translate-x-1/2 pt-3 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100">
-                  <ul className="overflow-hidden rounded-xl border border-forest/10 bg-beige/95 py-1.5 shadow-lg backdrop-blur">
+                  <ul className="overflow-hidden rounded-xl border border-forest/10 bg-mint/95 py-1.5 shadow-lg backdrop-blur">
                     {item.children.map((child) => (
                       <li key={child.href}>
                         <Link
@@ -149,7 +149,7 @@ export default function Header({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.2 }}
-            className="border-t border-forest/10 bg-beige px-6 pb-6 pt-3 lg:hidden"
+            className="border-t border-forest/10 bg-mint px-6 pb-6 pt-3 lg:hidden"
           >
             <ul className="flex flex-col gap-1">
               {nav.map((item) => (

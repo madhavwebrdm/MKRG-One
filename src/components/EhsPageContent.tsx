@@ -126,7 +126,7 @@ function Pillar({
   const items: Item[] = data?.items?.length ? data.items : fallback;
 
   return (
-    <section className={`${background === "white" ? "bg-white" : "bg-beige"} py-24 sm:py-32`}>
+    <section className={`${background === "white" ? "bg-white" : "bg-mint"} py-24 sm:py-32`}>
       <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
         <div className="max-w-3xl">
           <span className="text-xs uppercase tracking-[0.2em] text-accent">
@@ -150,7 +150,7 @@ function Pillar({
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-80px" }}
                 transition={{ duration: 0.5, delay: i * 0.04, ease: [0.16, 1, 0.3, 1] }}
-                className="flex h-full flex-col rounded-2xl border border-forest/15 bg-beige p-7 transition-colors hover:border-forest/40"
+                className="flex h-full flex-col rounded-2xl border border-forest/15 bg-mint p-7 transition-colors hover:border-forest/40"
               >
                 <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10 text-accent">
                   <Icon className="h-5 w-5" aria-hidden />
@@ -172,7 +172,7 @@ export default function EhsPageContent({ data }: { data?: EhsPageData }) {
   const cc = data?.closingCta;
 
   return (
-    <main className="bg-beige">
+    <main className="bg-mint">
       <PageHero
         eyebrow={str(hero?.eyebrow, "Environment, Health & Safety")}
         heading={str(hero?.heading, "Holistic health comes first at Madhav KRG Group.")}

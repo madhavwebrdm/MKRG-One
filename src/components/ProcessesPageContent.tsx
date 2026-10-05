@@ -20,7 +20,7 @@ export default function ProcessesPageContent({
   const hero = data?.hero;
 
   return (
-    <main className="bg-beige">
+    <main className="bg-mint">
       <PageHero
         eyebrow={str(hero?.eyebrow, "Processes")}
         heading={str(hero?.heading, "The Recycle2X Process.")}

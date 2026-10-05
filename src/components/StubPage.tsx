@@ -12,7 +12,7 @@ type Props = {
 
 export default function StubPage({ eyebrow, heading, body }: Props) {
   return (
-    <main className="bg-beige pt-28 sm:pt-36">
+    <main className="bg-mint pt-28 sm:pt-36">
       <div className="mx-auto max-w-7xl px-6 pb-32 sm:px-10 lg:px-16">
         {eyebrow && (
           <span className="text-xs uppercase tracking-[0.2em] text-accent">

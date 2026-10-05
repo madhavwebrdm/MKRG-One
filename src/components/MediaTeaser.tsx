@@ -33,6 +33,12 @@ const DEFAULTS: Item[] = [
   { kind: "Event", title: "MKRG at India Sustainability Summit 2025", source: "Mumbai · Sept 2025", date: "2025-09-04", href: "#" },
 ];
 
+// Artwork chosen for specific articles, matched by title. An image set in the CMS
+// still wins; otherwise this beats the generic placeholder photo.
+const ARTICLE_IMAGES: Array<{ match: RegExp; src: string }> = [
+  { match: /recycling metal dust/i, src: "/images/waste-to-recycled-metal.jpg" },
+];
+
 const container = {
   hidden: {},
   show: { transition: { staggerChildren: 0.1 } },
@@ -109,7 +115,9 @@ export default function MediaTeaser({
         >
           {items.map((it, i) => {
             const img =
-              it.imageUrl || PLACEHOLDER_IMAGES.mediaItems[i % PLACEHOLDER_IMAGES.mediaItems.length];
+              it.imageUrl ||
+              ARTICLE_IMAGES.find((a) => a.match.test(it.title ?? ""))?.src ||
+              PLACEHOLDER_IMAGES.mediaItems[i % PLACEHOLDER_IMAGES.mediaItems.length];
             return (
               <motion.li key={`${it.title}-${i}`} variants={item}>
                 <TiltCard className="h-full">

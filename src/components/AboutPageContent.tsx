@@ -210,7 +210,7 @@ export default function AboutPageContent({ data }: { data?: AboutPageData }) {
     : TIMELINE;
 
   return (
-    <main className="bg-beige">
+    <main className="bg-mint">
       <PageHero
         eyebrow={str(hero?.eyebrow, "About us")}
         heading={str(hero?.heading, "The recycler India can build its future on.")}
@@ -244,7 +244,7 @@ export default function AboutPageContent({ data }: { data?: AboutPageData }) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              className="bg-beige p-8 sm:p-10"
+              className="bg-mint p-8 sm:p-10"
             >
               <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-wider text-accent">
                 <Target className="h-4 w-4" />
@@ -263,7 +263,7 @@ export default function AboutPageContent({ data }: { data?: AboutPageData }) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.5, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="bg-beige p-8 sm:p-10"
+              className="bg-mint p-8 sm:p-10"
             >
               <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-wider text-teal">
                 <Compass className="h-4 w-4" />
@@ -306,7 +306,7 @@ export default function AboutPageContent({ data }: { data?: AboutPageData }) {
                   viewport={{ once: true, margin: "-80px" }}
                   transition={{ duration: 0.5, delay: i * 0.04, ease: [0.16, 1, 0.3, 1] }}
                 >
-                  <TiltCard className="h-full rounded-2xl border border-forest/15 bg-beige p-7 transition-colors hover:border-forest/40">
+                  <TiltCard className="h-full rounded-2xl border border-forest/15 bg-mint p-7 transition-colors hover:border-forest/40">
                     <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-forest/10 text-forest">
                       <Icon className="h-5 w-5" aria-hidden />
                     </div>
@@ -323,7 +323,7 @@ export default function AboutPageContent({ data }: { data?: AboutPageData }) {
       </section>
 
       {/* Brand identity */}
-      <section id="company-brief" className="bg-beige py-24 sm:py-32">
+      <section id="company-brief" className="bg-mint py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
           <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-16">
             <motion.div
@@ -364,7 +364,7 @@ export default function AboutPageContent({ data }: { data?: AboutPageData }) {
       </section>
 
       {/* Differentiators */}
-      <section className="bg-gradient-to-b from-[#F0FCF5] via-[#D5F7E4] to-[#A8F0C6] py-24 sm:py-32">
+      <section className="bg-mint py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
           <div className="max-w-3xl">
             <span className="text-xs uppercase tracking-[0.2em] text-black">
@@ -411,7 +411,7 @@ export default function AboutPageContent({ data }: { data?: AboutPageData }) {
       </section>
 
       {/* Timeline */}
-      <section className="bg-beige py-24 sm:py-32">
+      <section className="bg-mint py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
           <div className="mx-auto max-w-3xl text-center">
             <span className="text-xs uppercase tracking-[0.2em] text-accent">
@@ -447,7 +447,7 @@ export default function AboutPageContent({ data }: { data?: AboutPageData }) {
                   {/* Dot on the line */}
                   <span
                     aria-hidden
-                    className="absolute left-4 top-2 inline-flex h-5 w-5 -translate-x-1/2 items-center justify-center rounded-full bg-forest ring-4 ring-beige sm:left-6 lg:left-1/2"
+                    className="absolute left-4 top-2 inline-flex h-5 w-5 -translate-x-1/2 items-center justify-center rounded-full bg-forest ring-4 ring-mint sm:left-6 lg:left-1/2"
                   >
                     <span className="h-1.5 w-1.5 rounded-full bg-white" />
                   </span>

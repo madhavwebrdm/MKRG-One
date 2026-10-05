@@ -24,6 +24,12 @@ const HIGHLIGHT_IMAGES: string[] = [
   PLACEHOLDER_IMAGES.sustainability2,
 ];
 
+// Artwork chosen for a specific card, matched by its label (keeps working if the
+// CMS reorders the cards). Other cards fall back to HIGHLIGHT_IMAGES by position.
+const IMAGE_BY_LABEL: Record<string, string> = {
+  EHS: "/images/ehs-tractor-field.jpg",
+};
+
 const DEFAULTS: Highlight[] = [
   { label: "CSR", value: "Community programs across our sites", href: "/csr" },
   { label: "EHS", value: "Environment, health & safety, every shift", href: "/ehs" },
@@ -47,25 +53,25 @@ export default function SustainabilityTeaser({
   const ctaLabel = ctaLabelProp ?? "See our impact";
   const ctaHref = ctaHrefProp ?? "/sustainability";
   return (
-    <section className="bg-brand-green py-24 text-white sm:py-32">
+    <section className="bg-mint py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-12">
           <div className="lg:col-span-6">
-            <span className="text-xs uppercase tracking-[0.2em] text-white/80">
+            <span className="text-xs uppercase tracking-[0.2em] text-deep-green">
               {eyebrow}
             </span>
-            <AnimatedHeading className="mt-3 text-balance font-serif text-3xl leading-tight text-white sm:text-4xl lg:text-5xl">
+            <AnimatedHeading className="mt-3 text-balance font-serif text-3xl leading-tight text-ink sm:text-4xl lg:text-5xl">
               {heading}
             </AnimatedHeading>
           </div>
           <div className="lg:col-span-6">
-            <p className="text-base leading-relaxed text-white/85 sm:text-lg">
+            <p className="text-base leading-relaxed text-body sm:text-lg">
               {body}
             </p>
             <motion.div whileHover={{ x: 4 }} className="mt-6 inline-flex">
               <Link
                 href={ctaHref}
-                className="inline-flex items-center gap-2 text-sm font-medium text-white underline-offset-4 hover:underline"
+                className="inline-flex items-center gap-2 text-sm font-medium text-deep-green underline-offset-4 hover:underline"
               >
                 {ctaLabel}
                 <ArrowRight className="h-4 w-4" />
@@ -76,7 +82,9 @@ export default function SustainabilityTeaser({
 
         <ul className="mt-14 grid grid-cols-1 gap-5 md:grid-cols-2">
           {highlights.map((h, i) => {
-            const img = HIGHLIGHT_IMAGES[i % HIGHLIGHT_IMAGES.length];
+            const img =
+              IMAGE_BY_LABEL[h.label.trim().toUpperCase()] ??
+              HIGHLIGHT_IMAGES[i % HIGHLIGHT_IMAGES.length];
             const inner = (
               <>
                 <div className="relative aspect-[5/4] w-full overflow-hidden">

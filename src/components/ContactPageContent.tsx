@@ -184,7 +184,7 @@ function EnquiryForm({
           name="message"
           required
           rows={5}
-          className="mt-2 w-full rounded-xl border border-forest/20 bg-beige/40 px-4 py-3 text-sm text-ink shadow-inner focus:border-forest focus:outline-none focus:ring-2 focus:ring-forest/30"
+          className="mt-2 w-full rounded-xl border border-forest/20 bg-mint/40 px-4 py-3 text-sm text-ink shadow-inner focus:border-forest focus:outline-none focus:ring-2 focus:ring-forest/30"
         />
       </div>
 
@@ -265,7 +265,7 @@ function Field({
         name={name ?? id}
         type={type}
         required={required}
-        className="mt-2 w-full rounded-xl border border-forest/20 bg-beige/40 px-4 py-3 text-sm text-ink shadow-inner focus:border-forest focus:outline-none focus:ring-2 focus:ring-forest/30"
+        className="mt-2 w-full rounded-xl border border-forest/20 bg-mint/40 px-4 py-3 text-sm text-ink shadow-inner focus:border-forest focus:outline-none focus:ring-2 focus:ring-forest/30"
       />
     </div>
   );
@@ -301,7 +301,7 @@ export default function ContactPageContent({ data }: { data?: ContactPageData })
   const productOptions = ef?.productOptions?.length ? ef.productOptions : DEFAULT_PRODUCT_OPTIONS;
 
   return (
-    <main className="bg-beige">
+    <main className="bg-mint">
       <PageHero
         eyebrow={str(hero?.eyebrow, "Contact")}
         heading={str(hero?.heading, "Talk to the team behind the loop.")}
@@ -356,7 +356,7 @@ export default function ContactPageContent({ data }: { data?: ContactPageData })
                   return (
                     <li
                       key={o.label}
-                      className="flex gap-4 rounded-2xl border border-forest/15 bg-beige/40 p-5"
+                      className="flex gap-4 rounded-2xl border border-forest/15 bg-mint/40 p-5"
                     >
                       <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent/10 text-accent">
                         <Icon className="h-5 w-5" />
@@ -378,7 +378,7 @@ export default function ContactPageContent({ data }: { data?: ContactPageData })
                 })}
               </ul>
 
-              <ul className="mt-6 divide-y divide-forest/10 rounded-2xl border border-forest/15 bg-beige/40">
+              <ul className="mt-6 divide-y divide-forest/10 rounded-2xl border border-forest/15 bg-mint/40">
                 {contactLines.map((c) => {
                   const Icon = c.Icon;
                   return (
@@ -429,7 +429,7 @@ export default function ContactPageContent({ data }: { data?: ContactPageData })
       </section>
 
       {/* Map */}
-      <section className="bg-beige py-24 sm:py-32">
+      <section className="bg-mint py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
           <div className="flex flex-col items-start gap-3">
             <span className="text-xs uppercase tracking-[0.2em] text-accent">

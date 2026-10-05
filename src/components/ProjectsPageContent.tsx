@@ -361,7 +361,7 @@ export default function ProjectsPageContent({ data }: { data?: ProjectsPageData 
     : STATS;
 
   return (
-    <main className="bg-beige">
+    <main className="bg-mint">
       <PageHero
         eyebrow={str(hero?.eyebrow, "Projects")}
         heading={str(hero?.heading, "Transforming Hazardous Waste into Valuable Resources")}
@@ -395,7 +395,7 @@ export default function ProjectsPageContent({ data }: { data?: ProjectsPageData 
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-80px" }}
                   transition={{ duration: 0.5, delay: i * 0.04, ease: [0.16, 1, 0.3, 1] }}
-                  className="flex h-full flex-col rounded-2xl border border-forest/15 bg-beige p-7 transition-colors hover:border-forest/40"
+                  className="flex h-full flex-col rounded-2xl border border-forest/15 bg-mint p-7 transition-colors hover:border-forest/40"
                 >
                   <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10 text-accent">
                     <Icon className="h-5 w-5" aria-hidden />
@@ -409,7 +409,7 @@ export default function ProjectsPageContent({ data }: { data?: ProjectsPageData 
       </section>
 
       {/* About the project */}
-      <section className="bg-beige py-24 sm:py-32">
+      <section className="bg-mint py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
           <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-16">
             <motion.div
@@ -466,7 +466,7 @@ export default function ProjectsPageContent({ data }: { data?: ProjectsPageData 
       </section>
 
       {/* Project development journey / timeline */}
-      <section className="bg-beige py-24 sm:py-32">
+      <section className="bg-mint py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
           <div className="mx-auto max-w-3xl text-center">
             <span className="text-xs uppercase tracking-[0.2em] text-accent">
@@ -502,7 +502,7 @@ export default function ProjectsPageContent({ data }: { data?: ProjectsPageData 
                 >
                   <span
                     aria-hidden
-                    className="absolute left-4 top-2 inline-flex h-5 w-5 -translate-x-1/2 items-center justify-center rounded-full bg-forest ring-4 ring-beige sm:left-6 lg:left-1/2"
+                    className="absolute left-4 top-2 inline-flex h-5 w-5 -translate-x-1/2 items-center justify-center rounded-full bg-forest ring-4 ring-mint sm:left-6 lg:left-1/2"
                   >
                     <span className="h-1.5 w-1.5 rounded-full bg-white" />
                   </span>
@@ -556,7 +556,7 @@ export default function ProjectsPageContent({ data }: { data?: ProjectsPageData 
                   viewport={{ once: true, margin: "-80px" }}
                   transition={{ duration: 0.5, delay: i * 0.04, ease: [0.16, 1, 0.3, 1] }}
                 >
-                  <TiltCard className="h-full rounded-2xl border border-forest/15 bg-beige p-7 transition-colors hover:border-forest/40">
+                  <TiltCard className="h-full rounded-2xl border border-forest/15 bg-mint p-7 transition-colors hover:border-forest/40">
                     <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10 text-accent">
                       <Icon className="h-5 w-5" aria-hidden />
                     </div>
@@ -589,7 +589,7 @@ export default function ProjectsPageContent({ data }: { data?: ProjectsPageData 
       </section>
 
       {/* Environmental impact */}
-      <section className="bg-beige py-24 sm:py-32">
+      <section className="bg-mint py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
           <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-16">
             <div className="lg:col-span-7">
@@ -642,7 +642,7 @@ export default function ProjectsPageContent({ data }: { data?: ProjectsPageData 
       </section>
 
       {/* Circular economy contribution */}
-      <section className="bg-gradient-to-b from-[#F0FCF5] via-[#D5F7E4] to-[#A8F0C6] py-24 sm:py-32">
+      <section className="bg-mint py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
           <div className="max-w-3xl">
             <span className="text-xs uppercase tracking-[0.2em] text-black">
@@ -715,7 +715,7 @@ export default function ProjectsPageContent({ data }: { data?: ProjectsPageData 
       </section>
 
       {/* Future vision */}
-      <section className="bg-beige py-24 sm:py-32">
+      <section className="bg-mint py-24 sm:py-32">
         <div className="mx-auto max-w-4xl px-6 text-center sm:px-10 lg:px-16">
           <span className="text-xs uppercase tracking-[0.2em] text-accent">
             {str(futureVision?.eyebrow, "Future vision")}

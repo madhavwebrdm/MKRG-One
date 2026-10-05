@@ -10,7 +10,7 @@
   --color-teal: #0f6e56;
   --color-light-teal: #e1f5ee;
   --color-blue: #185fa5;
-  --color-beige: #f1efe8;
+  --color-mint: #f0f7ea; /* very light green: section background */
 
   /* Accent used sparingly for small focus elements (chips, underlines, markers) */
   --color-accent: #b22e31;
@@ -20,7 +20,7 @@
   --color-body: #3f3f46;         /* body neutral-700ish dark grey */
   --color-muted: #6b7280;        /* muted body */
 
-  --color-bg: var(--color-beige);
+  --color-bg: var(--color-mint);
   --color-fg: var(--color-body);
 }
 
@@ -35,7 +35,7 @@
   --color-teal: var(--color-teal);
   --color-light-teal: var(--color-light-teal);
   --color-blue: var(--color-blue);
-  --color-beige: var(--color-beige);
+  --color-mint: var(--color-mint);
   --color-accent: var(--color-accent);
   --color-ink: var(--color-ink);
   --color-body: var(--color-body);

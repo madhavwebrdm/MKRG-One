@@ -23,7 +23,7 @@ export default function CsrFocusAreaContent({
   const others = areas.filter((a) => a.slug !== area.slug);
 
   return (
-    <main className="bg-beige">
+    <main className="bg-mint">
       <PageHero
         eyebrow="Corporate Social Responsibility"
         heading={area.title}
@@ -51,7 +51,7 @@ export default function CsrFocusAreaContent({
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.5, delay: i * 0.04, ease: [0.16, 1, 0.3, 1] }}
-                className="rounded-2xl border border-forest/10 bg-beige p-6"
+                className="rounded-2xl border border-forest/10 bg-mint p-6"
               >
                 <dt className="font-serif text-3xl text-ink sm:text-4xl">
                   {stat.value}
@@ -136,7 +136,7 @@ export default function CsrFocusAreaContent({
       </section>
 
       {/* Other focus areas */}
-      <section className="bg-beige py-24 sm:py-28">
+      <section className="bg-mint py-24 sm:py-28">
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
           <div className="flex items-end justify-between gap-6">
             <AnimatedHeading className="font-serif text-2xl leading-tight text-ink sm:text-3xl">

@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
-import { ArrowRight, Recycle } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 import MagneticButton from "./MagneticButton";
 
@@ -36,7 +36,6 @@ type HeroProps = {
 const DEFAULT_TAGS: string[] = [];
 
 export default function Hero({
-  eyebrow: eyebrowProp,
   heading: headingProp,
   positioningTags: positioningTagsProp,
   imageUrl,
@@ -45,7 +44,6 @@ export default function Hero({
   secondaryCtaLabel: secondaryCtaLabelProp,
   secondaryCtaHref: secondaryCtaHrefProp,
 }: HeroProps) {
-  const eyebrow = eyebrowProp ?? "Waste is a Resource, Not a Problem";
   const heading = headingProp ?? "Waste is a Resource, Not a Problem";
   const positioningTags = positioningTagsProp ?? DEFAULT_TAGS;
   const primaryCtaLabel = primaryCtaLabelProp ?? "See our impact";
@@ -80,8 +78,7 @@ export default function Hero({
     () => {
       const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
-      tl.from(".hero-eyebrow", { y: 16, opacity: 0, duration: 0.6 })
-        .from(".hero-heading", { y: 20, opacity: 0, duration: 0.7 }, "-=0.3")
+      tl.from(".hero-heading", { y: 20, opacity: 0, duration: 0.7 })
         .from(
           ".hero-tag",
           { y: 12, opacity: 0, duration: 0.5, stagger: 0.06 },
@@ -98,7 +95,7 @@ export default function Hero({
     <section
       data-section="Home hero"
       ref={root}
-      className="relative flex min-h-screen flex-col justify-end overflow-hidden bg-deep-green"
+      className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-deep-green"
     >
       {/* Video layers — stacked by DOM order; opacity crossfade via CSS transition */}
       {PLAYLIST.map((item, i) => (
@@ -124,19 +121,8 @@ export default function Hero({
       <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/5 to-black/65" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_100%,rgba(0,0,0,0.3),transparent)]" />
 
-      <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pb-24 pt-36 sm:px-10 sm:pb-32 lg:px-16 lg:pb-36">
-        <div className="w-full max-w-3xl">
-          <h2 className="text-base uppercase leading-snug text-white sm:text-lg md:text-xl lg:text-2xl" style={{ letterSpacing: '0', paddingTop: '30px', paddingBottom: '30px' }}>
-            MKRG Environmental Solutions Pvt. Ltd.
-          </h2>
-        </div>
-
-        <span className="hero-eyebrow inline-flex w-fit items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs uppercase tracking-[0.18em] text-white/90 backdrop-blur">
-          <Recycle className="h-3.5 w-3.5" aria-hidden />
-          {eyebrow}
-        </span>
-
-        <h1 className="hero-heading mt-7 max-w-5xl font-serif text-5xl leading-[1.05] tracking-tight text-white sm:text-6xl lg:text-[clamp(3.5rem,6.5vw,6rem)]">
+      <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-col items-center px-6 py-28 text-center sm:px-10 lg:px-16">
+        <h1 className="hero-heading max-w-5xl font-serif text-5xl leading-[1.05] tracking-tight text-white sm:text-6xl lg:text-[clamp(3.5rem,6.5vw,6rem)]">
           {headingRows.map((row, ri) => (
             <span key={ri} className="block">
               {row}
@@ -146,7 +132,7 @@ export default function Hero({
         </h1>
 
         {positioningTags && positioningTags.length > 0 && (
-          <ul className="mt-7 flex flex-wrap items-center gap-2.5">
+          <ul className="mt-7 flex flex-wrap items-center justify-center gap-2.5">
             {positioningTags.map((tag) => (
               <li
                 key={tag}
@@ -159,7 +145,7 @@ export default function Hero({
           </ul>
         )}
 
-        <div className="hero-cta mt-9 flex flex-wrap items-center gap-4">
+        <div className="hero-cta mt-9 flex flex-wrap items-center justify-center gap-4">
           <MagneticButton
             href={primaryCtaHref}
             className="group inline-flex items-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-medium text-forest shadow-lg shadow-black/20 transition-shadow hover:shadow-xl"

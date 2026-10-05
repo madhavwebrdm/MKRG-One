@@ -54,7 +54,7 @@ export default function CertificationsTeaser({
   const ctaLabel = ctaLabelProp ?? "View certifications";
   const ctaHref = ctaHrefProp ?? "/certifications";
   return (
-    <section className="bg-gradient-to-b from-[#F0FCF5] via-[#D5F7E4] to-[#A8F0C6] py-24 sm:py-32">
+    <section className="bg-mint py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-5">
@@ -102,7 +102,7 @@ export default function CertificationsTeaser({
         >
           {badges.map((b, i) => (
             <motion.li key={`${b.label}-${i}`} variants={item}>
-              <TiltCard className="group h-full rounded-2xl border border-forest/15 bg-beige p-7 transition-colors hover:border-forest/40">
+              <TiltCard className="group h-full rounded-2xl border border-forest/15 bg-mint p-7 transition-colors hover:border-forest/40">
                 <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-accent/10 text-accent transition-transform group-hover:scale-110">
                   <ShieldCheck className="h-5 w-5" aria-hidden />
                 </div>

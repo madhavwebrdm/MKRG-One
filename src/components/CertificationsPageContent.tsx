@@ -173,7 +173,7 @@ export default function CertificationsPageContent({
   );
 
   return (
-    <main className="bg-beige">
+    <main className="bg-mint">
       <PageHero
         eyebrow={str(hero?.eyebrow, "Certifications")}
         heading={str(hero?.heading, "Compliant by design, certified by audit.")}
@@ -219,7 +219,7 @@ export default function CertificationsPageContent({
                     href={c.downloadHref}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group flex h-full flex-col rounded-2xl border border-forest/15 bg-beige p-7 transition-colors hover:border-forest/40"
+                    className="group flex h-full flex-col rounded-2xl border border-forest/15 bg-mint p-7 transition-colors hover:border-forest/40"
                   >
                     <div className="flex items-center justify-between">
                       <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10 text-accent transition-transform group-hover:scale-110">
@@ -254,7 +254,7 @@ export default function CertificationsPageContent({
       </section>
 
       {/* Award document gallery */}
-      <section className="bg-beige py-24 sm:py-32">
+      <section className="bg-mint py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
           <div className="max-w-3xl">
             <span className="text-xs uppercase tracking-[0.2em] text-accent">

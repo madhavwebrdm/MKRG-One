@@ -74,7 +74,7 @@ export default function ProcessesFlow({
 
   return (
     <>
-      <section id="processes" className="bg-beige py-24 sm:py-32">
+      <section id="processes" className="bg-mint py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
           <div className="grid grid-cols-1 items-end gap-10 lg:grid-cols-12 lg:gap-16">
             <div className="lg:col-span-7">
@@ -223,7 +223,7 @@ function FlowSection({ flow }: { flow: Flow }) {
                   data-index={i}
                 >
                   <span
-                    className={`absolute left-0 top-0.5 inline-flex h-7 w-7 items-center justify-center rounded-full ring-4 ring-beige transition-colors duration-500 sm:left-0.5 ${
+                    className={`absolute left-0 top-0.5 inline-flex h-7 w-7 items-center justify-center rounded-full ring-4 ring-mint transition-colors duration-500 sm:left-0.5 ${
                       active >= i
                         ? "bg-deep-green text-white"
                         : "border border-forest/30 bg-white text-forest"

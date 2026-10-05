@@ -135,7 +135,7 @@ export default function MediaPageContent({ data }: { data?: MediaPageData }) {
     : VIDEOS;
 
   return (
-    <main className="bg-beige">
+    <main className="bg-mint">
       <PageHero
         eyebrow={str(hero?.eyebrow, "Media")}
         heading={str(
@@ -182,7 +182,7 @@ export default function MediaPageContent({ data }: { data?: MediaPageData }) {
                     href={a.href}
                     target={a.href.startsWith("http") ? "_blank" : undefined}
                     rel={a.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                    className="group flex h-full flex-col overflow-hidden rounded-2xl bg-beige ring-1 ring-forest/10 transition-colors hover:ring-forest/30"
+                    className="group flex h-full flex-col overflow-hidden rounded-2xl bg-mint ring-1 ring-forest/10 transition-colors hover:ring-forest/30"
                   >
                     <div className="relative aspect-[5/3] w-full overflow-hidden">
                       <Image

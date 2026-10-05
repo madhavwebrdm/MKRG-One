@@ -192,7 +192,7 @@ export default function SustainabilityPageContent({
     : RECYCLING_STATS;
 
   return (
-    <main className="bg-beige">
+    <main className="bg-mint">
       <PageHero
         eyebrow={str(hero?.eyebrow, "Sustainability")}
         heading={hero?.heading?.trim() ? hero.heading : "Real numbers.\nCleaner air. Real communities."}
@@ -229,7 +229,7 @@ export default function SustainabilityPageContent({
       </section>
 
       {/* Pillars / Visuals brief */}
-      <section className="bg-beige py-24 sm:py-32">
+      <section className="bg-mint py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
           <div className="grid grid-cols-1 items-end gap-10 lg:grid-cols-12 lg:gap-16">
             <div className="lg:col-span-7">
@@ -329,7 +329,7 @@ export default function SustainabilityPageContent({
                 {recyclingItems.map((s) => (
                   <div
                     key={s.label}
-                    className="flex flex-col gap-2 bg-beige p-6 sm:p-7"
+                    className="flex flex-col gap-2 bg-mint p-6 sm:p-7"
                   >
                     <dt className="text-xs font-medium uppercase tracking-wider text-muted">
                       {s.label}
@@ -347,7 +347,7 @@ export default function SustainabilityPageContent({
       </section>
 
       {/* Community programs CSR + EHS */}
-      <section className="bg-beige py-24 sm:py-32">
+      <section className="bg-mint py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
           <div className="max-w-3xl">
             <span className="text-xs uppercase tracking-[0.2em] text-accent">

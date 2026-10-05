@@ -44,7 +44,7 @@ export default function CsrPageContent({ data }: { data?: CsrPageData }) {
   const areas = resolveCsrAreas(data?.focusAreas);
 
   return (
-    <main className="bg-beige">
+    <main className="bg-mint">
       <PageHero
         eyebrow={str(hero?.eyebrow, "Corporate Social Responsibility")}
         heading={str(hero?.heading, "Investing in the communities we call home.")}
@@ -158,7 +158,7 @@ export default function CsrPageContent({ data }: { data?: CsrPageData }) {
       </section>
 
       {/* CTA */}
-      <section className="bg-beige py-24 sm:py-28">
+      <section className="bg-mint py-24 sm:py-28">
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
           <div className="overflow-hidden rounded-3xl bg-deep-green px-8 py-14 sm:px-14 sm:py-16">
             <div className="max-w-2xl">

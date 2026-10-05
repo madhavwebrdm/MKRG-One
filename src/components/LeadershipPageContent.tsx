@@ -127,7 +127,7 @@ export default function LeadershipPageContent({
   );
 
   return (
-    <main className="bg-beige">
+    <main className="bg-mint">
       <PageHero
         eyebrow={str(hero?.eyebrow, "Leadership")}
         heading={str(hero?.heading, "The people behind every tonne we recycle.")}
@@ -250,7 +250,7 @@ function PrincipalSection({
 
   return (
     <section
-      className={`${background === "white" ? "bg-white" : "bg-beige"} py-24 sm:py-32`}
+      className={`${background === "white" ? "bg-white" : "bg-mint"} py-24 sm:py-32`}
     >
       <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-16">

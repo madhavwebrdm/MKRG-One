@@ -189,7 +189,7 @@ export default function ProductPageContent({ data }: { data?: ProductPageData })
     : ZINC_APPLICATIONS;
 
   return (
-    <main className="bg-beige">
+    <main className="bg-mint">
       <PageHero
         eyebrow={str(hero?.eyebrow, "Our Products")}
         heading={str(
@@ -266,7 +266,7 @@ export default function ProductPageContent({ data }: { data?: ProductPageData })
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-60px" }}
                   transition={{ duration: 0.5, delay: i * 0.04, ease: EASE }}
-                  className="flex h-full flex-col rounded-2xl border border-forest/15 bg-beige p-6"
+                  className="flex h-full flex-col rounded-2xl border border-forest/15 bg-mint p-6"
                 >
                   <span className="flex h-8 w-8 flex-none items-center justify-center rounded-full bg-accent/10 font-serif text-sm text-accent">
                     {i + 1}
@@ -382,7 +382,7 @@ function ProductRange({
   callout,
   note,
 }: ProductRangeProps) {
-  const sectionBg = background === "beige" ? "bg-beige" : "bg-white";
+  const sectionBg = background === "beige" ? "bg-mint" : "bg-white";
   const gridCols =
     columns === 4 ? "sm:grid-cols-2 lg:grid-cols-4" : "sm:grid-cols-2 lg:grid-cols-3";
 

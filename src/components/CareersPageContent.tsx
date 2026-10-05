@@ -62,13 +62,13 @@ function CareersForm() {
           id="careersMessage"
           name="message"
           rows={4}
-          className="mt-2 w-full rounded-xl border border-forest/20 bg-beige/40 px-4 py-3 text-sm text-ink shadow-inner focus:border-forest focus:outline-none focus:ring-2 focus:ring-forest/30"
+          className="mt-2 w-full rounded-xl border border-forest/20 bg-mint/40 px-4 py-3 text-sm text-ink shadow-inner focus:border-forest focus:outline-none focus:ring-2 focus:ring-forest/30"
         />
       </div>
 
       <div className="mt-6">
         <Label>CV (PDF, up to 5 MB)</Label>
-        <label className="mt-2 flex cursor-pointer items-center gap-3 rounded-xl border border-dashed border-forest/30 bg-beige/40 px-4 py-3 text-sm text-body transition-colors hover:border-forest">
+        <label className="mt-2 flex cursor-pointer items-center gap-3 rounded-xl border border-dashed border-forest/30 bg-mint/40 px-4 py-3 text-sm text-body transition-colors hover:border-forest">
           <Upload className="h-4 w-4 text-accent" />
           <span className="truncate">
             {fileName ? fileName : "Choose a PDF to upload"}
@@ -137,7 +137,7 @@ function Field({
         name={name ?? id}
         type={type}
         required={required}
-        className="mt-2 w-full rounded-xl border border-forest/20 bg-beige/40 px-4 py-3 text-sm text-ink shadow-inner focus:border-forest focus:outline-none focus:ring-2 focus:ring-forest/30"
+        className="mt-2 w-full rounded-xl border border-forest/20 bg-mint/40 px-4 py-3 text-sm text-ink shadow-inner focus:border-forest focus:outline-none focus:ring-2 focus:ring-forest/30"
       />
     </div>
   );
@@ -145,7 +145,7 @@ function Field({
 
 export default function CareersPageContent() {
   return (
-    <main className="bg-beige">
+    <main className="bg-mint">
       <PageHero
         eyebrow="Careers"
         heading="Work where the loop closes."
