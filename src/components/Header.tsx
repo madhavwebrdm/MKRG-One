@@ -52,6 +52,9 @@ export default function Header({
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const darkTop = !scrolled;
+  // Logo colourway follows the header background: white wordmark over the hero,
+  // dark-green wordmark once the header turns light green.
+  const tone = scrolled ? "on-light" : "on-dark";
 
   useEffect(() => {
     const onScroll = () => {
@@ -67,21 +70,32 @@ export default function Header({
       initial={false}
       className={`fixed inset-x-0 top-0 z-50 transition-[background-color,border-color] duration-300 ease-out ${
         scrolled
-          ? "border-b border-forest/10 bg-mint/85 backdrop-blur"
+          ? "border-b border-forest/10 bg-mint-strong/95 backdrop-blur"
           : "bg-black/50"
       }`}
     >
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 sm:px-10 lg:px-16">
-        <Link href="/" className="flex items-center gap-2.5">
+      <div className="flex w-full items-center justify-between px-6 py-4 sm:px-8 lg:px-12">
+        <Link href="/" aria-label={`${siteTitle} home`} className="flex items-center">
+          {/* Full logo: phones, tablets and 1280px+ */}
           <Image
-            src="/images/MKRG%20LOGO.png"
-            alt={siteTitle}
-            width={1009}
-            height={335}
-            priority
-            className="h-auto w-[120px] sm:w-[160px]"
+            src={`/brand/MKRG_header_${tone}.svg`}
+            alt="MKRG Environmental Solutions"
+            width={326}
+            height={32}
+            unoptimized
+            loading="eager"
+            className="block h-6 w-auto sm:h-8 lg:hidden xl:block"
           />
-          <span className="sr-only">{siteTitle}</span>
+          {/* Compact logo: 1024-1279px, where the full one would collide with the nav */}
+          <Image
+            src={`/brand/MKRG_header-compact_${tone}.svg`}
+            alt="MKRG Environmental Solutions"
+            width={139}
+            height={32}
+            unoptimized
+            loading="eager"
+            className="hidden h-8 w-auto lg:block xl:hidden"
+          />
         </Link>
 
         <nav className="hidden items-center gap-7 lg:flex">

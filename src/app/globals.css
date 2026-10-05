@@ -11,6 +11,7 @@
   --color-light-teal: #e1f5ee;
   --color-blue: #185fa5;
   --color-mint: #f0f7ea; /* very light green: section background */
+  --color-mint-strong: #e3f0d6; /* light green: sticky header */
 
   /* Accent used sparingly for small focus elements (chips, underlines, markers) */
   --color-accent: #b22e31;
@@ -36,6 +37,7 @@
   --color-light-teal: var(--color-light-teal);
   --color-blue: var(--color-blue);
   --color-mint: var(--color-mint);
+  --color-mint-strong: var(--color-mint-strong);
   --color-accent: var(--color-accent);
   --color-ink: var(--color-ink);
   --color-body: var(--color-body);

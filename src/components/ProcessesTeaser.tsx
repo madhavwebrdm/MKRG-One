@@ -134,14 +134,20 @@ function FlowBlock({ flow, index }: { flow: Flow; index: number }) {
           priority={index === 0}
         />
         {flow.badge && (
-          <Image
-            src={flow.badge}
-            alt="Hydrometallurgical Patented Process seal"
-            width={1200}
-            height={1200}
-            sizes="(max-width: 640px) 64px, 128px"
-            className="absolute right-2 top-2 h-16 w-16 drop-shadow-lg sm:right-5 sm:top-5 sm:h-28 sm:w-28 lg:h-32 lg:w-32"
-          />
+          <div className="absolute right-2 top-2 flex flex-col items-center sm:right-5 sm:top-5">
+            <Image
+              src={flow.badge}
+              alt="Hydrometallurgical Patented Process seal"
+              width={1200}
+              height={1200}
+              sizes="(max-width: 640px) 80px, (max-width: 1024px) 128px, 160px"
+              className="h-20 w-20 shrink-0 drop-shadow-lg sm:h-32 sm:w-32 lg:h-40 lg:w-40"
+            />
+            {/* Tucks into the seal's bottom margin so it adds little height */}
+            <span className="relative -mt-3 rounded-full bg-deep-green px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-white shadow-md sm:-mt-5 sm:px-4 sm:py-1.5 sm:text-xs">
+              In India
+            </span>
+          </div>
         )}
       </motion.div>
 

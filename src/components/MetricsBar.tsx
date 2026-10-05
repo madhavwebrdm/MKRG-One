@@ -47,7 +47,7 @@ const DEFAULT_LEADER = {
 };
 
 const SLIDE_COUNT = 2;
-const AUTOPLAY_MS = 8000;
+const AUTOPLAY_MS = 5000;
 
 export default function MetricsBar({
   heading: headingProp,
@@ -157,10 +157,14 @@ export default function MetricsBar({
           aria-label="Impact metrics and a message from our leadership"
           onMouseEnter={() => setPaused(true)}
           onMouseLeave={() => setPaused(false)}
-          onFocus={() => setPaused(true)}
+          // Pause for keyboard focus only; a mouse click would leave focus on the
+          // arrow/dot and freeze the autoplay.
+          onFocus={(e) => {
+            if (e.target.matches(":focus-visible")) setPaused(true);
+          }}
           onBlur={() => setPaused(false)}
         >
-          <div className="grid">
+          <div className="grid overflow-x-clip">
             {/* Slide 1 — impact metrics */}
             <div
               role="group"

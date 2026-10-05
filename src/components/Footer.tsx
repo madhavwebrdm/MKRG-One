@@ -213,9 +213,9 @@ export default function Footer({
             )}
 
             <div className="mt-8 rounded-2xl border border-white/15 bg-white/10 px-5 py-5 backdrop-blur-sm">
-              <p className="font-serif text-lg leading-snug text-white">
+              <p className="text-balance font-serif text-lg leading-snug text-white">
                 Let&apos;s Build a{" "}
-                <span className="text-light-green">Greener India.</span>
+                <span className="text-light-green">GREENER India.</span>
               </p>
               <p className="mt-2 text-xs leading-relaxed text-white/65">
                 Reach out to explore partnership, sourcing, or sustainability goals.
@@ -240,10 +240,6 @@ export default function Footer({
             {cin && (
               <> &nbsp;·&nbsp; CIN: <span className="text-white/60">{cin}</span></>
             )}
-          </span>
-          <span className="hidden sm:block text-white/15">|</span>
-          <span className="text-white/30">
-            Together for a greener India.
           </span>
           <nav className="flex items-center gap-4">
             <Link href="/privacy" className="transition-colors hover:text-white">
