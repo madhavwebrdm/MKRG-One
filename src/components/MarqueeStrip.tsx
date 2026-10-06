@@ -14,9 +14,9 @@ const DEFAULTS = [
   "ISO 9001 / 14001",
   "MOEFCC Approved",
   "GPCB Compliant",
-  "Zero degradation",
+  "Zero Degradation",
   "International Standards",
-  "Renewable energy",
+  "Renewable Energy",
   "Closed loop",
 ];
 

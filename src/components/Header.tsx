@@ -98,17 +98,17 @@ export default function Header({
           />
         </Link>
 
-        <nav className="hidden items-center gap-7 lg:flex">
+        <nav className="hidden items-center gap-5 lg:flex xl:gap-7">
           {nav.map((item) =>
             item.children && item.children.length > 0 ? (
               <div key={item.href} className="group relative">
                 <Link
                   href={item.href}
-                  className={`inline-flex items-center gap-1 text-sm font-medium transition-colors ${darkTop ? "text-white/90 hover:text-white" : "text-body hover:text-accent"}`}
+                  className={`inline-flex items-center gap-1 text-base font-semibold transition-colors ${darkTop ? "text-white/90 hover:text-white" : "text-body hover:text-accent"}`}
                 >
                   {item.label}
                   <ChevronDown
-                    className="h-3.5 w-3.5 transition-transform duration-200 group-hover:rotate-180"
+                    className="h-4 w-4 transition-transform duration-200 group-hover:rotate-180"
                     aria-hidden
                   />
                 </Link>
@@ -118,7 +118,7 @@ export default function Header({
                       <li key={child.href}>
                         <Link
                           href={child.href}
-                          className="block px-4 py-2 text-sm font-medium text-body transition-colors hover:bg-accent/10 hover:text-accent"
+                          className="block px-4 py-2 text-base font-semibold text-body transition-colors hover:bg-accent/10 hover:text-accent"
                         >
                           {child.label}
                         </Link>
@@ -131,7 +131,7 @@ export default function Header({
               <Link
                 key={item.href}
                 href={item.href}
-                className={`text-sm font-medium transition-colors ${darkTop ? "text-white/90 hover:text-white" : "text-body hover:text-accent"}`}
+                className={`text-base font-semibold transition-colors ${darkTop ? "text-white/90 hover:text-white" : "text-body hover:text-accent"}`}
               >
                 {item.label}
               </Link>
@@ -141,7 +141,7 @@ export default function Header({
 
         <Link
           href="/contact"
-          className={`hidden rounded-full px-5 py-2.5 text-sm font-medium shadow-sm transition-colors lg:inline-flex ${darkTop ? "bg-white text-forest hover:bg-accent hover:text-white" : "bg-deep-green text-white hover:bg-accent"}`}
+          className={`hidden rounded-full px-6 py-2.5 text-base font-semibold shadow-sm transition-colors lg:inline-flex ${darkTop ? "bg-white text-forest hover:bg-accent hover:text-white" : "bg-deep-green text-white hover:bg-accent"}`}
         >
           Get in touch
         </Link>
@@ -171,7 +171,7 @@ export default function Header({
                   <Link
                     href={item.href}
                     onClick={() => setOpen(false)}
-                    className="block rounded-md px-2 py-2.5 text-base font-medium text-body transition-colors hover:bg-accent/10 hover:text-accent"
+                    className="block rounded-md px-2 py-2.5 text-lg font-semibold text-body transition-colors hover:bg-accent/10 hover:text-accent"
                   >
                     {item.label}
                   </Link>
@@ -182,7 +182,7 @@ export default function Header({
                           <Link
                             href={child.href}
                             onClick={() => setOpen(false)}
-                            className="block rounded-md px-2 py-2 text-sm font-medium text-body/80 transition-colors hover:bg-accent/10 hover:text-accent"
+                            className="block rounded-md px-2 py-2 text-base font-semibold text-body/80 transition-colors hover:bg-accent/10 hover:text-accent"
                           >
                             {child.label}
                           </Link>
@@ -196,7 +196,7 @@ export default function Header({
                 <Link
                   href="/contact"
                   onClick={() => setOpen(false)}
-                  className="block rounded-full bg-deep-green px-4 py-2.5 text-center text-sm font-medium text-white transition-colors hover:bg-accent"
+                  className="block rounded-full bg-deep-green px-4 py-2.5 text-center text-base font-semibold text-white transition-colors hover:bg-accent"
                 >
                   Get in touch
                 </Link>

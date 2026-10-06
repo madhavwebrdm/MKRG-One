@@ -81,10 +81,10 @@ export default function ProcessesTeaser({
         {/* Flow */}
         <FlowBlock flow={FLOW} index={0} />
 
-        <motion.div whileHover={{ x: 4 }} className="mt-14 inline-flex">
+        <motion.div whileHover={{ y: -2 }} className="mt-14 inline-flex">
           <Link
             href={ctaHref}
-            className="inline-flex items-center gap-2 text-sm font-medium text-accent underline-offset-4 hover:underline"
+            className="inline-flex items-center gap-2 rounded-full bg-deep-green px-6 py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-forest"
           >
             {ctaLabel}
             <ArrowRight className="h-4 w-4" />
@@ -98,9 +98,10 @@ export default function ProcessesTeaser({
 function FlowBlock({ flow, index }: { flow: Flow; index: number }) {
   return (
     <div className={`${index === 0 ? "mt-20" : "mt-24"} sm:mt-24`}>
-      {/* Per-flow header */}
-      <div className="grid grid-cols-1 items-end gap-6 lg:grid-cols-12 lg:gap-16">
-        <div className="lg:col-span-7">
+      {/* Per-flow header: heading left, caption centred, patent badge right.
+          On phones the badge sits beside the heading and the caption drops below. */}
+      <div className="grid grid-cols-[1fr_auto] items-center gap-x-4 gap-y-5 lg:grid-cols-12 lg:gap-x-10">
+        <div className="lg:col-span-4 lg:col-start-1 lg:row-start-1">
           <span className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-accent">
             <Sprout className="h-3.5 w-3.5" />
             Process
@@ -109,11 +110,23 @@ function FlowBlock({ flow, index }: { flow: Flow; index: number }) {
             {flow.title}
           </h3>
         </div>
-        <div className="lg:col-span-5">
-          <p className="text-base leading-relaxed text-body lg:text-right">
+        <div className="col-span-2 row-start-2 lg:col-span-5 lg:col-start-5 lg:row-start-1">
+          <p className="text-base leading-relaxed text-body lg:text-center">
             {flow.caption}
           </p>
         </div>
+        {flow.badge && (
+          <div className="flex justify-end lg:col-span-3 lg:col-start-10 lg:row-start-1">
+            <Image
+              src={flow.badge}
+              alt="Hydrometallurgical Patented Process in India"
+              width={1200}
+              height={1200}
+              sizes="(max-width: 640px) 80px, (max-width: 1024px) 112px, 160px"
+              className="h-20 w-20 drop-shadow-lg sm:h-28 sm:w-28 lg:h-40 lg:w-40"
+            />
+          </div>
+        )}
       </div>
 
       {/* Illustration */}
@@ -133,16 +146,6 @@ function FlowBlock({ flow, index }: { flow: Flow; index: number }) {
           className="h-auto w-full object-cover"
           priority={index === 0}
         />
-        {flow.badge && (
-          <Image
-            src={flow.badge}
-            alt="Hydrometallurgical Patented Process in India"
-            width={1200}
-            height={1200}
-            sizes="(max-width: 640px) 80px, (max-width: 1024px) 128px, 160px"
-            className="absolute right-2 top-2 h-20 w-20 drop-shadow-lg sm:right-5 sm:top-5 sm:h-32 sm:w-32 lg:h-40 lg:w-40"
-          />
-        )}
       </motion.div>
 
       {/* Step cards */}

@@ -95,10 +95,10 @@ export default function MediaTeaser({
               {body}
             </p>
           </div>
-          <motion.div whileHover={{ x: 4 }} className="inline-flex">
+          <motion.div whileHover={{ y: -2 }} className="inline-flex">
             <Link
               href={ctaHref}
-              className="inline-flex items-center gap-2 text-sm font-medium text-forest underline-offset-4 hover:underline"
+              className="inline-flex items-center gap-2 rounded-full bg-deep-green px-6 py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-forest"
             >
               {ctaLabel}
               <ArrowRight className="h-4 w-4" />

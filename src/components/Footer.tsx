@@ -203,9 +203,9 @@ export default function Footer({
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label={label}
-                        className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/20 text-white/60 transition-colors hover:border-white hover:text-white"
+                        className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/40 bg-black/50 text-white shadow-sm transition-colors hover:border-white hover:bg-white hover:text-forest"
                       >
-                        <Icon className="h-4 w-4" aria-hidden />
+                        <Icon className="h-5 w-5" aria-hidden />
                       </a>
                     </li>
                   ))}
@@ -237,7 +237,7 @@ export default function Footer({
       <div className="border-t border-white/10 bg-black/25 backdrop-blur-sm">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-6 py-4 text-xs text-white/40 sm:flex-row sm:px-10 lg:px-16">
           <span>
-            © {new Date().getFullYear()} {legalName || siteTitle}.
+            © {new Date().getFullYear()} {legalName || siteTitle}. All rights reserved.
             {cin && (
               <> &nbsp;·&nbsp; CIN: <span className="text-white/60">{cin}</span></>
             )}
@@ -245,14 +245,27 @@ export default function Footer({
           <span className="text-white/30">
             Together for a Greener India.
           </span>
-          <nav className="flex items-center gap-4">
-            <Link href="/privacy" className="transition-colors hover:text-white">
-              Privacy Policy
-            </Link>
-            <Link href="/terms" className="transition-colors hover:text-white">
-              Terms of Use
-            </Link>
-          </nav>
+          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
+            <nav className="flex items-center gap-4">
+              <Link href="/privacy" className="transition-colors hover:text-white">
+                Privacy Policy
+              </Link>
+              <Link href="/terms" className="transition-colors hover:text-white">
+                Terms of Use
+              </Link>
+            </nav>
+            <span>
+              Designed by{" "}
+              <a
+                href="https://www.reddashmedia.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="transition-colors hover:text-white"
+              >
+                Red Dash Media
+              </a>
+            </span>
+          </div>
         </div>
       </div>
     </footer>
