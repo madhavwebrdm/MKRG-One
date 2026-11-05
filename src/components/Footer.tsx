@@ -62,7 +62,7 @@ const NAV_GROUPS = [
 ];
 
 export default function Footer({
-  siteTitle = "Madhav KRG Group",
+  siteTitle = "Madhav KRG Environmental Solution Limited",
   tagline = "Waste is a Resource, Not a Problem.",
   legalName,
   cin,
@@ -105,7 +105,7 @@ export default function Footer({
               <Link href="/" className="inline-block">
                 <Image
                   src="/brand/MKRG_footer_on-dark.svg"
-                  alt="MKRG Environmental Solutions, a Madhav KRG Group company"
+                  alt="Madhav KRG Environmental Solution Limited, a Madhav KRG Group company"
                   width={240}
                   height={108}
                   unoptimized
@@ -237,7 +237,7 @@ export default function Footer({
       <div className="border-t border-white/10 bg-black/25 backdrop-blur-sm">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-6 py-4 text-xs text-white/40 sm:flex-row sm:px-10 lg:px-16">
           <span>
-            © {new Date().getFullYear()} {legalName || siteTitle}. All rights reserved.
+            © {new Date().getFullYear()} {legalName || "Madhav KRG Environmental Solution Limited"}. All rights reserved.
             {cin && (
               <> &nbsp;·&nbsp; CIN: <span className="text-white/60">{cin}</span></>
             )}

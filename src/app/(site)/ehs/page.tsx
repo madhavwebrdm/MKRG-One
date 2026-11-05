@@ -3,9 +3,9 @@ import { sanityFetch } from "@/sanity/lib/live";
 import { EHS_PAGE_QUERY } from "@/sanity/lib/queries";
 
 export const metadata = {
-  title: "EHS Madhav KRG Group",
+  title: "EHS | Madhav KRG Environmental Solution Limited",
   description:
-    "Environment, Health & Safety at Madhav KRG Group. Detailed programs and standards coming soon.",
+    "Environment, Health & Safety at Madhav KRG Environmental Solution Limited. Detailed programs and standards coming soon.",
 };
 
 export default async function EhsPage() {

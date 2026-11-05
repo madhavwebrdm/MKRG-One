@@ -50,10 +50,10 @@ export default function CsrPageContent({ data }: { data?: CsrPageData }) {
         heading={str(hero?.heading, "Investing in the communities we call home.")}
         intro={str(
           hero?.intro,
-          "For Madhav KRG Group, responsibility reaches beyond the plant gate. Across education, health, the environment and rural livelihoods, our CSR work helps the people and places around our operations build a stronger, more dignified future.",
+          "For Madhav KRG Environmental Solution Limited, responsibility reaches beyond the plant gate. Across education, health, the environment and rural livelihoods, our CSR work helps the people and places around our operations build a stronger, more dignified future.",
         )}
         imageUrl={hero?.imageUrl || PLACEHOLDER_IMAGES.csr.hero}
-        imageAlt={str(hero?.imageAlt, "Madhav KRG Group community work")}
+        imageAlt={str(hero?.imageAlt, "Madhav KRG Environmental Solution Limited community work")}
       />
 
       {/* Impact band */}

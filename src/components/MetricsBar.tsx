@@ -38,9 +38,9 @@ const DEFAULTS: Metric[] = [
 const DEFAULT_LEADER = {
   heading: "Turning Metal into Tomorrow",
   quote:
-    "True progress lies in building a sustainable future through innovation, responsibility, and purpose. At MKRG, we are committed to creating solutions that make a lasting difference.",
-  attribution: "Rahul Goel, Director",
-  // Rahul Goel's portrait as published on the Leadership page; used only if the
+    "True progress lies in building a sustainable future through innovation, responsibility, and purpose. At MKESL, we are committed to creating solutions that make a lasting difference.",
+  attribution: "Rahul Goyal, Director",
+  // Rahul Goyal's portrait as published on the Leadership page; used only if the
   // Leadership page lookup in the home query comes back empty.
   portrait:
     "https://cdn.sanity.io/images/72k8551o/production/7f9cabf6d19dedf3a88f96f128ab67fb6e9b77da-1122x1402.png",

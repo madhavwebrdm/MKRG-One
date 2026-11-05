@@ -32,7 +32,7 @@ export default function LeadershipTeaser({
     headingProp ?? "Built by people who have spent decades closing the loop.";
   const quote =
     quoteProp ??
-    "Efficient utilization of Energy and Nature's Resources is the mantra of Madhav KRG Group in achieving our set goals.";
+    "Efficient utilization of Energy and Nature's Resources is the mantra of Madhav KRG Environmental Solution Limited in achieving our set goals.";
   const attribution = attributionProp ?? "Sudhir Goyal, Managing Director";
   const ctaLabel = ctaLabelProp ?? "Meet the team";
   const ctaHref = ctaHrefProp ?? "/leadership";

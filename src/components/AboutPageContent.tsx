@@ -118,7 +118,7 @@ const VALUES = [
 ];
 
 const DEFAULT_BRAND_PARAGRAPHS = [
-  "Madhav KRG Group is the principal brand under which every recycling, refining and manufacturing operation sits. This website is the place we are building that identity as a state-of-the-art recycler trusted by industry, regulators and the communities we operate in.",
+  "Madhav KRG Environmental Solution Limited is the principal brand under which every recycling, refining and manufacturing operation sits. This website is the place we are building that identity as a state-of-the-art recycler trusted by industry, regulators and the communities we operate in.",
   "When a partner buys recycled zinc from any plant in our group, the same standards, the same audit trail and the same promise sit behind the badge.",
 ];
 
@@ -149,7 +149,7 @@ const TIMELINE = [
   {
     year: "1985",
     title: "A founding idea",
-    body: "Madhav KRG Group is founded on a single belief that industrial waste is a resource the country can't afford to throw away.",
+    body: "Madhav KRG Environmental Solution Limited is founded on a single belief that industrial waste is a resource the country can't afford to throw away.",
   },
   {
     year: "2009",
@@ -216,10 +216,10 @@ export default function AboutPageContent({ data }: { data?: AboutPageData }) {
         heading={str(hero?.heading, "The recycler India can build its future on.")}
         intro={str(
           hero?.intro,
-          "Madhav KRG Group has spent decades closing the loop turning hazardous industrial waste into zinc that meets International Standards. We are building our identity as a state-of-the-art recycler so that industry, communities and the planet can grow together.",
+          "Madhav KRG Environmental Solution Limited has spent decades closing the loop turning hazardous industrial waste into zinc that meets International Standards. We are building our identity as a state-of-the-art recycler so that industry, communities and the planet can grow together.",
         )}
         imageUrl={hero?.imageUrl || PLACEHOLDER_IMAGES.aboutHero}
-        imageAlt={str(hero?.imageAlt, "MKRG plant operations")}
+        imageAlt={str(hero?.imageAlt, "MKESL plant operations")}
         videos={[
           { src: "/videos/about-hero-2.mp4", duration: 5000 },
           { src: "/videos/about-hero.mp4", duration: 5000 },
@@ -335,7 +335,7 @@ export default function AboutPageContent({ data }: { data?: AboutPageData }) {
             >
               <Image
                 src={brandIdentity?.imageUrl || PLACEHOLDER_IMAGES.aboutBrand}
-                alt={str(brandIdentity?.imageAlt, "Madhav KRG Group identity")}
+                alt={str(brandIdentity?.imageAlt, "Madhav KRG Environmental Solution Limited identity")}
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover transition-transform duration-1000 hover:scale-110"
@@ -371,7 +371,7 @@ export default function AboutPageContent({ data }: { data?: AboutPageData }) {
               {str(differentiators?.eyebrow, "Differentiators")}
             </span>
             <AnimatedHeading className="mt-3 text-balance font-serif text-3xl leading-tight text-black sm:text-4xl lg:text-5xl">
-              {str(differentiators?.heading, "What sets MKRG apart on the shop floor.")}
+              {str(differentiators?.heading, "What sets MKESL apart on the shop floor.")}
             </AnimatedHeading>
           </div>
 
@@ -500,7 +500,7 @@ export default function AboutPageContent({ data }: { data?: AboutPageData }) {
           <p className="mt-6 text-base leading-relaxed text-body sm:text-lg">
             {str(
               sustainabilityStatement?.body,
-              "MKESPL contributes to environmental sustainability through its core operations, focused on recycling APCD dust and metal waste. By actively engaging in the recycling process, MKESPL helps reduce waste and minimise the extraction of raw new materials. The company manufactures and trades zinc cathodes and zinc ingots, essential components across various industries, while adhering to strict environmental regulations in its manufacturing processes.",
+              "MKESL contributes to environmental sustainability through its core operations, focused on recycling APCD dust and metal waste. By actively engaging in the recycling process, MKESL helps reduce waste and minimise the extraction of raw new materials. The company manufactures and trades zinc cathodes and zinc ingots, essential components across various industries, while adhering to strict environmental regulations in its manufacturing processes.",
             )}
           </p>
         </div>

@@ -46,7 +46,7 @@ type Props = {
 };
 
 export default function Header({
-  siteTitle = "Madhav KRG Group",
+  siteTitle = "Madhav KRG Environmental Solution Limited",
   nav = NAV,
 }: Props) {
   const [scrolled, setScrolled] = useState(false);
@@ -79,7 +79,7 @@ export default function Header({
           {/* Full logo: phones, tablets and 1280px+ */}
           <Image
             src={`/brand/MKRG_header_${tone}.svg`}
-            alt="MKRG Environmental Solutions"
+            alt="Madhav KRG Environmental Solution Limited"
             width={326}
             height={32}
             unoptimized
@@ -89,7 +89,7 @@ export default function Header({
           {/* Compact logo: 1024-1279px, where the full one would collide with the nav */}
           <Image
             src={`/brand/MKRG_header-compact_${tone}.svg`}
-            alt="MKRG Environmental Solutions"
+            alt="Madhav KRG Environmental Solution Limited"
             width={139}
             height={32}
             unoptimized

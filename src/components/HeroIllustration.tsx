@@ -38,7 +38,7 @@ export default function HeroIllustration({ imageUrl, imageAlt }: Props) {
   }
 
   const src = imageUrl || PLACEHOLDER_IMAGES.hero;
-  const alt = imageAlt || "Madhav KRG Group recycling plant";
+  const alt = imageAlt || "Madhav KRG Environmental Solution Limited recycling plant";
 
   return (
     <motion.div

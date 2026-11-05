@@ -166,8 +166,8 @@ const PROCESS_STEPS = [
 ];
 
 const CAPACITY_STATS = [
-  { value: "10 MT/day", label: "APCD Dust Processing Capacity" },
-  { value: "5 MT/day", label: "Zinc Extraction Capacity" },
+  { value: "60 MT/day", label: "APCD Dust Recycling Capacity" },
+  { value: "20 MT/day", label: "Zinc Extraction Capacity" },
 ];
 
 const ACHIEVEMENTS = [

@@ -3,9 +3,9 @@ import { sanityFetch } from "@/sanity/lib/live";
 import { CONTACT_PAGE_QUERY } from "@/sanity/lib/queries";
 
 export const metadata = {
-  title: "Contact Madhav KRG Group",
+  title: "Contact | Madhav KRG Environmental Solution Limited",
   description:
-    "Sales, technical, partnership and audit enquiries for Madhav KRG Group offices in Ahmedabad and the Recycle2X plant in Mehsana, Gujarat.",
+    "Sales, technical, partnership and audit enquiries for Madhav KRG Environmental Solution Limited offices in Ahmedabad and the Recycle2X plant in Mehsana, Gujarat.",
 };
 
 export default async function ContactPage() {

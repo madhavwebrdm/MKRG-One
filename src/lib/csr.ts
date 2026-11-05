@@ -102,7 +102,7 @@ export const CSR_FOCUS_AREAS: CsrFocusArea[] = [
         title: "Blood Donation Camps",
         image: IMG.health.initiatives[0],
         body: [
-          "Blood donation is a powerful act of kindness with the potential to save lives, and regular donation carries real health benefits for donors too. Madhav KRG Group organises blood donation camps both within the company premises and in nearby villages, supporting healthcare needs while building a culture of compassion. We have held around 16 such camps so far.",
+          "Blood donation is a powerful act of kindness with the potential to save lives, and regular donation carries real health benefits for donors too. Madhav KRG Environmental Solution Limited organises blood donation camps both within the company premises and in nearby villages, supporting healthcare needs while building a culture of compassion. We have held around 16 such camps so far.",
         ],
       },
       {

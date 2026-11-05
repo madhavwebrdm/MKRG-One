@@ -201,7 +201,7 @@ export default function ProductPageContent({ data }: { data?: ProductPageData })
           "From hazardous industrial waste, we recover high-purity zinc products that power galvanizing, alloy manufacturing and sustainable growth.",
         )}
         imageUrl={hero?.imageUrl || IMG.hero}
-        imageAlt={str(hero?.imageAlt, "Madhav KRG Group zinc products")}
+        imageAlt={str(hero?.imageAlt, "Madhav KRG Environmental Solution Limited zinc products")}
       />
 
       {/* Product family overview */}

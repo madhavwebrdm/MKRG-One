@@ -5,9 +5,9 @@ import { sanityFetch } from "@/sanity/lib/live";
 import { SUSTAINABILITY_PAGE_QUERY } from "@/sanity/lib/queries";
 
 export const metadata = {
-  title: "Sustainability Madhav KRG Group",
+  title: "Sustainability | Madhav KRG Environmental Solution Limited",
   description:
-    "Environmental impact, recycling statistics and community programs at Madhav KRG Group emissions avoided, resources conserved, communities supported.",
+    "Environmental impact, recycling statistics and community programs at Madhav KRG Environmental Solution Limited, emissions avoided, resources conserved, communities supported.",
 };
 
 export default async function SustainabilityPage() {

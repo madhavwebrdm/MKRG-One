@@ -5,7 +5,7 @@ import { sanityFetch } from "@/sanity/lib/live";
 import { PROJECTS_PAGE_QUERY } from "@/sanity/lib/queries";
 
 export const metadata = {
-  title: "Projects Madhav KRG Group",
+  title: "Projects | Madhav KRG Environmental Solution Limited",
   description:
     "Inside the Waste Recycling Division's APCD dust to zinc recovery project in Mandi Gobindgarh, from plant timeline and process to environmental impact.",
 };

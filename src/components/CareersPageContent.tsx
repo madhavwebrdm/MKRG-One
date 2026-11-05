@@ -149,7 +149,7 @@ export default function CareersPageContent() {
       <PageHero
         eyebrow="Careers"
         heading="Work where the loop closes."
-        intro="MKRG is hiring across plant operations, engineering, sales, finance and EHS. Send your CV and a short note we read every application."
+        intro="MKESL is hiring across plant operations, engineering, sales, finance and EHS. Send your CV and a short note we read every application."
         imageUrl="/images/career.jpg"
         imageAlt="Save plants greener planet"
       />

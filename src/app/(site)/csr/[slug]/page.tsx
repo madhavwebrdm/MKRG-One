@@ -27,7 +27,7 @@ export async function generateMetadata({
   const area = resolveCsrArea(slug, await fetchFocusAreas());
   if (!area) return {};
   return {
-    title: `${area.title} CSR Madhav KRG Group`,
+    title: `${area.title} | CSR | Madhav KRG Environmental Solution Limited`,
     description: area.summary,
   };
 }

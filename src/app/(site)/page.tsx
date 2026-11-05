@@ -111,7 +111,7 @@ export default async function Home() {
         metrics={page?.metrics}
         leader={{
           ...page?.leadershipTeaser,
-          // Same photo the Leadership page shows for Rahul Goel.
+          // Same photo the Leadership page shows for Rahul Goyal.
           portraitUrl: page?.leadershipTeaser?.portraitUrl || page?.leaderPortraitUrl,
         }}
       />

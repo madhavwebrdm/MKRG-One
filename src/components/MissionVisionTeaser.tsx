@@ -1,9 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { ArrowRight, Compass, Target } from "lucide-react";
+import { Compass, Target } from "lucide-react";
 import AnimatedHeading from "./AnimatedHeading";
 
 type Props = {
@@ -11,8 +10,6 @@ type Props = {
   heading?: string;
   mission?: string;
   vision?: string;
-  ctaLabel?: string;
-  ctaHref?: string;
   imageUrl?: string | null;
 };
 
@@ -21,8 +18,6 @@ export default function MissionVisionTeaser({
   heading: headingProp,
   mission: missionProp,
   vision: visionProp,
-  ctaLabel: ctaLabelProp,
-  ctaHref: ctaHrefProp,
   imageUrl,
 }: Props) {
   const eyebrow = eyebrowProp ?? "About us";
@@ -32,8 +27,6 @@ export default function MissionVisionTeaser({
     "To provide efficient, responsible recycling solutions that empower communities and businesses to minimise their environmental footprint.";
   const vision =
     visionProp ?? "Accelerating India's growth by enabling Green Infrastructure.";
-  const ctaLabel = ctaLabelProp ?? "Learn more about us";
-  const ctaHref = ctaHrefProp ?? "/about";
   return (
     <section className="relative bg-white py-24 sm:py-32">
       <video
@@ -59,7 +52,7 @@ export default function MissionVisionTeaser({
           >
             <Image
               src={imageUrl || "/images/home-about-teaser.webp"}
-              alt="Madhav KRG Group operations"
+              alt="Madhav KRG Environmental Solution Limited operations"
               fill
               sizes="(max-width: 1024px) 100vw, 40vw"
               className="object-cover transition-transform duration-1000 hover:scale-110"
@@ -114,16 +107,6 @@ export default function MissionVisionTeaser({
                 </p>
               </motion.article>
             </div>
-
-            <motion.div whileHover={{ y: -2 }} className="mt-10 inline-flex">
-              <Link
-                href={ctaHref}
-                className="inline-flex items-center gap-2 rounded-full bg-deep-green px-6 py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-forest"
-              >
-                {ctaLabel}
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </motion.div>
           </div>
         </div>
       </div>

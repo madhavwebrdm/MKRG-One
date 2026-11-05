@@ -3,7 +3,7 @@ import { sanityFetch } from "@/sanity/lib/live";
 import { PRODUCT_PAGE_QUERY } from "@/sanity/lib/queries";
 
 export const metadata = {
-  title: "Products Madhav KRG Group",
+  title: "Products | Madhav KRG Environmental Solution Limited",
   description:
     "High-purity commercial zinc recovered from hazardous industrial waste. Zinc ingots, sheets and feedstock, refined to 99.9% purity.",
 };

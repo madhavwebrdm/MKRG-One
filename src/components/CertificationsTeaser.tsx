@@ -67,7 +67,7 @@ export default function CertificationsTeaser({
             >
               <Image
                 src="/images/mkrg-6.jpeg"
-                alt="Madhav KRG Group certifications and audits"
+                alt="Madhav KRG Environmental Solution Limited certifications and audits"
                 fill
                 sizes="(max-width: 1024px) 100vw, 40vw"
                 className="object-cover transition-transform duration-1000 hover:scale-110"

@@ -46,9 +46,9 @@ const MD: Principal = {
   title: "Managing Director",
   portrait: "/images/leadership/sudhir-goyal.jpg",
   pullQuote:
-    "Efficient utilization of Energy and Nature's Resources is the mantra of Madhav KRG Group in achieving our set goals.",
+    "Efficient utilization of Energy and Nature's Resources is the mantra of Madhav KRG Environmental Solution Limited in achieving our set goals.",
   body: [
-    "Positive outcomes are the result of following accurate techniques, procedures and systems. At Madhav KRG Group we maintain dedicated systems to ensure compliance with the standards we set for ourselves and the ones our partners hold us to.",
+    "Positive outcomes are the result of following accurate techniques, procedures and systems. At Madhav KRG Environmental Solution Limited we maintain dedicated systems to ensure compliance with the standards we set for ourselves and the ones our partners hold us to.",
     "The word that guides everything we do is GIVING giving quality to our customers, fair remuneration to our people, dependable services to our partners, robust systems to our operations, and meaningful contribution to society.",
     "This wholehearted commitment has helped us build strong, long-standing relationships with the customers and stakeholders who choose to grow with us.",
   ],
@@ -61,20 +61,20 @@ const DIRECTOR: Principal = {
   pullQuote:
     "Quality assurance, for us, is not a step in the manufacturing line it is part of the culture of our organisation.",
   body: [
-    "Madhav KRG Group believes in long-term relationships and in creating an environment in which those relationships can grow. We welcome existing and new vendors with the same impartiality, because equitable economic development is what makes a supply chain durable.",
+    "Madhav KRG Environmental Solution Limited believes in long-term relationships and in creating an environment in which those relationships can grow. We welcome existing and new vendors with the same impartiality, because equitable economic development is what makes a supply chain durable.",
     "We treat the regulatory policies of the government as business guidelines, not constraints and the work we do is meant to contribute to the socio-economic development of the country.",
     "Quality assurance, for us, is not a step in the manufacturing line. It is part of the culture of our organisation.",
   ],
 };
 
 const RAHUL: Principal = {
-  name: "Rahul Goel",
+  name: "Rahul Goyal",
   title: "Director",
   portrait: PLACEHOLDER_IMAGES.leadershipTeam[0],
   pullQuote:
     "As the next-generation founder and director, I bring a fresh perspective, strategic insight and unwavering commitment to making a lasting impact.",
   body: [
-    "A visionary leader committed to driving innovation and excellence. With a passion for transformative growth and a forward-thinking approach, he is dedicated to shaping the future of Madhav KRG Environmental Solutions Ltd.",
+    "A visionary leader committed to driving innovation and excellence. With a passion for transformative growth and a forward-thinking approach, he is dedicated to shaping the future of Madhav KRG Environmental Solution Limited.",
     "As the next-generation founder and director, he brings a fresh perspective, strategic insight, and unwavering commitment to making a lasting impact.",
   ],
 };
@@ -133,10 +133,10 @@ export default function LeadershipPageContent({
         heading={str(hero?.heading, "The people behind every tonne we recycle.")}
         intro={str(
           hero?.intro,
-          "Madhav KRG Group is led by operators, not bystanders. The people on this page have been on the shop floor, in the audit room and in the field often all in the same week.",
+          "Madhav KRG Environmental Solution Limited is led by operators, not bystanders. The people on this page have been on the shop floor, in the audit room and in the field often all in the same week.",
         )}
         imageUrl={hero?.imageUrl || "/images/leadership/team-hero.jpg"}
-        imageAlt={str(hero?.imageAlt, "Madhav KRG Group leadership team")}
+        imageAlt={str(hero?.imageAlt, "Madhav KRG Environmental Solution Limited leadership team")}
       />
 
       {/* MD MESSAGE */}

@@ -175,13 +175,13 @@ export default function EhsPageContent({ data }: { data?: EhsPageData }) {
     <main className="bg-mint">
       <PageHero
         eyebrow={str(hero?.eyebrow, "Environment, Health & Safety")}
-        heading={str(hero?.heading, "Holistic health comes first at Madhav KRG Group.")}
+        heading={str(hero?.heading, "Holistic health comes first at Madhav KRG Environmental Solution Limited.")}
         intro={str(
           hero?.intro,
           "A healthy product is the result of a healthy environment and a healthy workforce. From daily safety briefings and emission monitoring to occupational-health checks and incident transparency, EHS is how we keep our people and the environment around our plants protected.",
         )}
         imageUrl={hero?.imageUrl || PLACEHOLDER_IMAGES.sustEhs}
-        imageAlt={str(hero?.imageAlt, "Madhav KRG Group environment, health and safety")}
+        imageAlt={str(hero?.imageAlt, "Madhav KRG Environmental Solution Limited environment, health and safety")}
       />
 
       {/* Overview statement */}

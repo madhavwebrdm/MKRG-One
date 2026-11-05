@@ -179,10 +179,10 @@ export default function CertificationsPageContent({
         heading={str(hero?.heading, "Compliant by design, certified by audit.")}
         intro={str(
           hero?.intro,
-          "Independent certifications confirm what our process already enforces. Quality, environment and safety standards aren't a finish line for Madhav KRG Group they are the baseline we operate above.",
+          "Independent certifications confirm what our process already enforces. Quality, environment and safety standards aren't a finish line for Madhav KRG Environmental Solution Limited, they are the baseline we operate above.",
         )}
         imageUrl={hero?.imageUrl || "/images/certifications.jpeg"}
-        imageAlt={str(hero?.imageAlt, "Madhav KRG Group certifications")}
+        imageAlt={str(hero?.imageAlt, "Madhav KRG Environmental Solution Limited certifications")}
       />
 
       {/* Badge grid */}
@@ -291,14 +291,17 @@ export default function CertificationsPageContent({
                     aria-label={`View ${c.title} certificate`}
                     className="group block overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-forest/10"
                   >
-                    <div className="relative aspect-[3/4] w-full overflow-hidden">
-                      <Image
-                        src={img}
-                        alt={`${c.title} certificate`}
-                        fill
-                        sizes="(max-width: 640px) 100vw, 50vw"
-                        className="object-cover transition-transform duration-700 group-hover:scale-105"
-                      />
+                    {/* Documents come in both orientations, so show each one whole on a mat */}
+                    <div className="relative aspect-square w-full overflow-hidden bg-mint-strong/60">
+                      <div className="absolute inset-5 sm:inset-8">
+                        <Image
+                          src={img}
+                          alt={`${c.title} certificate`}
+                          fill
+                          sizes="(max-width: 640px) 100vw, 50vw"
+                          className="object-contain drop-shadow-md transition-transform duration-700 group-hover:scale-[1.03]"
+                        />
+                      </div>
                     </div>
                     <div className="flex items-center justify-between gap-2 p-4">
                       <p className="text-sm font-medium text-ink">{c.title}</p>

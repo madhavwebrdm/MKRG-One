@@ -3,9 +3,9 @@ import { sanityFetch } from "@/sanity/lib/live";
 import { ABOUT_PAGE_QUERY } from "@/sanity/lib/queries";
 
 export const metadata = {
-  title: "About Madhav KRG Group",
+  title: "About | Madhav KRG Environmental Solution Limited",
   description:
-    "Mission, vision, values, brand identity, differentiators and the company history of Madhav KRG Group India's state-of-the-art recycler.",
+    "Mission, vision, values, brand identity, differentiators and the company history of Madhav KRG Environmental Solution Limited, India's state-of-the-art recycler.",
 };
 
 export default async function AboutPage() {

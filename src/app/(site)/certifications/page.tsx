@@ -5,9 +5,9 @@ import { sanityFetch } from "@/sanity/lib/live";
 import { CERTIFICATIONS_PAGE_QUERY } from "@/sanity/lib/queries";
 
 export const metadata = {
-  title: "Certifications Madhav KRG Group",
+  title: "Certifications | Madhav KRG Environmental Solution Limited",
   description:
-    "ISO 9001 / 14001, GPCB, MOEFCC and EHS certifications quality, environmental and safety standards Madhav KRG Group operates under.",
+    "ISO 9001 / 14001, GPCB, MOEFCC and EHS certifications quality, environmental and safety standards Madhav KRG Environmental Solution Limited operates under.",
 };
 
 export default async function CertificationsPage() {

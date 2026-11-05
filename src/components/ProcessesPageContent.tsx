@@ -2,6 +2,7 @@
 import PageHero from "./PageHero";
 import ProcessesFlow from "./ProcessesFlow";
 import AnimatedHeading from "./AnimatedHeading";
+import WasteToZincFlow from "./WasteToZincFlow";
 
 const str = (v: string | null | undefined, fallback: string): string =>
   v && v.trim() ? v : fallback;
@@ -47,7 +48,7 @@ export default function ProcessesPageContent({
               The Technology Behind Our Zinc Recovery
             </AnimatedHeading>
             <p className="mt-6 text-base leading-relaxed text-body sm:text-lg">
-              At MKRG Environmental Solutions, innovation drives the way we
+              At Madhav KRG Environmental Solution Limited, innovation drives the way we
               recover valuable resources from industrial waste. Our zinc
               recovery process is built on our own patented hydrometallurgical
               process, an advanced technology designed to extract zinc from
@@ -65,6 +66,8 @@ export default function ProcessesPageContent({
           </div>
         </div>
       </section>
+
+      <WasteToZincFlow />
     </main>
   );
 }

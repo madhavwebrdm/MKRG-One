@@ -198,7 +198,7 @@ export default function SustainabilityPageContent({
         heading={hero?.heading?.trim() ? hero.heading : "Real numbers.\nCleaner air. Real communities."}
         intro={str(
           hero?.intro,
-          "Sustainability at Madhav KRG Group isn't a line item it is the business model. Every tonne we process avoids emissions, conserves resources and supports the communities we operate in.",
+          "Sustainability at Madhav KRG Environmental Solution Limited isn't a line item it is the business model. Every tonne we process avoids emissions, conserves resources and supports the communities we operate in.",
         )}
         imageUrl={hero?.imageUrl || PLACEHOLDER_IMAGES.sustHero}
         imageAlt={str(hero?.imageAlt, "Green plant operations")}
@@ -303,7 +303,7 @@ export default function SustainabilityPageContent({
             >
               <Image
                 src={PLACEHOLDER_IMAGES.sustStatsAccent}
-                alt="MKRG plant, APCD dust collection and stack infrastructure"
+                alt="MKESL plant, APCD dust collection and stack infrastructure"
                 fill
                 sizes="(max-width: 1024px) 100vw, 40vw"
                 className="object-cover"

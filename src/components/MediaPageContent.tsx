@@ -57,7 +57,7 @@ type VideoItem = {
 
 const VIDEOS: VideoItem[] = [
   {
-    title: "Inside MKESPL: the full recycling process, start to finish",
+    title: "Inside MKESL: the full recycling process, start to finish",
     duration: "3:59",
     kind: "Process",
     href: "/videos/mkespl-process-video.mp4",
@@ -144,10 +144,10 @@ export default function MediaPageContent({ data }: { data?: MediaPageData }) {
         )}
         intro={str(
           hero?.intro,
-          "Where Madhav KRG Group shows up on the page, on camera and on the ground at the forums where recycling policy and practice are being rewritten.",
+          "Where Madhav KRG Environmental Solution Limited shows up on the page, on camera and on the ground at the forums where recycling policy and practice are being rewritten.",
         )}
         imageUrl={hero?.imageUrl || "/images/media-hero.jpeg"}
-        imageAlt={str(hero?.imageAlt, "MKRG in the media")}
+        imageAlt={str(hero?.imageAlt, "MKESL in the media")}
       />
 
       {/* Industry articles */}
@@ -163,7 +163,7 @@ export default function MediaPageContent({ data }: { data?: MediaPageData }) {
               </AnimatedHeading>
             </div>
             <p className="max-w-md text-base leading-relaxed text-body sm:text-lg">
-              Independent coverage and analysis that frames the work MKRG and the wider
+              Independent coverage and analysis that frames the work MKESL and the wider
               industry are doing.
             </p>
           </div>

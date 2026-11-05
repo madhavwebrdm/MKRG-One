@@ -54,7 +54,7 @@ const OFFICES = [
     label: "Office",
     icon: Factory,
     lines: [
-      "Madhav KRG Environmental Solutions Pvt. Ltd.",
+      "Madhav KRG Environmental Solution Limited",
       "Vill. Bhadal Thuha, Amloh Bhadson Road",
       "Distt. Fatehgarh Sahib, Punjab",
       "India",
@@ -336,7 +336,7 @@ export default function ContactPageContent({ data }: { data?: ContactPageData })
                   submitLabel={str(ef?.submitLabel, "Send enquiry")}
                   successMessage={str(
                     ef?.successMessage,
-                    "A member of the Madhav KRG team will reply within one business day. For urgent calls, the sales line is open between 9 AM and 7 PM IST.",
+                    "A member of the MKESL team will reply within one business day. For urgent calls, the sales line is open between 9 AM and 7 PM IST.",
                   )}
                 />
               </div>
@@ -404,7 +404,7 @@ export default function ContactPageContent({ data }: { data?: ContactPageData })
 
               <div className="mt-6">
                 <p className="text-xs font-medium uppercase tracking-wider text-accent">
-                  Follow MKRG
+                  Follow MKESL
                 </p>
                 <ul className="mt-3 flex flex-wrap gap-2.5">
                   {SOCIALS.map((s) => {
@@ -454,7 +454,7 @@ export default function ContactPageContent({ data }: { data?: ContactPageData })
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                title="Madhav KRG location map"
+                title="Madhav KRG Environmental Solution Limited location map"
                 className="absolute inset-0 h-full w-full"
               />
             </div>
