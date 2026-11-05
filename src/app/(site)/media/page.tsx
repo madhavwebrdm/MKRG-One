@@ -5,7 +5,7 @@ import { MEDIA_PAGE_QUERY } from "@/sanity/lib/queries";
 export const metadata = {
   title: "Media | Madhav KRG Environmental Solution Limited",
   description:
-    "Industry articles, company news, press releases, videos and events from Madhav KRG Environmental Solution Limited, covering recycling innovation, sustainability policy and the circular economy.",
+    "Industry articles featuring Madhav KRG Environmental Solution Limited, covering recycling innovation, sustainability policy and the circular economy.",
 };
 
 export default async function MediaPage() {
