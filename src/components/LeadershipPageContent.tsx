@@ -72,10 +72,9 @@ const RAHUL: Principal = {
   title: "Director",
   portrait: PLACEHOLDER_IMAGES.leadershipTeam[0],
   pullQuote:
-    "As the next-generation founder and director, I bring a fresh perspective, strategic insight and unwavering commitment to making a lasting impact.",
+    "True progress lies in building a sustainable future through innovation, responsibility, and purpose.",
   body: [
-    "A visionary leader committed to driving innovation and excellence. With a passion for transformative growth and a forward-thinking approach, he is dedicated to shaping the future of Madhav KRG Environmental Solution Limited.",
-    "As the next-generation founder and director, he brings a fresh perspective, strategic insight, and unwavering commitment to making a lasting impact.",
+    "True progress lies in building a sustainable future through innovation, responsibility, and purpose. At MKESL, we are committed to creating solutions that make a lasting difference.",
   ],
 };
 
