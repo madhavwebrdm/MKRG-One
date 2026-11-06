@@ -14,6 +14,7 @@ type Metric = {
 };
 
 type Props = {
+  eyebrow?: string;
   heading?: string;
   intro?: string;
   metrics?: Metric[];
@@ -26,15 +27,17 @@ const DEFAULTS: Metric[] = [
 ];
 
 export default function MetricsBar({
+  eyebrow: eyebrowProp,
   heading: headingProp,
   intro: introProp,
   metrics: metricsProp,
 }: Props) {
+  const eyebrow = eyebrowProp ?? "Impact metrics";
   const heading = headingProp ?? "Our impact, measured.";
   const intro =
     introProp ??
     "Every tonne we process meets International Standards and behaves virtually like virgin material at a fraction of the environmental cost.";
-  const metrics = metricsProp ?? DEFAULTS;
+  const metrics = metricsProp && metricsProp.length > 0 ? metricsProp : DEFAULTS;
   const root = useRef<HTMLElement>(null);
 
   useGSAP(
@@ -83,7 +86,7 @@ export default function MetricsBar({
       <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
         <div className="metrics-head max-w-3xl">
           <span className="text-xs uppercase tracking-[0.2em] text-deep-green">
-            Impact metrics
+            {eyebrow}
           </span>
           <AnimatedHeading className="mt-3 text-balance font-serif text-3xl leading-tight text-ink sm:text-4xl lg:text-5xl">
             {heading}

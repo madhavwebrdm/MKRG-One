@@ -1,8 +1,17 @@
 import { defineArrayMember, defineField, defineType } from "sanity";
 import { CheckmarkCircleIcon } from "@sanity/icons";
 import { heroField } from "./shared/heroFields";
-import { iconKeyField } from "./shared/iconKey";
+import { ICON_KEYS, iconKeyField } from "./shared/iconKey";
 import { seoFields } from "./shared/seoFields";
+
+// The shared icon list plus "lightbulb", used by the Zinc Extraction Patent card.
+const certificateIconField = defineField({
+  ...iconKeyField,
+  description: "Icon shown at the top of the card in the certifications grid.",
+  options: {
+    list: [...ICON_KEYS, "lightbulb"].map((key) => ({ title: key, value: key })),
+  },
+});
 
 export const certificationsPage = defineType({
   name: "certificationsPage",
@@ -20,6 +29,7 @@ export const certificationsPage = defineType({
     defineField({
       name: "intro",
       title: "Intro block",
+      description: "Heading and text above the certifications grid.",
       type: "object",
       group: "content",
       fields: [
@@ -30,12 +40,21 @@ export const certificationsPage = defineType({
         }),
         defineField({ name: "heading", type: "string" }),
         defineField({ name: "body", type: "text", rows: 3 }),
+        defineField({
+          name: "cardLinkLabel",
+          title: "Card link text",
+          description:
+            "Text of the link at the bottom of each certificate card (shown when the certificate has a file).",
+          type: "string",
+        }),
       ],
     }),
 
     defineField({
       name: "certificates",
-      title: "Certifications & licences",
+      title: "Certifications, patents & awards",
+      description:
+        "Each entry appears either in the certifications grid or in the awards gallery, depending on its Section setting.",
       type: "array",
       group: "content",
       validation: (r) => r.min(1),
@@ -43,6 +62,20 @@ export const certificationsPage = defineType({
         defineArrayMember({
           type: "object",
           fields: [
+            defineField({
+              name: "category",
+              title: "Section",
+              description: "Where this entry appears on the page.",
+              type: "string",
+              initialValue: "certification",
+              options: {
+                list: [
+                  { title: "Certifications grid (card with icon and text)", value: "certification" },
+                  { title: "Awards gallery (document image)", value: "award" },
+                ],
+                layout: "radio",
+              },
+            }),
             defineField({
               name: "title",
               type: "string",
@@ -57,25 +90,73 @@ export const certificationsPage = defineType({
             defineField({
               name: "status",
               type: "string",
+              description: "Small badge on the certificate card.",
               options: {
-                list: ["Active", "Compliant", "Approved", "In force", "Expired"],
+                list: [
+                  "Active",
+                  "Compliant",
+                  "Approved",
+                  "In force",
+                  "Granted",
+                  "Awarded",
+                  "On file",
+                  "Expired",
+                ],
               },
             }),
-            iconKeyField,
+            certificateIconField,
             defineField({
               name: "downloadFile",
               type: "file",
               title: "Certificate file",
+              description: "PDF or image that opens when a visitor clicks the card.",
+            }),
+            defineField({
+              name: "thumbnail",
+              title: "Document image",
+              description:
+                "Picture of the document shown in the awards gallery. Leave empty to show a stock photo.",
+              type: "image",
+              options: { hotspot: true },
+              fields: [
+                defineField({
+                  name: "alt",
+                  type: "string",
+                  title: "Alt text",
+                  description: 'Leave empty to use the title followed by "certificate".',
+                }),
+              ],
             }),
           ],
-          preview: { select: { title: "title", subtitle: "issuer" } },
+          preview: {
+            select: { title: "title", category: "category", media: "thumbnail" },
+            prepare: ({ title, category, media }) => ({
+              title,
+              subtitle: category === "award" ? "Awards gallery" : "Certifications grid",
+              media,
+            }),
+          },
         }),
+      ],
+    }),
+
+    defineField({
+      name: "awardsSection",
+      title: "Awards gallery",
+      description: "Heading and text above the awards gallery.",
+      type: "object",
+      group: "content",
+      fields: [
+        defineField({ name: "eyebrow", type: "string" }),
+        defineField({ name: "heading", type: "string" }),
+        defineField({ name: "body", type: "text", rows: 3 }),
       ],
     }),
 
     defineField({
       name: "closingCta",
       title: "Closing CTA",
+      description: "Not currently shown on the website.",
       type: "object",
       group: "content",
       fields: [

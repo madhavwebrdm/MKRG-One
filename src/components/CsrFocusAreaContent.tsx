@@ -5,16 +5,25 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight, ArrowUpRight, Check } from "lucide-react";
 
-import { resolveCsrAreas, type SanityFocusArea } from "@/lib/csr";
+import {
+  resolveCsrAreas,
+  type CsrDetailLabels,
+  type SanityFocusArea,
+} from "@/lib/csr";
 import AnimatedHeading from "./AnimatedHeading";
 import PageHero from "./PageHero";
+
+const str = (v: string | null | undefined, fallback: string): string =>
+  v && v.trim() ? v : fallback;
 
 export default function CsrFocusAreaContent({
   slug,
   focusAreas,
+  labels,
 }: {
   slug: string;
   focusAreas?: SanityFocusArea[] | null;
+  labels?: CsrDetailLabels;
 }) {
   const areas = resolveCsrAreas(focusAreas);
   const area = areas.find((a) => a.slug === slug);
@@ -25,11 +34,11 @@ export default function CsrFocusAreaContent({
   return (
     <main className="bg-mint">
       <PageHero
-        eyebrow="Corporate Social Responsibility"
+        eyebrow={str(labels?.heroEyebrow, "Corporate Social Responsibility")}
         heading={area.title}
         intro={area.summary}
         imageUrl={area.heroImage}
-        imageAlt={area.title}
+        imageAlt={area.heroImageAlt || area.title}
       />
 
       {/* Back link + stats */}
@@ -40,7 +49,7 @@ export default function CsrFocusAreaContent({
             className="inline-flex items-center gap-1.5 text-sm font-medium text-forest transition-colors hover:text-accent"
           >
             <ArrowLeft className="h-4 w-4" aria-hidden />
-            All focus areas
+            {str(labels?.backLinkLabel, "All focus areas")}
           </Link>
 
           <dl className="mt-8 grid grid-cols-2 gap-6 sm:gap-8 md:grid-cols-4">
@@ -68,10 +77,10 @@ export default function CsrFocusAreaContent({
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
           <div className="max-w-3xl">
             <span className="text-xs uppercase tracking-[0.2em] text-accent">
-              On the ground
+              {str(labels?.initiativesEyebrow, "On the ground")}
             </span>
             <AnimatedHeading className="mt-3 font-serif text-3xl leading-tight text-ink sm:text-4xl">
-              How the work happens.
+              {str(labels?.initiativesHeading, "How the work happens.")}
             </AnimatedHeading>
           </div>
 
@@ -94,7 +103,7 @@ export default function CsrFocusAreaContent({
                   >
                     <Image
                       src={it.image}
-                      alt={it.title}
+                      alt={it.imageAlt || it.title}
                       fill
                       sizes="(max-width: 1024px) 100vw, 50vw"
                       className="object-cover"
@@ -140,13 +149,13 @@ export default function CsrFocusAreaContent({
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
           <div className="flex items-end justify-between gap-6">
             <AnimatedHeading className="font-serif text-2xl leading-tight text-ink sm:text-3xl">
-              Explore other focus areas
+              {str(labels?.othersHeading, "Explore other focus areas")}
             </AnimatedHeading>
             <Link
               href="/csr"
               className="hidden shrink-0 items-center gap-1.5 text-sm font-medium text-forest transition-colors hover:text-accent sm:inline-flex"
             >
-              View all
+              {str(labels?.viewAllLabel, "View all")}
               <ArrowRight className="h-4 w-4" aria-hidden />
             </Link>
           </div>

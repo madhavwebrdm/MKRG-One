@@ -9,8 +9,21 @@ import { ChevronDown, Menu, X } from "lucide-react";
 type NavItem = {
   label: string;
   href: string;
-  children?: Array<{ label: string; href: string }>;
+  children?: Array<{ label: string; href: string }> | null;
 };
+
+type HeaderLogos = {
+  onDarkUrl?: string | null;
+  onDarkAlt?: string | null;
+  onLightUrl?: string | null;
+  onLightAlt?: string | null;
+  compactOnDarkUrl?: string | null;
+  compactOnDarkAlt?: string | null;
+  compactOnLightUrl?: string | null;
+  compactOnLightAlt?: string | null;
+};
+
+const LOGO_ALT = "Madhav KRG Environmental Solution Limited";
 
 const NAV: NavItem[] = [
   {
@@ -42,12 +55,16 @@ const NAV: NavItem[] = [
 type Props = {
   siteTitle?: string;
   logoUrl?: string | null;
+  logos?: HeaderLogos | null;
   nav?: NavItem[];
+  cta?: { label?: string | null; href?: string | null } | null;
 };
 
 export default function Header({
   siteTitle = "Madhav KRG Environmental Solution Limited",
+  logos,
   nav = NAV,
+  cta,
 }: Props) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
@@ -55,6 +72,16 @@ export default function Header({
   // Logo colourway follows the header background: white wordmark over the hero,
   // dark-green wordmark once the header turns light green.
   const tone = scrolled ? "on-light" : "on-dark";
+  const fullLogoSrc =
+    (scrolled ? logos?.onLightUrl : logos?.onDarkUrl) || `/brand/MKRG_header_${tone}.svg`;
+  const fullLogoAlt = (scrolled ? logos?.onLightAlt : logos?.onDarkAlt) || LOGO_ALT;
+  const compactLogoSrc =
+    (scrolled ? logos?.compactOnLightUrl : logos?.compactOnDarkUrl) ||
+    `/brand/MKRG_header-compact_${tone}.svg`;
+  const compactLogoAlt =
+    (scrolled ? logos?.compactOnLightAlt : logos?.compactOnDarkAlt) || LOGO_ALT;
+  const ctaLabel = cta?.label ?? "Get in touch";
+  const ctaHref = cta?.href ?? "/contact";
 
   useEffect(() => {
     const onScroll = () => {
@@ -78,8 +105,8 @@ export default function Header({
         <Link href="/" aria-label={`${siteTitle} home`} className="flex items-center">
           {/* Full logo: phones, tablets and 1280px+ */}
           <Image
-            src={`/brand/MKRG_header_${tone}.svg`}
-            alt="Madhav KRG Environmental Solution Limited"
+            src={fullLogoSrc}
+            alt={fullLogoAlt}
             width={326}
             height={32}
             unoptimized
@@ -88,8 +115,8 @@ export default function Header({
           />
           {/* Compact logo: 1024-1279px, where the full one would collide with the nav */}
           <Image
-            src={`/brand/MKRG_header-compact_${tone}.svg`}
-            alt="Madhav KRG Environmental Solution Limited"
+            src={compactLogoSrc}
+            alt={compactLogoAlt}
             width={139}
             height={32}
             unoptimized
@@ -140,10 +167,10 @@ export default function Header({
         </nav>
 
         <Link
-          href="/contact"
+          href={ctaHref}
           className={`hidden rounded-full px-6 py-2.5 text-base font-semibold shadow-sm transition-colors lg:inline-flex ${darkTop ? "bg-white text-forest hover:bg-accent hover:text-white" : "bg-deep-green text-white hover:bg-accent"}`}
         >
-          Get in touch
+          {ctaLabel}
         </Link>
 
         <button
@@ -194,11 +221,11 @@ export default function Header({
               ))}
               <li className="mt-2">
                 <Link
-                  href="/contact"
+                  href={ctaHref}
                   onClick={() => setOpen(false)}
                   className="block rounded-full bg-deep-green px-4 py-2.5 text-center text-base font-semibold text-white transition-colors hover:bg-accent"
                 >
-                  Get in touch
+                  {ctaLabel}
                 </Link>
               </li>
             </ul>

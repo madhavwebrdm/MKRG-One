@@ -12,6 +12,15 @@ type Step = {
   label: string;
   body: string;
   image: string | StaticImageData;
+  alt?: string;
+};
+
+/** Step content from Sanity; empty values fall back to the built-in step. */
+export type ProcessFlowStepInput = {
+  label?: string | null;
+  body?: string | null;
+  imageUrl?: string | null;
+  imageAlt?: string | null;
 };
 
 type Flow = {
@@ -59,18 +68,51 @@ type Props = {
   eyebrow?: string;
   heading?: string;
   body?: string;
+  index?: string;
+  title?: string;
+  caption?: string;
+  callout?: string;
+  steps?: ProcessFlowStepInput[] | null;
 };
+
+const str = (v: string | null | undefined, fallback: string): string =>
+  v && v.trim() ? v : fallback;
 
 export default function ProcessesFlow({
   eyebrow: eyebrowProp,
   heading: headingProp,
   body: bodyProp,
+  index,
+  title,
+  caption,
+  callout,
+  steps,
 }: Props) {
   const eyebrow = eyebrowProp ?? "Our Process";
   const heading = headingProp ?? "From hazardous waste to high-value zinc.";
   const body =
     bodyProp ??
     "One closed loop. Hazardous waste returns as commercial-grade zinc every step verified and optimized.";
+
+  const flow: Flow = {
+    ...FLOW,
+    index: index ?? FLOW.index,
+    title: title ?? FLOW.title,
+    caption: caption ?? FLOW.caption,
+    callout: callout ?? FLOW.callout,
+    steps: steps?.length
+      ? steps.map((s, i) => {
+          const fallback = FLOW.steps[i];
+          const label = str(s.label, fallback?.label ?? "");
+          return {
+            label,
+            body: str(s.body, fallback?.body ?? ""),
+            image: s.imageUrl || FLOW.steps[i % FLOW.steps.length].image,
+            alt: str(s.imageAlt, label),
+          };
+        })
+      : FLOW.steps,
+  };
 
   return (
     <>
@@ -92,11 +134,11 @@ export default function ProcessesFlow({
             </div>
           </div>
 
-          <FlowSection flow={FLOW} />
+          <FlowSection flow={flow} />
         </div>
       </section>
 
-      {FLOW.callout && <FlowCallout text={FLOW.callout} />}
+      {flow.callout && <FlowCallout text={flow.callout} />}
     </>
   );
 }
@@ -169,9 +211,9 @@ function FlowSection({ flow }: { flow: Flow }) {
             <div className="relative aspect-[4/5] max-h-[82vh] w-full overflow-hidden rounded-2xl bg-white">
               {flow.steps.map((s, i) => (
                 <Image
-                  key={s.label}
+                  key={`${s.label}-${i}`}
                   src={s.image}
-                  alt={s.label}
+                  alt={s.alt || s.label}
                   fill
                   sizes="(max-width: 1024px) 100vw, 45vw"
                   priority={i === 0}
@@ -218,7 +260,7 @@ function FlowSection({ flow }: { flow: Flow }) {
               const isLast = i === flow.steps.length - 1;
               return (
                 <li
-                  key={s.label}
+                  key={`${s.label}-${i}`}
                   className={`pf-step relative pl-12 sm:pl-14 ${isLast ? "pb-[60vh] lg:pb-[80vh]" : ""}`}
                   data-index={i}
                 >

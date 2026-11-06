@@ -36,7 +36,14 @@ const paragraphs = (v: string | null | undefined, fallback: string[]): string[] 
 
 export type ProjectsPageData = {
   hero?:
-    | { eyebrow?: string | null; heading?: string | null; intro?: string | null; imageUrl?: string | null; imageAlt?: string | null }
+    | {
+        eyebrow?: string | null;
+        heading?: string | null;
+        intro?: string | null;
+        imageUrl?: string | null;
+        imageAlt?: string | null;
+        videoUrl?: string | null;
+      }
     | null;
   highlights?:
     | { eyebrow?: string | null; heading?: string | null; items?: Array<{ title?: string | null; icon?: string | null }> | null }
@@ -44,15 +51,7 @@ export type ProjectsPageData = {
   overview?:
     | { eyebrow?: string | null; heading?: string | null; body?: string | null; imageUrl?: string | null; imageAlt?: string | null }
     | null;
-  challenge?:
-    | {
-        eyebrow?: string | null;
-        heading?: string | null;
-        body?: string | null;
-        backgroundImageUrl?: string | null;
-        backgroundImageAlt?: string | null;
-      }
-    | null;
+  challenge?: { eyebrow?: string | null; heading?: string | null; body?: string | null } | null;
   timeline?:
     | {
         eyebrow?: string | null;
@@ -371,6 +370,7 @@ export default function ProjectsPageContent({ data }: { data?: ProjectsPageData 
         )}
         imageUrl={hero?.imageUrl || PLACEHOLDER_IMAGES.projects.hero}
         imageAlt={str(hero?.imageAlt, "Zinc feedstock at the Waste Recycling Division plant")}
+        videoUrl={hero?.videoUrl || undefined}
       />
 
       {/* Key highlights */}

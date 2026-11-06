@@ -13,7 +13,10 @@ type Props = {
   eyebrow?: string;
   heading?: string;
   body?: string;
-  badges?: Badge[];
+  badges?: Badge[] | null;
+  imageUrl?: string | null;
+  imageAlt?: string | null;
+  imageBadge?: string | null;
   ctaLabel?: string;
   ctaHref?: string;
 };
@@ -42,6 +45,9 @@ export default function CertificationsTeaser({
   heading: headingProp,
   body: bodyProp,
   badges: badgesProp,
+  imageUrl,
+  imageAlt,
+  imageBadge,
   ctaLabel: ctaLabelProp,
   ctaHref: ctaHrefProp,
 }: Props) {
@@ -50,7 +56,7 @@ export default function CertificationsTeaser({
   const body =
     bodyProp ??
     "Independent certifications confirm what our process already enforces. Standards aren't a finish line they are the baseline we operate above.";
-  const badges = badgesProp ?? DEFAULTS;
+  const badges = badgesProp && badgesProp.length > 0 ? badgesProp : DEFAULTS;
   const ctaLabel = ctaLabelProp ?? "View certifications";
   const ctaHref = ctaHrefProp ?? "/certifications";
   return (
@@ -66,8 +72,8 @@ export default function CertificationsTeaser({
               className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl"
             >
               <Image
-                src="/images/mkrg-6.jpeg"
-                alt="Madhav KRG Environmental Solution Limited certifications and audits"
+                src={imageUrl || "/images/mkrg-6.jpeg"}
+                alt={imageAlt || "Madhav KRG Environmental Solution Limited certifications and audits"}
                 fill
                 sizes="(max-width: 1024px) 100vw, 40vw"
                 className="object-cover transition-transform duration-1000 hover:scale-110"
@@ -75,7 +81,7 @@ export default function CertificationsTeaser({
               <div className="absolute inset-0 bg-gradient-to-t from-deep-green/50 via-transparent to-transparent" />
               <div className="absolute left-5 top-5 inline-flex items-center gap-2 rounded-full bg-white/90 px-3.5 py-1.5 text-[10px] uppercase tracking-[0.2em] text-accent backdrop-blur">
                 <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-                Audit-ready
+                {imageBadge ?? "Audit-ready"}
               </div>
             </motion.div>
           </div>

@@ -34,20 +34,70 @@ const str = (v: string | null | undefined, fallback: string): string =>
 
 const DEFAULT_PRODUCT_OPTIONS = ["Zinc Ingots", "Zinc Sheets", "Zinc Feedstock"];
 
+type Str = string | null | undefined;
+
 export type ContactPageData = {
   hero?:
-    | { eyebrow?: string | null; heading?: string | null; intro?: string | null; imageUrl?: string | null; imageAlt?: string | null }
+    | { eyebrow?: Str; heading?: Str; intro?: Str; imageUrl?: Str; imageAlt?: Str; videoUrl?: Str }
     | null;
-  offices?: Array<{ label?: string | null; icon?: string | null; lines?: string[] | null }> | null;
-  contactLines?: Array<{ label?: string | null; icon?: string | null; value?: string | null; href?: string | null }> | null;
-  mapEmbedUrl?: string | null;
-  enquiryForm?:
-    | { heading?: string | null; intro?: string | null; productOptions?: string[] | null; submitLabel?: string | null; successMessage?: string | null }
-    | null;
+  offices?: Array<{ label?: Str; icon?: Str; lines?: string[] | null }> | null;
+  contactLines?: Array<{ label?: Str; icon?: Str; value?: Str; href?: Str }> | null;
+  mapEmbedUrl?: Str;
+  enquiryForm?: {
+    eyebrow?: Str;
+    heading?: Str;
+    intro?: Str;
+    productOptions?: string[] | null;
+    nameLabel?: Str;
+    companyLabel?: Str;
+    phoneLabel?: Str;
+    emailLabel?: Str;
+    messageLabel?: Str;
+    productLabel?: Str;
+    submitLabel?: Str;
+    sendingLabel?: Str;
+    successHeading?: Str;
+    successMessage?: Str;
+    sendAnotherLabel?: Str;
+  } | null;
+  reachSection?: { eyebrow?: Str; heading?: Str } | null;
+  follow?: {
+    label?: Str;
+    links?: Array<{ platform?: Str; url?: Str }> | null;
+  } | null;
+  mapSection?: {
+    eyebrow?: Str;
+    heading?: Str;
+    intro?: Str;
+    mapTitle?: Str;
+    locationLabel?: Str;
+    locationText?: Str;
+    imageUrl?: Str;
+    imageAlt?: Str;
+  } | null;
 } | null;
 
 type OfficeView = { label: string; Icon: LucideIcon; lines: string[] };
 type ContactLineView = { label: string; Icon: LucideIcon; value: string; href: string };
+type SocialView = { label: string; Icon: typeof LinkedinIcon; href: string };
+
+type FormLabels = {
+  name: string;
+  company: string;
+  phone: string;
+  email: string;
+  message: string;
+  product: string;
+  submit: string;
+  sending: string;
+  successHeading: string;
+  successMessage: string;
+  sendAnother: string;
+};
+
+// Contact rows may use "life-buoy", which isn't in the shared icon map.
+const contactIcon = (key: Str, fallback: LucideIcon): LucideIcon =>
+  key === "life-buoy" ? LifeBuoy : iconFromKey(key, fallback);
 
 const OFFICES = [
   {
@@ -89,6 +139,15 @@ const CONTACT_LINES = [
   },
 ];
 
+// Social platform key (as picked in Sanity) -> label + icon.
+const SOCIAL_PLATFORMS: Record<string, { label: string; icon: typeof LinkedinIcon }> = {
+  linkedin: { label: "LinkedIn", icon: LinkedinIcon },
+  twitter: { label: "Twitter", icon: TwitterIcon },
+  youtube: { label: "YouTube", icon: YoutubeIcon },
+  instagram: { label: "Instagram", icon: InstagramIcon },
+  facebook: { label: "Facebook", icon: FacebookIcon },
+};
+
 const SOCIALS = [
   {
     label: "LinkedIn",
@@ -122,12 +181,10 @@ const MAP_EMBED =
 
 function EnquiryForm({
   productOptions,
-  submitLabel,
-  successMessage,
+  labels,
 }: {
   productOptions: string[];
-  submitLabel: string;
-  successMessage: string;
+  labels: FormLabels;
 }) {
   const [product, setProduct] = useState<string>("");
   const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
@@ -148,17 +205,17 @@ function EnquiryForm({
           <CheckCircle2 className="h-6 w-6" />
         </span>
         <h3 className="font-serif text-2xl leading-snug text-ink">
-          Thanks we&apos;ve got your enquiry.
+          {labels.successHeading}
         </h3>
         <p className="text-sm leading-relaxed text-body">
-          {successMessage}
+          {labels.successMessage}
         </p>
         <button
           type="button"
           onClick={() => setStatus("idle")}
           className="mt-2 inline-flex items-center gap-2 text-sm font-medium text-forest underline-offset-4 hover:underline"
         >
-          Send another enquiry
+          {labels.sendAnother}
           <ArrowRight className="h-4 w-4" />
         </button>
       </div>
@@ -171,14 +228,14 @@ function EnquiryForm({
       className="rounded-2xl border border-forest/15 bg-white p-7 sm:p-9"
     >
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-        <Field id="name" label="Name" required />
-        <Field id="company" label="Company" />
-        <Field id="phone" label="Phone" type="tel" required />
-        <Field id="email" label="Email" type="email" required />
+        <Field id="name" label={labels.name} required />
+        <Field id="company" label={labels.company} />
+        <Field id="phone" label={labels.phone} type="tel" required />
+        <Field id="email" label={labels.email} type="email" required />
       </div>
 
       <div className="mt-6">
-        <Label htmlFor="message">Message</Label>
+        <Label htmlFor="message">{labels.message}</Label>
         <textarea
           id="message"
           name="message"
@@ -189,7 +246,7 @@ function EnquiryForm({
       </div>
 
       <div className="mt-6">
-        <Label>Product interest</Label>
+        <Label>{labels.product}</Label>
         <div className="mt-3 flex flex-wrap gap-2.5">
           {productOptions.map((opt) => {
             const active = product === opt;
@@ -217,7 +274,7 @@ function EnquiryForm({
         disabled={status === "sending"}
         className="mt-8 inline-flex items-center gap-2 rounded-full bg-deep-green px-6 py-3 text-sm font-medium text-white shadow-md transition-shadow hover:shadow-lg disabled:opacity-60"
       >
-        {status === "sending" ? "Sending…" : submitLabel}
+        {status === "sending" ? labels.sending : labels.submit}
         <ArrowRight className="h-4 w-4" />
       </button>
     </form>
@@ -286,7 +343,7 @@ export default function ContactPageContent({ data }: { data?: ContactPageData })
   const contactLines: ContactLineView[] = data?.contactLines?.length
     ? data.contactLines.map((c) => ({
         label: c.label ?? "",
-        Icon: iconFromKey(c.icon, Phone),
+        Icon: contactIcon(c.icon, Phone),
         value: c.value ?? "",
         href: c.href ?? "#",
       }))
@@ -297,8 +354,35 @@ export default function ContactPageContent({ data }: { data?: ContactPageData })
         href: c.href,
       }));
 
+  const socialLinks = (data?.follow?.links ?? []).filter((s) => s.url);
+  const socials: SocialView[] = socialLinks.length
+    ? socialLinks.map((s) => {
+        const p = SOCIAL_PLATFORMS[s.platform ?? ""] ?? SOCIAL_PLATFORMS.linkedin;
+        return { label: p.label, Icon: p.icon, href: s.url ?? "#" };
+      })
+    : SOCIALS.map((s) => ({ label: s.label, Icon: s.icon, href: s.href }));
+
+  const reach = data?.reachSection;
+  const map = data?.mapSection;
   const mapEmbed = str(data?.mapEmbedUrl, MAP_EMBED);
   const productOptions = ef?.productOptions?.length ? ef.productOptions : DEFAULT_PRODUCT_OPTIONS;
+
+  const formLabels: FormLabels = {
+    name: str(ef?.nameLabel, "Name"),
+    company: str(ef?.companyLabel, "Company"),
+    phone: str(ef?.phoneLabel, "Phone"),
+    email: str(ef?.emailLabel, "Email"),
+    message: str(ef?.messageLabel, "Message"),
+    product: str(ef?.productLabel, "Product interest"),
+    submit: str(ef?.submitLabel, "Send enquiry"),
+    sending: str(ef?.sendingLabel, "Sending…"),
+    successHeading: str(ef?.successHeading, "Thanks we've got your enquiry."),
+    successMessage: str(
+      ef?.successMessage,
+      "A member of the MKESL team will reply within one business day. For urgent calls, the sales line is open between 9 AM and 7 PM IST.",
+    ),
+    sendAnother: str(ef?.sendAnotherLabel, "Send another enquiry"),
+  };
 
   return (
     <main className="bg-mint">
@@ -311,6 +395,7 @@ export default function ContactPageContent({ data }: { data?: ContactPageData })
         )}
         imageUrl={hero?.imageUrl || "/images/Contact.jpg"}
         imageAlt={str(hero?.imageAlt, "Save plants greener planet")}
+        videoUrl={hero?.videoUrl || undefined}
       />
 
       {/* Enquiry form + contact details */}
@@ -319,7 +404,7 @@ export default function ContactPageContent({ data }: { data?: ContactPageData })
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
             <div className="lg:col-span-7">
               <span className="text-xs uppercase tracking-[0.2em] text-accent">
-                Enquiry
+                {str(ef?.eyebrow, "Enquiry")}
               </span>
               <AnimatedHeading className="mt-3 font-serif text-3xl leading-tight text-ink sm:text-4xl">
                 {str(ef?.heading, "Send us a message.")}
@@ -331,23 +416,16 @@ export default function ContactPageContent({ data }: { data?: ContactPageData })
                 )}
               </p>
               <div className="mt-8">
-                <EnquiryForm
-                  productOptions={productOptions}
-                  submitLabel={str(ef?.submitLabel, "Send enquiry")}
-                  successMessage={str(
-                    ef?.successMessage,
-                    "A member of the MKESL team will reply within one business day. For urgent calls, the sales line is open between 9 AM and 7 PM IST.",
-                  )}
-                />
+                <EnquiryForm productOptions={productOptions} labels={formLabels} />
               </div>
             </div>
 
             <aside className="lg:col-span-5">
               <span className="text-xs uppercase tracking-[0.2em] text-accent">
-                Reach us
+                {str(reach?.eyebrow, "Reach us")}
               </span>
               <AnimatedHeading className="mt-3 font-serif text-3xl leading-tight text-ink sm:text-4xl">
-                Offices &amp; lines.
+                {str(reach?.heading, "Offices & lines.")}
               </AnimatedHeading>
 
               <ul className="mt-8 space-y-5">
@@ -404,11 +482,11 @@ export default function ContactPageContent({ data }: { data?: ContactPageData })
 
               <div className="mt-6">
                 <p className="text-xs font-medium uppercase tracking-wider text-accent">
-                  Follow MKESL
+                  {str(data?.follow?.label, "Follow MKESL")}
                 </p>
                 <ul className="mt-3 flex flex-wrap gap-2.5">
-                  {SOCIALS.map((s) => {
-                    const Icon = s.icon;
+                  {socials.map((s) => {
+                    const Icon = s.Icon;
                     return (
                       <li key={s.label}>
                         <Link
@@ -433,14 +511,16 @@ export default function ContactPageContent({ data }: { data?: ContactPageData })
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
           <div className="flex flex-col items-start gap-3">
             <span className="text-xs uppercase tracking-[0.2em] text-accent">
-              Find us
+              {str(map?.eyebrow, "Find us")}
             </span>
             <AnimatedHeading className="font-serif text-3xl leading-tight text-ink sm:text-4xl">
-              Offices &amp; plant locations.
+              {str(map?.heading, "Offices & plant locations.")}
             </AnimatedHeading>
             <p className="max-w-2xl text-base leading-relaxed text-body sm:text-lg">
-              Visits are by appointment please write ahead so we can arrange a plant
-              walk-through or office meeting.
+              {str(
+                map?.intro,
+                "Visits are by appointment please write ahead so we can arrange a plant walk-through or office meeting.",
+              )}
             </p>
           </div>
 
@@ -454,7 +534,7 @@ export default function ContactPageContent({ data }: { data?: ContactPageData })
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                title="Madhav KRG Environmental Solution Limited location map"
+                title={str(map?.mapTitle, "Madhav KRG Environmental Solution Limited location map")}
                 className="absolute inset-0 h-full w-full"
               />
             </div>
@@ -465,18 +545,20 @@ export default function ContactPageContent({ data }: { data?: ContactPageData })
                 </span>
                 <div>
                   <p className="text-xs font-medium uppercase tracking-wider text-accent">
-                    Coordinates
+                    {str(map?.locationLabel, "Coordinates")}
                   </p>
                   <p className="mt-1 text-sm leading-relaxed text-body">
-                    New Delhi, Khanna and Patiala, the registered office,
-                    corporate HQ and the Akalgarh plant.
+                    {str(
+                      map?.locationText,
+                      "New Delhi, Khanna and Patiala, the registered office, corporate HQ and the Akalgarh plant.",
+                    )}
                   </p>
                 </div>
               </div>
               <div className="relative aspect-[5/4] w-full overflow-hidden rounded-2xl">
                 <Image
-                  src={PLACEHOLDER_IMAGES.contactPlant}
-                  alt="Plant exterior"
+                  src={map?.imageUrl || PLACEHOLDER_IMAGES.contactPlant}
+                  alt={str(map?.imageAlt, "Plant exterior")}
                   fill
                   sizes="(max-width: 1024px) 100vw, 33vw"
                   className="object-cover"

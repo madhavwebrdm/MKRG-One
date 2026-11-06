@@ -16,6 +16,7 @@ import {
   HeartIcon,
   ActivityIcon,
   ProjectsIcon,
+  CaseIcon,
 } from "@sanity/icons";
 
 import { SINGLETON_TYPES } from "./schemaTypes";
@@ -68,6 +69,7 @@ export const structure: StructureResolver = (S) =>
               singleton(S, "leadershipPage", "Leadership", UsersIcon),
               singleton(S, "certificationsPage", "Certifications", CheckmarkCircleIcon),
               singleton(S, "mediaPage", "Media", PlayIcon),
+              singleton(S, "careersPage", "Careers", CaseIcon),
               singleton(S, "contactPage", "Contact", EnvelopeIcon),
             ]),
         ),

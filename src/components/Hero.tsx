@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ArrowRight } from "lucide-react";
@@ -25,6 +25,11 @@ type HeroProps = {
   subheading?: string;
   positioningTags?: string[];
   videoUrl?: string | null;
+  videos?: Array<{
+    src?: string | null;
+    startAt?: number | null;
+    duration?: number | null;
+  }> | null;
   imageUrl?: string | null;
   imageAlt?: string | null;
   primaryCtaLabel?: string;
@@ -38,6 +43,7 @@ const DEFAULT_TAGS: string[] = [];
 export default function Hero({
   heading: headingProp,
   positioningTags: positioningTagsProp,
+  videos: videosProp,
   imageUrl,
   primaryCtaLabel: primaryCtaLabelProp,
   primaryCtaHref: primaryCtaHrefProp,
@@ -51,6 +57,18 @@ export default function Hero({
   const secondaryCtaLabel = secondaryCtaLabelProp ?? "Our recycling process";
   const secondaryCtaHref = secondaryCtaHrefProp ?? "/processes";
 
+  // Videos from the CMS (duration entered in seconds); fall back to the built-in playlist.
+  const playlist = useMemo(() => {
+    const fromCms = (videosProp ?? [])
+      .filter((v) => v?.src)
+      .map((v) => ({
+        src: v.src as string,
+        duration: v.duration && v.duration > 0 ? v.duration * 1000 : 5000,
+        startTime: v.startAt && v.startAt > 0 ? v.startAt : 0,
+      }));
+    return fromCms.length > 0 ? fromCms : PLAYLIST;
+  }, [videosProp]);
+
   const [activeIdx, setActiveIdx] = useState(0);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const root = useRef<HTMLElement>(null);
@@ -58,21 +76,21 @@ export default function Hero({
   // Seek to startTime and play the newly active video
   useEffect(() => {
     const video = videoRefs.current[activeIdx];
-    const { startTime = 0 } = PLAYLIST[activeIdx];
+    const { startTime = 0 } = playlist[activeIdx] ?? playlist[0];
     if (video) {
       video.currentTime = startTime;
       video.play().catch(() => {});
     }
-  }, [activeIdx]);
+  }, [activeIdx, playlist]);
 
   // Advance to next video after each clip's duration
   useEffect(() => {
-    const { duration } = PLAYLIST[activeIdx];
+    const { duration } = playlist[activeIdx] ?? playlist[0];
     const timer = setTimeout(() => {
-      setActiveIdx((i) => (i + 1) % PLAYLIST.length);
+      setActiveIdx((i) => (i + 1) % playlist.length);
     }, duration);
     return () => clearTimeout(timer);
-  }, [activeIdx]);
+  }, [activeIdx, playlist]);
 
   useGSAP(
     () => {
@@ -98,9 +116,9 @@ export default function Hero({
       className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-deep-green"
     >
       {/* Video layers — stacked by DOM order; opacity crossfade via CSS transition */}
-      {PLAYLIST.map((item, i) => (
+      {playlist.map((item, i) => (
         <video
-          key={item.src}
+          key={`${item.src}-${i}`}
           ref={(el) => { videoRefs.current[i] = el; }}
           className="absolute inset-0 h-full w-full object-cover"
           muted

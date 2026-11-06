@@ -1,55 +1,32 @@
 import { defineArrayMember, defineField, defineType } from "sanity";
 import { ComposeSparklesIcon } from "@sanity/icons";
 import { heroField } from "./shared/heroFields";
-import { iconKeyField } from "./shared/iconKey";
 import { seoFields } from "./shared/seoFields";
 
-const processFlow = (name: string, title: string) =>
+/** Image field with alt text (fresh object per call to avoid shared refs). */
+const imageWithAlt = (name: string, title: string, description?: string) =>
   defineField({
     name,
     title,
-    type: "object",
-    group: "content",
+    type: "image",
+    description,
+    options: { hotspot: true },
     fields: [
-      defineField({ name: "eyebrow", type: "string" }),
       defineField({
-        name: "heading",
+        name: "alt",
         type: "string",
-        validation: (r) => r.required(),
-      }),
-      defineField({ name: "body", type: "text", rows: 3 }),
-      defineField({
-        name: "steps",
-        type: "array",
-        validation: (r) => r.min(2).max(12),
-        of: [
-          defineArrayMember({
-            type: "object",
-            fields: [
-              defineField({
-                name: "label",
-                type: "string",
-                validation: (r) => r.required(),
-              }),
-              iconKeyField,
-            ],
-            preview: { select: { title: "label", subtitle: "icon" } },
-          }),
-        ],
-      }),
-      defineField({
-        name: "accent",
-        type: "string",
-        options: {
-          list: [
-            { title: "Deep green", value: "deep" },
-            { title: "Brand green", value: "brand" },
-          ],
-          layout: "radio",
-        },
-        initialValue: "deep",
+        title: "Alt text",
+        description: "Short description of the image for screen readers and search engines.",
       }),
     ],
+  });
+
+const eyebrowField = (example: string) =>
+  defineField({
+    name: "eyebrow",
+    title: "Small label above the heading",
+    type: "string",
+    description: `For example "${example}".`,
   });
 
 export const processesPage = defineType({
@@ -65,62 +42,119 @@ export const processesPage = defineType({
   fields: [
     { ...heroField, group: "hero" },
 
-    processFlow("wasteToZinc", "Waste → Zinc flow"),
-
     defineField({
-      name: "zincInputs",
-      title: "Zinc input materials",
-      type: "array",
-      group: "content",
-      of: [{ type: "string" }],
-      description: "Short labels shown alongside the Waste → Zinc flow.",
-    }),
-
-    defineField({
-      name: "apcdSection",
-      title: "APCD accent section",
+      name: "processFlow",
+      title: "Step-by-step process",
+      description:
+        "The scrolling section below the hero. The photo on the left changes as visitors scroll through the steps.",
       type: "object",
       group: "content",
+      options: { collapsible: true, collapsed: false },
       fields: [
-        defineField({ name: "eyebrow", type: "string", initialValue: "APCD" }),
-        defineField({ name: "heading", type: "string" }),
+        eyebrowField("Recycle2X"),
+        defineField({ name: "heading", title: "Heading", type: "string" }),
         defineField({
           name: "body",
-          type: "array",
-          of: [{ type: "block", styles: [{ title: "Normal", value: "normal" }] }],
+          title: "Intro text",
+          type: "text",
+          rows: 3,
+          description: "Shown to the right of the heading.",
         }),
         defineField({
-          name: "image",
-          type: "image",
-          options: { hotspot: true },
-          fields: [defineField({ name: "alt", type: "string", title: "Alt text" })],
+          name: "flowNumber",
+          title: "Flow number",
+          type: "string",
+          description: 'Large number shown before the flow title, for example "01".',
+        }),
+        defineField({ name: "flowTitle", title: "Flow title", type: "string" }),
+        defineField({
+          name: "flowCaption",
+          title: "Flow caption",
+          type: "text",
+          rows: 2,
+          description: "Short line shown to the right of the flow title.",
+        }),
+        defineField({
+          name: "steps",
+          title: "Steps",
+          type: "array",
+          description: "Shown in this order. Each step has its own photo.",
+          of: [
+            defineArrayMember({
+              type: "object",
+              fields: [
+                defineField({ name: "label", title: "Step title", type: "string" }),
+                defineField({ name: "body", title: "Step text", type: "text", rows: 3 }),
+                imageWithAlt("image", "Step photo"),
+              ],
+              preview: { select: { title: "label", subtitle: "body", media: "image" } },
+            }),
+          ],
+        }),
+        defineField({
+          name: "calloutText",
+          title: "Green banner statement",
+          type: "text",
+          rows: 3,
+          description: "Large statement shown in the dark green band after the steps.",
         }),
       ],
     }),
 
     defineField({
-      name: "subpages",
-      title: "Sub-page cards",
-      type: "array",
+      name: "technology",
+      title: "The technology behind our zinc recovery",
+      description: "Centred text section below the green banner.",
+      type: "object",
       group: "content",
-      of: [
-        defineArrayMember({
-          type: "object",
-          fields: [
-            defineField({
-              name: "title",
-              type: "string",
-              validation: (r) => r.required(),
+      options: { collapsible: true, collapsed: false },
+      fields: [
+        defineField({ name: "heading", title: "Heading", type: "string" }),
+        defineField({
+          name: "body",
+          title: "Text",
+          type: "text",
+          rows: 10,
+          description: "One paragraph per line. Each line is shown as its own paragraph.",
+        }),
+      ],
+    }),
+
+    defineField({
+      name: "wasteToZinc",
+      title: "Waste to Zinc summary",
+      description:
+        "Section at the bottom of the page with the patent seal, the process illustration and the numbered step cards.",
+      type: "object",
+      group: "content",
+      options: { collapsible: true, collapsed: false },
+      fields: [
+        eyebrowField("Process"),
+        defineField({ name: "heading", title: "Heading", type: "string" }),
+        defineField({
+          name: "caption",
+          title: "Caption",
+          type: "text",
+          rows: 2,
+          description: "Short line shown between the heading and the patent seal.",
+        }),
+        imageWithAlt("seal", "Patent seal", "Round badge shown to the right of the heading."),
+        imageWithAlt("illustration", "Process illustration", "Wide illustration above the step cards."),
+        defineField({
+          name: "steps",
+          title: "Step cards",
+          type: "array",
+          description: "Numbered automatically in this order.",
+          of: [
+            defineArrayMember({
+              type: "object",
+              fields: [
+                defineField({ name: "title", title: "Step title", type: "string" }),
+                defineField({ name: "body", title: "Step text", type: "string" }),
+              ],
+              preview: { select: { title: "title", subtitle: "body" } },
             }),
-            defineField({ name: "body", type: "text", rows: 3 }),
-            defineField({
-              name: "href",
-              type: "string",
-              validation: (r) => r.required(),
-            }),
-            iconKeyField,
           ],
-          preview: { select: { title: "title", subtitle: "href" } },
         }),
       ],
     }),

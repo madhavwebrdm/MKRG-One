@@ -80,12 +80,6 @@ export const projectsPage = defineType({
           rows: 8,
           description: "One paragraph per line. Rendered as separate paragraphs.",
         }),
-        defineField({
-          name: "backgroundImage",
-          type: "image",
-          options: { hotspot: true },
-          fields: [defineField({ name: "alt", type: "string", title: "Alt text" })],
-        }),
       ],
     }),
 
@@ -254,7 +248,12 @@ export const projectsPage = defineType({
       fields: [
         defineField({ name: "eyebrow", type: "string", initialValue: "Partnership with industries" }),
         defineField({ name: "heading", type: "string" }),
-        defineField({ name: "body", type: "text", rows: 6 }),
+        defineField({
+          name: "body",
+          type: "text",
+          rows: 6,
+          description: "One paragraph per line. Rendered as separate paragraphs.",
+        }),
       ],
     }),
 

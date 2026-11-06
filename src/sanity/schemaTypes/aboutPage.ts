@@ -18,6 +18,42 @@ export const aboutPage = defineType({
     { ...heroField, group: "hero" },
 
     defineField({
+      name: "heroVideos",
+      title: "Hero video playlist",
+      description:
+        "Clips that play one after another behind the hero text, fading into each other. When this list has clips it is used instead of the single Background video above. Use MP4 files, ideally under about 8 MB each.",
+      type: "array",
+      group: "hero",
+      of: [
+        defineArrayMember({
+          type: "object",
+          fields: [
+            defineField({
+              name: "video",
+              title: "Video clip",
+              type: "file",
+              options: { accept: "video/mp4" },
+            }),
+            defineField({
+              name: "duration",
+              title: "Seconds on screen",
+              description: "How long this clip shows before fading to the next one.",
+              type: "number",
+              initialValue: 5,
+            }),
+          ],
+          preview: {
+            select: { title: "video.asset.originalFilename", duration: "duration" },
+            prepare: ({ title, duration }) => ({
+              title: title || "Video clip",
+              subtitle: duration ? `${duration} seconds` : undefined,
+            }),
+          },
+        }),
+      ],
+    }),
+
+    defineField({
       name: "purpose",
       title: "Mission & Vision",
       type: "object",
@@ -25,7 +61,19 @@ export const aboutPage = defineType({
       fields: [
         defineField({ name: "eyebrow", type: "string", initialValue: "Purpose" }),
         defineField({ name: "heading", type: "string" }),
+        defineField({
+          name: "missionLabel",
+          title: "Mission label",
+          description: "Small label above the mission text.",
+          type: "string",
+        }),
         defineField({ name: "mission", type: "text", rows: 4 }),
+        defineField({
+          name: "visionLabel",
+          title: "Vision label",
+          description: "Small label above the vision text.",
+          type: "string",
+        }),
         defineField({ name: "vision", type: "text", rows: 4 }),
       ],
     }),
@@ -81,7 +129,11 @@ export const aboutPage = defineType({
           options: { hotspot: true },
           fields: [defineField({ name: "alt", type: "string", title: "Alt text" })],
         }),
-        defineField({ name: "caption", type: "string" }),
+        defineField({
+          name: "caption",
+          type: "string",
+          description: "Not currently shown on the website.",
+        }),
       ],
     }),
 
@@ -97,7 +149,12 @@ export const aboutPage = defineType({
           initialValue: "Differentiators",
         }),
         defineField({ name: "heading", type: "string" }),
-        defineField({ name: "intro", type: "text", rows: 3 }),
+        defineField({
+          name: "intro",
+          type: "text",
+          rows: 3,
+          description: "Not currently shown on the website.",
+        }),
         defineField({
           name: "items",
           type: "array",
@@ -112,7 +169,7 @@ export const aboutPage = defineType({
                   validation: (r) => r.required(),
                 }),
                 defineField({ name: "body", type: "text", rows: 3 }),
-                iconKeyField,
+                { ...iconKeyField, description: "Not currently shown on the website." },
                 defineField({
                   name: "image",
                   type: "image",
@@ -135,7 +192,12 @@ export const aboutPage = defineType({
       fields: [
         defineField({ name: "eyebrow", type: "string", initialValue: "Our story" }),
         defineField({ name: "heading", type: "string" }),
-        defineField({ name: "intro", type: "text", rows: 3 }),
+        defineField({
+          name: "intro",
+          type: "text",
+          rows: 3,
+          description: "Not currently shown on the website.",
+        }),
         defineField({
           name: "entries",
           type: "array",
@@ -172,8 +234,16 @@ export const aboutPage = defineType({
           type: "text",
           rows: 4,
         }),
-        defineField({ name: "closingCtaLabel", type: "string" }),
-        defineField({ name: "closingCtaHref", type: "string" }),
+        defineField({
+          name: "closingCtaLabel",
+          type: "string",
+          description: "Not currently shown on the website.",
+        }),
+        defineField({
+          name: "closingCtaHref",
+          type: "string",
+          description: "Not currently shown on the website.",
+        }),
       ],
     }),
 

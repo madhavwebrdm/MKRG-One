@@ -32,10 +32,25 @@ const blockText = (block: Block): string =>
 
 export type AboutPageData = {
   hero?:
-    | { eyebrow?: string | null; heading?: string | null; intro?: string | null; imageUrl?: string | null; imageAlt?: string | null }
+    | {
+        eyebrow?: string | null;
+        heading?: string | null;
+        intro?: string | null;
+        imageUrl?: string | null;
+        imageAlt?: string | null;
+        videoUrl?: string | null;
+      }
     | null;
+  heroVideos?: Array<{ url?: string | null; duration?: number | null }> | null;
   purpose?:
-    | { eyebrow?: string | null; heading?: string | null; mission?: string | null; vision?: string | null }
+    | {
+        eyebrow?: string | null;
+        heading?: string | null;
+        missionLabel?: string | null;
+        mission?: string | null;
+        visionLabel?: string | null;
+        vision?: string | null;
+      }
     | null;
   sustainabilityStatement?: { heading?: string | null; body?: string | null } | null;
   values?:
@@ -83,6 +98,11 @@ export type AboutPageData = {
       }
     | null;
 } | null;
+
+const DEFAULT_HERO_VIDEOS = [
+  { src: "/videos/about-hero-2.mp4", duration: 5000 },
+  { src: "/videos/about-hero.mp4", duration: 5000 },
+];
 
 const VALUES = [
   {
@@ -177,6 +197,20 @@ export default function AboutPageContent({ data }: { data?: AboutPageData }) {
   const differentiators = data?.differentiators;
   const timeline = data?.timeline;
 
+  // Hero background: the page's clip playlist from Sanity, else the single
+  // hero video, else the built-in clips.
+  const sanityHeroVideos = (data?.heroVideos ?? [])
+    .filter((v) => v?.url)
+    .map((v) => ({
+      src: v.url as string,
+      duration: (v.duration && v.duration > 0 ? v.duration : 5) * 1000,
+    }));
+  const heroVideos = sanityHeroVideos.length
+    ? sanityHeroVideos
+    : hero?.videoUrl
+      ? undefined
+      : DEFAULT_HERO_VIDEOS;
+
   const valuesItems = values?.items?.length
     ? values.items.map((v) => ({
         title: v.title ?? "",
@@ -197,12 +231,14 @@ export default function AboutPageContent({ data }: { data?: AboutPageData }) {
         image:
           d.imageUrl ||
           PLACEHOLDER_IMAGES.aboutDifferentiators[i % PLACEHOLDER_IMAGES.aboutDifferentiators.length],
+        imageAlt: d.imageAlt ?? "",
       }))
     : DIFFERENTIATORS.map((d, i) => ({
         title: d.title,
         body: d.body,
         Icon: d.icon,
         image: PLACEHOLDER_IMAGES.aboutDifferentiators[i % PLACEHOLDER_IMAGES.aboutDifferentiators.length],
+        imageAlt: "",
       }));
 
   const timelineEntries = timeline?.entries?.length
@@ -220,10 +256,8 @@ export default function AboutPageContent({ data }: { data?: AboutPageData }) {
         )}
         imageUrl={hero?.imageUrl || PLACEHOLDER_IMAGES.aboutHero}
         imageAlt={str(hero?.imageAlt, "MKESL plant operations")}
-        videos={[
-          { src: "/videos/about-hero-2.mp4", duration: 5000 },
-          { src: "/videos/about-hero.mp4", duration: 5000 },
-        ]}
+        videoUrl={hero?.videoUrl ?? undefined}
+        videos={heroVideos}
       />
 
       {/* Mission & Vision */}
@@ -248,7 +282,7 @@ export default function AboutPageContent({ data }: { data?: AboutPageData }) {
             >
               <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-wider text-accent">
                 <Target className="h-4 w-4" />
-                Mission
+                {str(purpose?.missionLabel, "Mission")}
               </div>
               <p className="mt-5 font-serif text-2xl leading-snug text-ink">
                 {str(
@@ -267,7 +301,7 @@ export default function AboutPageContent({ data }: { data?: AboutPageData }) {
             >
               <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-wider text-teal">
                 <Compass className="h-4 w-4" />
-                Vision
+                {str(purpose?.visionLabel, "Vision")}
               </div>
               <p className="mt-5 font-serif text-2xl leading-snug text-ink">
                 {str(purpose?.vision, "Accelerating India's growth by enabling Green Infrastructure.")}
@@ -388,7 +422,7 @@ export default function AboutPageContent({ data }: { data?: AboutPageData }) {
                   <div className="relative aspect-[5/3] w-full overflow-hidden">
                     <Image
                       src={d.image}
-                      alt=""
+                      alt={d.imageAlt}
                       fill
                       sizes="(max-width: 768px) 100vw, 50vw"
                       className="object-cover transition-transform duration-700 group-hover:scale-110"

@@ -24,7 +24,14 @@ const principalFields = (defaultEyebrow: string) => [
     title: "Portrait",
     type: "image",
     options: { hotspot: true },
-    fields: [defineField({ name: "alt", type: "string", title: "Alt text" })],
+    fields: [
+      defineField({
+        name: "alt",
+        type: "string",
+        title: "Alt text",
+        description: "Describes the photo for screen readers. Leave empty to use the name and role.",
+      }),
+    ],
   }),
 ];
 
@@ -66,6 +73,14 @@ export const leadershipPage = defineType({
           type: "string",
           description: "Name, role.",
         }),
+        defineField({
+          name: "backgroundImage",
+          title: "Background image",
+          description:
+            "Photo shown behind the quote under a dark green tint. Decorative, so no alt text is needed.",
+          type: "image",
+          options: { hotspot: true },
+        }),
       ],
     }),
 
@@ -91,6 +106,15 @@ export const leadershipPage = defineType({
           preview: { select: { title: "name", subtitle: "role", media: "image" } },
         }),
       ],
+    }),
+
+    defineField({
+      name: "contactEmail",
+      title: "Contact email",
+      description:
+        "Email address opened by the envelope button next to each leader's name.",
+      type: "string",
+      group: "content",
     }),
 
     ...seoFields.map((f) => ({ ...f, group: "seo" })),

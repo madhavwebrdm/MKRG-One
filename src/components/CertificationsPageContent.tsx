@@ -43,6 +43,7 @@ type CertView = {
   status?: string;
   downloadHref?: string;
   thumbnail?: string;
+  thumbnailAlt?: string;
   category: "certification" | "award";
 };
 
@@ -50,16 +51,32 @@ export type CertificationsPageData = {
   hero?:
     | { eyebrow?: string | null; heading?: string | null; intro?: string | null; imageUrl?: string | null; imageAlt?: string | null }
     | null;
-  intro?: { eyebrow?: string | null; heading?: string | null; body?: string | null } | null;
+  intro?: {
+    eyebrow?: string | null;
+    heading?: string | null;
+    body?: string | null;
+    cardLinkLabel?: string | null;
+  } | null;
   certificates?: Array<{
+    category?: string | null;
     title?: string | null;
     issuer?: string | null;
     body?: string | null;
     status?: string | null;
     icon?: string | null;
     downloadUrl?: string | null;
+    thumbnailUrl?: string | null;
+    thumbnailAlt?: string | null;
   }> | null;
+  awardsSection?: { eyebrow?: string | null; heading?: string | null; body?: string | null } | null;
 } | null;
+
+// "lightbulb" is offered only on this page (see certificationsPage schema).
+const certIcon = (key: string | null | undefined): LucideIcon =>
+  key === "lightbulb" ? Lightbulb : iconFromKey(key, ShieldCheck);
+
+// Without Sanity content, only these built-in entries appear in the grid.
+const FALLBACK_GRID_TITLES = ["ISO 9001", "Zinc Extraction Patent"];
 
 const CERTS: Cert[] = [
   {
@@ -145,16 +162,20 @@ export default function CertificationsPageContent({
 }) {
   const hero = data?.hero;
   const intro = data?.intro;
+  const awardsSection = data?.awardsSection;
+  const fromSanity = Boolean(data?.certificates?.length);
 
   const certs: CertView[] = data?.certificates?.length
     ? data.certificates.map((c) => ({
         title: c.title ?? "",
         issuer: c.issuer ?? "",
         body: c.body ?? "",
-        Icon: iconFromKey(c.icon, ShieldCheck),
+        Icon: certIcon(c.icon),
         status: c.status ?? undefined,
         downloadHref: c.downloadUrl ?? undefined,
-        category: "certification" as const,
+        thumbnail: c.thumbnailUrl ?? undefined,
+        thumbnailAlt: c.thumbnailAlt ?? undefined,
+        category: c.category === "award" ? ("award" as const) : ("certification" as const),
       }))
     : CERTS.map((c) => ({
         title: c.title,
@@ -168,9 +189,9 @@ export default function CertificationsPageContent({
       }));
 
   const awardDocs = certs.filter((c) => c.category === "award");
-  const badgeCerts = certs.filter(
-    (c) => c.title === "ISO 9001" || c.title === "Zinc Extraction Patent",
-  );
+  const badgeCerts = fromSanity
+    ? certs.filter((c) => c.category === "certification")
+    : certs.filter((c) => FALLBACK_GRID_TITLES.includes(c.title));
 
   return (
     <main className="bg-mint">
@@ -242,7 +263,7 @@ export default function CertificationsPageContent({
                     {c.downloadHref && (
                       <span className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-forest underline-offset-4 group-hover:underline">
                         <Eye className="h-4 w-4" />
-                        View certificate
+                        {str(intro?.cardLinkLabel, "View certificate")}
                       </span>
                     )}
                   </a>
@@ -258,14 +279,16 @@ export default function CertificationsPageContent({
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
           <div className="max-w-3xl">
             <span className="text-xs uppercase tracking-[0.2em] text-accent">
-              Awards
+              {str(awardsSection?.eyebrow, "Awards")}
             </span>
             <AnimatedHeading className="mt-3 font-serif text-3xl leading-tight text-ink sm:text-4xl lg:text-5xl">
-              Recognition, on record.
+              {str(awardsSection?.heading, "Recognition, on record.")}
             </AnimatedHeading>
             <p className="mt-5 text-base leading-relaxed text-body sm:text-lg">
-              Scanned copies of the awards we&apos;ve received. Full documents are available
-              on request for partners, regulators and auditors.
+              {str(
+                awardsSection?.body,
+                "Scanned copies of the awards we've received. Full documents are available on request for partners, regulators and auditors.",
+              )}
             </p>
           </div>
 
@@ -296,7 +319,7 @@ export default function CertificationsPageContent({
                       <div className="absolute inset-5 sm:inset-8">
                         <Image
                           src={img}
-                          alt={`${c.title} certificate`}
+                          alt={c.thumbnailAlt || `${c.title} certificate`}
                           fill
                           sizes="(max-width: 640px) 100vw, 50vw"
                           className="object-contain drop-shadow-md transition-transform duration-700 group-hover:scale-[1.03]"

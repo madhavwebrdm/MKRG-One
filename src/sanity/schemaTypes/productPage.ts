@@ -1,7 +1,6 @@
 import { defineArrayMember, defineField, defineType } from "sanity";
 import { PackageIcon } from "@sanity/icons";
 import { heroField } from "./shared/heroFields";
-import { iconKeyField } from "./shared/iconKey";
 import { seoFields } from "./shared/seoFields";
 
 /** Reusable image field with alt text (fresh object per call to avoid shared refs). */
@@ -19,6 +18,8 @@ const productRange = () =>
   defineField({
     name: "products",
     title: "Product range",
+    description:
+      "The first product is shown beside the spec table. Any further products appear as cards above it.",
     type: "array",
     validation: (r) => r.min(1).max(8),
     of: [
@@ -72,7 +73,6 @@ export const productPage = defineType({
                   validation: (r) => r.required(),
                 }),
                 defineField({ name: "tagline", type: "text", rows: 2 }),
-                iconKeyField,
                 imageWithAlt(),
               ],
               preview: { select: { title: "title", subtitle: "tagline", media: "image" } },
@@ -104,6 +104,33 @@ export const productPage = defineType({
             defineField({ name: "ctaLabel", type: "string", initialValue: "Explore the process" }),
             defineField({ name: "ctaHref", type: "string", initialValue: "/processes" }),
           ],
+        }),
+      ],
+    }),
+
+    // Full-screen image banner between the applications and the zinc detail
+    defineField({
+      name: "parallax",
+      title: "Full-screen image banner",
+      description:
+        "Large image with a heading, shown between the zinc applications and the Commercial Zinc section.",
+      type: "object",
+      group: "content",
+      fields: [
+        defineField({
+          name: "heading",
+          title: "Heading",
+          type: "text",
+          rows: 3,
+          description: "Press Enter to start a new line on the page.",
+        }),
+        defineField({
+          name: "image",
+          title: "Background image",
+          type: "image",
+          options: { hotspot: true },
+          description:
+            "Fills the screen behind the heading and stays still while the page scrolls. Use a wide, high-resolution photo.",
         }),
       ],
     }),

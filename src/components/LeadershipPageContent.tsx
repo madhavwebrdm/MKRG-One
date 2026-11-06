@@ -27,18 +27,24 @@ type PrincipalInput = {
   role?: string | null;
   story?: string | null;
   imageUrl?: string | null;
+  imageAlt?: string | null;
 } | null;
 
-type ResolvedPrincipal = Principal & { eyebrow: string; heading: string };
+type ResolvedPrincipal = Principal & { eyebrow: string; heading: string; portraitAlt: string };
 
 export type LeadershipPageData = {
   hero?:
     | { eyebrow?: string | null; heading?: string | null; intro?: string | null; imageUrl?: string | null; imageAlt?: string | null }
     | null;
   founder?: PrincipalInput;
-  pullQuote?: { text?: string | null; attribution?: string | null } | null;
+  pullQuote?: {
+    text?: string | null;
+    attribution?: string | null;
+    backgroundImageUrl?: string | null;
+  } | null;
   director?: PrincipalInput;
   additionalLeaders?: PrincipalInput[] | null;
+  contactEmail?: string | null;
 } | null;
 
 const MD: Principal = {
@@ -91,6 +97,7 @@ const resolvePrincipal = (input: PrincipalInput | undefined, fallback: Principal
       : fallback.body,
     eyebrow: str(input?.eyebrow, `${title}'s message`),
     heading: str(input?.heading, `A note from ${name}.`),
+    portraitAlt: str(input?.imageAlt, `${name}, ${title}`),
   };
 };
 
@@ -124,6 +131,9 @@ export default function LeadershipPageContent({
     data?.pullQuote?.attribution,
     `${md.name}, ${md.title}`,
   );
+  const quoteBackground =
+    data?.pullQuote?.backgroundImageUrl || PLACEHOLDER_IMAGES.sustPillars[0];
+  const contactEmail = str(data?.contactEmail, "contact@mkrg.in");
 
   return (
     <main className="bg-mint">
@@ -139,13 +149,13 @@ export default function LeadershipPageContent({
       />
 
       {/* MD MESSAGE */}
-      <PrincipalSection principal={md} side="left" />
+      <PrincipalSection principal={md} side="left" email={contactEmail} />
 
       {/* PULL QUOTE mission */}
       <section
         className="relative isolate overflow-hidden bg-deep-green py-24 text-white sm:py-32"
         style={{
-          backgroundImage: `url(${PLACEHOLDER_IMAGES.sustPillars[0]})`,
+          backgroundImage: `url(${quoteBackground})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundAttachment: "fixed",
@@ -164,7 +174,7 @@ export default function LeadershipPageContent({
       </section>
 
       {/* DIRECTOR MESSAGE */}
-      <PrincipalSection principal={director} side="right" />
+      <PrincipalSection principal={director} side="right" email={contactEmail} />
 
       {/* ADDITIONAL LEADERSHIP MESSAGES */}
       {additionalLeaders.map((leader, i) => (
@@ -172,6 +182,7 @@ export default function LeadershipPageContent({
           key={`${leader.name}-${i}`}
           principal={leader}
           side={i % 2 === 0 ? "left" : "right"}
+          email={contactEmail}
         />
       ))}
     </main>
@@ -181,10 +192,12 @@ export default function LeadershipPageContent({
 function PrincipalSection({
   principal,
   side,
+  email,
   background = "white",
 }: {
   principal: ResolvedPrincipal;
   side: "left" | "right";
+  email: string;
   background?: "white" | "beige";
 }) {
   const imageFirst = side === "left";
@@ -199,7 +212,7 @@ function PrincipalSection({
     >
       <Image
         src={principal.portrait}
-        alt={`${principal.name}, ${principal.title}`}
+        alt={principal.portraitAlt}
         fill
         sizes="(max-width: 1024px) 100vw, 40vw"
         className="object-cover"
@@ -231,7 +244,7 @@ function PrincipalSection({
       </div>
       <div className="mt-8 flex items-center gap-3">
         <Link
-          href={`mailto:contact@mkrg.in`}
+          href={`mailto:${email}`}
           aria-label={`Email ${principal.name}'s office`}
           className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-accent/20 text-accent transition-colors hover:bg-accent hover:text-white"
         >

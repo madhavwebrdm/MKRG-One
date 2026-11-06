@@ -2,13 +2,16 @@ import LeadershipPageContent, {
   type LeadershipPageData,
 } from "@/components/LeadershipPageContent";
 import { sanityFetch } from "@/sanity/lib/live";
+import { pageMetadata } from "@/sanity/lib/metadata";
 import { LEADERSHIP_PAGE_QUERY } from "@/sanity/lib/queries";
 
-export const metadata = {
-  title: "Leadership | Madhav KRG Environmental Solution Limited",
-  description:
-    "Founder story, leadership team and the environmental mission behind Madhav KRG Environmental Solution Limited.",
-};
+export function generateMetadata() {
+  return pageMetadata("leadershipPage", {
+    title: "Leadership | Madhav KRG Environmental Solution Limited",
+    description:
+      "Founder story, leadership team and the environmental mission behind Madhav KRG Environmental Solution Limited.",
+  });
+}
 
 export default async function LeadershipPage() {
   const { data } = await sanityFetch({

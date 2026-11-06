@@ -28,7 +28,37 @@ type Props = {
     instagram?: string | null;
     facebook?: string | null;
   } | null;
+  logoUrl?: string | null;
+  logoAlt?: string | null;
+  backgroundUrl?: string | null;
+  columns?: Array<{ title?: string | null; links?: LinkItem[] | null }> | null;
+  connectHeading?: string | null;
+  cta?: {
+    heading?: string | null;
+    highlight?: string | null;
+    body?: string | null;
+    buttonLabel?: string | null;
+    buttonHref?: string | null;
+  } | null;
+  bottom?: {
+    rightsText?: string | null;
+    slogan?: string | null;
+    legalLinks?: LinkItem[] | null;
+    creditPrefix?: string | null;
+    creditLabel?: string | null;
+    creditHref?: string | null;
+  } | null;
 };
+
+type LinkItem = { label?: string | null; href?: string | null };
+
+const FOOTER_BACKGROUND =
+  "https://images.unsplash.com/photo-1448375240586-882707db888b?w=1920&q=80&fit=crop&crop=center";
+
+const LEGAL_LINKS = [
+  { label: "Privacy Policy", href: "/privacy" },
+  { label: "Terms of Use", href: "/terms" },
+];
 
 const NAV_GROUPS = [
   {
@@ -69,7 +99,26 @@ export default function Footer({
   addressLines,
   contact,
   socials,
+  logoUrl,
+  logoAlt,
+  backgroundUrl,
+  columns,
+  connectHeading,
+  cta,
+  bottom,
 }: Props) {
+  const navGroups =
+    columns && columns.length > 0
+      ? columns.map((c) => ({
+          title: c.title ?? "",
+          items: (c.links ?? []).map((l) => ({ label: l.label ?? "", href: l.href ?? "#" })),
+        }))
+      : NAV_GROUPS;
+  const legalLinks =
+    bottom?.legalLinks && bottom.legalLinks.length > 0
+      ? bottom.legalLinks.map((l) => ({ label: l.label ?? "", href: l.href ?? "#" }))
+      : LEGAL_LINKS;
+  const rightsText = bottom?.rightsText ?? "All rights reserved.";
   const socialLinks = [
     { url: socials?.linkedin, Icon: Linkedin, label: "LinkedIn" },
     { url: socials?.twitter, Icon: Twitter, label: "X / Twitter" },
@@ -83,7 +132,7 @@ export default function Footer({
       {/* ── Background: lush forest image + brand-green tint ── */}
       <div className="absolute inset-0 -z-10">
         <Image
-          src="https://images.unsplash.com/photo-1448375240586-882707db888b?w=1920&q=80&fit=crop&crop=center"
+          src={backgroundUrl || FOOTER_BACKGROUND}
           alt=""
           fill
           className="object-cover object-center"
@@ -104,8 +153,11 @@ export default function Footer({
             <div className="flex flex-col items-center text-center">
               <Link href="/" className="inline-block">
                 <Image
-                  src="/brand/MKRG_footer_on-dark.svg"
-                  alt="Madhav KRG Environmental Solution Limited, a Madhav KRG Group company"
+                  src={logoUrl || "/brand/MKRG_footer_on-dark.svg"}
+                  alt={
+                    logoAlt ||
+                    "Madhav KRG Environmental Solution Limited, a Madhav KRG Group company"
+                  }
                   width={240}
                   height={108}
                   unoptimized
@@ -167,7 +219,7 @@ export default function Footer({
 
           {/* Nav groups */}
           <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:col-span-6">
-            {NAV_GROUPS.map((group) => (
+            {navGroups.map((group) => (
               <div key={group.title}>
                 <p className="text-[11px] font-semibold uppercase tracking-wider text-white/45">
                   {group.title}
@@ -193,7 +245,7 @@ export default function Footer({
             {socialLinks.length > 0 && (
               <div>
                 <p className="text-[11px] font-semibold uppercase tracking-wider text-white/45">
-                  Connect
+                  {connectHeading ?? "Connect"}
                 </p>
                 <ul className="mt-4 flex flex-wrap items-center gap-1.5">
                   {socialLinks.map(({ url, Icon, label }) => (
@@ -215,17 +267,18 @@ export default function Footer({
 
             <div className="mt-8 rounded-2xl border border-white/15 bg-white/10 px-5 py-5 backdrop-blur-sm">
               <p className="text-balance font-serif text-lg leading-snug text-white">
-                Let&apos;s Build a{" "}
-                <span className="text-light-green">Greener India.</span>
+                {cta?.heading ?? "Let's Build a"}{" "}
+                <span className="text-light-green">{cta?.highlight ?? "Greener India."}</span>
               </p>
               <p className="mt-2 text-xs leading-relaxed text-white/65">
-                Reach out to explore partnership, sourcing, or sustainability goals.
+                {cta?.body ??
+                  "Reach out to explore partnership, sourcing, or sustainability goals."}
               </p>
               <Link
-                href="/contact"
+                href={cta?.buttonHref ?? "/contact"}
                 className="mt-4 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-xs font-medium text-forest transition-colors hover:bg-light-green"
               >
-                Get in touch
+                {cta?.buttonLabel ?? "Get in touch"}
                 <ArrowRight className="h-3.5 w-3.5" aria-hidden />
               </Link>
             </div>
@@ -237,32 +290,31 @@ export default function Footer({
       <div className="border-t border-white/10 bg-black/25 backdrop-blur-sm">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-6 py-4 text-xs text-white/40 sm:flex-row sm:px-10 lg:px-16">
           <span>
-            © {new Date().getFullYear()} {legalName || "Madhav KRG Environmental Solution Limited"}. All rights reserved.
+            © {new Date().getFullYear()} {legalName || "Madhav KRG Environmental Solution Limited"}{`. ${rightsText}`}
             {cin && (
               <> &nbsp;·&nbsp; CIN: <span className="text-white/60">{cin}</span></>
             )}
           </span>
           <span className="text-white/30">
-            Together for a Greener India.
+            {bottom?.slogan ?? "Together for a Greener India."}
           </span>
           <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
             <nav className="flex items-center gap-4">
-              <Link href="/privacy" className="transition-colors hover:text-white">
-                Privacy Policy
-              </Link>
-              <Link href="/terms" className="transition-colors hover:text-white">
-                Terms of Use
-              </Link>
+              {legalLinks.map((l) => (
+                <Link key={`${l.href}-${l.label}`} href={l.href} className="transition-colors hover:text-white">
+                  {l.label}
+                </Link>
+              ))}
             </nav>
             <span>
-              Designed by{" "}
+              {bottom?.creditPrefix ?? "Designed by"}{" "}
               <a
-                href="https://www.reddashmedia.com/"
+                href={bottom?.creditHref ?? "https://www.reddashmedia.com/"}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="transition-colors hover:text-white"
               >
-                Red Dash Media
+                {bottom?.creditLabel ?? "Red Dash Media"}
               </a>
             </span>
           </div>

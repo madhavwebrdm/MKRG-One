@@ -7,13 +7,20 @@ import { ArrowRight } from "lucide-react";
 import { PLACEHOLDER_IMAGES } from "@/lib/placeholderImages";
 import AnimatedHeading from "./AnimatedHeading";
 
-type Highlight = { label: string; value: string; href?: string };
+type Highlight = {
+  label: string;
+  value: string;
+  href?: string | null;
+  imageUrl?: string | null;
+  imageAlt?: string | null;
+};
 
 type Props = {
   eyebrow?: string;
   heading?: string;
   body?: string;
-  highlights?: Highlight[];
+  highlights?: Highlight[] | null;
+  cardLinkLabel?: string | null;
   ctaLabel?: string;
   ctaHref?: string;
 };
@@ -40,16 +47,19 @@ export default function SustainabilityTeaser({
   heading: headingProp,
   body: bodyProp,
   highlights: highlightsProp,
+  cardLinkLabel: cardLinkLabelProp,
   ctaLabel: ctaLabelProp,
   ctaHref: ctaHrefProp,
 }: Props) {
+  const cardLinkLabel = cardLinkLabelProp ?? "Explore";
   const eyebrow = eyebrowProp ?? "Sustainability";
   const heading =
     headingProp ?? "Recycling that gives back to industry and to the planet.";
   const body =
     bodyProp ??
     "Our environmental, health and safety programs run alongside community initiatives in the regions where we operate. Recycling isn't a line item; it is how we build green infrastructure.";
-  const highlights = highlightsProp ?? DEFAULTS;
+  const highlights =
+    highlightsProp && highlightsProp.length > 0 ? highlightsProp : DEFAULTS;
   const ctaLabel = ctaLabelProp ?? "See our impact";
   const ctaHref = ctaHrefProp ?? "/sustainability";
   return (
@@ -83,14 +93,15 @@ export default function SustainabilityTeaser({
         <ul className="mt-14 grid grid-cols-1 gap-5 md:grid-cols-2">
           {highlights.map((h, i) => {
             const img =
-              IMAGE_BY_LABEL[h.label.trim().toUpperCase()] ??
-              HIGHLIGHT_IMAGES[i % HIGHLIGHT_IMAGES.length];
+              h.imageUrl ||
+              (IMAGE_BY_LABEL[(h.label ?? "").trim().toUpperCase()] ??
+                HIGHLIGHT_IMAGES[i % HIGHLIGHT_IMAGES.length]);
             const inner = (
               <>
                 <div className="relative aspect-[5/4] w-full overflow-hidden">
                   <Image
                     src={img}
-                    alt=""
+                    alt={h.imageAlt || ""}
                     fill
                     sizes="(max-width: 768px) 100vw, 33vw"
                     className="object-cover transition-transform duration-700 group-hover:scale-110"
@@ -105,7 +116,7 @@ export default function SustainabilityTeaser({
                   </p>
                   {h.href && (
                     <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-white/90 transition-colors group-hover:text-light-green">
-                      Explore
+                      {cardLinkLabel}
                       <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                     </span>
                   )}

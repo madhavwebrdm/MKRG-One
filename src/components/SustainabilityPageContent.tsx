@@ -25,30 +25,40 @@ const str = (v: string | null | undefined, fallback: string): string =>
 type PillarImage = string | import("next/image").StaticImageData;
 
 type Metric = { value: number; suffix?: string; label: string; note?: string };
-type PillarView = { title: string; body: string; image?: PillarImage };
+type PillarView = { title: string; body: string; image?: PillarImage; imageAlt?: string };
 type StatRow = { label: string; value: string; note: string };
+
+type CardData = {
+  eyebrow?: string | null;
+  heading?: string | null;
+  body?: string | null;
+  imageUrl?: string | null;
+  imageAlt?: string | null;
+} | null;
 
 export type SustainabilityPageData = {
   hero?:
-    | { eyebrow?: string | null; heading?: string | null; intro?: string | null; imageUrl?: string | null; imageAlt?: string | null }
+    | { eyebrow?: string | null; heading?: string | null; intro?: string | null; imageUrl?: string | null; imageAlt?: string | null; videoUrl?: string | null }
     | null;
   metricsBlock?:
     | { eyebrow?: string | null; heading?: string | null; intro?: string | null; items?: Array<{ value?: number | null; suffix?: string | null; label?: string | null; note?: string | null }> | null }
     | null;
   pillars?:
-    | { eyebrow?: string | null; heading?: string | null; intro?: string | null; items?: Array<{ title?: string | null; body?: string | null; icon?: string | null }> | null }
+    | { eyebrow?: string | null; heading?: string | null; intro?: string | null; items?: Array<{ title?: string | null; body?: string | null; icon?: string | null; imageUrl?: string | null; imageAlt?: string | null }> | null }
     | null;
   recyclingStats?:
-    | { heading?: string | null; intro?: string | null; items?: Array<{ label?: string | null; value?: string | null; note?: string | null }> | null }
+    | { eyebrow?: string | null; heading?: string | null; intro?: string | null; imageUrl?: string | null; imageAlt?: string | null; items?: Array<{ label?: string | null; value?: string | null; note?: string | null }> | null }
     | null;
-  csrSection?: { eyebrow?: string | null; heading?: string | null; imageUrl?: string | null; imageAlt?: string | null } | null;
-  ehsSection?: { eyebrow?: string | null; heading?: string | null; imageUrl?: string | null; imageAlt?: string | null } | null;
+  communityPrograms?: { eyebrow?: string | null; heading?: string | null; intro?: string | null } | null;
+  csrSection?: CardData;
+  ehsSection?: CardData;
 } | null;
 
 const METRICS = [
-  { value: 1.2, suffix: "M t", label: "CO₂ offset", note: "Avoided emissions per year" },
-  { value: 18, suffix: "K t", label: "Tonnes recycled", note: "Zinc recovered last FY" },
-  { value: 42, suffix: "%", label: "Renewable energy", note: "Powering our plants today" },
+  // Kept in step with the home page Impact metrics (homePage.metrics in Sanity).
+  { value: 45000, suffix: " Mt", label: "CO₂ offset", note: "Annual avoided emissions" },
+  { value: 25907.549, suffix: " MT", label: "Tonnes recycled", note: "Till March 2026" },
+  { value: 42, suffix: "%", label: "Renewable energy", note: "Powering our plants" },
 ];
 
 const PILLARS: Array<{
@@ -163,6 +173,7 @@ export default function SustainabilityPageContent({
   const mb = data?.metricsBlock;
   const pl = data?.pillars;
   const rs = data?.recyclingStats;
+  const cp = data?.communityPrograms;
   const csr = data?.csrSection;
   const ehs = data?.ehsSection;
 
@@ -179,7 +190,10 @@ export default function SustainabilityPageContent({
     ? pl.items.map((p, i) => ({
         title: p.title ?? "",
         body: p.body ?? "",
-        image: PLACEHOLDER_IMAGES.sustPillars[i % PLACEHOLDER_IMAGES.sustPillars.length],
+        image:
+          p.imageUrl ||
+          PLACEHOLDER_IMAGES.sustPillars[i % PLACEHOLDER_IMAGES.sustPillars.length],
+        imageAlt: p.imageAlt ?? undefined,
       }))
     : PILLARS.map((p) => ({ title: p.title, body: p.body, image: p.image }));
 
@@ -202,8 +216,8 @@ export default function SustainabilityPageContent({
         )}
         imageUrl={hero?.imageUrl || PLACEHOLDER_IMAGES.sustHero}
         imageAlt={str(hero?.imageAlt, "Green plant operations")}
-        videoUrl="/videos/sustainability-hero.mp4"
-        videoPoster="/images/sustainability-hero-poster.jpg"
+        videoUrl={hero?.videoUrl || "/videos/sustainability-hero.mp4"}
+        videoPoster={hero?.imageUrl || "/images/sustainability-hero-poster.jpg"}
       />
 
       {/* Environmental impact metrics */}
@@ -267,7 +281,7 @@ export default function SustainabilityPageContent({
                     <div className="relative aspect-[5/4] w-full overflow-hidden">
                       <Image
                         src={img}
-                        alt=""
+                        alt={p.imageAlt || ""}
                         fill
                         sizes="(max-width: 768px) 100vw, 33vw"
                         className="object-cover transition-transform duration-700 group-hover:scale-110"
@@ -302,8 +316,8 @@ export default function SustainabilityPageContent({
               className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl lg:col-span-5"
             >
               <Image
-                src={PLACEHOLDER_IMAGES.sustStatsAccent}
-                alt="MKESL plant, APCD dust collection and stack infrastructure"
+                src={rs?.imageUrl || PLACEHOLDER_IMAGES.sustStatsAccent}
+                alt={str(rs?.imageAlt, "MKESL plant, APCD dust collection and stack infrastructure")}
                 fill
                 sizes="(max-width: 1024px) 100vw, 40vw"
                 className="object-cover"
@@ -313,7 +327,7 @@ export default function SustainabilityPageContent({
 
             <div className="lg:col-span-7">
               <span className="text-xs uppercase tracking-[0.2em] text-accent">
-                Recycling statistics
+                {str(rs?.eyebrow, "Recycling statistics")}
               </span>
               <AnimatedHeading className="mt-3 font-serif text-3xl leading-tight text-ink sm:text-4xl lg:text-5xl">
                 {str(rs?.heading, "One closed loop, zero landfill.")}
@@ -351,15 +365,16 @@ export default function SustainabilityPageContent({
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
           <div className="max-w-3xl">
             <span className="text-xs uppercase tracking-[0.2em] text-accent">
-              Community programs
+              {str(cp?.eyebrow, "Community programs")}
             </span>
             <AnimatedHeading className="mt-3 font-serif text-3xl leading-tight text-ink sm:text-4xl lg:text-5xl">
-              Recycling that gives back beyond the gate.
+              {str(cp?.heading, "Recycling that gives back beyond the gate.")}
             </AnimatedHeading>
             <p className="mt-5 text-base leading-relaxed text-body sm:text-lg">
-              Our work doesn&apos;t end at the plant boundary. CSR and EHS programs run
-              year-round across every site, in partnership with the people who live and
-              work nearest to us.
+              {str(
+                cp?.intro,
+                "Our work doesn't end at the plant boundary. CSR and EHS programs run year-round across every site, in partnership with the people who live and work nearest to us.",
+              )}
             </p>
           </div>
 
@@ -374,7 +389,7 @@ export default function SustainabilityPageContent({
               <div className="relative aspect-[5/3] w-full overflow-hidden">
                 <Image
                   src={csr?.imageUrl || "/images/mkrg-3.jpeg"}
-                  alt="CSR program"
+                  alt={str(csr?.imageAlt, "CSR program")}
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
@@ -389,9 +404,10 @@ export default function SustainabilityPageContent({
                   {str(csr?.heading, "Corporate social responsibility")}
                 </h3>
                 <p className="mt-4 text-base leading-relaxed text-body">
-                  Skills training, school infrastructure, healthcare access and water
-                  programs our CSR spend is concentrated in the catchment of every
-                  operating plant, where impact is local and visible.
+                  {str(
+                    csr?.body,
+                    "Skills training, school infrastructure, healthcare access and water programs our CSR spend is concentrated in the catchment of every operating plant, where impact is local and visible.",
+                  )}
                 </p>
               </div>
             </motion.article>
@@ -406,7 +422,7 @@ export default function SustainabilityPageContent({
               <div className="relative aspect-[5/3] w-full overflow-hidden">
                 <Image
                   src={ehs?.imageUrl || "/images/mkrg-8.jpeg"}
-                  alt="EHS program"
+                  alt={str(ehs?.imageAlt, "EHS program")}
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
@@ -421,9 +437,10 @@ export default function SustainabilityPageContent({
                   {str(ehs?.heading, "Environment, health & safety")}
                 </h3>
                 <p className="mt-4 text-base leading-relaxed text-body">
-                  Daily safety briefings, emission monitoring, occupational-health checks
-                  and incident transparency EHS is governance, not paperwork. Every
-                  shift, every plant.
+                  {str(
+                    ehs?.body,
+                    "Daily safety briefings, emission monitoring, occupational-health checks and incident transparency EHS is governance, not paperwork. Every shift, every plant.",
+                  )}
                 </p>
               </div>
             </motion.article>

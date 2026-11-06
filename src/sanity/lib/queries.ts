@@ -11,6 +11,7 @@ const HERO_FRAGMENT = `
     intro,
     "imageUrl": image.asset->url,
     "imageAlt": image.alt,
+    "videoUrl": video.asset->url,
     primaryCtaLabel,
     primaryCtaHref,
     secondaryCtaLabel,
@@ -80,10 +81,28 @@ export const SITE_SETTINGS_QUERY = defineQuery(`
     title,
     description,
     "logoUrl": logo.asset->url,
-    primaryNav[]{ label, href },
+    headerLogo{
+      "onDarkUrl": onDark.asset->url, "onDarkAlt": onDark.alt,
+      "onLightUrl": onLight.asset->url, "onLightAlt": onLight.alt,
+      "compactOnDarkUrl": compactOnDark.asset->url, "compactOnDarkAlt": compactOnDark.alt,
+      "compactOnLightUrl": compactOnLight.asset->url, "compactOnLightAlt": compactOnLight.alt
+    },
+    primaryNav[]{ label, href, children[]{ label, href } },
+    headerCta{ label, href },
+    "footerLogoUrl": footerLogo.asset->url,
+    "footerLogoAlt": footerLogo.alt,
+    "footerBackgroundUrl": footerBackground.asset->url,
     company{ legalName, cin, tagline, addressLines },
     contact{ salesEmail, generalEmail, hrEmail, phone },
-    socials{ linkedin, twitter, youtube, instagram, facebook }
+    footerColumns[]{ title, links[]{ label, href } },
+    footerConnectHeading,
+    socials{ linkedin, twitter, youtube, instagram, facebook },
+    footerCta{ heading, highlight, body, buttonLabel, buttonHref },
+    footerBottom{
+      rightsText, slogan,
+      legalLinks[]{ label, href },
+      creditPrefix, creditLabel, creditHref
+    }
   }
 `);
 
@@ -96,20 +115,31 @@ export const HOME_PAGE_QUERY = defineQuery(`
     hero{
       eyebrow, heading, subheading, positioningTags,
       "imageUrl": image.asset->url, "imageAlt": image.alt,
+      "videos": videos[]{ "src": video.asset->url, startAt, duration },
       primaryCtaLabel, primaryCtaHref,
       secondaryCtaLabel, secondaryCtaHref
     },
+    marqueeItems,
+    metricsEyebrow,
     metricsHeading,
     metricsIntro,
     metrics[]{ value, suffix, label, note },
-    missionVision{ eyebrow, heading, mission, vision, ctaLabel, ctaHref },
-    sustainabilityTeaser{
-      eyebrow, heading, body,
-      highlights[]{ label, value },
+    missionVision{
+      eyebrow, heading, missionLabel, mission, visionLabel, vision,
+      "imageUrl": image.asset->url, "imageAlt": image.alt, imageCaption,
       ctaLabel, ctaHref
     },
+    sustainabilityTeaser{
+      eyebrow, heading, body,
+      highlights[]{ label, value, href, "imageUrl": image.asset->url, "imageAlt": image.alt },
+      cardLinkLabel,
+      ctaLabel, ctaHref
+    },
+    parallaxImpact{ heading, "imageUrl": image.asset->url },
     processesTeaser{
       eyebrow, heading, body,
+      "sealUrl": sealImage.asset->url, "sealAlt": sealImage.alt,
+      proofPoints[]{ value, label },
       steps[]{ title, body },
       ctaLabel, ctaHref
     },
@@ -121,6 +151,7 @@ export const HOME_PAGE_QUERY = defineQuery(`
     "leaderPortraitUrl": *[_type == "leadershipPage"][0].additionalLeaders[name match "Rahul*"][0].image.asset->url,
     certificationsTeaser{
       eyebrow, heading, body,
+      "imageUrl": image.asset->url, "imageAlt": image.alt, imageBadge,
       badges[]{ label, issuer },
       ctaLabel, ctaHref
     },
@@ -143,7 +174,8 @@ export const HOME_PAGE_QUERY = defineQuery(`
 export const ABOUT_PAGE_QUERY = defineQuery(`
   *[_type == "aboutPage"][0]{
     ${HERO_FRAGMENT},
-    purpose{ eyebrow, heading, mission, vision },
+    heroVideos[]{ "url": video.asset->url, duration },
+    purpose{ eyebrow, heading, missionLabel, mission, visionLabel, vision },
     sustainabilityStatement{ heading, body },
     values{
       eyebrow, heading, intro,
@@ -179,12 +211,14 @@ export const SUSTAINABILITY_PAGE_QUERY = defineQuery(`
     },
     pillars{
       eyebrow, heading, intro,
-      items[]{ title, body, icon }
+      items[]{ title, body, icon, "imageUrl": image.asset->url, "imageAlt": image.alt }
     },
     recyclingStats{
-      heading, intro,
+      eyebrow, heading, intro,
+      "imageUrl": image.asset->url, "imageAlt": image.alt,
       items[]{ label, value, note }
     },
+    communityPrograms{ eyebrow, heading, intro },
     csrSection{
       eyebrow, heading, body,
       "imageUrl": image.asset->url, "imageAlt": image.alt
@@ -193,7 +227,6 @@ export const SUSTAINABILITY_PAGE_QUERY = defineQuery(`
       eyebrow, heading, body,
       "imageUrl": image.asset->url, "imageAlt": image.alt
     },
-    subpages[]{ title, body, href, icon },
     ${SEO_FRAGMENT}
   }
 `);
@@ -201,16 +234,22 @@ export const SUSTAINABILITY_PAGE_QUERY = defineQuery(`
 export const PROCESSES_PAGE_QUERY = defineQuery(`
   *[_type == "processesPage"][0]{
     ${HERO_FRAGMENT},
-    wasteToZinc{
-      eyebrow, heading, body, accent,
-      steps[]{ label, icon }
-    },
-    zincInputs,
-    apcdSection{
+    processFlow{
       eyebrow, heading, body,
-      "imageUrl": image.asset->url, "imageAlt": image.alt
+      flowNumber, flowTitle, flowCaption,
+      steps[]{
+        label, body,
+        "imageUrl": image.asset->url, "imageAlt": image.alt
+      },
+      calloutText
     },
-    subpages[]{ title, body, href, icon },
+    technology{ heading, body },
+    wasteToZinc{
+      eyebrow, heading, caption,
+      "sealUrl": seal.asset->url, "sealAlt": seal.alt,
+      "illustrationUrl": illustration.asset->url, "illustrationAlt": illustration.alt,
+      steps[]{ title, body }
+    },
     ${SEO_FRAGMENT}
   }
 `);
@@ -226,10 +265,7 @@ export const PROJECTS_PAGE_QUERY = defineQuery(`
       eyebrow, heading, body,
       "imageUrl": image.asset->url, "imageAlt": image.alt
     },
-    challenge{
-      eyebrow, heading, body,
-      "backgroundImageUrl": backgroundImage.asset->url, "backgroundImageAlt": backgroundImage.alt
-    },
+    challenge{ eyebrow, heading, body },
     timeline{
       eyebrow, heading, intro,
       entries[]{ year, title, body }
@@ -264,7 +300,7 @@ export const PRODUCT_PAGE_QUERY = defineQuery(`
     overview{
       eyebrow, heading, intro,
       families[]{
-        title, tagline, icon,
+        title, tagline,
         "imageUrl": image.asset->url, "imageAlt": image.alt
       },
       applications{
@@ -272,6 +308,7 @@ export const PRODUCT_PAGE_QUERY = defineQuery(`
         ctaLabel, ctaHref
       }
     },
+    parallax{ heading, "imageUrl": image.asset->url },
     zinc{
       eyebrow, heading, intro,
       products[]{
@@ -294,7 +331,7 @@ export const CSR_PAGE_QUERY = defineQuery(`
       eyebrow, heading,
       stats[]{ value, label }
     },
-    focus{ eyebrow, heading, intro },
+    focus{ eyebrow, heading, intro, cardLinkLabel },
     focusAreas[]{
       "slug": slug.current,
       title, tagline, summary, icon,
@@ -305,7 +342,13 @@ export const CSR_PAGE_QUERY = defineQuery(`
         title,
         "imageUrl": image.asset->url, "imageAlt": image.alt,
         body, bullets
-      }
+      },
+      seoTitle, seoDescription
+    },
+    detailPages{
+      heroEyebrow, backLinkLabel,
+      initiativesEyebrow, initiativesHeading,
+      othersHeading, viewAllLabel
     },
     closingCta{ heading, body, primaryLabel, primaryHref },
     ${SEO_FRAGMENT}
@@ -340,7 +383,10 @@ export const LEADERSHIP_PAGE_QUERY = defineQuery(`
       eyebrow, heading, name, role, story,
       "imageUrl": image.asset->url, "imageAlt": image.alt
     },
-    pullQuote{ text, attribution },
+    pullQuote{
+      text, attribution,
+      "backgroundImageUrl": backgroundImage.asset->url
+    },
     director{
       eyebrow, heading, name, role, story,
       "imageUrl": image.asset->url, "imageAlt": image.alt
@@ -349,6 +395,7 @@ export const LEADERSHIP_PAGE_QUERY = defineQuery(`
       eyebrow, heading, name, role, story,
       "imageUrl": image.asset->url, "imageAlt": image.alt
     },
+    contactEmail,
     ${SEO_FRAGMENT}
   }
 `);
@@ -356,11 +403,13 @@ export const LEADERSHIP_PAGE_QUERY = defineQuery(`
 export const CERTIFICATIONS_PAGE_QUERY = defineQuery(`
   *[_type == "certificationsPage"][0]{
     ${HERO_FRAGMENT},
-    intro{ eyebrow, heading, body },
+    intro{ eyebrow, heading, body, cardLinkLabel },
     certificates[]{
-      title, issuer, body, status, icon,
-      "downloadUrl": downloadFile.asset->url
+      category, title, issuer, body, status, icon,
+      "downloadUrl": downloadFile.asset->url,
+      "thumbnailUrl": thumbnail.asset->url, "thumbnailAlt": thumbnail.alt
     },
+    awardsSection{ eyebrow, heading, body },
     closingCta{ heading, body, primaryLabel, primaryHref },
     ${SEO_FRAGMENT}
   }
@@ -370,7 +419,7 @@ export const MEDIA_PAGE_QUERY = defineQuery(`
   *[_type == "mediaPage"][0]{
     ${HERO_FRAGMENT},
     articlesSection{
-      eyebrow, heading,
+      eyebrow, heading, intro,
       items[]{
         topic, title, source, date, href,
         "imageUrl": image.asset->url, "imageAlt": image.alt
@@ -398,12 +447,36 @@ export const MEDIA_PAGE_QUERY = defineQuery(`
 export const CONTACT_PAGE_QUERY = defineQuery(`
   *[_type == "contactPage"][0]{
     ${HERO_FRAGMENT},
+    enquiryForm{
+      eyebrow, heading, intro, productOptions,
+      nameLabel, companyLabel, phoneLabel, emailLabel,
+      messageLabel, productLabel, submitLabel, sendingLabel,
+      successHeading, successMessage, sendAnotherLabel
+    },
+    reachSection{ eyebrow, heading },
     offices[]{ label, icon, lines },
     contactLines[]{ label, icon, value, href },
+    follow{ label, links[]{ platform, url } },
+    mapSection{
+      eyebrow, heading, intro, mapTitle,
+      locationLabel, locationText,
+      "imageUrl": image.asset->url,
+      "imageAlt": image.alt
+    },
     mapEmbedUrl,
-    enquiryForm{
-      heading, intro, productOptions,
-      submitLabel, successMessage
+    ${SEO_FRAGMENT}
+  }
+`);
+
+export const CAREERS_PAGE_QUERY = defineQuery(`
+  *[_type == "careersPage"][0]{
+    ${HERO_FRAGMENT},
+    applySection{
+      eyebrow, heading,
+      nameLabel, emailLabel, phoneLabel, roleLabel,
+      coverNoteLabel, cvLabel, cvPlaceholder,
+      submitLabel, sendingLabel,
+      successHeading, successMessage, applyEmail
     },
     ${SEO_FRAGMENT}
   }

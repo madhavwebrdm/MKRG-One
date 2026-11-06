@@ -41,7 +41,12 @@ type SectionData = {
 
 export type ProductPageData = {
   hero?:
-    | (SanityImg & { eyebrow?: string | null; heading?: string | null; intro?: string | null })
+    | (SanityImg & {
+        eyebrow?: string | null;
+        heading?: string | null;
+        intro?: string | null;
+        videoUrl?: string | null;
+      })
     | null;
   overview?:
     | {
@@ -58,6 +63,7 @@ export type ProductPageData = {
           | null;
       }
     | null;
+  parallax?: { heading?: string | null; imageUrl?: string | null } | null;
   zinc?: SectionData | null;
   closingCta?:
     | { heading?: string | null; body?: string | null; primaryLabel?: string | null; primaryHref?: string | null }
@@ -82,6 +88,7 @@ type Overview = {
   title: string;
   tagline: string;
   image: string;
+  alt?: string;
 };
 
 const OVERVIEW: Overview[] = [
@@ -122,7 +129,7 @@ const ZINC_APPLICATIONS: Array<{ title: string; body: string }> = [
   },
 ];
 
-type RangeItem = { name: string; desc: string; image: string };
+type RangeItem = { name: string; desc: string; image: string; alt?: string };
 
 const ZINC_RANGE: RangeItem[] = [
   {
@@ -159,11 +166,15 @@ function mergeRange(
   fallback: RangeItem[],
 ): RangeItem[] {
   if (!products?.length) return fallback;
-  return products.map((p, i) => ({
-    name: str(p.name, fallback[i]?.name ?? `Product ${i + 1}`),
-    desc: str(p.description, fallback[i]?.desc ?? ""),
-    image: p.imageUrl || fallback[i % fallback.length].image,
-  }));
+  return products.map((p, i) => {
+    const name = str(p.name, fallback[i]?.name ?? `Product ${i + 1}`);
+    return {
+      name,
+      desc: str(p.description, fallback[i]?.desc ?? ""),
+      image: p.imageUrl || fallback[i % fallback.length].image,
+      alt: str(p.imageAlt, name),
+    };
+  });
 }
 
 /* -------------------------------------------------------------------------- */
@@ -175,13 +186,17 @@ export default function ProductPageContent({ data }: { data?: ProductPageData })
   const cc = data?.closingCta;
 
   const families: Overview[] = ov?.families?.length
-    ? ov.families.map((f, i) => ({
-        id: `${f.title ?? "family"}-${i}`,
-        icon: iconFor(f.icon, OVERVIEW[i]?.icon ?? Factory),
-        title: str(f.title, OVERVIEW[i]?.title ?? `Product family ${i + 1}`),
-        tagline: str(f.tagline, OVERVIEW[i]?.tagline ?? ""),
-        image: f.imageUrl || OVERVIEW[i]?.image || IMG.hero,
-      }))
+    ? ov.families.map((f, i) => {
+        const title = str(f.title, OVERVIEW[i]?.title ?? `Product family ${i + 1}`);
+        return {
+          id: `${f.title ?? "family"}-${i}`,
+          icon: iconFor(f.icon, OVERVIEW[i]?.icon ?? Factory),
+          title,
+          tagline: str(f.tagline, OVERVIEW[i]?.tagline ?? ""),
+          image: f.imageUrl || OVERVIEW[i]?.image || IMG.hero,
+          alt: str(f.imageAlt, title),
+        };
+      })
     : OVERVIEW;
 
   const zincApplications = ov?.applications?.items?.length
@@ -202,6 +217,7 @@ export default function ProductPageContent({ data }: { data?: ProductPageData })
         )}
         imageUrl={hero?.imageUrl || IMG.hero}
         imageAlt={str(hero?.imageAlt, "Madhav KRG Environmental Solution Limited zinc products")}
+        videoUrl={hero?.videoUrl || undefined}
       />
 
       {/* Product family overview */}
@@ -236,7 +252,7 @@ export default function ProductPageContent({ data }: { data?: ProductPageData })
                 <div className="relative aspect-[16/9] overflow-hidden">
                   <Image
                     src={item.image}
-                    alt={item.title}
+                    alt={item.alt || item.title}
                     fill
                     sizes="(max-width: 1024px) 100vw, 50vw"
                     className="object-cover"
@@ -296,8 +312,8 @@ export default function ProductPageContent({ data }: { data?: ProductPageData })
       </section>
 
       <ParallaxImpact
-        heading={"Recycled. Certified.\nReady for Industry."}
-        imageUrl="/images/product-parallax.webp"
+        heading={str(data?.parallax?.heading, "Recycled. Certified.\nReady for Industry.")}
+        imageUrl={data?.parallax?.imageUrl || "/images/product-parallax.webp"}
       />
 
       {/* Zinc detail */}
@@ -401,7 +417,7 @@ function ProductRange({
       <div className="relative aspect-[4/3] overflow-hidden">
         <Image
           src={item.image}
-          alt={item.name}
+          alt={item.alt || item.name}
           fill
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
           className="object-cover transition-transform duration-700 group-hover:scale-105"

@@ -24,10 +24,10 @@ const IMPACT: Stat[] = [
 
 export type CsrPageData = {
   hero?:
-    | { eyebrow?: string | null; heading?: string | null; intro?: string | null; imageUrl?: string | null; imageAlt?: string | null }
+    | { eyebrow?: string | null; heading?: string | null; intro?: string | null; imageUrl?: string | null; imageAlt?: string | null; videoUrl?: string | null }
     | null;
   impact?: { eyebrow?: string | null; heading?: string | null; stats?: Stat[] | null } | null;
-  focus?: { eyebrow?: string | null; heading?: string | null; intro?: string | null } | null;
+  focus?: { eyebrow?: string | null; heading?: string | null; intro?: string | null; cardLinkLabel?: string | null } | null;
   focusAreas?: SanityFocusArea[] | null;
   closingCta?:
     | { heading?: string | null; body?: string | null; primaryLabel?: string | null; primaryHref?: string | null }
@@ -54,6 +54,8 @@ export default function CsrPageContent({ data }: { data?: CsrPageData }) {
         )}
         imageUrl={hero?.imageUrl || PLACEHOLDER_IMAGES.csr.hero}
         imageAlt={str(hero?.imageAlt, "Madhav KRG Environmental Solution Limited community work")}
+        videoUrl={hero?.videoUrl || undefined}
+        videoPoster={hero?.imageUrl || undefined}
       />
 
       {/* Impact band */}
@@ -122,7 +124,7 @@ export default function CsrPageContent({ data }: { data?: CsrPageData }) {
                     <div className="relative aspect-[4/3] overflow-hidden">
                       <Image
                         src={area.heroImage}
-                        alt={area.title}
+                        alt={area.heroImageAlt || area.title}
                         fill
                         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                         className="object-cover transition-transform duration-700 group-hover:scale-105"
@@ -145,7 +147,7 @@ export default function CsrPageContent({ data }: { data?: CsrPageData }) {
                         {area.tagline}
                       </p>
                       <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-forest transition-colors group-hover:text-accent">
-                        Explore focus area
+                        {str(focus?.cardLinkLabel, "Explore focus area")}
                         <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden />
                       </span>
                     </div>

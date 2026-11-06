@@ -26,26 +26,56 @@ export const mediaPage = defineType({
         defineField({ name: "eyebrow", type: "string", initialValue: "In the news" }),
         defineField({ name: "heading", type: "string" }),
         defineField({
+          name: "intro",
+          title: "Intro text",
+          description: "Short paragraph shown beside the heading.",
+          type: "text",
+          rows: 3,
+        }),
+        defineField({
           name: "items",
+          title: "Articles",
+          description: "The three most recent articles (by date) also appear on the home page.",
           type: "array",
           of: [
             defineArrayMember({
               type: "object",
               fields: [
-                defineField({ name: "topic", type: "string" }),
+                defineField({
+                  name: "topic",
+                  type: "string",
+                  description: "Small label shown on the photo.",
+                }),
                 defineField({
                   name: "title",
                   type: "string",
                   validation: (r) => r.required(),
                 }),
-                defineField({ name: "source", type: "string" }),
+                defineField({
+                  name: "source",
+                  type: "string",
+                  description: "Publication name, e.g. The Times of India.",
+                }),
                 defineField({ name: "date", type: "date" }),
-                defineField({ name: "href", type: "url" }),
+                defineField({
+                  name: "href",
+                  title: "Article link",
+                  type: "url",
+                  description: "Full web address of the article. Opens in a new tab.",
+                }),
                 defineField({
                   name: "image",
                   type: "image",
+                  description: "Leave empty to show a stock photo.",
                   options: { hotspot: true },
-                  fields: [defineField({ name: "alt", type: "string", title: "Alt text" })],
+                  fields: [
+                    defineField({
+                      name: "alt",
+                      type: "string",
+                      title: "Alt text",
+                      description: "Optional. Leave empty if the photo is decorative.",
+                    }),
+                  ],
                 }),
               ],
               preview: { select: { title: "title", subtitle: "source", media: "image" } },

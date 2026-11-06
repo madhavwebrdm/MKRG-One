@@ -10,7 +10,11 @@ type Props = {
   heading?: string;
   mission?: string;
   vision?: string;
+  missionLabel?: string | null;
+  visionLabel?: string | null;
   imageUrl?: string | null;
+  imageAlt?: string | null;
+  imageCaption?: string | null;
 };
 
 export default function MissionVisionTeaser({
@@ -18,7 +22,11 @@ export default function MissionVisionTeaser({
   heading: headingProp,
   mission: missionProp,
   vision: visionProp,
+  missionLabel,
+  visionLabel,
   imageUrl,
+  imageAlt,
+  imageCaption,
 }: Props) {
   const eyebrow = eyebrowProp ?? "About us";
   const heading = headingProp ?? "A purpose built around the planet.";
@@ -52,7 +60,7 @@ export default function MissionVisionTeaser({
           >
             <Image
               src={imageUrl || "/images/home-about-teaser.webp"}
-              alt="Madhav KRG Environmental Solution Limited operations"
+              alt={imageAlt || "Madhav KRG Environmental Solution Limited operations"}
               fill
               sizes="(max-width: 1024px) 100vw, 40vw"
               className="object-cover transition-transform duration-1000 hover:scale-110"
@@ -60,7 +68,7 @@ export default function MissionVisionTeaser({
             <div className="absolute inset-0 bg-gradient-to-t from-deep-green/40 via-transparent to-transparent" />
             <div className="absolute bottom-5 left-5 right-5 flex items-center gap-3 rounded-2xl bg-white/85 px-5 py-3.5 backdrop-blur">
               <p className="text-sm font-medium text-ink">
-                Building Green Infrastructure across India
+                {imageCaption ?? "Building Green Infrastructure across India"}
               </p>
             </div>
           </motion.div>
@@ -84,7 +92,7 @@ export default function MissionVisionTeaser({
               >
                 <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-wider text-accent">
                   <Target className="h-4 w-4" />
-                  Mission
+                  {missionLabel ?? "Mission"}
                 </div>
                 <p className="mt-4 font-serif text-xl leading-snug text-ink">
                   {mission}
@@ -100,7 +108,7 @@ export default function MissionVisionTeaser({
               >
                 <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-wider text-teal">
                   <Compass className="h-4 w-4" />
-                  Vision
+                  {visionLabel ?? "Vision"}
                 </div>
                 <p className="mt-4 font-serif text-xl leading-snug text-ink">
                   {vision}

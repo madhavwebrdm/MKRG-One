@@ -23,7 +23,7 @@ type PillarData = {
 
 export type EhsPageData = {
   hero?:
-    | { eyebrow?: string | null; heading?: string | null; intro?: string | null; imageUrl?: string | null; imageAlt?: string | null }
+    | { eyebrow?: string | null; heading?: string | null; intro?: string | null; imageUrl?: string | null; imageAlt?: string | null; videoUrl?: string | null }
     | null;
   overview?: { eyebrow?: string | null; heading?: string | null; body?: string | null } | null;
   environment?: PillarData | null;
@@ -182,6 +182,8 @@ export default function EhsPageContent({ data }: { data?: EhsPageData }) {
         )}
         imageUrl={hero?.imageUrl || PLACEHOLDER_IMAGES.sustEhs}
         imageAlt={str(hero?.imageAlt, "Madhav KRG Environmental Solution Limited environment, health and safety")}
+        videoUrl={hero?.videoUrl || undefined}
+        videoPoster={hero?.imageUrl || undefined}
       />
 
       {/* Overview statement */}

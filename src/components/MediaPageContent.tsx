@@ -19,6 +19,7 @@ type Article = {
   date: string;
   href: string;
   imageUrl?: string;
+  imageAlt?: string;
 };
 
 const ARTICLES: Article[] = [
@@ -48,6 +49,7 @@ const ARTICLES: Article[] = [
 type ItemsSection<T> = {
   eyebrow?: string | null;
   heading?: string | null;
+  intro?: string | null;
   items?: T[] | null;
 } | null;
 
@@ -62,6 +64,7 @@ export type MediaPageData = {
     date?: string | null;
     href?: string | null;
     imageUrl?: string | null;
+    imageAlt?: string | null;
   }>;
 } | null;
 
@@ -87,6 +90,7 @@ export default function MediaPageContent({ data }: { data?: MediaPageData }) {
         date: a.date ?? "",
         href: a.href || "#",
         imageUrl: a.imageUrl ?? undefined,
+        imageAlt: a.imageAlt ?? undefined,
       }))
     : ARTICLES;
 
@@ -119,8 +123,10 @@ export default function MediaPageContent({ data }: { data?: MediaPageData }) {
               </AnimatedHeading>
             </div>
             <p className="max-w-md text-base leading-relaxed text-body sm:text-lg">
-              Independent coverage and analysis that frames the work MKESL and the wider
-              industry are doing.
+              {str(
+                articlesSection?.intro,
+                "Independent coverage and analysis that frames the work MKESL and the wider industry are doing.",
+              )}
             </p>
           </div>
 
@@ -148,7 +154,7 @@ export default function MediaPageContent({ data }: { data?: MediaPageData }) {
                             i % PLACEHOLDER_IMAGES.mediaArticles.length
                           ]
                         }
-                        alt=""
+                        alt={a.imageAlt ?? ""}
                         fill
                         sizes="(max-width: 768px) 100vw, 33vw"
                         className="object-cover transition-transform duration-700 group-hover:scale-110"

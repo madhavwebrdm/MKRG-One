@@ -18,6 +18,8 @@ export type CsrStat = { value: string; label: string };
 export type CsrInitiative = {
   title: string;
   image: string;
+  /** Alt text for the photo; the title is used when empty. */
+  imageAlt?: string;
   body: string[];
   bullets?: string[];
 };
@@ -31,11 +33,16 @@ export type CsrFocusArea = {
   summary: string;
   icon: LucideIcon;
   heroImage: string;
+  /** Alt text for the hero/card photo; the title is used when empty. */
+  heroImageAlt?: string;
   /** Headline number shown on the card. */
   cardStat: CsrStat;
   /** Stat row shown on the detail page. */
   stats: CsrStat[];
   initiatives: CsrInitiative[];
+  /** Detail-page <title> / meta description overrides. */
+  seoTitle?: string;
+  seoDescription?: string;
 };
 
 export const CSR_FOCUS_AREAS: CsrFocusArea[] = [
@@ -280,18 +287,45 @@ export type SanityFocusArea = {
   summary?: string | null;
   icon?: string | null;
   heroImageUrl?: string | null;
+  heroImageAlt?: string | null;
   cardStat?: { value?: string | null; label?: string | null } | null;
   stats?: Array<{ value?: string | null; label?: string | null }> | null;
   initiatives?: Array<{
     title?: string | null;
     imageUrl?: string | null;
+    imageAlt?: string | null;
     body?: string[] | null;
     bullets?: string[] | null;
   }> | null;
+  seoTitle?: string | null;
+  seoDescription?: string | null;
 };
+
+/** Labels shared by every focus-area detail page (csrPage.detailPages). */
+export type CsrDetailLabels = {
+  heroEyebrow?: string | null;
+  backLinkLabel?: string | null;
+  initiativesEyebrow?: string | null;
+  initiativesHeading?: string | null;
+  othersHeading?: string | null;
+  viewAllLabel?: string | null;
+} | null;
 
 const txt = (v: string | null | undefined, fallback: string): string =>
   v && v.trim() ? v : fallback;
+
+const opt = (v: string | null | undefined): string | undefined =>
+  v && v.trim() ? v : undefined;
+
+// CSR-only icon keys (not in the shared icon list), see csrPage schema.
+const CSR_ICONS: Record<string, LucideIcon> = {
+  "graduation-cap": GraduationCap,
+  "heart-pulse": HeartPulse,
+  wrench: Wrench,
+};
+
+const csrIcon = (key: string | null | undefined, fallback: LucideIcon): LucideIcon =>
+  (key && CSR_ICONS[key]) || iconFromKey(key, fallback);
 
 /**
  * Resolve the focus areas shown on the site. When Sanity provides focus areas
@@ -311,8 +345,9 @@ export function resolveCsrAreas(
       title: txt(a.title, fb?.title ?? "Focus area"),
       tagline: txt(a.tagline, fb?.tagline ?? ""),
       summary: txt(a.summary, fb?.summary ?? ""),
-      icon: iconFromKey(a.icon, fb?.icon ?? HeartPulse),
+      icon: csrIcon(a.icon, fb?.icon ?? HeartPulse),
       heroImage: a.heroImageUrl || fb?.heroImage || IMG.hero,
+      heroImageAlt: opt(a.heroImageAlt),
       cardStat: {
         value: txt(a.cardStat?.value, fb?.cardStat.value ?? ""),
         label: txt(a.cardStat?.label, fb?.cardStat.label ?? ""),
@@ -327,12 +362,15 @@ export function resolveCsrAreas(
         ? a.initiatives.map((it, ii) => ({
             title: txt(it.title, fb?.initiatives[ii]?.title ?? ""),
             image: it.imageUrl || fb?.initiatives[ii]?.image || IMG.hero,
+            imageAlt: opt(it.imageAlt),
             body: it.body?.length ? it.body : fb?.initiatives[ii]?.body ?? [],
             bullets: it.bullets?.length
               ? it.bullets
               : fb?.initiatives[ii]?.bullets,
           }))
         : fb?.initiatives ?? [],
+      seoTitle: opt(a.seoTitle),
+      seoDescription: opt(a.seoDescription),
     };
   });
 }

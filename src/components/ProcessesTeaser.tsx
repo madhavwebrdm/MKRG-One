@@ -16,6 +16,9 @@ type Props = {
   eyebrow?: string;
   heading?: string;
   body?: string;
+  sealUrl?: string | null;
+  sealAlt?: string | null;
+  proofPoints?: Array<{ value?: string | null; label?: string | null }> | null;
 };
 
 /** Home page highlight for the patented hydrometallurgical process. */
@@ -23,7 +26,14 @@ export default function ProcessesTeaser({
   eyebrow: eyebrowProp,
   heading: headingProp,
   body: bodyProp,
+  sealUrl,
+  sealAlt,
+  proofPoints,
 }: Props) {
+  const proof =
+    proofPoints && proofPoints.length > 0
+      ? proofPoints.map((p) => ({ value: p.value ?? "", label: p.label ?? "" }))
+      : PROOF;
   const eyebrow = eyebrowProp ?? "A first for India";
   const heading =
     headingProp ??
@@ -71,8 +81,8 @@ export default function ProcessesTeaser({
                   transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
                 >
                   <Image
-                    src="/images/patented-process-in-india-seal.png"
-                    alt="Patented hydrometallurgical process in India"
+                    src={sealUrl || "/images/patented-process-in-india-seal.png"}
+                    alt={sealAlt || "Patented hydrometallurgical process in India"}
                     width={1200}
                     height={1200}
                     sizes="(max-width: 640px) 208px, (max-width: 1024px) 288px, 352px"
@@ -96,8 +106,8 @@ export default function ProcessesTeaser({
               </p>
 
               <ul className="mt-10 grid grid-cols-1 gap-6 border-t border-white/15 pt-8 sm:grid-cols-3 sm:gap-8">
-                {PROOF.map((p) => (
-                  <li key={p.label} className="text-center sm:text-left">
+                {proof.map((p, i) => (
+                  <li key={`${p.label}-${i}`} className="text-center sm:text-left">
                     <p className="font-serif text-3xl leading-none text-[#f2cf63] sm:text-4xl">
                       {p.value}
                     </p>
