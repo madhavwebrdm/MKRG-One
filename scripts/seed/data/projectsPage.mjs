@@ -7,7 +7,7 @@ const doc = {
     eyebrow: "Projects",
     heading: "Transforming Hazardous Waste into Valuable Resources",
     intro:
-      "Madhav Alloys Pvt. Ltd. (Waste Recycling Division) has developed a unique waste recovery solution to process hazardous APCD dust generated from steel industries and recover valuable metals like zinc. The initiative supports cleaner industrial operations while reducing environmental impact through responsible waste management.",
+      "Madhav KRG Environmental Solution Limited has developed a unique waste recovery solution to process hazardous APCD dust generated from steel industries and recover valuable metals like zinc. The initiative supports cleaner industrial operations while reducing environmental impact through responsible waste management.",
     image: {
       _type: "image",
       _file: "public/images/product-hero.webp",
@@ -57,7 +57,7 @@ const doc = {
       {
         year: "March 2015",
         title: "Installation begins",
-        body: "Project installation work started for the MAPL Waste Recycling Division plant.",
+        body: "Project installation work started for the Waste Recycling Division plant.",
       },
       {
         year: "October 2015",
@@ -155,7 +155,7 @@ const doc = {
         note: "Induction furnace units partnered for APCD dust collection and recycling.",
       },
       {
-        value: 5000,
+        value: 25900,
         suffix: "+ MT",
         label: "APCD Dust Processed",
         note: "Waste material collected and diverted from disposal sites.",
@@ -167,7 +167,7 @@ const doc = {
         note: "Valuable zinc extracted from industrial waste.",
       },
       {
-        value: 300,
+        value: 1800,
         suffix: " MT/Month",
         label: "Waste Utilization Capacity",
         note: "Current APCD dust processing capability.",

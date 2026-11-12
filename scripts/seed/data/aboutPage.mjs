@@ -32,7 +32,7 @@ const doc = {
   "purpose": {
     "eyebrow": "Purpose",
     "heading": "A purpose built around the planet.",
-    "mission": "To provide efficient, responsible recycling solutions that empower \ncommunities and businesses to minimize their environmental footprint. ",
+    "mission": "To provide efficient and responsible recycling solutions that empower communities and businesses to minimize their environmental footprint.",
     "vision": "Accelerating India’s growth by enabling Green Infrastructure",
     "missionLabel": "Mission",
     "visionLabel": "Vision"

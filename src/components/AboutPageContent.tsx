@@ -287,7 +287,7 @@ export default function AboutPageContent({ data }: { data?: AboutPageData }) {
               <p className="mt-5 font-serif text-2xl leading-snug text-ink">
                 {str(
                   purpose?.mission,
-                  "To provide efficient, responsible recycling solutions that empower communities and businesses to minimise their environmental footprint.",
+                  "To provide efficient and responsible recycling solutions that empower communities and businesses to minimize their environmental footprint.",
                 )}
               </p>
             </motion.article>

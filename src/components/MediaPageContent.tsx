@@ -106,8 +106,8 @@ export default function MediaPageContent({ data }: { data?: MediaPageData }) {
           hero?.intro,
           "Where Madhav KRG Environmental Solution Limited shows up on the page, on camera and on the ground at the forums where recycling policy and practice are being rewritten.",
         )}
-        imageUrl={hero?.imageUrl || "/images/media-hero.jpeg"}
-        imageAlt={str(hero?.imageAlt, "MKESL in the media")}
+        imageUrl={hero?.imageUrl || "/images/media-hero-team.jpeg"}
+        imageAlt={str(hero?.imageAlt, "The MKESL team at an industry event")}
       />
 
       {/* Industry articles */}

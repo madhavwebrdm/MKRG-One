@@ -32,7 +32,7 @@ export default function MissionVisionTeaser({
   const heading = headingProp ?? "A purpose built around the planet.";
   const mission =
     missionProp ??
-    "To provide efficient, responsible recycling solutions that empower communities and businesses to minimise their environmental footprint.";
+    "To provide efficient and responsible recycling solutions that empower communities and businesses to minimise their environmental footprint.";
   const vision =
     visionProp ?? "Accelerating India's growth by enabling Green Infrastructure.";
   return (

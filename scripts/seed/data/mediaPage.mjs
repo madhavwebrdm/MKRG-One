@@ -13,8 +13,8 @@ const doc = {
     "intro": "Where Madhav KRG Environmental Solution Limited shows up on the page, on camera and on the ground at the forums where recycling policy and practice are being rewritten.",
     "image": {
       "_type": "image",
-      "_file": "public/images/media-hero.jpeg",
-      "alt": "MKESL in the media"
+      "_file": "public/images/media-hero-team.jpeg",
+      "alt": "The MKESL team at an industry event"
     }
   },
   "articlesSection": {
