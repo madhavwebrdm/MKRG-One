@@ -96,8 +96,8 @@ const doc = {
       "New Delhi, Khanna and Patiala, the registered office, corporate HQ and the Akalgarh plant.",
     image: {
       _type: "image",
-      _url: "https://images.unsplash.com/photo-1743650050124-78df792c751d?w=1200&h=800&fit=crop&auto=format&q=80",
-      alt: "Plant exterior",
+      _file: "public/images/sustainability-recycling-stats.jpeg",
+      alt: "MKESL plant, APCD dust collection and stack infrastructure",
     },
   },
   mapEmbedUrl:

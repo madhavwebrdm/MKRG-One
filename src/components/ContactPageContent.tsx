@@ -18,7 +18,6 @@ import {
 import type { LucideIcon } from "lucide-react";
 
 import { iconFromKey } from "@/lib/icons";
-import { PLACEHOLDER_IMAGES } from "@/lib/placeholderImages";
 import AnimatedHeading from "./AnimatedHeading";
 import PageHero from "./PageHero";
 import {
@@ -557,8 +556,8 @@ export default function ContactPageContent({ data }: { data?: ContactPageData })
               </div>
               <div className="relative aspect-[5/4] w-full overflow-hidden rounded-2xl">
                 <Image
-                  src={map?.imageUrl || PLACEHOLDER_IMAGES.contactPlant}
-                  alt={str(map?.imageAlt, "Plant exterior")}
+                  src={map?.imageUrl || "/images/sustainability-recycling-stats.jpeg"}
+                  alt={str(map?.imageAlt, "MKESL plant, APCD dust collection and stack infrastructure")}
                   fill
                   sizes="(max-width: 1024px) 100vw, 33vw"
                   className="object-cover"
