@@ -210,12 +210,17 @@ export const projectsPage = defineType({
       title: "Impact statistics",
       type: "object",
       group: "content",
+      description:
+        "The number boxes in this section show the Home page Impact metrics. Edit the numbers in Home → Metrics; they update on both pages.",
       fields: [
         defineField({ name: "eyebrow", type: "string", initialValue: "Impact statistics" }),
         defineField({ name: "heading", type: "string" }),
         defineField({ name: "intro", type: "text", rows: 3 }),
         defineField({
           name: "items",
+          title: "Old number boxes (no longer shown)",
+          description: "Kept for reference only. The site now shows the Home page Impact metrics here.",
+          hidden: true,
           type: "array",
           validation: (r) => r.min(1).max(6),
           of: [

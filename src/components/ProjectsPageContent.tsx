@@ -23,6 +23,7 @@ import {
 import { iconFromKey } from "@/lib/icons";
 import { PLACEHOLDER_IMAGES } from "@/lib/placeholderImages";
 import AnimatedHeading from "./AnimatedHeading";
+import MetricCards, { type Metric } from "./MetricCards";
 import PageHero from "./PageHero";
 import TiltCard from "./TiltCard";
 
@@ -87,9 +88,10 @@ export type ProjectsPageData = {
         eyebrow?: string | null;
         heading?: string | null;
         intro?: string | null;
-        items?: Array<{ value?: number | null; suffix?: string | null; label?: string | null; note?: string | null }> | null;
       }
     | null;
+  /** The number boxes reuse the Home page Impact metrics (homePage.metrics). */
+  homeMetrics?: Array<{ value?: number | null; suffix?: string | null; label?: string | null; note?: string | null }> | null;
   partnership?: { eyebrow?: string | null; heading?: string | null; body?: string | null } | null;
   futureVision?: { eyebrow?: string | null; heading?: string | null; body?: string | null } | null;
 } | null;
@@ -183,43 +185,16 @@ const CIRCULAR_ITEMS = [
   { title: "Responsible industrial growth", icon: Target },
 ];
 
-const STATS = [
-  {
-    value: 140,
-    suffix: "+",
-    label: "Industries Associated",
-    note: "Induction furnace units partnered for APCD dust collection and recycling.",
-  },
-  {
-    value: 25900,
-    suffix: "+ MT",
-    label: "APCD Dust Processed",
-    note: "Waste material collected and diverted from disposal sites.",
-  },
-  {
-    value: 2140,
-    suffix: " MT",
-    label: "Zinc Recovered",
-    note: "Valuable zinc extracted from industrial waste.",
-  },
-  {
-    value: 1800,
-    suffix: " MT/Month",
-    label: "Waste Utilization Capacity",
-    note: "Current APCD dust processing capability.",
-  },
-];
-
 function ImpactStats({
   eyebrow,
   heading,
   intro,
-  items,
+  metrics,
 }: {
   eyebrow: string;
   heading: string;
   intro: string;
-  items: Array<{ value: number; suffix: string; label: string; note: string }>;
+  metrics: Metric[];
 }) {
   const root = useRef<HTMLElement>(null);
 
@@ -233,30 +208,6 @@ function ImpactStats({
         opacity: 0,
         duration: 0.5,
         stagger: 0.12,
-        ease: "power3.out",
-      });
-
-      const numbers = root.current?.querySelectorAll<HTMLElement>(".projects-stat-number");
-      numbers?.forEach((el) => {
-        const target = Number(el.dataset.target ?? "0");
-        const obj = { val: 0 };
-        gsap.to(obj, {
-          val: target,
-          duration: 1.8,
-          ease: "power2.out",
-          scrollTrigger: { trigger: el, start: "top 85%" },
-          onUpdate: () => {
-            el.textContent = Math.round(obj.val).toLocaleString("en-IN");
-          },
-        });
-      });
-
-      gsap.from(".projects-stat-card", {
-        scrollTrigger: { trigger: root.current, start: "top 70%" },
-        y: 16,
-        opacity: 0,
-        stagger: 0.1,
-        duration: 0.5,
         ease: "power3.out",
       });
     },
@@ -278,25 +229,8 @@ function ImpactStats({
           </p>
         </div>
 
-        <div className="mt-12 grid grid-cols-1 gap-px overflow-hidden rounded-2xl bg-white/10 sm:grid-cols-2 lg:grid-cols-4">
-          {items.map((s, i) => (
-            <div
-              key={i}
-              className="projects-stat-card flex flex-col gap-2 bg-deep-green/60 p-7 backdrop-blur"
-            >
-              <div className="flex items-baseline gap-1 font-serif text-4xl tracking-tight text-white sm:text-5xl">
-                <span className="projects-stat-number" data-target={s.value}>
-                  0
-                </span>
-                <span className="text-xl text-white/80 sm:text-2xl">{s.suffix}</span>
-              </div>
-              <p className="mt-1 text-sm font-medium uppercase tracking-wider text-white/90">
-                {s.label}
-              </p>
-              {s.note && <p className="text-sm text-white/70">{s.note}</p>}
-            </div>
-          ))}
-        </div>
+        {/* Same number boxes and data as the Home page Impact metrics */}
+        <MetricCards metrics={metrics} tone="dark" className="mt-12" />
       </div>
     </section>
   );
@@ -350,14 +284,14 @@ export default function ProjectsPageContent({ data }: { data?: ProjectsPageData 
       }))
     : CIRCULAR_ITEMS.map((c) => ({ title: c.title, Icon: c.icon }));
 
-  const statItems = stats?.items?.length
-    ? stats.items.map((s) => ({
-        value: s.value ?? 0,
-        suffix: s.suffix ?? "",
-        label: s.label ?? "",
-        note: s.note ?? "",
-      }))
-    : STATS;
+  // Number boxes mirror the Home page Impact metrics (MetricCards falls back
+  // to the same defaults when Sanity has none).
+  const impactMetrics: Metric[] = (data?.homeMetrics ?? []).map((m) => ({
+    value: m.value ?? 0,
+    suffix: m.suffix ?? undefined,
+    label: m.label ?? "",
+    note: m.note ?? undefined,
+  }));
 
   return (
     <main className="bg-mint">
@@ -691,7 +625,7 @@ export default function ProjectsPageContent({ data }: { data?: ProjectsPageData 
           stats?.intro,
           "Since commercial production began, the Waste Recycling Division has scaled steadily alongside the induction furnace units it partners with.",
         )}
-        items={statItems}
+        metrics={impactMetrics}
       />
 
       {/* Partnership with industries */}

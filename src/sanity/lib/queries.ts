@@ -284,10 +284,8 @@ export const PROJECTS_PAGE_QUERY = defineQuery(`
       eyebrow, heading, intro,
       items[]{ title, icon }
     },
-    stats{
-      eyebrow, heading, intro,
-      items[]{ value, suffix, label, note }
-    },
+    stats{ eyebrow, heading, intro },
+    "homeMetrics": *[_type == "homePage"][0].metrics[]{ value, suffix, label, note },
     partnership{ eyebrow, heading, body },
     futureVision{ eyebrow, heading, body },
     ${SEO_FRAGMENT}

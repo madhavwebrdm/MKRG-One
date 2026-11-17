@@ -5,13 +5,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import AnimatedHeading from "./AnimatedHeading";
-
-type Metric = {
-  value: number;
-  suffix?: string;
-  label: string;
-  note?: string;
-};
+import MetricCards, { type Metric } from "./MetricCards";
 
 type Props = {
   eyebrow?: string;
@@ -20,24 +14,17 @@ type Props = {
   metrics?: Metric[];
 };
 
-const DEFAULTS: Metric[] = [
-  { value: 1.2, suffix: "M t", label: "CO₂ offset", note: "Annual avoided emissions" },
-  { value: 18, suffix: "K t", label: "Tonnes recycled", note: "Zinc recovered last FY" },
-  { value: 42, suffix: "%", label: "Renewable energy", note: "Powering our plants" },
-];
-
 export default function MetricsBar({
   eyebrow: eyebrowProp,
   heading: headingProp,
   intro: introProp,
-  metrics: metricsProp,
+  metrics,
 }: Props) {
   const eyebrow = eyebrowProp ?? "Impact metrics";
   const heading = headingProp ?? "Our impact, measured.";
   const intro =
     introProp ??
     "Every tonne we process meets International Standards and behaves virtually like virgin material at a fraction of the environmental cost.";
-  const metrics = metricsProp && metricsProp.length > 0 ? metricsProp : DEFAULTS;
   const root = useRef<HTMLElement>(null);
 
   useGSAP(
@@ -50,31 +37,6 @@ export default function MetricsBar({
         opacity: 0,
         duration: 0.5,
         stagger: 0.12,
-        ease: "power3.out",
-      });
-
-      const numbers = root.current?.querySelectorAll<HTMLElement>(".metric-number");
-      numbers?.forEach((el) => {
-        const target = Number(el.dataset.target ?? "0");
-        const decimals = target % 1 !== 0 ? 1 : 0;
-        const obj = { val: 0 };
-        gsap.to(obj, {
-          val: target,
-          duration: 1.8,
-          ease: "power2.out",
-          scrollTrigger: { trigger: el, start: "top 85%" },
-          onUpdate: () => {
-            el.textContent = obj.val.toFixed(decimals);
-          },
-        });
-      });
-
-      gsap.from(".metric-card", {
-        scrollTrigger: { trigger: root.current, start: "top 70%" },
-        y: 16,
-        opacity: 0,
-        stagger: 0.1,
-        duration: 0.5,
         ease: "power3.out",
       });
     },
@@ -98,29 +60,7 @@ export default function MetricsBar({
           )}
         </div>
 
-        <div className="mt-12 grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-forest/15 bg-forest/10 sm:grid-cols-3">
-          {metrics.map((m, i) => (
-            <div
-              key={i}
-              className="metric-card flex flex-col gap-2 bg-white p-7 sm:p-8"
-            >
-              <div className="flex items-baseline gap-1 font-serif text-5xl tracking-tight text-ink sm:text-6xl">
-                <span className="metric-number" data-target={m.value}>
-                  0
-                </span>
-                {m.suffix && (
-                  <span className="text-2xl text-deep-green sm:text-3xl">
-                    {m.suffix}
-                  </span>
-                )}
-              </div>
-              <p className="mt-1 text-sm font-medium uppercase tracking-wider text-ink">
-                {m.label}
-              </p>
-              {m.note && <p className="text-sm text-muted">{m.note}</p>}
-            </div>
-          ))}
-        </div>
+        <MetricCards metrics={metrics} className="mt-12" />
       </div>
     </section>
   );
