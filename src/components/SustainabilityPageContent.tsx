@@ -101,7 +101,7 @@ const PILLARS: Array<{
 const RECYCLING_STATS = [
   {
     label: "Waste → Zinc",
-    value: "18K t",
+    value: "25907.5 MT",
     note: "Hazardous flue dust converted to commercial-grade zinc concentrate.",
   },
   {

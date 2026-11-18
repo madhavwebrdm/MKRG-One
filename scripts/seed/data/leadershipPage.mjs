@@ -1,7 +1,7 @@
 // Leadership page (singleton). Today's live content: code fallbacks plus the
 // values already saved in Sanity (published and draft are identical). The seeder
-// only fills fields that are empty in Sanity. Rahul Goyal's "Turning Metal into
-// Tomorrow" entry is intentional.
+// only fills fields that are empty in Sanity. Rahul Goyal's section was removed
+// at the client's request (Nov 2026), so there are no additional leaders.
 const doc = {
   "_id": "leadershipPage",
   "_type": "leadershipPage",
@@ -53,23 +53,6 @@ const doc = {
       "alt": "Sanjeev Goyal, Director"
     }
   },
-  "additionalLeaders": [
-    {
-      "eyebrow": "Director's message",
-      "heading": "Turning Metal into Tomorrow",
-      "name": "Rahul Goyal",
-      "role": "Director",
-      "story": "True progress lies in building a sustainable future through innovation, responsibility, and purpose. At MKESL, we are committed to creating solutions that make a lasting difference.",
-      "image": {
-        "_type": "image",
-        "asset": {
-          "_ref": "image-7f9cabf6d19dedf3a88f96f128ab67fb6e9b77da-1122x1402-png",
-          "_type": "reference"
-        },
-        "alt": "Rahul Goyal, Director"
-      }
-    }
-  ],
   "contactEmail": "contact@mkrg.in",
   "seo": {
     "title": "Leadership | Madhav KRG Environmental Solution Limited",

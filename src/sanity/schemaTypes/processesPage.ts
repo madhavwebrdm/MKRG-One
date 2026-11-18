@@ -124,7 +124,7 @@ export const processesPage = defineType({
       name: "wasteToZinc",
       title: "Waste to Zinc summary",
       description:
-        "Section at the bottom of the page with the patent seal, the process illustration and the numbered step cards.",
+        "Section at the bottom of the page with the patent seal and the numbered step cards.",
       type: "object",
       group: "content",
       options: { collapsible: true, collapsed: false },
@@ -139,7 +139,11 @@ export const processesPage = defineType({
           description: "Short line shown between the heading and the patent seal.",
         }),
         imageWithAlt("seal", "Patent seal", "Round badge shown to the right of the heading."),
-        imageWithAlt("illustration", "Process illustration", "Wide illustration above the step cards."),
+        imageWithAlt(
+          "illustration",
+          "Process illustration (optional)",
+          "Leave empty to hide. If set, a wide illustration appears above the step cards.",
+        ),
         defineField({
           name: "steps",
           title: "Step cards",

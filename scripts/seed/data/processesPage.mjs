@@ -63,11 +63,6 @@ const doc = {
       _file: "public/images/patented-process-in-india-seal.png",
       alt: "Hydrometallurgical Patented Process in India",
     },
-    illustration: {
-      _type: "image",
-      _file: "public/images/waste to zinc.jpeg",
-      alt: "Waste to Zinc process illustration",
-    },
     steps: [
       { title: "Waste Receipt", body: "Secure hazardous waste handling" },
       { title: "Washing & Prep", body: "Remove contaminants" },

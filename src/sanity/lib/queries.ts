@@ -317,6 +317,12 @@ export const PRODUCT_PAGE_QUERY = defineQuery(`
       noteHeading, noteBody,
       noteSpecs[]{ label, value }
     },
+    testCertificate{
+      eyebrow, heading, body, buttonLabel,
+      "fileUrl": file.asset->url,
+      "fileName": file.asset->originalFilename,
+      "previewUrl": preview.asset->url, "previewAlt": preview.alt
+    },
     closingCta{ heading, body, primaryLabel, primaryHref },
     ${SEO_FRAGMENT}
   }
@@ -476,6 +482,28 @@ export const CAREERS_PAGE_QUERY = defineQuery(`
       submitLabel, sendingLabel,
       successHeading, successMessage, applyEmail
     },
+    ${SEO_FRAGMENT}
+  }
+`);
+
+export const QUALITY_CONTROL_PAGE_QUERY = defineQuery(`
+  *[_type == "qualityControlPage"][0]{
+    ${HERO_FRAGMENT},
+    intro{ eyebrow, heading, body },
+    commitments{ eyebrow, heading, items },
+    testing{ eyebrow, heading, body, "imageUrl": image.asset->url, "imageAlt": image.alt },
+    policy{ eyebrow, heading, body },
+    cta{ heading, body, buttonLabel, buttonHref },
+    ${SEO_FRAGMENT}
+  }
+`);
+
+export const WASTE_WE_BUY_PAGE_QUERY = defineQuery(`
+  *[_type == "wasteWeBuyPage"][0]{
+    ${HERO_FRAGMENT},
+    intro{ eyebrow, heading, body },
+    materials[]{ name, description, "imageUrl": image.asset->url, "imageAlt": image.alt },
+    cta{ heading, body, buttonLabel, buttonHref },
     ${SEO_FRAGMENT}
   }
 `);

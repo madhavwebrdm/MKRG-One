@@ -31,7 +31,6 @@ import {
 const str = (v: string | null | undefined, fallback: string): string =>
   v && v.trim() ? v : fallback;
 
-const DEFAULT_PRODUCT_OPTIONS = ["Zinc Ingots", "Zinc Sheets", "Zinc Feedstock"];
 
 type Str = string | null | undefined;
 
@@ -244,29 +243,32 @@ function EnquiryForm({
         />
       </div>
 
-      <div className="mt-6">
-        <Label>{labels.product}</Label>
-        <div className="mt-3 flex flex-wrap gap-2.5">
-          {productOptions.map((opt) => {
-            const active = product === opt;
-            return (
-              <button
-                key={opt}
-                type="button"
-                onClick={() => setProduct(active ? "" : opt)}
-                className={`rounded-full border px-4 py-1.5 text-sm font-medium transition-colors ${
-                  active
-                    ? "border-deep-green bg-deep-green text-white"
-                    : "border-forest/20 bg-white text-ink hover:border-forest/40"
-                }`}
-              >
-                {opt}
-              </button>
-            );
-          })}
+      {/* Optional product chips: only shown when options are set in Sanity */}
+      {productOptions.length > 0 && (
+        <div className="mt-6">
+          <Label>{labels.product}</Label>
+          <div className="mt-3 flex flex-wrap gap-2.5">
+            {productOptions.map((opt) => {
+              const active = product === opt;
+              return (
+                <button
+                  key={opt}
+                  type="button"
+                  onClick={() => setProduct(active ? "" : opt)}
+                  className={`rounded-full border px-4 py-1.5 text-sm font-medium transition-colors ${
+                    active
+                      ? "border-deep-green bg-deep-green text-white"
+                      : "border-forest/20 bg-white text-ink hover:border-forest/40"
+                  }`}
+                >
+                  {opt}
+                </button>
+              );
+            })}
+          </div>
+          <input type="hidden" name="product" value={product} />
         </div>
-        <input type="hidden" name="product" value={product} />
-      </div>
+      )}
 
       <button
         type="submit"
@@ -364,7 +366,7 @@ export default function ContactPageContent({ data }: { data?: ContactPageData })
   const reach = data?.reachSection;
   const map = data?.mapSection;
   const mapEmbed = str(data?.mapEmbedUrl, MAP_EMBED);
-  const productOptions = ef?.productOptions?.length ? ef.productOptions : DEFAULT_PRODUCT_OPTIONS;
+  const productOptions = ef?.productOptions ?? [];
 
   const formLabels: FormLabels = {
     name: str(ef?.nameLabel, "Name"),
@@ -411,7 +413,7 @@ export default function ContactPageContent({ data }: { data?: ContactPageData })
               <p className="mt-4 max-w-xl text-base leading-relaxed text-body">
                 {str(
                   ef?.intro,
-                  "Pick a product interest, drop a line and we'll route your enquiry to the right person.",
+                  "Drop us a line and we'll route your enquiry to the right person.",
                 )}
               </p>
               <div className="mt-8">

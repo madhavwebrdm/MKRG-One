@@ -73,17 +73,6 @@ const DIRECTOR: Principal = {
   ],
 };
 
-const RAHUL: Principal = {
-  name: "Rahul Goyal",
-  title: "Director",
-  portrait: PLACEHOLDER_IMAGES.leadershipTeam[0],
-  pullQuote:
-    "True progress lies in building a sustainable future through innovation, responsibility, and purpose.",
-  body: [
-    "True progress lies in building a sustainable future through innovation, responsibility, and purpose. At MKESL, we are committed to creating solutions that make a lasting difference.",
-  ],
-};
-
 const resolvePrincipal = (input: PrincipalInput | undefined, fallback: Principal): ResolvedPrincipal => {
   const name = str(input?.name, fallback.name);
   const title = str(input?.role, fallback.title);
@@ -111,20 +100,16 @@ export default function LeadershipPageContent({
   const md = resolvePrincipal(data?.founder, MD);
   const director = resolvePrincipal(data?.director, DIRECTOR);
 
-  const additionalFallbacks = [RAHUL];
-  const additionalLeaders: ResolvedPrincipal[] = data?.additionalLeaders?.length
-    ? data.additionalLeaders.map((leader, i) =>
-        resolvePrincipal(leader, {
-          ...(additionalFallbacks[i] ?? {
-            name: "",
-            title: "",
-            portrait: PLACEHOLDER_IMAGES.leadershipTeam[i % PLACEHOLDER_IMAGES.leadershipTeam.length],
-            pullQuote: "",
-            body: [],
-          }),
-        }),
-      )
-    : additionalFallbacks.map((fallback) => resolvePrincipal(undefined, fallback));
+  // Extra leader sections exist only when added in Sanity (none by default).
+  const additionalLeaders: ResolvedPrincipal[] = (data?.additionalLeaders ?? []).map((leader, i) =>
+    resolvePrincipal(leader, {
+      name: "",
+      title: "",
+      portrait: PLACEHOLDER_IMAGES.leadershipTeam[i % PLACEHOLDER_IMAGES.leadershipTeam.length],
+      pullQuote: "",
+      body: [],
+    }),
+  );
 
   const quoteText = str(data?.pullQuote?.text, MD.pullQuote);
   const quoteAttribution = str(
@@ -146,6 +131,7 @@ export default function LeadershipPageContent({
         )}
         imageUrl={hero?.imageUrl || "/images/leadership/team-hero.jpg"}
         imageAlt={str(hero?.imageAlt, "Madhav KRG Environmental Solution Limited leadership team")}
+        textBelow
       />
 
       {/* MD MESSAGE */}

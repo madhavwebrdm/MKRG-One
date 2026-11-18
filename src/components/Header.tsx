@@ -35,17 +35,25 @@ const NAV: NavItem[] = [
       { label: "Values", href: "/about#values" },
       { label: "Process", href: "/processes" },
       { label: "Certifications", href: "/certifications" },
-      { label: "Projects", href: "/projects" },
     ],
   },
   { label: "Leadership", href: "/leadership" },
-  { label: "Product", href: "/product" },
+  {
+    label: "Product",
+    href: "/product",
+    children: [
+      { label: "Our Products", href: "/product" },
+      { label: "Quality Control", href: "/product/quality-control" },
+    ],
+  },
   {
     label: "Sustainability",
     href: "/sustainability",
     children: [
       { label: "CSR", href: "/csr" },
       { label: "EHS", href: "/ehs" },
+      { label: "Projects", href: "/projects" },
+      { label: "Waste We Buy", href: "/waste-we-buy" },
     ],
   },
   { label: "Media", href: "/media" },

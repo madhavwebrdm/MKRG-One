@@ -11,7 +11,6 @@ const FLOW = {
   title: "Waste to Zinc",
   caption:
     "Our hydrometallurgical process recovers 99.9% pure zinc from hazardous waste.",
-  image: "/images/waste to zinc.jpeg",
   badge: "/images/patented-process-in-india-seal.png",
   badgeAlt: "Hydrometallurgical Patented Process in India",
   steps: [
@@ -80,26 +79,30 @@ export default function WasteToZincFlow({ data }: { data?: WasteToZincData }) {
           </div>
         </div>
 
-        {/* Illustration */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          className="relative mt-10 overflow-hidden rounded-2xl border border-forest/10 bg-white shadow-sm"
-        >
-          <Image
-            src={data?.illustrationUrl || FLOW.image}
-            alt={str(data?.illustrationAlt, `${title} process illustration`)}
-            width={1344}
-            height={768}
-            sizes="(max-width: 1024px) 100vw, 1200px"
-            className="h-auto w-full object-cover"
-          />
-        </motion.div>
+        {/* Optional illustration: only shown when one is set in Sanity */}
+        {data?.illustrationUrl && (
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            className="relative mt-10 overflow-hidden rounded-2xl border border-forest/10 bg-white shadow-sm"
+          >
+            <Image
+              src={data.illustrationUrl}
+              alt={str(data.illustrationAlt, `${title} process illustration`)}
+              width={1344}
+              height={768}
+              sizes="(max-width: 1024px) 100vw, 1200px"
+              className="h-auto w-full object-cover"
+            />
+          </motion.div>
+        )}
 
         {/* Step cards */}
-        <ol className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+        <ol
+          className={`${data?.illustrationUrl ? "mt-6" : "mt-10"} grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5`}
+        >
           {steps.map((s, i) => (
             <motion.li
               key={`${s.title}-${i}`}

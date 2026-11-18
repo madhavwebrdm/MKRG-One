@@ -150,21 +150,21 @@ export const productPage = defineType({
         defineField({ name: "calloutBody", type: "text", rows: 3 }),
         defineField({
           name: "noteHeading",
-          title: "Note heading",
-          description: "Plain heading shown above the callout box.",
+          title: "Paragraph heading (optional)",
+          description: "Heading above the callout box. Leave empty to hide.",
           type: "string",
         }),
         defineField({
           name: "noteBody",
-          title: "Note text",
-          description: "Plain paragraph shown above the callout box.",
+          title: "Paragraph text (optional)",
+          description: "Paragraph above the callout box. Leave empty to hide.",
           type: "text",
           rows: 4,
         }),
         defineField({
           name: "noteSpecs",
-          title: "Note spec table",
-          description: "Label/value rows shown as a table to the right of the note text.",
+          title: "Spec table",
+          description: "Label/value rows shown as a table beside the first product card.",
           type: "array",
           of: [
             defineArrayMember({
@@ -177,6 +177,38 @@ export const productPage = defineType({
             }),
           ],
         }),
+      ],
+    }),
+
+    // Test Certificate (hidden until a file is uploaded)
+    defineField({
+      name: "testCertificate",
+      title: "Test Certificate",
+      description:
+        "Upload the Test Certificate (PDF or image) to show this section on the Product page. It stays hidden while no file is uploaded.",
+      type: "object",
+      group: "content",
+      options: { collapsible: true, collapsed: false },
+      fields: [
+        defineField({ name: "eyebrow", title: "Small label", type: "string" }),
+        defineField({ name: "heading", title: "Heading", type: "string" }),
+        defineField({ name: "body", title: "Text", type: "text", rows: 3 }),
+        defineField({
+          name: "file",
+          title: "Certificate file",
+          type: "file",
+          options: { accept: "application/pdf,image/*" },
+          description: "The certificate visitors open or download.",
+        }),
+        defineField({
+          name: "preview",
+          title: "Preview image (optional)",
+          type: "image",
+          options: { hotspot: true },
+          description: "A picture of the certificate shown beside the text. Recommended for PDFs.",
+          fields: [defineField({ name: "alt", type: "string", title: "Alt text" })],
+        }),
+        defineField({ name: "buttonLabel", title: "Button text", type: "string" }),
       ],
     }),
 

@@ -20,6 +20,8 @@ type Props = {
   videos?: VideoClip[];
   videoPoster?: string;
   align?: "left" | "center";
+  /** Show the full photo uncropped with the text in a band below it (no overlay). */
+  textBelow?: boolean;
 };
 
 function VideoPlaylist({ clips, poster }: { clips: VideoClip[]; poster?: string }) {
@@ -76,9 +78,55 @@ export default function PageHero({
   videos,
   videoPoster,
   align = "left",
+  textBelow = false,
 }: Props) {
   const isCenter = align === "center";
   const headingMaxWidth = heading.includes("\n") ? "max-w-6xl" : "max-w-4xl";
+
+  if (textBelow) {
+    return (
+      <section className="bg-deep-green">
+        {/* Dark strip behind the fixed header, then the whole photo, uncropped */}
+        <div className="pt-20">
+          <Image
+            src={imageUrl}
+            alt={imageAlt}
+            width={1920}
+            height={850}
+            priority
+            sizes="100vw"
+            className="h-auto w-full"
+          />
+        </div>
+        <div className="mx-auto max-w-7xl px-5 py-12 sm:px-10 sm:py-16 lg:px-16 lg:py-20">
+          <motion.span
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="inline-flex w-fit items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3.5 py-1 text-[11px] uppercase tracking-[0.2em] text-white/90 sm:text-xs"
+          >
+            {eyebrow}
+          </motion.span>
+          <AnimatedHeading
+            as="h1"
+            className={`mt-5 font-serif text-[2.25rem] leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-6xl ${headingMaxWidth} text-balance`}
+          >
+            {heading}
+          </AnimatedHeading>
+          {intro && (
+            <motion.p
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              className="mt-5 max-w-2xl text-base leading-relaxed text-white/85 sm:mt-6 sm:text-lg"
+            >
+              {intro}
+            </motion.p>
+          )}
+        </div>
+      </section>
+    );
+  }
 
   const playlist = videos ?? (videoUrl ? [{ src: videoUrl, duration: Infinity }] : null);
 

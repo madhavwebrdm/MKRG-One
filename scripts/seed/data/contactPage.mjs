@@ -17,9 +17,8 @@ const doc = {
   enquiryForm: {
     eyebrow: "Enquiry",
     heading: "Send us a message.",
-    intro:
-      "Pick a product interest, drop a line and we'll route your enquiry to the right person.",
-    productOptions: ["Zinc Ingots", "Zinc Sheets", "Zinc Feedstock"],
+    intro: "Drop us a line and we'll route your enquiry to the right person.",
+    // Product interest question removed at the client's request (Nov 2026).
     nameLabel: "Name",
     companyLabel: "Company",
     phoneLabel: "Phone",

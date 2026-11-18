@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, ArrowUpRight, Factory, Recycle } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Factory, FileCheck, Recycle } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
 import { PLACEHOLDER_IMAGES } from "@/lib/placeholderImages";
@@ -65,6 +65,7 @@ export type ProductPageData = {
     | null;
   parallax?: { heading?: string | null; imageUrl?: string | null } | null;
   zinc?: SectionData | null;
+  testCertificate?: TestCertificateData;
   closingCta?:
     | { heading?: string | null; body?: string | null; primaryLabel?: string | null; primaryHref?: string | null }
     | null;
@@ -155,7 +156,6 @@ const ZINC_INGOT_SPECS: Array<{ label: string; value: string }> = [
   { label: "Bundle", value: "40 Ingots / Bundle · 1000 KG Total" },
   { label: "Composition", value: "99.7% Purity" },
   { label: "Testing", value: "MP-AES Tested for uniform purity" },
-  { label: "Plant Capacity", value: "6,000 MT P.A." },
 ];
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -333,16 +333,17 @@ export default function ProductPageContent({ data }: { data?: ProductPageData })
           ),
         }}
         note={{
-          heading: str(zn?.noteHeading, "Built for consistent, certified supply."),
-          body: str(
-            zn?.noteBody,
-            "Every batch is tested for purity and traceable back to the waste stream it was recovered from, so partners can plan around a supply that meets specification every time.",
-          ),
+          // Optional paragraph under the spec table: hidden when left empty in Sanity.
+          heading: zn?.noteHeading?.trim() ?? "",
+          body: zn?.noteBody?.trim() ?? "",
           specs: zn?.noteSpecs?.length
             ? zn.noteSpecs.map((s) => ({ label: s.label ?? "", value: s.value ?? "" }))
             : ZINC_INGOT_SPECS,
         }}
       />
+
+      {/* Test Certificate: only shown once a file is uploaded in Sanity */}
+      <TestCertificate data={data?.testCertificate} />
 
       {/* CTA */}
       <section className="bg-deep-green py-24 sm:py-28">
@@ -487,7 +488,7 @@ function ProductRange({
           </div>
         )}
 
-        {note && (
+        {note && (note.heading || note.body) && (
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -495,12 +496,16 @@ function ProductRange({
             transition={{ duration: 0.5, ease: EASE }}
             className="mt-10"
           >
-            <h3 className="font-serif text-2xl leading-snug text-ink sm:text-3xl">
-              {note.heading}
-            </h3>
-            <p className="mt-4 text-base leading-relaxed text-body sm:text-lg">
-              {note.body}
-            </p>
+            {note.heading && (
+              <h3 className="font-serif text-2xl leading-snug text-ink sm:text-3xl">
+                {note.heading}
+              </h3>
+            )}
+            {note.body && (
+              <p className="mt-4 text-base leading-relaxed text-body sm:text-lg">
+                {note.body}
+              </p>
+            )}
           </motion.div>
         )}
 
@@ -519,6 +524,86 @@ function ProductRange({
               {callout.body}
             </p>
           </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+/* Test Certificate                                                            */
+/* -------------------------------------------------------------------------- */
+
+type TestCertificateData = {
+  eyebrow?: string | null;
+  heading?: string | null;
+  body?: string | null;
+  buttonLabel?: string | null;
+  fileUrl?: string | null;
+  fileName?: string | null;
+  previewUrl?: string | null;
+  previewAlt?: string | null;
+} | null | undefined;
+
+function TestCertificate({ data }: { data?: TestCertificateData }) {
+  // Hidden until the client uploads the certificate in Sanity.
+  if (!data?.fileUrl) return null;
+  const heading = str(data.heading, "Test Certificate");
+
+  return (
+    <section id="test-certificate" className="bg-mint py-20 sm:py-24">
+      <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.5, ease: EASE }}
+          className="grid grid-cols-1 items-center gap-10 rounded-3xl bg-white p-8 shadow-sm ring-1 ring-forest/10 sm:p-12 lg:grid-cols-12 lg:gap-14"
+        >
+          <div className={data.previewUrl ? "lg:col-span-7" : "lg:col-span-12"}>
+            <span className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-accent">
+              <FileCheck className="h-4 w-4" />
+              {str(data.eyebrow, "Quality assurance")}
+            </span>
+            <h2 className="mt-3 font-serif text-3xl leading-tight text-ink sm:text-4xl">
+              {heading}
+            </h2>
+            <p className="mt-4 max-w-2xl text-base leading-relaxed text-body sm:text-lg">
+              {str(
+                data.body,
+                "Every batch of our zinc ingots is tested for purity. View the latest test certificate for the full results.",
+              )}
+            </p>
+            <a
+              href={data.fileUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-8 inline-flex items-center gap-2 rounded-full bg-deep-green px-6 py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-forest"
+            >
+              {str(data.buttonLabel, "View test certificate")}
+              <ArrowUpRight className="h-4 w-4" />
+            </a>
+          </div>
+
+          {data.previewUrl && (
+            <a
+              href={data.fileUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Open ${heading}`}
+              className="relative block aspect-[4/5] w-full overflow-hidden rounded-2xl bg-mint-strong/60 lg:col-span-5"
+            >
+              <span className="absolute inset-5 sm:inset-8">
+                <Image
+                  src={data.previewUrl}
+                  alt={str(data.previewAlt, heading)}
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 40vw"
+                  className="object-contain drop-shadow-md"
+                />
+              </span>
+            </a>
+          )}
         </motion.div>
       </div>
     </section>

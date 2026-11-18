@@ -57,11 +57,11 @@ export const contactPage = defineType({
         defineField({ name: "intro", title: "Intro text", type: "text", rows: 3 }),
         defineField({
           name: "productOptions",
-          title: "Product choices",
+          title: "Product choices (optional)",
           type: "array",
           of: [{ type: "string" }],
           description:
-            "Product names shown as selectable chips (e.g. Zinc Ingots, Zinc Sheets, Zinc Feedstock).",
+            "Leave empty to hide the product question. If filled, the names show as selectable chips on the form.",
         }),
         defineField({
           name: "nameLabel",

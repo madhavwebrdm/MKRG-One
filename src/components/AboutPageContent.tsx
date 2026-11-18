@@ -260,6 +260,47 @@ export default function AboutPageContent({ data }: { data?: AboutPageData }) {
         videos={heroVideos}
       />
 
+      {/* Company Brief (brand identity) */}
+      <section id="company-brief" className="bg-mint py-24 sm:py-32">
+        <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
+          <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-16">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.96 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              className="relative aspect-[5/4] w-full overflow-hidden rounded-2xl lg:col-span-5"
+            >
+              <Image
+                src={brandIdentity?.imageUrl || PLACEHOLDER_IMAGES.aboutBrand}
+                alt={str(brandIdentity?.imageAlt, "Madhav KRG Environmental Solution Limited identity")}
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover transition-transform duration-1000 hover:scale-110"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-deep-green/40 via-transparent to-transparent" />
+            </motion.div>
+
+            <div className="lg:col-span-7">
+              <span className="text-xs uppercase tracking-[0.2em] text-accent">
+                {str(brandIdentity?.eyebrow, "Brand identity")}
+              </span>
+              <AnimatedHeading className="mt-3 font-serif text-3xl leading-tight text-ink sm:text-4xl lg:text-5xl">
+                {str(brandIdentity?.heading, "One purpose.\nEvery plant. A greener output.")}
+              </AnimatedHeading>
+              {brandParagraphs.map((p, i) => (
+                <p
+                  key={i}
+                  className={`text-base leading-relaxed text-body sm:text-lg ${i === 0 ? "mt-6" : "mt-4"}`}
+                >
+                  {p}
+                </p>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Mission & Vision */}
       <section id="mission-vision" className="bg-white py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
@@ -353,47 +394,6 @@ export default function AboutPageContent({ data }: { data?: AboutPageData }) {
               );
             })}
           </ul>
-        </div>
-      </section>
-
-      {/* Brand identity */}
-      <section id="company-brief" className="bg-mint py-24 sm:py-32">
-        <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
-          <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-16">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.96 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              className="relative aspect-[5/4] w-full overflow-hidden rounded-2xl lg:col-span-5"
-            >
-              <Image
-                src={brandIdentity?.imageUrl || PLACEHOLDER_IMAGES.aboutBrand}
-                alt={str(brandIdentity?.imageAlt, "Madhav KRG Environmental Solution Limited identity")}
-                fill
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover transition-transform duration-1000 hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-deep-green/40 via-transparent to-transparent" />
-            </motion.div>
-
-            <div className="lg:col-span-7">
-              <span className="text-xs uppercase tracking-[0.2em] text-accent">
-                {str(brandIdentity?.eyebrow, "Brand identity")}
-              </span>
-              <AnimatedHeading className="mt-3 font-serif text-3xl leading-tight text-ink sm:text-4xl lg:text-5xl">
-                {str(brandIdentity?.heading, "One purpose.\nEvery plant. A greener output.")}
-              </AnimatedHeading>
-              {brandParagraphs.map((p, i) => (
-                <p
-                  key={i}
-                  className={`text-base leading-relaxed text-body sm:text-lg ${i === 0 ? "mt-6" : "mt-4"}`}
-                >
-                  {p}
-                </p>
-              ))}
-            </div>
-          </div>
         </div>
       </section>
 
@@ -511,7 +511,7 @@ export default function AboutPageContent({ data }: { data?: AboutPageData }) {
             })}
           </ol>
 
-          <div className="mx-auto mt-20 max-w-3xl text-center">
+          <div className="mx-auto mt-20 max-w-3xl text-left">
             <AnimatedHeading className="font-serif text-3xl leading-tight text-ink sm:text-4xl lg:text-5xl">
               {str(timeline?.closingHeading, "The next chapter, already underway.")}
             </AnimatedHeading>

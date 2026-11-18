@@ -146,7 +146,7 @@ const doc = {
     ]
   },
   "timeline": {
-    "closingBody": "Madhav KRG Environmental Solution Limited was founded in year 2019 as a spin-off from the Madhav KRG Group’s steel manufacturing operations. The company was established with the goal of addressing the environmental challenges posed by the steel industry, particularly the issue of air pollution caused by dust particles from steel production. In year 2014, the Madhav KRG Group took the initiative to develop a pilot plant inside the existing plant for processing and refining these air pollutants. Over the next five years, the company worked to refine and improve the process, becoming a pioneer in converting “pollution to resource.” This innovative approach presented a significant opportunity for both the steel and zinc industries. To accommodate the growing scale and importance of this environmental initiative, Madhav KRG Environmental Solution Limited was established as a separate company in year 2019. The company’s mission is to make a positive impact on the environment through sustainable practices, including the recycling of waste materials. The company’s dedication to environmental responsibility and innovation has earned it a reputable position in the industry.",
+    "closingBody": "Madhav KRG Environmental Solution Limited was founded in 2019 as a spin-off from the Madhav KRG Group’s steel manufacturing operations, to tackle a major environmental challenge of the steel industry: air pollution from dust generated during steel production. In 2014, the Group built a pilot plant inside its existing plant to process and refine these pollutants, and over the next five years refined the process to become a pioneer in converting “pollution to resource”. Today, the company’s mission is to make a positive impact on the environment through sustainable practices, including the recycling of waste materials.",
     "closingHeading": "Brief History",
     "entries": [
       {
@@ -165,14 +165,14 @@ const doc = {
         "year": "2019"
       },
       {
-        "body": "Line 1 has utilised 60% of its capacity. The Punjab Government has granted an incentive of Rs 18 crore, to be received over the next five years.",
-        "title": "Line 1 at 60% utilisation",
-        "year": "Ongoing"
+        "body": "Line 1 commenced commercial production on 10 September 2021 and now runs at 100% utilisation. The Punjab Government has granted an incentive of Rs 18 crore, to be received over five years.",
+        "title": "Line 1 begins commercial production",
+        "year": "2021"
       },
       {
-        "body": "Line 2 is now established in parallel to Line 1 and is in operation. Once ramped, both lines are expected to reach a combined capacity of 70%, with a further incentive covering the next seven years.",
-        "title": "Line 2 in operation",
-        "year": "What's next"
+        "body": "Line 2 commenced commercial production on 29 February 2024, running in parallel to Line 1. Together, the two lines produce 20 MT of zinc per day. A further incentive covers the next seven years.",
+        "title": "Line 2 begins commercial production",
+        "year": "2024"
       }
     ],
     "eyebrow": "Our story",
