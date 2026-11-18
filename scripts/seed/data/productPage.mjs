@@ -88,12 +88,17 @@ const doc = {
       { label: "Testing", value: "MP-AES Tested for uniform purity" },
     ],
   },
-  // Section stays hidden on the site until the certificate file is uploaded.
+  // Test Certificates section: shows "available on request" until certificates
+  // are uploaded in the Studio (Product → Test Certificates → Certificates).
   testCertificate: {
     eyebrow: "Quality assurance",
-    heading: "Test Certificate",
-    body: "Every batch of our zinc ingots is tested for purity. View the latest test certificate for the full results.",
-    buttonLabel: "View test certificate",
+    heading: "Test Certificates",
+    body: "Every batch of our zinc ingots is tested for purity. Open a certificate below to see the full results.",
+    buttonLabel: "View certificate",
+    emptyNote:
+      "Our latest test certificates are available on request. Contact our team and we will share them with you.",
+    requestLabel: "Request a test certificate",
+    requestHref: "/contact",
   },
   closingCta: {
     heading: "Looking for a reliable supply of commercial zinc?",

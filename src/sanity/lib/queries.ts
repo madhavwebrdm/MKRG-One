@@ -318,10 +318,12 @@ export const PRODUCT_PAGE_QUERY = defineQuery(`
       noteSpecs[]{ label, value }
     },
     testCertificate{
-      eyebrow, heading, body, buttonLabel,
-      "fileUrl": file.asset->url,
-      "fileName": file.asset->originalFilename,
-      "previewUrl": preview.asset->url, "previewAlt": preview.alt
+      eyebrow, heading, body, buttonLabel, emptyNote, requestLabel, requestHref,
+      certificates[]{
+        title,
+        "fileUrl": file.asset->url,
+        "previewUrl": preview.asset->url, "previewAlt": preview.alt
+      }
     },
     closingCta{ heading, body, primaryLabel, primaryHref },
     ${SEO_FRAGMENT}

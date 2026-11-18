@@ -180,12 +180,12 @@ export const productPage = defineType({
       ],
     }),
 
-    // Test Certificate (hidden until a file is uploaded)
+    // Test Certificates
     defineField({
       name: "testCertificate",
-      title: "Test Certificate",
+      title: "Test Certificates",
       description:
-        "Upload the Test Certificate (PDF or image) to show this section on the Product page. It stays hidden while no file is uploaded.",
+        "Section on the Product page showing the test certificates. Add certificates below; until then the section shows the 'available on request' text.",
       type: "object",
       group: "content",
       options: { collapsible: true, collapsed: false },
@@ -194,21 +194,54 @@ export const productPage = defineType({
         defineField({ name: "heading", title: "Heading", type: "string" }),
         defineField({ name: "body", title: "Text", type: "text", rows: 3 }),
         defineField({
-          name: "file",
-          title: "Certificate file",
-          type: "file",
-          options: { accept: "application/pdf,image/*" },
-          description: "The certificate visitors open or download.",
+          name: "certificates",
+          title: "Certificates",
+          type: "array",
+          description: "Each certificate is shown as a card that opens the file.",
+          of: [
+            defineArrayMember({
+              type: "object",
+              fields: [
+                defineField({
+                  name: "title",
+                  title: "Title",
+                  type: "string",
+                  description: 'For example "Zinc Ingots, Batch 2026-11".',
+                }),
+                defineField({
+                  name: "file",
+                  title: "Certificate file (PDF or image)",
+                  type: "file",
+                  options: { accept: "application/pdf,image/*" },
+                }),
+                defineField({
+                  name: "preview",
+                  title: "Preview image",
+                  type: "image",
+                  options: { hotspot: true },
+                  description:
+                    "A picture of the certificate shown on the card. Recommended for PDFs; for image files you can upload the same image here.",
+                  fields: [defineField({ name: "alt", type: "string", title: "Alt text" })],
+                }),
+              ],
+              preview: { select: { title: "title", media: "preview" } },
+            }),
+          ],
         }),
         defineField({
-          name: "preview",
-          title: "Preview image (optional)",
-          type: "image",
-          options: { hotspot: true },
-          description: "A picture of the certificate shown beside the text. Recommended for PDFs.",
-          fields: [defineField({ name: "alt", type: "string", title: "Alt text" })],
+          name: "buttonLabel",
+          title: "Card link text",
+          type: "string",
+          description: 'Text on each certificate card, e.g. "View certificate".',
         }),
-        defineField({ name: "buttonLabel", title: "Button text", type: "string" }),
+        defineField({
+          name: "emptyNote",
+          title: "Text when no certificates are uploaded",
+          type: "text",
+          rows: 2,
+        }),
+        defineField({ name: "requestLabel", title: "Request button text", type: "string" }),
+        defineField({ name: "requestHref", title: "Request button link", type: "string" }),
       ],
     }),
 

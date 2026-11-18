@@ -342,8 +342,8 @@ export default function ProductPageContent({ data }: { data?: ProductPageData })
         }}
       />
 
-      {/* Test Certificate: only shown once a file is uploaded in Sanity */}
-      <TestCertificate data={data?.testCertificate} />
+      {/* Test Certificates (shows "available on request" until certificates are uploaded) */}
+      <TestCertificates data={data?.testCertificate} />
 
       {/* CTA */}
       <section className="bg-deep-green py-24 sm:py-28">
@@ -531,7 +531,7 @@ function ProductRange({
 }
 
 /* -------------------------------------------------------------------------- */
-/* Test Certificate                                                            */
+/* Test Certificates                                                           */
 /* -------------------------------------------------------------------------- */
 
 type TestCertificateData = {
@@ -539,72 +539,118 @@ type TestCertificateData = {
   heading?: string | null;
   body?: string | null;
   buttonLabel?: string | null;
-  fileUrl?: string | null;
-  fileName?: string | null;
-  previewUrl?: string | null;
-  previewAlt?: string | null;
+  emptyNote?: string | null;
+  requestLabel?: string | null;
+  requestHref?: string | null;
+  certificates?: Array<{
+    title?: string | null;
+    fileUrl?: string | null;
+    previewUrl?: string | null;
+    previewAlt?: string | null;
+  }> | null;
 } | null | undefined;
 
-function TestCertificate({ data }: { data?: TestCertificateData }) {
-  // Hidden until the client uploads the certificate in Sanity.
-  if (!data?.fileUrl) return null;
-  const heading = str(data.heading, "Test Certificate");
+const TC_DEFAULTS = {
+  eyebrow: "Quality assurance",
+  heading: "Test Certificates",
+  body: "Every batch of our zinc ingots is tested for purity. Open a certificate below to see the full results.",
+  buttonLabel: "View certificate",
+  emptyNote:
+    "Our latest test certificates are available on request. Contact our team and we will share them with you.",
+  requestLabel: "Request a test certificate",
+  requestHref: "/contact",
+};
+
+function TestCertificates({ data }: { data?: TestCertificateData }) {
+  const certificates = (data?.certificates ?? []).filter((c) => c.fileUrl);
+  const heading = str(data?.heading, TC_DEFAULTS.heading);
+  const linkLabel = str(data?.buttonLabel, TC_DEFAULTS.buttonLabel);
 
   return (
-    <section id="test-certificate" className="bg-mint py-20 sm:py-24">
+    <section id="test-certificates" className="bg-mint py-24 sm:py-28">
       <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.5, ease: EASE }}
-          className="grid grid-cols-1 items-center gap-10 rounded-3xl bg-white p-8 shadow-sm ring-1 ring-forest/10 sm:p-12 lg:grid-cols-12 lg:gap-14"
-        >
-          <div className={data.previewUrl ? "lg:col-span-7" : "lg:col-span-12"}>
-            <span className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-accent">
-              <FileCheck className="h-4 w-4" />
-              {str(data.eyebrow, "Quality assurance")}
-            </span>
-            <h2 className="mt-3 font-serif text-3xl leading-tight text-ink sm:text-4xl">
-              {heading}
-            </h2>
-            <p className="mt-4 max-w-2xl text-base leading-relaxed text-body sm:text-lg">
-              {str(
-                data.body,
-                "Every batch of our zinc ingots is tested for purity. View the latest test certificate for the full results.",
-              )}
-            </p>
-            <a
-              href={data.fileUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-8 inline-flex items-center gap-2 rounded-full bg-deep-green px-6 py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-forest"
-            >
-              {str(data.buttonLabel, "View test certificate")}
-              <ArrowUpRight className="h-4 w-4" />
-            </a>
-          </div>
+        <div className="max-w-3xl">
+          <span className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-accent">
+            <FileCheck className="h-4 w-4" />
+            {str(data?.eyebrow, TC_DEFAULTS.eyebrow)}
+          </span>
+          <AnimatedHeading className="mt-3 font-serif text-3xl leading-tight text-ink sm:text-4xl lg:text-5xl">
+            {heading}
+          </AnimatedHeading>
+          <p className="mt-5 text-base leading-relaxed text-body sm:text-lg">
+            {str(data?.body, TC_DEFAULTS.body)}
+          </p>
+        </div>
 
-          {data.previewUrl && (
-            <a
-              href={data.fileUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`Open ${heading}`}
-              className="relative block aspect-[4/5] w-full overflow-hidden rounded-2xl bg-mint-strong/60 lg:col-span-5"
+        {certificates.length > 0 ? (
+          <ul className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {certificates.map((c, i) => {
+              const title = str(c.title, heading);
+              return (
+                <motion.li
+                  key={`${title}-${i}`}
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-80px" }}
+                  transition={{ duration: 0.5, delay: i * 0.04, ease: EASE }}
+                >
+                  <a
+                    href={c.fileUrl ?? "#"}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${linkLabel}: ${title}`}
+                    className="group block overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-forest/10"
+                  >
+                    {/* Certificates come in both orientations, so show each one whole on a mat */}
+                    <div className="relative aspect-square w-full overflow-hidden bg-mint-strong/60">
+                      {c.previewUrl ? (
+                        <div className="absolute inset-5 sm:inset-8">
+                          <Image
+                            src={c.previewUrl}
+                            alt={str(c.previewAlt, title)}
+                            fill
+                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                            className="object-contain drop-shadow-md transition-transform duration-700 group-hover:scale-[1.03]"
+                          />
+                        </div>
+                      ) : (
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <FileCheck className="h-16 w-16 text-deep-green/50" />
+                        </div>
+                      )}
+                    </div>
+                    <div className="flex items-center justify-between gap-3 p-4">
+                      <p className="text-sm font-medium text-ink">{title}</p>
+                      <span className="inline-flex shrink-0 items-center gap-1 text-sm font-medium text-accent">
+                        {linkLabel}
+                        <ArrowUpRight className="h-4 w-4" />
+                      </span>
+                    </div>
+                  </a>
+                </motion.li>
+              );
+            })}
+          </ul>
+        ) : (
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.5, ease: EASE }}
+            className="mt-12 flex flex-col items-start gap-6 rounded-3xl bg-white p-8 shadow-sm ring-1 ring-forest/10 sm:flex-row sm:items-center sm:justify-between sm:p-10"
+          >
+            <p className="max-w-2xl text-base leading-relaxed text-body sm:text-lg">
+              {str(data?.emptyNote, TC_DEFAULTS.emptyNote)}
+            </p>
+            <Link
+              href={str(data?.requestHref, TC_DEFAULTS.requestHref)}
+              className="inline-flex shrink-0 items-center gap-2 rounded-full bg-deep-green px-6 py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-forest"
             >
-              <span className="absolute inset-5 sm:inset-8">
-                <Image
-                  src={data.previewUrl}
-                  alt={str(data.previewAlt, heading)}
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 40vw"
-                  className="object-contain drop-shadow-md"
-                />
-              </span>
-            </a>
-          )}
-        </motion.div>
+              {str(data?.requestLabel, TC_DEFAULTS.requestLabel)}
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </motion.div>
+        )}
       </div>
     </section>
   );
